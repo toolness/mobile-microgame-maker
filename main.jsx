@@ -3,10 +3,6 @@ $(function() {
     preload: function() {
       window.game = this.game;
       this.game.load.spritesheet('fly', 'img/fly-flying.png', 80, 92);
-      this.game.scale.maxWidth = this.game.width;
-      this.game.scale.maxHeight = this.game.height;
-      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      this.game.scale.setScreenSize();
     },
     create: function() {
       var fly = this.game.add.sprite(0, 0, 'fly');

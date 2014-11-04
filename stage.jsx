@@ -19,7 +19,8 @@ var Stage = React.createClass({
   },
   render: function() {
     return (
-      <div style={{overflow: 'hidden'}} ref="phaser"></div>
+      <div ref="phaser"></div>
     );    
   }
 });
+ 
