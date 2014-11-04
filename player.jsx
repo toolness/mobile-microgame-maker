@@ -1,17 +1,66 @@
 var Player = React.createClass({
   makePhaserState: function() {
+    var gameData = {
+      spritesheets: [
+        {
+          key: 'fly',
+          url: 'img/fly-flying.png',
+          frameWidth: 80,
+          frameHeight: 92
+        }
+      ],
+      animations: {
+        'fly': [
+          {
+            name: 'flying',
+            frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            frameRate: 10,
+            loop: true
+          },
+          {
+            name: 'dead',
+            frames: [3],
+            frameRate: 10,
+            loop: true            
+          }
+        ]
+      },
+      sprites: [
+        {
+          x: 0,
+          y: 0,
+          key: 'fly',
+          animation: 'flying'
+        },
+        {
+          x: 150,
+          y: 0,
+          key: 'fly',
+          animation: 'dead'
+        }
+      ],
+      backgroundColor: 0xf0f0f0
+    };
+
     return {
+      gameData: gameData,
       preload: function() {
         console.log('preload');
-        this.game.load.spritesheet('fly', 'img/fly-flying.png', 80, 92);
+        this.gameData.spritesheets.forEach(function(info) {
+          this.game.load.spritesheet(info.key, info.url, info.frameWidth,
+                                     info.frameHeight);
+        }, this);
       },
       create: function() {
-        var fly = this.game.add.sprite(0, 0, 'fly');
-        fly.inputEnabled = true;
-        fly.input.enableDrag(false);
-        fly.animations.add('flying', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
-        fly.animations.play('flying');
-        this.game.stage.backgroundColor = 0xf0f0f0;
+        this.gameData.sprites.forEach(function(info) {
+          var sprite = this.game.add.sprite(info.x, info.y, info.key);
+          this.gameData.animations[info.key].forEach(function(animInfo) {
+            sprite.animations.add(animInfo.name, animInfo.frames,
+                                  animInfo.frameRate, animInfo.loop);
+          });
+          sprite.animations.play(info.animation);
+        }, this);
+        this.game.stage.backgroundColor = this.gameData.backgroundColor;
         this.game.paused = true;
       }
     }
