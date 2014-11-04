@@ -4,18 +4,29 @@ var Stage = React.createClass({
     height: React.PropTypes.number,
     phaserState: React.PropTypes.object
   },
+  setPhaserState: function(newState) {
+    if (this.game) {
+      this.game.destroy();
+      this.game = null;
+    }
+
+    if (newState) {
+      // http://docs.phaser.io/Phaser.Game.html
+      this.game = new Phaser.Game(
+        this.props.width,
+        this.props.height,
+        Phaser.CANVAS,
+        this.refs.phaser.getDOMNode(),
+        newState
+      );
+    }
+  },
   componentDidMount: function() {
-    // http://docs.phaser.io/Phaser.Game.html
-    var game = this.game = new Phaser.Game(
-      this.props.width,
-      this.props.height,
-      Phaser.AUTO,
-      this.refs.phaser.getDOMNode(),
-      this.props.phaserState
-    );
+    this.setPhaserState(this.props.phaserState);
   },
   componentWillUnmount: function() {
     this.game.destroy();
+    this.game = null;
   },
   render: function() {
     return (
