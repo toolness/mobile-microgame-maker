@@ -20,6 +20,8 @@ var Stage = React.createClass({
       this.game = null;
     }
 
+    if (!newState) return;
+
     var self = this;
     var stateWrapper = Object.create(newState);
 
@@ -42,8 +44,7 @@ var Stage = React.createClass({
     this.setPhaserState(this.props.phaserState);
   },
   componentWillUnmount: function() {
-    this.game.destroy();
-    this.game = null;
+    this.setPhaserState(null);
   },
   render: function() {
     return (
