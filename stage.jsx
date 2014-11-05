@@ -4,28 +4,28 @@ var Stage = React.createClass({
     height: React.PropTypes.number,
     phaserState: React.PropTypes.object
   },
+  getInitialState: function() {
+    return {loading: true};
+  },
   setPhaserState: function(newState) {
-    var oldGame = this.game;
+    if (this.game) {
+      if (this.game.canvas) {
+        this.refs.placeholder.getDOMNode().getContext('2d').drawImage(
+          this.game.canvas,
+          0,
+          0
+        );
+      }
+      this.game.destroy();
+      this.game = null;
+    }
+
+    var self = this;
     var stateWrapper = Object.create(newState);
 
     stateWrapper.create = function() {
+      self.setState({loading: false});
       newState.create.apply(this, arguments);
-      if (oldGame && oldGame.isBooted) {
-        oldGame.destroy();
-        oldGame = null;
-      }
-    };
-
-    stateWrapper.preload = function() {
-      newState.preload.apply(this, arguments);
-      if (oldGame && oldGame.canvas) {
-        $(oldGame.canvas).css({
-          position: 'absolute',
-          top: '0px',
-          left: '0px',
-          zIndex: '1'
-        });
-      }
     };
 
     // http://docs.phaser.io/Phaser.Game.html
@@ -36,6 +36,7 @@ var Stage = React.createClass({
       this.refs.phaser.getDOMNode(),
       stateWrapper
     );
+    this.setState({loading: true});
   },
   componentDidMount: function() {
     this.setPhaserState(this.props.phaserState);
@@ -46,7 +47,22 @@ var Stage = React.createClass({
   },
   render: function() {
     return (
-      <div style={{position: 'relative'}} ref="phaser"></div>
+      <div style={{
+        position: 'relative',
+        width: this.props.width + 'px',
+        height: this.props.height + 'px'
+      }}><canvas
+        ref="placeholder"
+        width={this.props.width}
+        height={this.props.height}
+        style={{
+          position: 'absolute',
+          top: '0px',
+          left: '0px',
+          zIndex: '1',
+          display: this.state.loading ? 'block' : 'none'
+        }}
+      /><div ref="phaser"/></div>
     );    
   }
 });
