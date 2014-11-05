@@ -40,6 +40,8 @@
         animation: 'dead'
       }
     ],
+    width: 288,
+    height: 216,
     backgroundColor: 0xf0f0f0
   };
 
