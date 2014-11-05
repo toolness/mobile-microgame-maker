@@ -3,7 +3,6 @@ var Player = React.createClass({
     return {
       gameData: this.props.gameData,
       preload: function() {
-        console.log('preload');
         this.gameData.spritesheets.forEach(function(info) {
           this.game.load.spritesheet(info.key, info.url, info.frameWidth,
                                      info.frameHeight);
