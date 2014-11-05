@@ -10,22 +10,25 @@ var Editor = React.createClass({
     // For debugging via console only!
     window.editor = this;
   },
-  handleAddSprite: function() {
+  changeGameData: function(changes) {
     this.setState(React.addons.update(this.state, {
       undo: {$push: [this.state.gameData]},
       redo: {$set: []},
-      gameData: {
-        sprites: {
-          $push: [{
-            id: guid(),
-            x: 100,
-            y: 100,
-            key: 'fly',
-            animation: 'flying'
-          }]
-        }
+      gameData: changes
+    }));    
+  },
+  handleAddSprite: function() {
+    this.changeGameData({
+      sprites: {
+        $push: [{
+          id: guid(),
+          x: 100,
+          y: 100,
+          key: 'fly',
+          animation: 'flying'
+        }]
       }
-    }));
+    });
   },
   spriteIndex: function(id) {
     var index = -1;
@@ -38,15 +41,11 @@ var Editor = React.createClass({
     return index;
   },
   handleRemoveSprite: function(id) {
-    this.setState(React.addons.update(this.state, {
-      undo: {$push: [this.state.gameData]},
-      redo: {$set: []},
-      gameData: {
-        sprites: {
-          $splice: [[this.spriteIndex(id), 1]]
-        }
+    this.changeGameData({
+      sprites: {
+        $splice: [[this.spriteIndex(id), 1]]
       }
-    }));
+    });
   },
   handleUndo: function() {
     this.setState(React.addons.update(this.state, {
