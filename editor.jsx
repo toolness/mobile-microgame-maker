@@ -13,6 +13,7 @@ var Editor = React.createClass({
   handleAddSprite: function() {
     this.setState(React.addons.update(this.state, {
       undo: {$push: [this.state.gameData]},
+      redo: {$set: []},
       gameData: {
         sprites: {
           $push: [{
@@ -39,6 +40,7 @@ var Editor = React.createClass({
   handleRemoveSprite: function(id) {
     this.setState(React.addons.update(this.state, {
       undo: {$push: [this.state.gameData]},
+      redo: {$set: []},
       gameData: {
         sprites: {
           $splice: [[this.spriteIndex(id), 1]]
