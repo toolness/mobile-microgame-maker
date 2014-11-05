@@ -28,8 +28,7 @@ var Player = React.createClass({
     };
   },
   componentDidUpdate: function(prevProps) {
-    if (JSON.stringify(prevProps.gameData) !==
-        JSON.stringify(this.props.gameData))
+    if (prevProps.gameData !== this.props.gameData)
       this.handleReload();
   },
   handlePlayPause: function() {
