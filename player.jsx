@@ -1,49 +1,7 @@
 var Player = React.createClass({
   makePhaserState: function() {
-    var gameData = {
-      spritesheets: [
-        {
-          key: 'fly',
-          url: 'img/fly-flying.png',
-          frameWidth: 80,
-          frameHeight: 92
-        }
-      ],
-      animations: {
-        'fly': [
-          {
-            name: 'flying',
-            frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            frameRate: 10,
-            loop: true
-          },
-          {
-            name: 'dead',
-            frames: [3],
-            frameRate: 10,
-            loop: true            
-          }
-        ]
-      },
-      sprites: [
-        {
-          x: 0,
-          y: 0,
-          key: 'fly',
-          animation: 'flying'
-        },
-        {
-          x: 150,
-          y: 0,
-          key: 'fly',
-          animation: 'dead'
-        }
-      ],
-      backgroundColor: 0xf0f0f0
-    };
-
     return {
-      gameData: gameData,
+      gameData: this.props.gameData,
       preload: function() {
         console.log('preload');
         this.gameData.spritesheets.forEach(function(info) {
@@ -70,14 +28,16 @@ var Player = React.createClass({
       isPaused: true
     };
   },
-  componentWillMount: function() {
-    window.player = this;
+  componentDidUpdate: function(prevProps) {
+    if (JSON.stringify(prevProps.gameData) !==
+        JSON.stringify(this.props.gameData))
+      this.refs.stage.setPhaserState(this.makePhaserState());
   },
   handlePlayPause: function() {
     this.refs.stage.game.paused = !this.state.isPaused;
     this.setState({isPaused: !this.state.isPaused});
   },
-  handleStop: function() {
+  handleReload: function() {
     if (!this.state.isPaused)
       this.handlePlayPause();
     this.refs.stage.setPhaserState(this.makePhaserState());
@@ -91,8 +51,8 @@ var Player = React.createClass({
             <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
                                                                 : 'glyphicon-pause')}></span>
           </button>
-          <button type="button" className="btn btn-default" onClick={this.handleStop}>
-            <span className="glyphicon glyphicon-stop"></span>
+          <button type="button" className="btn btn-default" onClick={this.handleReload}>
+            <span className="glyphicon glyphicon-refresh"></span>
           </button>
         </div>
       </div>
