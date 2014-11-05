@@ -6,10 +6,6 @@ var Editor = React.createClass({
       gameData: this.props.initialGameData
     };
   },
-  componentDidMount: function() {
-    // For debugging via console only!
-    window.editor = this;
-  },
   changeGameData: function(changes) {
     this.setState(React.addons.update(this.state, {
       undo: {$push: [this.state.gameData]},

@@ -46,13 +46,13 @@
   };
 
   function start() {
-    var main = React.render(
-      <div className="container">
-        <h1>Mobile Microgame Maker</h1>
-        <Editor initialGameData={gameData}/>
-      </div>,
-      document.getElementById('main')
+    var editor = React.render(
+      <Editor initialGameData={gameData}/>,
+      document.getElementById('editor')
     );
+
+    // For debugging via console only!
+    window.editor = editor;
   }
 
   if (document.readyState == 'loading')
