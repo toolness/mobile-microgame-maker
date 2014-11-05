@@ -70,15 +70,17 @@ var Editor = React.createClass({
           return <Sprite sprite={sprite} key={sprite.id} onRemove={this.handleRemoveSprite} />
         }, this)}
         </ul>
-        <button className="btn btn-default" onClick={this.handleAddSprite}>
-          <span className="glyphicon glyphicon-plus"></span>
-        </button>
-        <button className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
-          Undo
-        </button>
-        <button className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
-          Redo
-        </button>
+        <div className="btn-group">
+          <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
+            <span className="glyphicon glyphicon-plus"></span>
+          </button>
+          <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
+            Undo
+          </button>
+          <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
+            Redo
+          </button>
+        </div>
       </div>
     );
   }
