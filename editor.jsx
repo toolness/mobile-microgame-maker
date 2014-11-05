@@ -14,14 +14,17 @@ var Editor = React.createClass({
     }));    
   },
   handleAddSprite: function() {
+    var spritesheet = this.state.gameData.spritesheets[0];
+    var animation = this.state.gameData.animations[spritesheet.key][0];
+
     this.changeGameData({
       sprites: {
         $push: [{
           id: guid(),
-          x: 100,
-          y: 100,
-          key: 'fly',
-          animation: 'flying'
+          x: _.random(this.state.gameData.width - spritesheet.frameWidth),
+          y: _.random(this.state.gameData.height - spritesheet.frameHeight),
+          key: spritesheet.key,
+          animation: animation.name
         }]
       }
     });
