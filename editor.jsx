@@ -13,6 +13,7 @@ var Editor = React.createClass({
       gameData: {
         sprites: {
           $push: [{
+            id: guid(),
             x: 100,
             y: 100,
             key: 'fly',
@@ -29,7 +30,7 @@ var Editor = React.createClass({
         <br/>
         <ul className="list-group">
         {this.state.gameData.sprites.map(function(sprite, i) {
-          return <li className="list-group-item" key={i}>{sprite.key} @ {sprite.x}, {sprite.y}</li>
+          return <li className="list-group-item" key={sprite.id}>{sprite.key} @ {sprite.x}, {sprite.y}</li>
         })}
         </ul>
         <button className="btn btn-default" onClick={this.handleAddSprite}>

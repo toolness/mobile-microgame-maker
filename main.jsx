@@ -26,12 +26,14 @@ $(function() {
     },
     sprites: [
       {
+        id: '3799a7b6-1576-0a79-8cd5-72a0f5e48759',
         x: 0,
         y: 0,
         key: 'fly',
         animation: 'flying'
       },
       {
+        id: '3c48f505-4ab3-3724-f578-59d7efe857f4',
         x: 150,
         y: 0,
         key: 'fly',
