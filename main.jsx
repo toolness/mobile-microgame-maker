@@ -1,4 +1,4 @@
-$(function() {
+(function() {
   var gameData = {
     spritesheets: [
       {
@@ -43,11 +43,18 @@ $(function() {
     backgroundColor: 0xf0f0f0
   };
 
-  var main = React.render(
-    <div className="container">
-      <h1>Mobile Microgame Maker</h1>
-      <Editor initialGameData={gameData}/>
-    </div>,
-    $('#main')[0]
-  );
-});
+  function start() {
+    var main = React.render(
+      <div className="container">
+        <h1>Mobile Microgame Maker</h1>
+        <Editor initialGameData={gameData}/>
+      </div>,
+      document.getElementById('main')
+    );
+  }
+
+  if (document.readyState == 'loading')
+    document.addEventListener('DOMContentLoaded', start, false);
+  else
+    start();
+})();
