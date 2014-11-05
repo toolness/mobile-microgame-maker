@@ -5,21 +5,37 @@ var Stage = React.createClass({
     phaserState: React.PropTypes.object
   },
   setPhaserState: function(newState) {
-    if (this.game) {
-      this.game.destroy();
-      this.game = null;
-    }
+    var oldGame = this.game;
+    var stateWrapper = Object.create(newState);
 
-    if (newState) {
-      // http://docs.phaser.io/Phaser.Game.html
-      this.game = new Phaser.Game(
-        this.props.width,
-        this.props.height,
-        Phaser.CANVAS,
-        this.refs.phaser.getDOMNode(),
-        newState
-      );
-    }
+    stateWrapper.create = function() {
+      newState.create.apply(this, arguments);
+      if (oldGame && oldGame.isBooted) {
+        oldGame.destroy();
+        oldGame = null;
+      }
+    };
+
+    stateWrapper.preload = function() {
+      newState.preload.apply(this, arguments);
+      if (oldGame && oldGame.canvas) {
+        $(oldGame.canvas).css({
+          position: 'absolute',
+          top: '0px',
+          left: '0px',
+          zIndex: '1'
+        });
+      }
+    };
+
+    // http://docs.phaser.io/Phaser.Game.html
+    this.game = new Phaser.Game(
+      this.props.width,
+      this.props.height,
+      Phaser.CANVAS,
+      this.refs.phaser.getDOMNode(),
+      stateWrapper
+    );
   },
   componentDidMount: function() {
     this.setPhaserState(this.props.phaserState);
@@ -30,7 +46,7 @@ var Stage = React.createClass({
   },
   render: function() {
     return (
-      <div ref="phaser"></div>
+      <div style={{position: 'relative'}} ref="phaser"></div>
     );    
   }
 });
