@@ -1,6 +1,8 @@
 var Editor = React.createClass({
   getInitialState: function() {
     return {
+      undo: [],
+      redo: [],
       gameData: this.props.initialGameData
     };
   },
@@ -10,6 +12,7 @@ var Editor = React.createClass({
   },
   handleAddSprite: function() {
     this.setState(React.addons.update(this.state, {
+      undo: {$push: [this.state.gameData]},
       gameData: {
         sprites: {
           $push: [{
@@ -35,11 +38,26 @@ var Editor = React.createClass({
   },
   handleRemoveSprite: function(id) {
     this.setState(React.addons.update(this.state, {
+      undo: {$push: [this.state.gameData]},
       gameData: {
         sprites: {
           $splice: [[this.spriteIndex(id), 1]]
         }
       }
+    }));
+  },
+  handleUndo: function() {
+    this.setState(React.addons.update(this.state, {
+      undo: {$splice: [[-1, 1]]},
+      redo: {$push: [this.state.gameData]},
+      gameData: {$set: this.state.undo[this.state.undo.length - 1]}
+    }));
+  },
+  handleRedo: function() {
+    this.setState(React.addons.update(this.state, {
+      undo: {$push: [this.state.gameData]},
+      redo: {$splice: [[-1, 1]]},
+      gameData: {$set: this.state.redo[this.state.redo.length - 1]}
     }));
   },
   render: function() {
@@ -54,6 +72,12 @@ var Editor = React.createClass({
         </ul>
         <button className="btn btn-default" onClick={this.handleAddSprite}>
           <span className="glyphicon glyphicon-plus"></span>
+        </button>
+        <button className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
+          Undo
+        </button>
+        <button className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
+          Redo
         </button>
       </div>
     );
