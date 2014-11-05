@@ -43,7 +43,7 @@ var Player = React.createClass({
   render: function() {
     return (
       <div>
-        <Stage ref="stage" width={320} height={240} phaserState={this.makePhaserState()}/>
+        <Stage ref="stage" width={288} height={216} phaserState={this.makePhaserState()}/>
         <div className="btn-group">
           <button type="button" className="btn btn-default" onClick={this.handlePlayPause}>
             <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
