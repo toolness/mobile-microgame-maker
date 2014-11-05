@@ -31,7 +31,7 @@ var Player = React.createClass({
   componentDidUpdate: function(prevProps) {
     if (JSON.stringify(prevProps.gameData) !==
         JSON.stringify(this.props.gameData))
-      this.refs.stage.setPhaserState(this.makePhaserState());
+      this.handleReload();
   },
   handlePlayPause: function() {
     this.refs.stage.game.paused = !this.state.isPaused;
