@@ -45,26 +45,23 @@
     backgroundColor: 0xf0f0f0
   };
 
-  function handleShowFrame(src) {
-    document.documentElement.classList.add('show-frame');
-    var holder = document.getElementById('frame-holder');
-    var iframe = document.createElement('iframe');
-    holder.innerHTML = '';
-    iframe.setAttribute('src', src);
-    iframe.addEventListener('load', function() {
-      var doc = iframe.contentDocument;
-      doc.getElementById('close').addEventListener('click', function() {
-        holder.innerHTML = '';
-        document.documentElement.classList.remove('show-frame');
-      }, false);
-    }, false);
-    holder.appendChild(iframe);
-    return iframe;
+  function handleOpenBlockly() {
+    document.documentElement.classList.add('show-blockly');
+    Blockly.fireUiEvent(window, 'resize');
+  }
+
+  function handleCloseBlockly() {
+    document.documentElement.classList.remove('show-blockly');
   }
 
   function start() {
+    var blockly = React.render(
+      <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
+      document.getElementById('blockly-holder')
+    );
+
     var editor = React.render(
-      <Editor initialGameData={gameData} onShowFrame={handleShowFrame}/>,
+      <Editor initialGameData={gameData} onOpenBlockly={handleOpenBlockly}/>,
       document.getElementById('editor')
     );
 

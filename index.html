@@ -3,21 +3,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
 <style>
-html.show-frame #editor-holder {
+html.show-blockly #editor-holder,
+html:not(.show-blockly) #blockly-holder {
   display: none;
 }
 
-html.show-frame, html.show-frame body,
-html.show-frame #frame-holder, html.show-frame iframe {
+html.show-blockly, html.show-blockly body,
+html.show-blockly .blockly-fill-page {
   border: none;
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 #editor-holder {
   margin-bottom: 3em;
+}
+
+#blockly-holder .close-box {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 4px 10px;
+  font-size: 30px;
+}
+
+#blockly-holder .blocklySvg {
+  height: 100%;
+  width: 100%;
 }
 </style>
 <script src="vendor/react/build/react-with-addons.js"></script>
@@ -27,12 +46,29 @@ html.show-frame #frame-holder, html.show-frame iframe {
   <h1>Mobile Microgame Maker</h1>
   <div id="editor"></div>
 </div>
-<div id="frame-holder"></div>
+<div id="blockly-holder" class="blockly-fill-page">
+  <xml id="toolbox" style="display: none">
+      <category name="Logic">
+          <block type="controls_if"></block>
+          <block type="logic_compare"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_negate"></block>
+          <block type="logic_boolean"></block>
+          <block type="logic_null"></block>
+          <block type="logic_ternary"></block>
+      </category>
+  </xml>
+</div>
 <script src="vendor/underscore.js"></script>
 <script src="vendor/phaser.js"></script>
 <script src="vendor/guid.js"></script>
+<script src="vendor/blockly/blockly_compressed.js"></script>
+<script src="vendor/blockly/blocks_compressed.js"></script>
+<script src="vendor/blockly/javascript_compressed.js"></script>
+<script src="vendor/blockly/en.js"></script>
 <script type="text/jsx" src="stage.jsx"></script>
 <script type="text/jsx" src="player.jsx"></script>
 <script type="text/jsx" src="sprite.jsx"></script>
+<script type="text/jsx" src="blockly.jsx"></script>
 <script type="text/jsx" src="editor.jsx"></script>
 <script type="text/jsx" src="main.jsx"></script>

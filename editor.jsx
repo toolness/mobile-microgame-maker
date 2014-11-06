@@ -60,9 +60,6 @@ var Editor = React.createClass({
       gameData: {$set: this.state.redo[this.state.redo.length - 1]}
     }));
   },
-  handleCode: function() {
-    var iframe = this.props.onShowFrame('blockly.html?cacheBust=' + Date.now());
-  },
   render: function() {
     return (
       <div>
@@ -83,7 +80,7 @@ var Editor = React.createClass({
           <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
             Redo
           </button>
-          <button type="button" className="btn btn-default" onClick={this.handleCode}>
+          <button type="button" className="btn btn-default" onClick={this.props.onOpenBlockly}>
             Code&hellip;
           </button>
         </div>
