@@ -45,9 +45,26 @@
     backgroundColor: 0xf0f0f0
   };
 
+  function handleShowFrame(src) {
+    document.documentElement.classList.add('show-frame');
+    var holder = document.getElementById('frame-holder');
+    var iframe = document.createElement('iframe');
+    holder.innerHTML = '';
+    iframe.setAttribute('src', src);
+    iframe.addEventListener('load', function() {
+      var doc = iframe.contentDocument;
+      doc.getElementById('close').addEventListener('click', function() {
+        holder.innerHTML = '';
+        document.documentElement.classList.remove('show-frame');
+      }, false);
+    }, false);
+    holder.appendChild(iframe);
+    return iframe;
+  }
+
   function start() {
     var editor = React.render(
-      <Editor initialGameData={gameData}/>,
+      <Editor initialGameData={gameData} onShowFrame={handleShowFrame}/>,
       document.getElementById('editor')
     );
 

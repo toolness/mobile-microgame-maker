@@ -3,17 +3,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
 <style>
-body {
-  margin-bottom: 1em;
+html.show-frame #editor-holder {
+  display: none;
+}
+
+html.show-frame, html.show-frame body,
+html.show-frame #frame-holder, html.show-frame iframe {
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#editor-holder {
+  margin-bottom: 3em;
 }
 </style>
 <script src="vendor/react/build/react-with-addons.js"></script>
 <script src="vendor/react/build/JSXTransformer.js"></script>
 <title>Mobile Microgame Maker</title>
-<div class="container">
+<div class="container" id="editor-holder">
   <h1>Mobile Microgame Maker</h1>
   <div id="editor"></div>
 </div>
+<div id="frame-holder"></div>
 <script src="vendor/underscore.js"></script>
 <script src="vendor/phaser.js"></script>
 <script src="vendor/guid.js"></script>
