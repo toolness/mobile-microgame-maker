@@ -16,6 +16,7 @@ var Editor = React.createClass({
         }, this);
       },
       create: function() {
+        var sprites = {};
         gameData.sprites.forEach(function(info) {
           var sprite = this.game.add.sprite(info.x, info.y, info.key);
           gameData.animations[info.key].forEach(function(animInfo) {
@@ -23,6 +24,7 @@ var Editor = React.createClass({
                                   animInfo.frameRate, animInfo.loop);
           });
           sprite.animations.play(info.animation);
+          sprites[info.id] = sprite;
         }, this);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;

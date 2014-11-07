@@ -34,8 +34,20 @@
   };
 
   Blockly.JavaScript['phaser_on_tap'] = function(block) {
-    return 'console.log("TODO: ontap for ", ' +
-      JSON.stringify(block.getFieldValue('SPRITE')) + ');';
+    var sprite = 'sprites["' + block.getFieldValue('SPRITE') + '"]';
+    var branch = Blockly.JavaScript.statementToCode(block, 'STACK');
+    if (Blockly.JavaScript.STATEMENT_PREFIX) {
+      branch = Blockly.JavaScript.prefixLines(
+          Blockly.JavaScript.STATEMENT_PREFIX.replace(/%1/g,
+          '\'' + block.id + '\''), Blockly.JavaScript.INDENT) + branch;
+    }
+    if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
+      branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+          '\'' + block.id + '\'') + branch;
+    }
+
+    return sprite + '.inputEnabled = true;\n' +
+           sprite + '.events.onInputDown.add(function() {\n' + branch + '});\n';
   };
 
   Blockly.Blocks['phaser_set_bg'] = {
@@ -51,6 +63,6 @@
     var colour = Blockly.JavaScript.valueToCode(block, 'COLOUR',
       Blockly.JavaScript.ORDER_COMMA) || '\'#FFFFFF\'';
 
-    return 'game.stage.backgroundColor = ' + colour + ';';
+    return 'game.stage.backgroundColor = ' + colour + ';\n';
   };
 })();
