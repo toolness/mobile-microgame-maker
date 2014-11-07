@@ -1,4 +1,34 @@
 var Editor = React.createClass({
+  makePhaserState: function() {
+    var blockly = this.props.blockly;
+    var gameData = this.state.gameData;
+
+    blockly.Phaser.setGameData(gameData);
+
+    var js = blockly.Phaser.generateJs();
+    console.log('js is', js);
+
+    return {
+      preload: function() {
+        gameData.spritesheets.forEach(function(info) {
+          this.game.load.spritesheet(info.key, info.url, info.frameWidth,
+                                     info.frameHeight);
+        }, this);
+      },
+      create: function() {
+        gameData.sprites.forEach(function(info) {
+          var sprite = this.game.add.sprite(info.x, info.y, info.key);
+          gameData.animations[info.key].forEach(function(animInfo) {
+            sprite.animations.add(animInfo.name, animInfo.frames,
+                                  animInfo.frameRate, animInfo.loop);
+          });
+          sprite.animations.play(info.animation);
+        }, this);
+        this.game.stage.backgroundColor = gameData.backgroundColor;
+        this.game.paused = true;
+      }
+    }
+  },
   getInitialState: function() {
     return {
       undo: [],
@@ -69,10 +99,25 @@ var Editor = React.createClass({
       gameData: {$set: this.state.redo[this.state.redo.length - 1]}
     }));
   },
+  refreshBlocklyXml: function() {
+    var blockly = this.props.blockly;
+    var xml = blockly.Xml.workspaceToDom(blockly.mainWorkspace);
+
+    xml = blockly.Xml.domToText(xml);
+    console.log('refresh blockly xml', xml);
+    if (xml == this.state.gameData.blocklyXml) return;
+    this.changeGameData({
+      blocklyXml: {$set: xml}
+    });
+  },
+  handleOpenBlockly: function() {
+    this.props.onOpenBlockly();
+    this.props.blockly.Phaser.setGameData(this.state.gameData);
+  },
   render: function() {
     return (
       <div>
-        <Player gameData={this.state.gameData}/>
+        <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState}/>
         <br/>
         <ul className="list-group">
         {this.state.gameData.sprites.map(function(sprite) {
@@ -89,7 +134,7 @@ var Editor = React.createClass({
           <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
             Redo
           </button>
-          <button type="button" className="btn btn-default" onClick={this.props.onOpenBlockly}>
+          <button type="button" className="btn btn-default" onClick={this.handleOpenBlockly}>
             Code&hellip;
           </button>
         </div>

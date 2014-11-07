@@ -42,28 +42,30 @@
         animation: 'dead'
       }
     ],
+    blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
     width: 288,
     height: 216,
     backgroundColor: 0xf0f0f0
   };
 
-  function handleOpenBlockly() {
-    document.documentElement.classList.add('show-blockly');
-    Blockly.fireUiEvent(window, 'resize');
-  }
-
-  function handleCloseBlockly() {
-    document.documentElement.classList.remove('show-blockly');
-  }
-
   function start() {
+    function handleOpenBlockly() {
+      document.documentElement.classList.add('show-blockly');
+      Blockly.fireUiEvent(window, 'resize');
+    }
+
+    function handleCloseBlockly() {
+      document.documentElement.classList.remove('show-blockly');
+      editor.refreshBlocklyXml();
+    }
+
     var blockly = React.render(
       <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
       document.getElementById('blockly-holder')
     );
 
     var editor = React.render(
-      <Editor initialGameData={gameData} onOpenBlockly={handleOpenBlockly}/>,
+      <Editor initialGameData={gameData} onOpenBlockly={handleOpenBlockly} blockly={Blockly}/>,
       document.getElementById('editor')
     );
 

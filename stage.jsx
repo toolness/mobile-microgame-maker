@@ -40,6 +40,10 @@ var Stage = React.createClass({
     );
     this.setState({loading: true});
   },
+  componentDidUpdate: function(prevProps) {
+    if (prevProps.phaserState !== this.props.phaserState)
+      this.setPhaserState(this.props.phaserState);
+  },
   componentDidMount: function() {
     this.setPhaserState(this.props.phaserState);
   },
