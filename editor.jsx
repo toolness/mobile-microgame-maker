@@ -114,6 +114,10 @@ var Editor = React.createClass({
     this.props.onOpenBlockly();
     this.props.blockly.Phaser.setGameData(this.state.gameData);
   },
+  componentDidUpdate: function(prevProps, prevState) {
+    if (prevState.gameData !== this.state.gameData)
+      this.props.onGameDataChange(this.state.gameData);
+  },
   render: function() {
     return (
       <div>

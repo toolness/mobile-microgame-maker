@@ -1,5 +1,5 @@
 (function() {
-  var gameData = {
+  var defaultGameData = {
     spritesheets: [
       {
         key: 'fly',
@@ -49,6 +49,12 @@
   };
 
   function start() {
+    var initialGameData = defaultGameData;
+
+    try {
+      initialGameData = JSON.parse(window.sessionStorage['mmm_gamedata']);
+    } catch (e) {}
+
     function handleOpenBlockly() {
       document.documentElement.classList.add('show-blockly');
       Blockly.fireUiEvent(window, 'resize');
@@ -59,13 +65,17 @@
       editor.refreshBlocklyXml();
     }
 
+    function handleGameDataChange(gameData) {
+      window.sessionStorage['mmm_gamedata'] = JSON.stringify(gameData);
+    }
+
     var blockly = React.render(
       <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
       document.getElementById('blockly-holder')
     );
 
     var editor = React.render(
-      <Editor initialGameData={gameData} onOpenBlockly={handleOpenBlockly} blockly={Blockly}/>,
+      <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly}/>,
       document.getElementById('editor')
     );
 
