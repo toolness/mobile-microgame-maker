@@ -21,7 +21,8 @@
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       xml = Blockly.Xml.domToText(xml);
 
-      return Blockly.JavaScript.workspaceToCode();
+      return '//# sourceURL=generated-blockly-code.js\n' +
+             Blockly.JavaScript.workspaceToCode();
     }
   };
 
