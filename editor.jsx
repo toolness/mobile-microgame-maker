@@ -24,7 +24,7 @@ var Editor = React.createClass({
                                   animInfo.frameRate, animInfo.loop);
           });
           sprite.animations.play(info.animation);
-          sprites[info.id] = sprite;
+          sprites[info.name] = sprite;
         }, this);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;

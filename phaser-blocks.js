@@ -9,6 +9,11 @@
     });
   }
 
+  function spriteName(id) {
+    // TODO: Deal w/ case where id is invalid.
+    return _.findWhere(gameData.sprites, {id: id}).name;
+  }
+
   Blockly.Phaser = {
     setGameData: function(newGameData) {
       gameData = newGameData;
@@ -35,7 +40,7 @@
   };
 
   Blockly.JavaScript['phaser_on_tap'] = function(block) {
-    var sprite = 'sprites["' + block.getFieldValue('SPRITE') + '"]';
+    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));
     var branch = Blockly.JavaScript.statementToCode(block, 'STACK');
     if (Blockly.JavaScript.STATEMENT_PREFIX) {
       branch = Blockly.JavaScript.prefixLines(
