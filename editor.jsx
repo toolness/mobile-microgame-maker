@@ -26,6 +26,9 @@ var Editor = React.createClass({
         }, this);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;
+
+        var game = this.game;
+        eval(js);
       }
     }
   },

@@ -51,6 +51,6 @@
     var colour = Blockly.JavaScript.valueToCode(block, 'COLOUR',
       Blockly.JavaScript.ORDER_COMMA) || '\'#FFFFFF\'';
 
-    return 'console.log("TODO: set bg to", ' + colour + ');';
+    return 'game.stage.backgroundColor = ' + colour + ';';
   };
 })();
