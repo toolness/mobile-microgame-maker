@@ -13,6 +13,14 @@ var Editor = React.createClass({
       gameData: changes
     }));    
   },
+  findUnusedSpriteName: function() {
+    var names = _.pluck(this.state.gameData.sprites, 'name');
+    for (var i = 1; i < 10000; i++) {
+      var candidate = 'Object' + i;
+      if (names.indexOf(candidate) == -1) return candidate;
+    }
+    throw new Error('maximum number of sprites reached');
+  },
   handleAddSprite: function() {
     var spritesheet = this.state.gameData.spritesheets[0];
     var animation = this.state.gameData.animations[spritesheet.key][0];
@@ -21,6 +29,7 @@ var Editor = React.createClass({
       sprites: {
         $push: [{
           id: guid(),
+          name: this.findUnusedSpriteName(),
           x: _.random(this.state.gameData.width - spritesheet.frameWidth),
           y: _.random(this.state.gameData.height - spritesheet.frameHeight),
           key: spritesheet.key,

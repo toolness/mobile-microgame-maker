@@ -3,6 +3,8 @@ var Sprite = React.createClass({
     var sprite = this.props.sprite;
     return (
       <li className="list-group-item">
+        <code>{sprite.name}</code>
+        &nbsp;
         {sprite.key}/{sprite.animation} @ {sprite.x}, {sprite.y}
         &nbsp;
         <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
