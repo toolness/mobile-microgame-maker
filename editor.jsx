@@ -10,22 +10,10 @@ var Editor = React.createClass({
 
     return {
       preload: function() {
-        gameData.spritesheets.forEach(function(info) {
-          this.game.load.spritesheet(info.key, info.url, info.frameWidth,
-                                     info.frameHeight);
-        }, this);
+        PhaserState.preload(this.game, gameData);
       },
       create: function() {
-        var sprites = {};
-        gameData.sprites.forEach(function(info) {
-          var sprite = this.game.add.sprite(info.x, info.y, info.key);
-          gameData.animations[info.key].forEach(function(animInfo) {
-            sprite.animations.add(animInfo.name, animInfo.frames,
-                                  animInfo.frameRate, animInfo.loop);
-          });
-          sprite.animations.play(info.animation);
-          sprites[info.name] = sprite;
-        }, this);
+        var sprites = PhaserState.createSprites(this.game, gameData);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;
 
