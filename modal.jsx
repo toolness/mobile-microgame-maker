@@ -12,9 +12,12 @@ var Modal = React.createClass({
     this.$modal().data('bs.modal', null).off('hidden.bs.modal', this.handleModalHidden);
   },
   handleModalHidden: function() {
-    if (this.state.saveChanges && this.props.onSave)
-      return this.props.onSave();
-    this.props.onCancel();
+    if (this.state.saveChanges) {
+      if (this.props.onSave) this.props.onSave();
+    } else {
+      if (this.props.onCancel) this.props.onCancel();
+    }
+    this.props.onFinished();
   },
   handleSave: function() {
     this.setState({saveChanges: true});
@@ -39,5 +42,25 @@ var Modal = React.createClass({
         </div>
       </div>
     );
+  },
+  statics: {
+    createManager: function(rootNode) {
+      function unmount() {
+        React.unmountComponentAtNode(rootNode);
+      }
+
+      return {
+        show: function(type, props, children) {
+          if (rootNode.childElementCount)
+            throw new Error('Assertion failure, root node not empty');
+          var reactEl = React.createElement(
+            type,
+            _.extend({onFinished: unmount}, props),
+            children
+          );
+          return React.render(reactEl, rootNode);
+        }
+      };
+    }
   }
 });
