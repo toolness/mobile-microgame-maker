@@ -11,16 +11,6 @@ var Sprite = React.createClass({
       animation: {$set: e.target.value}
     });
   },
-  handleBlurNumber: function(prop, e) {
-    e.target.value = this.props.sprite[prop];
-  },
-  handleChangeNumber: function(prop, e) {
-    var val = parseFloat(e.target.value);
-    if (isNaN(val)) return;
-    var changes = {};
-    changes[prop] = {$set: val};
-    this.props.onChange(this.props.sprite.id, changes);
-  },
   getInitialState: function() {
     return {isCollapsed: true};
   },
@@ -75,16 +65,6 @@ var Sprite = React.createClass({
                 return <option key={info.name} value={info.name}>{info.name}</option>
               })}
             </select>
-          </div>
-          <div className="row">
-            <div className="col-xs-6 form-group">
-              <label>X</label>
-              <input className="form-control" type="text" defaultValue={sprite.x} onChange={this.handleChangeNumber.bind(null, 'x')} onBlur={this.handleBlurNumber.bind(null, 'x')}/>
-            </div>
-            <div className="col-xs-6">
-              <label>Y</label>
-              <input className="form-control" type="text" defaultValue={sprite.y} onChange={this.handleChangeNumber.bind(null, 'y')} onBlur={this.handleBlurNumber.bind(null, 'y')}/>
-            </div>
           </div>
           <button className="btn btn-block btn-default" onClick={this.handlePosition}>
             Set Starting Position&hellip;

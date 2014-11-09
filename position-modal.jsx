@@ -36,6 +36,8 @@ var PositionModal = React.createClass({
       this.setState(React.addons.update(this.state, {
         sprite: {$set: this.state.movingSprite}
       }));
+      this.refs.x.getDOMNode().value = this.state.movingSprite.x;
+      this.refs.y.getDOMNode().value = this.state.movingSprite.y;
     }.bind(this));
   },
   componentWillUnmount: function() {
@@ -44,6 +46,19 @@ var PositionModal = React.createClass({
   },
   handleSave: function() {
     this.props.onSave(this.state.sprite);
+  },
+  handleBlurNumber: function(prop, e) {
+    e.target.value = this.state.sprite[prop];
+  },
+  handleChangeNumber: function(prop, e) {
+    var val = parseFloat(e.target.value);
+    if (isNaN(val)) return;
+    var changes = {};
+    changes[prop] = {$set: val};
+    this.setState(React.addons.update(this.state, {
+      movingSprite: changes,
+      sprite: changes
+    }));
   },
   render: function() {
     var gameData = this.state.gameData;
@@ -79,6 +94,16 @@ var PositionModal = React.createClass({
             </div>
           </div>
           <p>Just drag the object around.</p>
+        </div>
+        <div className="row">
+          <div className="col-xs-6 form-group">
+            <label>X</label>
+            <input ref="x" className="form-control" type="text" defaultValue={sprite.x} onChange={this.handleChangeNumber.bind(null, 'x')} onBlur={this.handleBlurNumber.bind(null, 'x')}/>
+          </div>
+          <div className="col-xs-6">
+            <label>Y</label>
+            <input ref="y" className="form-control" type="text" defaultValue={sprite.y} onChange={this.handleChangeNumber.bind(null, 'y')} onBlur={this.handleBlurNumber.bind(null, 'y')}/>
+          </div>
         </div>
       </Modal>
     );
