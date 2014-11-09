@@ -27,22 +27,33 @@
       window.sessionStorage['mmm_gamedata'] = JSON.stringify(gameData);
     }
 
-    function handleReset() {
-      if (window.confirm("Reset this app to its factory defaults, destroying your game? This cannot be undone!")) {
-        delete window.sessionStorage['mmm_gamedata'];
-        window.location.reload();
-      }
+    function reset() {
+      delete window.sessionStorage['mmm_gamedata'];
+      window.location.reload();
     }
 
-    var blockly = React.render(
-      <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
-      document.getElementById('blockly-holder')
-    );
+    function handleReset() {
+      if (window.confirm("Reset this app to its factory defaults, destroying your game? This cannot be undone!"))
+        reset();
+    }
 
-    var editor = React.render(
-      <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset}/>,
-      document.getElementById('editor')
-    );
+    try {
+      var blockly = React.render(
+        <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
+        document.getElementById('blockly-holder')
+      );
+
+      var editor = React.render(
+        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset}/>,
+        document.getElementById('editor')
+      );
+    } catch (e) {
+      setTimeout(function() {
+        if (window.confirm("A fatal error occured! Reset this app to its factory defaults? Your data will be lost."))
+          reset();
+      }, 250);
+      throw e;
+    }
 
     // For debugging via console only!
     window.editor = editor;
