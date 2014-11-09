@@ -40,8 +40,8 @@ var Sprite = React.createClass({
           <button className="btn btn-default" style={{float: 'right'}} onClick={this.handleToggleCollapse}>
             <span className={React.addons.classSet({
               'glyphicon': true,
-              'glyphicon-collapse-down': this.state.isCollapsed,
-              'glyphicon-collapse-up': !this.state.isCollapsed
+              'glyphicon-chevron-down': this.state.isCollapsed,
+              'glyphicon-chevron-up': !this.state.isCollapsed
             })}></span>
           </button>
 
