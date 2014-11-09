@@ -16,7 +16,9 @@ var Sprite = React.createClass({
     var animations = this.props.gameData.animations[sprite.key] || [];
     return (
       <li className="list-group-item">
-        <CssSprite sprite={sprite} gameData={this.props.gameData}/>
+        <div style={{display: 'inline-block', width: 38, height: 32, verticalAlign: 'bottom'}}>
+          <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />
+        </div>
         <code>{sprite.name}</code>
         &nbsp;
         <select value={sprite.key} onChange={this.handleChangeKey}>

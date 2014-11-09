@@ -15,12 +15,26 @@ var CssSprite = React.createClass({
       return <div></div>;
     }
 
+    var frameWidth = spritesheet.frameWidth;
+    var frameHeight = spritesheet.frameHeight;
+
+    if (this.props.maxDimension) {
+      if (frameWidth > frameHeight) {
+        frameHeight = frameHeight / frameWidth * this.props.maxDimension;
+        frameWidth = this.props.maxDimension;
+      } else {
+        frameWidth = frameWidth / frameHeight * this.props.maxDimension;
+        frameHeight = this.props.maxDimension;
+      }
+    }
+
     return (
       <div style={{
-        width: spritesheet.frameWidth,
-        height: spritesheet.frameHeight,
+        width: frameWidth,
+        height: frameHeight,
+        backgroundSize: 'auto ' + frameHeight + 'px',
         backgroundImage: 'url(' + spritesheet.url + ')',
-        backgroundPosition: -(frame * spritesheet.frameWidth) + 'px 0px'
+        backgroundPosition: -(frame * frameWidth) + 'px 0px'
       }}></div>
     );
   }
