@@ -3,7 +3,7 @@ var Sprite = React.createClass({
     var key = e.target.value;
     this.props.onChange(this.props.sprite.id, {
       key: {$set: key},
-      animation: {$set: this.props.gameData.animations[key][0]}
+      animation: {$set: this.props.gameData.animations[key][0].name}
     });
   },
   handleChangeAnimation: function(e) {
