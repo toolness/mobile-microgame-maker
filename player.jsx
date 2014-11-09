@@ -32,14 +32,18 @@ var Player = React.createClass({
           width: this.props.gameData.width
         }}>
           <Stage ref="stage" width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
-          <div className="btn-group">
-            <button type="button" className="btn btn-default" onClick={this.handlePlayPause}>
-              <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
-                                                                  : 'glyphicon-pause')}></span>
-            </button>
-            <button type="button" className="btn btn-default" onClick={this.handleReload}>
-              <span className="glyphicon glyphicon-refresh"></span>
-            </button>
+          <div className="btn-group btn-group-justified">
+            <div className="btn-group">
+              <button type="button" className="btn btn-default" onClick={this.handlePlayPause}>
+                <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
+                                                                    : 'glyphicon-pause')}></span>
+              </button>
+            </div>
+            <div className="btn-group">
+              <button type="button" className="btn btn-default" onClick={this.handleReload}>
+                <span className="glyphicon glyphicon-refresh"></span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
