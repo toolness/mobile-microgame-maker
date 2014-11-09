@@ -127,19 +127,27 @@ var Editor = React.createClass({
           return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} />
         }, this)}
         </ul>
-        <div className="btn-group">
-          <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
-            <span className="glyphicon glyphicon-plus"></span>
-          </button>
-          <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
-            Undo
-          </button>
-          <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
-            Redo
-          </button>
-          <button type="button" className="btn btn-default" onClick={this.handleOpenBlockly}>
-            Code&hellip;
-          </button>
+        <div className="btn-group btn-group-justified">
+          <div className="btn-group">
+            <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
+              <span className="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+          <div className="btn-group">
+            <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
+              Undo
+            </button>
+          </div>
+          <div className="btn-group">
+            <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
+              Redo
+            </button>
+          </div>
+          <div className="btn-group">          
+            <button type="button" className="btn btn-default" onClick={this.handleOpenBlockly}>
+              Code&hellip;
+            </button>
+          </div>
         </div>
       </div>
     );
