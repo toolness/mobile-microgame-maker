@@ -51,8 +51,8 @@ var defaultGameData = {
       name: 'Object2',
       x: 150,
       y: 0,
-      key: 'fly',
-      animation: 'dead'
+      key: 'grumpaloomba',
+      animation: 'grumpy'
     }
   ],
   blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
