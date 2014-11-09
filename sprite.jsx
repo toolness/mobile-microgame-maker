@@ -27,6 +27,17 @@ var Sprite = React.createClass({
   handleToggleCollapse: function() {
     this.setState({isCollapsed: !this.state.isCollapsed});
   },
+  handlePosition: function() {
+    this.props.modalManager.show(PositionModal, {
+      initialGameData: this.props.gameData,
+      initialSprite: this.props.sprite,
+      onSave: function(sprite) {
+        this.props.onChange(this.props.sprite.id, {
+          $set: sprite
+        });
+      }.bind(this)
+    });
+  },
   render: function() {
     var sprite = this.props.sprite;
     var animations = this.props.gameData.animations[sprite.key] || [];
@@ -75,6 +86,10 @@ var Sprite = React.createClass({
               <input className="form-control" type="text" defaultValue={sprite.y} onChange={this.handleChangeNumber.bind(null, 'y')} onBlur={this.handleBlurNumber.bind(null, 'y')}/>
             </div>
           </div>
+          <button className="btn btn-block btn-default" onClick={this.handlePosition}>
+            Set Starting Position&hellip;
+          </button>
+          <br/>
           <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
             <span className="glyphicon glyphicon-trash"></span>
           </button>

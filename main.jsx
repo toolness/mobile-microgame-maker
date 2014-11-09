@@ -38,13 +38,17 @@
     }
 
     try {
+      var modalManager = Modal.createManager(
+        document.getElementById('modal-holder')
+      );
+
       var blockly = React.render(
         <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
         document.getElementById('blockly-holder')
       );
 
       var editor = React.render(
-        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset}/>,
+        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
         document.getElementById('editor')
       );
     } catch (e) {

@@ -62,14 +62,7 @@ var Editor = React.createClass({
     });
   },
   spriteIndex: function(id) {
-    var index = -1;
-    this.state.gameData.sprites.some(function(sprite, i) {
-      if (sprite.id === id) {
-        index = i;
-        return true;
-      }
-    });
-    return index;
+    return GameData.spriteIndex(this.state.gameData, id);
   },
   handleChangeSprite: function(id, changes) {
     var index = this.spriteIndex(id);
@@ -124,7 +117,7 @@ var Editor = React.createClass({
         <br/>
         <ul className="list-group">
         {this.state.gameData.sprites.map(function(sprite) {
-          return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} />
+          return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} modalManager={this.props.modalManager}/>
         }, this)}
         </ul>
         <button type="button" className="btn btn-default btn-block" onClick={this.handleOpenBlockly}>
