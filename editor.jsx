@@ -127,6 +127,10 @@ var Editor = React.createClass({
           return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} />
         }, this)}
         </ul>
+        <button type="button" className="btn btn-default btn-block" onClick={this.handleOpenBlockly}>
+          Code&hellip;
+        </button>
+        <br/>
         <div className="btn-group btn-group-justified">
           <div className="btn-group">
             <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
@@ -146,11 +150,6 @@ var Editor = React.createClass({
           <div className="btn-group">
             <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
               Redo
-            </button>
-          </div>
-          <div className="btn-group">          
-            <button type="button" className="btn btn-default" onClick={this.handleOpenBlockly}>
-              Code&hellip;
             </button>
           </div>
         </div>
