@@ -11,32 +11,55 @@ var Sprite = React.createClass({
       animation: {$set: e.target.value}
     });
   },
+  getInitialState: function() {
+    return {isCollapsed: true};
+  },
+  handleToggleCollapse: function() {
+    this.setState({isCollapsed: !this.state.isCollapsed});
+  },
   render: function() {
     var sprite = this.props.sprite;
     var animations = this.props.gameData.animations[sprite.key] || [];
     return (
       <li className="list-group-item">
-        <div style={{display: 'inline-block', width: 38, height: 32, verticalAlign: 'bottom'}}>
-          <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />
+        <div>
+          <div style={{display: 'inline-block', width: 38, height: 32, verticalAlign: 'bottom'}}>
+            <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />
+          </div>
+          <code>{sprite.name}</code>
+          <button className="btn btn-default" style={{float: 'right'}} onClick={this.handleToggleCollapse}>
+            <span className={React.addons.classSet({
+              'glyphicon': true,
+              'glyphicon-collapse-down': this.state.isCollapsed,
+              'glyphicon-collapse-up': !this.state.isCollapsed
+            })}></span>
+          </button>
+
         </div>
-        <code>{sprite.name}</code>
-        &nbsp;
-        <select value={sprite.key} onChange={this.handleChangeKey}>
-          {this.props.gameData.spritesheets.map(function(info) {
-            return <option key={info.key} value={info.key}>{info.key}</option>
-          })}
-        </select>&nbsp; / &nbsp;
-        <select value={sprite.animation} onChange={this.handleChangeAnimation}>
-          {animations.map(function(info) {
-            return <option key={info.name} value={info.name}>{info.name}</option>
-          })}
-        </select>        
-        &nbsp;
-        @ {sprite.x}, {sprite.y}
-        &nbsp;
-        <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
-          <span className="glyphicon glyphicon-trash"></span>
-        </button>
+        {this.state.isCollapsed ? null :
+        <div>
+          <br/>
+          <p>This object starts at ({sprite.x}, {sprite.y}).</p>
+          <div className="form-group">
+            <label>Spritesheet</label>
+            <select className="form-control" value={sprite.key} onChange={this.handleChangeKey}>
+              {this.props.gameData.spritesheets.map(function(info) {
+                return <option key={info.key} value={info.key}>{info.key}</option>
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Animation</label>
+            <select className="form-control" value={sprite.animation} onChange={this.handleChangeAnimation}>
+              {animations.map(function(info) {
+                return <option key={info.name} value={info.name}>{info.name}</option>
+              })}
+            </select>
+          </div>
+          <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
+            <span className="glyphicon glyphicon-trash"></span>
+          </button>
+        </div>}
       </li>
     );
   }
