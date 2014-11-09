@@ -5,6 +5,12 @@ var defaultGameData = {
       url: 'img/fly-flying.png',
       frameWidth: 80,
       frameHeight: 92
+    },
+    {
+      key: 'grumpaloomba',
+      url: 'img/grumpaloomba-06.png',
+      frameWidth: 75,
+      frameHeight: 73
     }
   ],
   animations: {
@@ -20,6 +26,14 @@ var defaultGameData = {
         frames: [3],
         frameRate: 10,
         loop: true            
+      }
+    ],
+    'grumpaloomba': [
+      {
+        name: 'grumpy',
+        frames: [0],
+        frameRate: 1,
+        loop: false
       }
     ]
   },

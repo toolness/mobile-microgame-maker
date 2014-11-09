@@ -71,6 +71,12 @@ var Editor = React.createClass({
     });
     return index;
   },
+  handleChangeSprite: function(id, changes) {
+    var index = this.spriteIndex(id);
+    var sprites = {};
+    sprites[index] = changes;
+    this.changeGameData({sprites: sprites});
+  },
   handleRemoveSprite: function(id) {
     this.changeGameData({
       sprites: {
@@ -118,7 +124,7 @@ var Editor = React.createClass({
         <br/>
         <ul className="list-group">
         {this.state.gameData.sprites.map(function(sprite) {
-          return <Sprite sprite={sprite} key={sprite.id} onRemove={this.handleRemoveSprite} />
+          return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} />
         }, this)}
         </ul>
         <div className="btn-group">
