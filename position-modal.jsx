@@ -31,18 +31,22 @@ var PositionModal = React.createClass({
           y: {$set: this.state.sprite.y + e.deltaY}
         }
       }));
+      this.updateFields();
     }.bind(this));
     hammer.on('panend', function(e) {
       this.setState(React.addons.update(this.state, {
         sprite: {$set: this.state.movingSprite}
       }));
-      this.refs.x.getDOMNode().value = this.state.movingSprite.x;
-      this.refs.y.getDOMNode().value = this.state.movingSprite.y;
+      this.updateFields();
     }.bind(this));
   },
   componentWillUnmount: function() {
     this.hammer.destroy();
     this.hammer = null;
+  },
+  updateFields: function() {
+    this.refs.x.getDOMNode().value = this.state.movingSprite.x;
+    this.refs.y.getDOMNode().value = this.state.movingSprite.y;
   },
   handleSave: function() {
     this.props.onSave(this.state.sprite);
