@@ -13,7 +13,7 @@ var Sprite = React.createClass({
   },
   render: function() {
     var sprite = this.props.sprite;
-    var animations = this.props.gameData.animations[sprite.key];
+    var animations = this.props.gameData.animations[sprite.key] || [];
     return (
       <li className="list-group-item">
         <code>{sprite.name}</code>
