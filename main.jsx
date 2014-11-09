@@ -27,13 +27,20 @@
       window.sessionStorage['mmm_gamedata'] = JSON.stringify(gameData);
     }
 
+    function handleReset() {
+      if (window.confirm("Reset this app to its factory defaults, destroying your game? This cannot be undone!")) {
+        delete window.sessionStorage['mmm_gamedata'];
+        window.location.reload();
+      }
+    }
+
     var blockly = React.render(
       <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
       document.getElementById('blockly-holder')
     );
 
     var editor = React.render(
-      <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly}/>,
+      <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset}/>,
       document.getElementById('editor')
     );
 

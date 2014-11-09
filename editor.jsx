@@ -134,6 +134,11 @@ var Editor = React.createClass({
             </button>
           </div>
           <div className="btn-group">
+            <button type="button" className="btn btn-default" onClick={this.props.onReset}>
+              <span className="glyphicon glyphicon-off"></span>
+            </button>
+          </div>
+          <div className="btn-group">
             <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
               Undo
             </button>
