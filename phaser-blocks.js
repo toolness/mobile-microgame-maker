@@ -1,6 +1,14 @@
 (function() {
   var gameData = null;
 
+  function soundList() {
+    if (!(gameData && gameData.sounds.length))
+      return [['--', '']];
+    return gameData.sounds.map(function(sound) {
+      return [sound.key, sound.key];
+    });    
+  }
+
   function spriteList() {
     if (!(gameData && gameData.sprites.length))
       return [['--', '']];
@@ -54,6 +62,19 @@
 
     return sprite + '.inputEnabled = true;\n' +
            sprite + '.events.onInputDown.add(function() {\n' + branch + '});\n';
+  };
+
+  Blockly.Blocks['phaser_play_sound'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('play')
+        .appendField(new Blockly.FieldDropdown(soundList), 'SOUND');
+    }
+  };
+
+  Blockly.JavaScript['phaser_play_sound'] = function(block) {
+    return 'sounds.' + block.getFieldValue('SOUND') + '.play();\n';
   };
 
   Blockly.Blocks['phaser_set_bg'] = {

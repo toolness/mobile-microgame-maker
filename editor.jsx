@@ -14,6 +14,7 @@ var Editor = React.createClass({
       },
       create: function() {
         var sprites = PhaserState.createSprites(this.game, gameData);
+        var sounds = PhaserState.createSounds(this.game, gameData);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;
 

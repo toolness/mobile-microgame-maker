@@ -1,4 +1,14 @@
 var defaultGameData = {
+  sounds: [
+    {
+      key: 'blop',
+      url: 'sounds/Blop-Mark_DiAngelo.mp3'
+    },
+    {
+      key: 'woosh',
+      url: 'sounds/Woosh-Mark_DiAngelo.mp3'
+    }
+  ],
   spritesheets: [
     {
       key: 'fly',
