@@ -31,7 +31,9 @@ var Player = React.createClass({
           display: 'inline-block',
           width: this.props.gameData.width
         }}>
-          <Stage ref="stage" width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
+          <div style={{pointerEvents: this.state.isPaused ? 'none' : 'auto'}}>
+            <Stage ref="stage" width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
+          </div>
           <div className="btn-group btn-group-justified">
             <div className="btn-group">
               <button type="button" className="btn btn-default" onClick={this.handlePlayPause}>
