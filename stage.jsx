@@ -20,24 +20,39 @@ var Stage = React.createClass({
       this.game = null;
     }
 
+    if (this.iframe) {
+      this.iframe.parentNode.removeChild(this.iframe);
+      this.iframe = null;
+    }
+
     if (!newState) return;
 
     var self = this;
     var stateWrapper = Object.create(newState);
+    var iframe = document.createElement('iframe');
 
     stateWrapper.create = function() {
       self.setState({loading: false});
       newState.create.apply(this, arguments);
     };
 
-    // http://docs.phaser.io/Phaser.Game.html
-    this.game = new Phaser.Game(
-      this.props.width,
-      this.props.height,
-      Phaser.CANVAS,
-      this.refs.phaser.getDOMNode(),
-      stateWrapper
-    );
+    iframe.setAttribute('src', 'phaser-frame.html');
+    iframe.onload = function() {
+      var Phaser = iframe.contentWindow.Phaser;
+      self.game = new Phaser.Game(
+        self.props.width,
+        self.props.height,
+        Phaser.CANVAS,
+        iframe.contentDocument.body,
+        stateWrapper
+      );
+    };
+    this.refs.phaser.getDOMNode().appendChild(iframe);
+    iframe.style.width = this.props.width + 'px';
+    iframe.style.height = this.props.height + 'px';
+    iframe.style.border = 'none';
+
+    this.iframe = iframe;
     this.setState({loading: true});
   },
   componentDidUpdate: function(prevProps) {
@@ -62,8 +77,8 @@ var Stage = React.createClass({
         height={this.props.height}
         style={{
           position: 'absolute',
-          top: '0px',
-          left: '0px',
+          top: 0,
+          left: 0,
           zIndex: '1',
           display: this.state.loading ? 'block' : 'none'
         }}
