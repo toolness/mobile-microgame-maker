@@ -6,10 +6,17 @@ var Modal = React.createClass({
     return {saveChanges: false};
   },
   componentDidMount: function() {
-    this.$modal().modal().on('hidden.bs.modal', this.handleModalHidden);
+    this.$modal().modal()
+      .on('hidden.bs.modal', this.handleModalHidden)
+      .on('shown.bs.modal', this.handleModalShown);
   },
   componentWillUnmount: function() {
-    this.$modal().data('bs.modal', null).off('hidden.bs.modal', this.handleModalHidden);
+    this.$modal().data('bs.modal', null)
+      .off('hidden.bs.modal', this.handleModalHidden)
+      .off('shown.bs.modal', this.handleModalShown);
+  },
+  handleModalShown: function() {
+    if (this.props.onShown) this.props.onShown();
   },
   handleModalHidden: function() {
     if (this.state.saveChanges) {

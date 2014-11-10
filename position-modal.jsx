@@ -18,6 +18,7 @@ var PositionModal = React.createClass({
       gameData: gameData,
       sprite: this.props.initialSprite,
       movingSprite: this.props.initialSprite,
+      isShown: false,
       phaserState: this.makePhaserState(gameData)
     };
   },
@@ -39,6 +40,11 @@ var PositionModal = React.createClass({
       }));
       this.updateFields();
     }.bind(this));
+  },
+  handleShown: function() {
+    this.setState(React.addons.update(this.state, {
+      isShown: {$set: true}
+    }));
   },
   componentWillUnmount: function() {
     this.hammer.destroy();
@@ -68,12 +74,24 @@ var PositionModal = React.createClass({
     var gameData = this.state.gameData;
     var sprite = this.state.sprite;
     var movingSprite = this.state.movingSprite;
-    var movableTransform = 'translate(' + movingSprite.x + 'px, ' +
-                                          movingSprite.y + 'px)';
+
+    // An apparent bug on iOS 7 makes it so that transforms aren't
+    // applied if the element isn't visible at the time that
+    // the transform is set, so we'll wait until the modal is
+    // fully shown before setting the transform.
+    var movableTransform = this.state.isShown
+                           ? 'translate(' + movingSprite.x + 'px, ' +
+                                            movingSprite.y + 'px)'
+                           : '';
+
     var movableStyle = {
       position: 'absolute',
       top: 0,
       left: 0,
+      opacity: this.state.isShown ? 1 : 0,
+      transition: 'opacity 0.25s',
+      webkitTransition: 'opacity 0.25s',
+      mozTransition: 'opacity 0.25s',
       backgroundColor: 'rgba(0, 255, 0, 0.25)',
       transform: movableTransform,
       webkitTransform: movableTransform,
@@ -81,7 +99,7 @@ var PositionModal = React.createClass({
     };
 
     return (
-      <Modal title={"Set position for " + sprite.name} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished}>
+      <Modal title={"Set position for " + sprite.name} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished} onShown={this.handleShown}>
         <div style={{textAlign: 'center'}}>
           <div style={{
             display: 'inline-block',
