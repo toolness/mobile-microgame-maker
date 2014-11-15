@@ -1,10 +1,12 @@
 var Editor = React.createClass({
   DEFAULT_PLAY_TIME: 5000,
+  DEFAULT_ENDING_TIME: 2000,
   makePhaserState: function(options) {
     var blockly = this.props.blockly;
     var gameData = this.state.gameData;
     var autoplay = options.autoplay;
     var playTime = options.playTime || this.DEFAULT_PLAY_TIME;
+    var endingTime = options.endingTime || this.DEFAULT_ENDING_TIME;
 
     blockly.Phaser.setGameData(gameData);
 
@@ -14,8 +16,10 @@ var Editor = React.createClass({
     return {
       TIME_BAR_HEIGHT: 8,
       onGameEnded: options.onGameEnded,
+      endingTime: endingTime,
       playTime: playTime,
       timeLeft: playTime,
+      phase: 'PLAYING',
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
@@ -34,18 +38,27 @@ var Editor = React.createClass({
       update: function() {
         this.timeLeft -= this.game.time.elapsed;
         if (this.timeLeft < 0) this.timeLeft = 0;
-        if (this.isEnded() && this.onGameEnded)
-          this.onGameEnded(this);
+        if (this.timeLeft == 0) {
+          if (this.phase == 'PLAYING') {
+            this.timeLeft = this.endingTime;
+            this.phase = 'ENDING';
+            this.game.input.disabled = true;
+          } else if (this.phase == 'ENDING') {
+            this.phase = 'ENDED';
+            if (this.onGameEnded) this.onGameEnded(this);
+          }
+        }
         this.timeBar.right = (this.timeLeft / this.playTime) * this.game.width;
       },
       render: function() {
-        this.game.debug.geom(this.timeBar, '#000000');
+        if (this.phase == 'PLAYING')
+          this.game.debug.geom(this.timeBar, '#000000');
       },
       setPaused: function(isPaused) {
         this.game.paused = isPaused;
       },
       isEnded: function() {
-        return this.timeLeft == 0;
+        return this.phase == 'ENDED';
       },
     }
   },
