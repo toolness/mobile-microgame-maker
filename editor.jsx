@@ -21,6 +21,7 @@ var Editor = React.createClass({
       timeLeft: playTime,
       phase: 'PLAYING',
       outcome: undefined,
+      eventHandlers: {},
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
@@ -52,6 +53,7 @@ var Editor = React.createClass({
           }
         }
         this.timeBar.right = (this.timeLeft / this.playTime) * this.game.width;
+        this.trigger('update');
       },
       setupEndingPhase: function() {
         this.timeLeft = this.endingTime;
@@ -83,6 +85,15 @@ var Editor = React.createClass({
       isEnded: function() {
         return this.phase == 'ENDED';
       },
+      trigger: function(eventName) {
+        var handlers = this.eventHandlers[eventName] || [];
+        handlers.forEach(function(cb) { cb(); });
+      },
+      on: function(eventName, cb) {
+        if (!(eventName in this.eventHandlers))
+          this.eventHandlers[eventName] = [];
+        this.eventHandlers[eventName].push(cb);
+      }
     }
   },
   getInitialState: function() {

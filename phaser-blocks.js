@@ -74,6 +74,19 @@
     }
   };
 
+  Blockly.Blocks['phaser_on_update'] = {
+    init: function() {
+      this.appendDummyInput().appendField('when game updates')
+      this.appendStatementInput('STACK');
+    }
+  };
+
+  Blockly.JavaScript['phaser_on_update'] = function(block) {
+    var branch = generateJsBranch(block);
+
+    return 'state.on("update", function() {\n' + branch + '});\n';
+  };
+
   Blockly.Blocks['phaser_on_tap'] = {
     init: function() {
       this.appendDummyInput().appendField('when')
