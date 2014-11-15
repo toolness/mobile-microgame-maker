@@ -1,10 +1,10 @@
 var Editor = React.createClass({
-  DEFAULT_TIME_LIMIT: 5000,
+  DEFAULT_PLAY_TIME: 5000,
   makePhaserState: function(options) {
     var blockly = this.props.blockly;
     var gameData = this.state.gameData;
     var autoplay = options.autoplay;
-    var timeLimit = options.timeLimit || this.DEFAULT_TIME_LIMIT;
+    var playTime = options.playTime || this.DEFAULT_PLAY_TIME;
 
     blockly.Phaser.setGameData(gameData);
 
@@ -14,8 +14,8 @@ var Editor = React.createClass({
     return {
       TIME_BAR_HEIGHT: 8,
       onGameEnded: options.onGameEnded,
-      timeLimit: timeLimit,
-      timeLeft: timeLimit,
+      playTime: playTime,
+      timeLeft: playTime,
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
@@ -36,7 +36,7 @@ var Editor = React.createClass({
         if (this.timeLeft < 0) this.timeLeft = 0;
         if (this.isEnded() && this.onGameEnded)
           this.onGameEnded(this);
-        this.timeBar.right = (this.timeLeft / this.timeLimit) * this.game.width;
+        this.timeBar.right = (this.timeLeft / this.playTime) * this.game.width;
       },
       render: function() {
         this.game.debug.geom(this.timeBar, '#000000');
