@@ -138,7 +138,7 @@
       this.setPreviousStatement(true);
       this.setNextStatement(true);
   
-      this.appendDummyInput().appendField('set the animation of')
+      this.appendDummyInput().appendField('set animation of')
         .appendField(spriteDropdown, 'SPRITE');
       this.appendDummyInput().appendField('to')
         .appendField(animationDropdown, 'ANIMATION');
