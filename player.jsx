@@ -10,10 +10,10 @@ var Player = React.createClass({
       this.resetGame(nextProps);
   },
   resetGame: function(props, autoplay) {
-    this.setState(React.addons.update(this.state, {
-      isPaused: {$set: true},
-      phaserState: {$set: this.makePhaserState(props, autoplay)}
-    }));
+    this.setState({
+      isPaused: true,
+      phaserState: this.makePhaserState(props, autoplay)
+    });
   },
   makePhaserState: function(props, autoplay) {
     props = props || this.props;
@@ -24,22 +24,16 @@ var Player = React.createClass({
   },
   handleGameEnded: function(phaserState) {
     phaserState.game.paused = true;
-    this.setState(React.addons.update(this.state, {
-      isPaused: {$set: true}
-    }));
+    this.setState({isPaused: true});
   },
   handlePlayPause: function() {
     if (this.state.phaserState.isEnded() &&
         this.state.isPaused) {
-      this.setState(React.addons.update(this.state, {
-        isPaused: {$set: false}
-      }));
+      this.setState({isPaused: false});
       return this.resetGame(this.props, true);
     }
     this.state.phaserState.game.paused = !this.state.isPaused;
-    this.setState(React.addons.update(this.state, {
-      isPaused: {$set: !this.state.isPaused}
-    }));
+    this.setState({isPaused: !this.state.isPaused});
   },
   handleReload: function() {
     this.resetGame(this.props);
