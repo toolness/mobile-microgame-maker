@@ -10,7 +10,9 @@
   }
 
   function animationList(spriteDropdown) {
-    var spriteId = spriteDropdown.getValue();
+    var spriteId = typeof(spriteDropdown) == 'string'
+                   ? spriteDropdown : spriteDropdown.getValue();
+
     var sprite = spriteWithId(spriteId);
     if (sprite) {
       var animations = gameData.animations[sprite.key];
@@ -121,7 +123,14 @@
 
   Blockly.Blocks['phaser_set_animation'] = {
     init: function() {
-      var spriteDropdown = new Blockly.FieldDropdown(spriteList);
+      var spriteDropdown = new Blockly.FieldDropdown(spriteList, function(id) {
+        var animations = animationList(id);
+        var currAnimation = _.findWhere(animations, {
+          1: animationDropdown.getValue()
+        });
+        if (!currAnimation)
+          animationDropdown.setValue(animations[0][1]);
+      });
       var animationDropdown = new Blockly.FieldDropdown(
         animationList.bind(null, spriteDropdown)
       );
