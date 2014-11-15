@@ -35,16 +35,12 @@ var PositionModal = React.createClass({
       this.updateFields();
     }.bind(this));
     hammer.on('panend', function(e) {
-      this.setState(React.addons.update(this.state, {
-        sprite: {$set: this.state.movingSprite}
-      }));
+      this.setState({sprite: this.state.movingSprite});
       this.updateFields();
     }.bind(this));
   },
   handleShown: function() {
-    this.setState(React.addons.update(this.state, {
-      isShown: {$set: true}
-    }));
+    this.setState({isShown: true});
   },
   componentWillUnmount: function() {
     this.hammer.destroy();
