@@ -11,7 +11,7 @@ var Player = React.createClass({
   },
   resetGame: function(props, autoplay) {
     this.setState({
-      isPaused: true,
+      isPaused: !autoplay,
       phaserState: this.makePhaserState(props, autoplay)
     });
   },
@@ -23,7 +23,7 @@ var Player = React.createClass({
     });
   },
   handleGameEnded: function(phaserState) {
-    phaserState.game.paused = true;
+    phaserState.setPaused(true);
     this.setState({isPaused: true});
   },
   handlePlayPause: function() {
@@ -32,7 +32,7 @@ var Player = React.createClass({
       this.setState({isPaused: false});
       return this.resetGame(this.props, true);
     }
-    this.state.phaserState.game.paused = !this.state.isPaused;
+    this.state.phaserState.setPaused(!this.state.isPaused);
     this.setState({isPaused: !this.state.isPaused});
   },
   handleReload: function() {

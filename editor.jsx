@@ -41,6 +41,9 @@ var Editor = React.createClass({
       render: function() {
         this.game.debug.geom(this.timeBar, '#000000');
       },
+      setPaused: function(isPaused) {
+        this.game.paused = isPaused;
+      },
       isEnded: function() {
         return this.timeLeft == 0;
       },
