@@ -73,7 +73,8 @@ var Editor = React.createClass({
           this.game.debug.geom(this.timeBar, '#000000');
         } else {
           this.game.debug.text("Player has " + this.outcome + " the game.",
-                               0, this.TIME_BAR_HEIGHT + 4, "#000000");
+                               0, this.TIME_BAR_HEIGHT + 4,
+                               this.outcome == 'WON' ? "lightgreen" : "red");
         }
       },
       setPaused: function(isPaused) {
