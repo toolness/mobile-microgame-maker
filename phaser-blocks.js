@@ -77,6 +77,30 @@
     return 'sounds.' + block.getFieldValue('SOUND') + '.play();\n';
   };
 
+  Blockly.Blocks['phaser_win'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('win');
+    }
+  };
+
+  Blockly.JavaScript['phaser_win'] = function(block) {
+    return 'state.win();\n';
+  };
+
+  Blockly.Blocks['phaser_lose'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('lose');
+    }
+  };
+
+  Blockly.JavaScript['phaser_lose'] = function(block) {
+    return 'state.lose();\n';
+  };
+
   Blockly.Blocks['phaser_set_bg'] = {
     init: function() {
       this.setPreviousStatement(true);

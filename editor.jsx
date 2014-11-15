@@ -20,6 +20,7 @@ var Editor = React.createClass({
       playTime: playTime,
       timeLeft: playTime,
       phase: 'PLAYING',
+      outcome: undefined,
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
@@ -32,6 +33,7 @@ var Editor = React.createClass({
         if (!autoplay)
           this.game.paused = true;
 
+        var state = this;
         var game = this.game;
         eval(js);
       },
@@ -40,9 +42,10 @@ var Editor = React.createClass({
         if (this.timeLeft < 0) this.timeLeft = 0;
         if (this.timeLeft == 0) {
           if (this.phase == 'PLAYING') {
-            this.timeLeft = this.endingTime;
-            this.phase = 'ENDING';
-            this.game.input.disabled = true;
+            // TODO: Trigger 'out of time' handler(s).
+            if (this.outcome === undefined)
+              this.outcome = 'LOST';
+            this.setupEndingPhase();
           } else if (this.phase == 'ENDING') {
             this.phase = 'ENDED';
             if (this.onGameEnded) this.onGameEnded(this);
@@ -50,9 +53,28 @@ var Editor = React.createClass({
         }
         this.timeBar.right = (this.timeLeft / this.playTime) * this.game.width;
       },
+      setupEndingPhase: function() {
+        this.timeLeft = this.endingTime;
+        this.phase = 'ENDING';
+        this.game.input.disabled = true;
+      },
+      win: function() {
+        if (this.phase != 'PLAYING') return;
+        this.setupEndingPhase();
+        this.outcome = 'WON';
+      },
+      lose: function() {
+        if (this.phase != 'PLAYING') return;
+        this.setupEndingPhase();
+        this.outcome = 'LOST';
+      },
       render: function() {
-        if (this.phase == 'PLAYING')
+        if (this.phase == 'PLAYING') {
           this.game.debug.geom(this.timeBar, '#000000');
+        } else {
+          this.game.debug.text("Player has " + this.outcome + " the game.",
+                               0, this.TIME_BAR_HEIGHT + 4, "#000000");
+        }
       },
       setPaused: function(isPaused) {
         this.game.paused = isPaused;
