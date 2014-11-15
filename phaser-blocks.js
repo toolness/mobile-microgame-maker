@@ -9,6 +9,21 @@
     });    
   }
 
+  function generateJsBranch(block) {
+    var branch = Blockly.JavaScript.statementToCode(block, 'STACK');
+    if (Blockly.JavaScript.STATEMENT_PREFIX) {
+      branch = Blockly.JavaScript.prefixLines(
+          Blockly.JavaScript.STATEMENT_PREFIX.replace(/%1/g,
+          '\'' + block.id + '\''), Blockly.JavaScript.INDENT) + branch;
+    }
+    if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
+      branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+          '\'' + block.id + '\'') + branch;
+    }
+
+    return branch;
+  }
+
   function animationList(spriteDropdown) {
     var spriteId = typeof(spriteDropdown) == 'string'
                    ? spriteDropdown : spriteDropdown.getValue();
@@ -69,16 +84,7 @@
 
   Blockly.JavaScript['phaser_on_tap'] = function(block) {
     var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));
-    var branch = Blockly.JavaScript.statementToCode(block, 'STACK');
-    if (Blockly.JavaScript.STATEMENT_PREFIX) {
-      branch = Blockly.JavaScript.prefixLines(
-          Blockly.JavaScript.STATEMENT_PREFIX.replace(/%1/g,
-          '\'' + block.id + '\''), Blockly.JavaScript.INDENT) + branch;
-    }
-    if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
-      branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
-          '\'' + block.id + '\'') + branch;
-    }
+    var branch = generateJsBranch(block);
 
     return sprite + '.inputEnabled = true;\n' +
            sprite + '.events.onInputDown.add(function() {\n' + branch + '});\n';
