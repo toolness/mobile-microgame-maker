@@ -28,23 +28,24 @@ var Stage = React.createClass({
     if (!newState) return;
 
     var self = this;
-    var stateWrapper = Object.create(newState);
+    var originalCreate = newState.create;
     var iframe = document.createElement('iframe');
 
-    stateWrapper.create = function() {
+    newState.create = function() {
       self.setState({loading: false});
-      newState.create.apply(this, arguments);
+      originalCreate.apply(this, arguments);
     };
 
     iframe.setAttribute('src', 'phaser-frame.html');
     iframe.onload = function() {
       var Phaser = iframe.contentWindow.Phaser;
+      newState.Phaser = Phaser;
       self.game = new Phaser.Game(
         self.props.width,
         self.props.height,
         Phaser.CANVAS,
         iframe.contentDocument.body,
-        stateWrapper
+        newState
       );
     };
     this.refs.phaser.getDOMNode().appendChild(iframe);

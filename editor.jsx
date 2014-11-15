@@ -1,7 +1,10 @@
 var Editor = React.createClass({
-  makePhaserState: function() {
+  DEFAULT_TIME_LIMIT: 5000,
+  makePhaserState: function(options) {
     var blockly = this.props.blockly;
     var gameData = this.state.gameData;
+    var autoplay = options.autoplay;
+    var timeLimit = options.timeLimit || this.DEFAULT_TIME_LIMIT;
 
     blockly.Phaser.setGameData(gameData);
 
@@ -9,18 +12,38 @@ var Editor = React.createClass({
     console.log('js is', js);
 
     return {
+      TIME_BAR_HEIGHT: 8,
+      onGameEnded: options.onGameEnded,
+      timeLimit: timeLimit,
+      timeLeft: timeLimit,
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
       create: function() {
         var sprites = PhaserState.createSprites(this.game, gameData);
         var sounds = PhaserState.createSounds(this.game, gameData);
+        this.timeBar = new this.Phaser.Rectangle(0, 0, this.game.width,
+                                                 this.TIME_BAR_HEIGHT);
         this.game.stage.backgroundColor = gameData.backgroundColor;
-        this.game.paused = true;
+        if (!autoplay)
+          this.game.paused = true;
 
         var game = this.game;
         eval(js);
-      }
+      },
+      update: function() {
+        this.timeLeft -= this.game.time.elapsed;
+        if (this.timeLeft < 0) this.timeLeft = 0;
+        if (this.isEnded() && this.onGameEnded)
+          this.onGameEnded(this);
+        this.timeBar.right = (this.timeLeft / this.timeLimit) * this.game.width;
+      },
+      render: function() {
+        this.game.debug.geom(this.timeBar, '#000000');
+      },
+      isEnded: function() {
+        return this.timeLeft == 0;
+      },
     }
   },
   getInitialState: function() {

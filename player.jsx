@@ -2,21 +2,41 @@ var Player = React.createClass({
   getInitialState: function() {
     return {
       isPaused: true,
-      phaserState: this.props.makePhaserState()
+      phaserState: this.makePhaserState()
     };
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.gameData !== this.props.gameData)
       this.resetGame(nextProps);
   },
-  resetGame: function(props) {
+  resetGame: function(props, autoplay) {
     this.setState(React.addons.update(this.state, {
       isPaused: {$set: true},
-      phaserState: {$set: props.makePhaserState()}
-    }));    
+      phaserState: {$set: this.makePhaserState(props, autoplay)}
+    }));
+  },
+  makePhaserState: function(props, autoplay) {
+    props = props || this.props;
+    return props.makePhaserState({
+      onGameEnded: this.handleGameEnded,
+      autoplay: !!autoplay
+    });
+  },
+  handleGameEnded: function(phaserState) {
+    phaserState.game.paused = true;
+    this.setState(React.addons.update(this.state, {
+      isPaused: {$set: true}
+    }));
   },
   handlePlayPause: function() {
-    this.refs.stage.game.paused = !this.state.isPaused;
+    if (this.state.phaserState.isEnded() &&
+        this.state.isPaused) {
+      this.setState(React.addons.update(this.state, {
+        isPaused: {$set: false}
+      }));
+      return this.resetGame(this.props, true);
+    }
+    this.state.phaserState.game.paused = !this.state.isPaused;
     this.setState(React.addons.update(this.state, {
       isPaused: {$set: !this.state.isPaused}
     }));
@@ -32,7 +52,7 @@ var Player = React.createClass({
           width: this.props.gameData.width
         }}>
           <div style={{pointerEvents: this.state.isPaused ? 'none' : 'auto'}}>
-            <Stage ref="stage" width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
+            <Stage width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
           </div>
           <div className="btn-group btn-group-justified">
             <div className="btn-group">
