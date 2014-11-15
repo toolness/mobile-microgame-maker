@@ -87,6 +87,19 @@
     return 'state.on("update", function() {\n' + branch + '});\n';
   };
 
+  Blockly.Blocks['phaser_on_outoftime'] = {
+    init: function() {
+      this.appendDummyInput().appendField('when time limit expires')
+      this.appendStatementInput('STACK');
+    }
+  };
+
+  Blockly.JavaScript['phaser_on_outoftime'] = function(block) {
+    var branch = generateJsBranch(block);
+
+    return 'state.on("outoftime", function() {\n' + branch + '});\n';
+  };
+
   Blockly.Blocks['phaser_on_tap'] = {
     init: function() {
       this.appendDummyInput().appendField('when')

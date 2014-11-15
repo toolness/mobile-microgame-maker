@@ -43,7 +43,7 @@ var Editor = React.createClass({
         if (this.timeLeft < 0) this.timeLeft = 0;
         if (this.timeLeft == 0) {
           if (this.phase == 'PLAYING') {
-            // TODO: Trigger 'out of time' handler(s).
+            this.trigger('outoftime');
             if (this.outcome === undefined)
               this.outcome = 'LOST';
             this.setupEndingPhase();
