@@ -9,6 +9,20 @@
     });    
   }
 
+  function animationList(spriteDropdown) {
+    var spriteId = spriteDropdown.getValue();
+    var sprite = spriteWithId(spriteId);
+    if (sprite) {
+      var animations = gameData.animations[sprite.key];
+      if (animations && animations.length) {
+        return animations.map(function(animation) {
+          return [animation.name, animation.name];
+        });
+      }
+    }
+    return [['--', '']];
+  }
+
   function spriteList() {
     if (!(gameData && gameData.sprites.length))
       return [['--', '']];
@@ -17,9 +31,13 @@
     });
   }
 
-  function spriteName(id) {
+  function spriteWithId(id) {
     // TODO: Deal w/ case where id is invalid.
-    return _.findWhere(gameData.sprites, {id: id}).name;
+    return _.findWhere(gameData.sprites, {id: id});
+  }
+
+  function spriteName(id) {
+    return spriteWithId(id).name;
   }
 
   Blockly.Phaser = {
@@ -99,6 +117,30 @@
 
   Blockly.JavaScript['phaser_lose'] = function(block) {
     return 'state.lose();\n';
+  };
+
+  Blockly.Blocks['phaser_set_animation'] = {
+    init: function() {
+      var spriteDropdown = new Blockly.FieldDropdown(spriteList);
+      var animationDropdown = new Blockly.FieldDropdown(
+        animationList.bind(null, spriteDropdown)
+      );
+
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+  
+      this.appendDummyInput().appendField('set the animation of')
+        .appendField(spriteDropdown, 'SPRITE');
+      this.appendDummyInput().appendField('to')
+        .appendField(animationDropdown, 'ANIMATION');
+    }
+  };
+
+  Blockly.JavaScript['phaser_set_animation'] = function(block) {
+    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));
+    var animation = block.getFieldValue('ANIMATION');
+
+    return sprite + '.animations.play("' + animation + '");\n';
   };
 
   Blockly.Blocks['phaser_set_bg'] = {
