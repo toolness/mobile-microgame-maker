@@ -159,10 +159,12 @@
     var ms = block.getFieldValue('MS');
 
     if (ms == '0') {
-      return sprite + '.x = ' + x + '; ' + sprite + '.y = ' + y + ';\n';
+      return sprite + '.x = ' + x + ';\n' + sprite + '.y = ' + y + ';\n';
     } else {
-      return 'game.add.tween(' + sprite + ').to({' +
-             'x: ' + x + ', y: ' + y + '}, ' + ms + ', null, true);\n';
+      return 'game.add.tween(' + sprite + ').to({\n' +
+             '  x: ' + x + ',\n' +
+             '  y: ' + y + '\n' +
+             '}, ' + ms + ', null, true);\n';
     }
   };
 
