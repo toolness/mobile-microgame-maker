@@ -1,56 +1,19 @@
 var Editor = React.createClass({
-  DEFAULT_PLAY_TIME: 5000,
-  DEFAULT_ENDING_TIME: 2000,
   makePhaserState: function(options) {
     var blockly = this.props.blockly;
-    var gameData = this.state.gameData;
-    var autoplay = options.autoplay;
 
-    blockly.Phaser.setGameData(gameData);
+    blockly.Phaser.setGameData(this.state.gameData);
 
     var js = blockly.Phaser.generateJs();
+    js = '//# sourceURL=generated-blockly-code.js\n(' + js + ')';
     console.log('js is', js);
 
-    var state = PhaserState.createEventEmitter({
-      preload: function() {
-        PhaserState.preload(this.game, gameData);
-      },
-      create: function() {
-        var sprites = PhaserState.createSprites(this.game, gameData);
-        var sounds = PhaserState.createSounds(this.game, gameData);
-        this.game.stage.backgroundColor = gameData.backgroundColor;
-        this.microgame.create();
-        if (!autoplay)
-          this.game.paused = true;
-
-        var state = this;
-        var game = this.game;
-        var microgame = this.microgame;
-
-        eval(js);
-      },
-      update: function() {
-        this.microgame.update();
-        this.trigger('update');
-      },
-      render: function() {
-        this.microgame.render();
-      },
-      setPaused: function(isPaused) {
-        this.game.paused = isPaused;
-      },
-      isEnded: function() {
-        return this.microgame.isEnded();
-      }
+    var state = PhaserState.createState({
+      autoplay: options.autoplay,
+      gameData: this.state.gameData,
+      start: eval(js),
+      onGameEnded: options.onGameEnded
     });
-
-    state.microgame = new PhaserState.Microgame({
-      state: state,
-      playTime: options.playTime || this.DEFAULT_PLAY_TIME,
-      endingTime: options.endingTime || this.DEFAULT_ENDING_TIME
-    });
-    if (options.onGameEnded)
-      state.on('end', options.onGameEnded.bind(null, state));
 
     return state;
   },

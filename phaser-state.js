@@ -50,6 +50,53 @@ PhaserState.createEventEmitter = function(target) {
   return target;
 };
 
+PhaserState.DEFAULT_PLAY_TIME = 5000;
+PhaserState.DEFAULT_ENDING_TIME = 2000;
+
+PhaserState.createState = function(options) {
+  var gameData = options.gameData;
+  var autoplay = options.autoplay;
+  var start = options.start;
+  var state = PhaserState.createEventEmitter({
+    preload: function() {
+      PhaserState.preload(this.game, gameData);
+    },
+    create: function() {
+      this.sprites = PhaserState.createSprites(this.game, gameData);
+      this.sounds = PhaserState.createSounds(this.game, gameData);
+      this.game.stage.backgroundColor = gameData.backgroundColor;
+      this.microgame.create();
+      if (!autoplay)
+        this.game.paused = true;
+
+      start(this);
+    },
+    update: function() {
+      this.microgame.update();
+      this.trigger('update');
+    },
+    render: function() {
+      this.microgame.render();
+    },
+    setPaused: function(isPaused) {
+      this.game.paused = isPaused;
+    },
+    isEnded: function() {
+      return this.microgame.isEnded();
+    }
+  });
+
+  state.microgame = new PhaserState.Microgame({
+    state: state,
+    playTime: options.playTime || PhaserState.DEFAULT_PLAY_TIME,
+    endingTime: options.endingTime || PhaserState.DEFAULT_ENDING_TIME
+  });
+  if (options.onGameEnded)
+    state.on('end', options.onGameEnded.bind(null, state));
+
+  return state;
+};
+
 PhaserState.Microgame = function(options) {
   this.state = options.state;
   this.endingTime = options.endingTime;

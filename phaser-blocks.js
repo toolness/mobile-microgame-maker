@@ -69,8 +69,22 @@
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       xml = Blockly.Xml.domToText(xml);
 
-      return '//# sourceURL=generated-blockly-code.js\n' +
-             Blockly.JavaScript.workspaceToCode();
+      var blocklyLines = Blockly.JavaScript.workspaceToCode().split('\n');
+      var lines = [
+        'function start(state) {',
+        '  var game = state.game;',
+        '  var microgame = state.microgame;',
+        '  var sprites = state.sprites;',
+        '  var sounds = state.sounds;',
+        '  ',
+      ];
+
+      lines.push.apply(lines, blocklyLines.map(function(line) {
+        return '  ' + line;
+      }));
+      lines.push('}');
+
+      return lines.join('\n');
     }
   };
 
