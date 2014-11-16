@@ -138,7 +138,7 @@
   };
 
   Blockly.JavaScript['phaser_win'] = function(block) {
-    return 'state.win();\n';
+    return 'microgame.win();\n';
   };
 
   Blockly.Blocks['phaser_lose'] = {
@@ -150,7 +150,7 @@
   };
 
   Blockly.JavaScript['phaser_lose'] = function(block) {
-    return 'state.lose();\n';
+    return 'microgame.lose();\n';
   };
 
   Blockly.Blocks['phaser_set_animation'] = {

@@ -5,22 +5,13 @@ var Editor = React.createClass({
     var blockly = this.props.blockly;
     var gameData = this.state.gameData;
     var autoplay = options.autoplay;
-    var playTime = options.playTime || this.DEFAULT_PLAY_TIME;
-    var endingTime = options.endingTime || this.DEFAULT_ENDING_TIME;
 
     blockly.Phaser.setGameData(gameData);
 
     var js = blockly.Phaser.generateJs();
     console.log('js is', js);
 
-    return {
-      TIME_BAR_HEIGHT: 8,
-      onGameEnded: options.onGameEnded,
-      endingTime: endingTime,
-      playTime: playTime,
-      timeLeft: playTime,
-      phase: 'PLAYING',
-      outcome: undefined,
+    var state = {
       eventHandlers: {},
       preload: function() {
         PhaserState.preload(this.game, gameData);
@@ -28,62 +19,29 @@ var Editor = React.createClass({
       create: function() {
         var sprites = PhaserState.createSprites(this.game, gameData);
         var sounds = PhaserState.createSounds(this.game, gameData);
-        this.timeBar = new this.Phaser.Rectangle(0, 0, this.game.width,
-                                                 this.TIME_BAR_HEIGHT);
         this.game.stage.backgroundColor = gameData.backgroundColor;
+        this.microgame.create();
         if (!autoplay)
           this.game.paused = true;
 
         var state = this;
         var game = this.game;
+        var microgame = this.microgame;
+
         eval(js);
       },
       update: function() {
-        this.timeLeft -= this.game.time.elapsed;
-        if (this.timeLeft < 0) this.timeLeft = 0;
-        if (this.timeLeft == 0) {
-          if (this.phase == 'PLAYING') {
-            this.trigger('outoftime');
-            if (this.outcome === undefined)
-              this.outcome = 'LOST';
-            this.setupEndingPhase();
-          } else if (this.phase == 'ENDING') {
-            this.phase = 'ENDED';
-            if (this.onGameEnded) this.onGameEnded(this);
-          }
-        }
-        this.timeBar.right = (this.timeLeft / this.playTime) * this.game.width;
+        this.microgame.update();
         this.trigger('update');
       },
-      setupEndingPhase: function() {
-        this.timeLeft = this.endingTime;
-        this.phase = 'ENDING';
-        this.game.input.disabled = true;
-      },
-      win: function() {
-        if (this.phase != 'PLAYING') return;
-        this.setupEndingPhase();
-        this.outcome = 'WON';
-      },
-      lose: function() {
-        if (this.phase != 'PLAYING') return;
-        this.setupEndingPhase();
-        this.outcome = 'LOST';
-      },
       render: function() {
-        if (this.phase == 'PLAYING') {
-          this.game.debug.geom(this.timeBar, '#000000');
-        } else {
-          this.game.debug.text("Player has " + this.outcome + " the game.",
-                               0, this.TIME_BAR_HEIGHT + 4,
-                               this.outcome == 'WON' ? "lightgreen" : "red");
-        }
+        this.microgame.render();
       },
       setPaused: function(isPaused) {
         this.game.paused = isPaused;
       },
       isEnded: function() {
-        return this.phase == 'ENDED';
+        return this.microgame.isEnded();
       },
       trigger: function(eventName) {
         var handlers = this.eventHandlers[eventName] || [];
@@ -94,7 +52,17 @@ var Editor = React.createClass({
           this.eventHandlers[eventName] = [];
         this.eventHandlers[eventName].push(cb);
       }
-    }
+    };
+
+    state.microgame = new PhaserState.Microgame({
+      state: state,
+      playTime: options.playTime || this.DEFAULT_PLAY_TIME,
+      endingTime: options.endingTime || this.DEFAULT_ENDING_TIME
+    });
+    if (options.onGameEnded)
+      state.on('end', options.onGameEnded.bind(null, state));
+
+    return state;
   },
   getInitialState: function() {
     return {
