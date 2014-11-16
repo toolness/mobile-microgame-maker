@@ -134,6 +134,38 @@
            sprite + '.events.onInputDown.add(function() {\n' + branch + '});\n';
   };
 
+  Blockly.Blocks['phaser_move'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('move')
+        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE');
+      this.appendValueInput('X').setCheck('Number').appendField('to x');
+      this.appendValueInput('Y').setCheck('Number').appendField('and y');
+      this.appendDummyInput().appendField('over')
+        .appendField(new Blockly.FieldTextInput(
+          '1000',
+          Blockly.FieldTextInput.numberValidator
+        ), 'MS').appendField('ms');
+    }
+  };
+
+  Blockly.JavaScript['phaser_move'] = function(block) {
+    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));    
+    var x = Blockly.JavaScript.valueToCode(block, 'X',
+      Blockly.JavaScript.ORDER_ATOMIC) || '0';
+    var y = Blockly.JavaScript.valueToCode(block, 'Y',
+      Blockly.JavaScript.ORDER_ATOMIC) || '0';
+    var ms = block.getFieldValue('MS');
+
+    if (ms == '0') {
+      return sprite + '.x = ' + x + '; ' + sprite + '.y = ' + y + ';\n';
+    } else {
+      return 'game.add.tween(' + sprite + ').to({' +
+             'x: ' + x + ', y: ' + y + '}, ' + ms + ', null, true);\n';
+    }
+  };
+
   Blockly.Blocks['phaser_play_sound'] = {
     init: function() {
       this.setPreviousStatement(true);

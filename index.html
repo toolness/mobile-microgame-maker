@@ -57,6 +57,50 @@ html.show-blockly .blockly-fill-page {
           <block type="logic_boolean"></block>
       </category>
 
+      <category name="Math">
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_trig"></block>
+            <block type="math_constant"></block>
+            <block type="math_number_property"></block>
+            <block type="math_change">
+                <value name="DELTA">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_round"></block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo"></block>
+            <block type="math_constrain">
+                <value name="LOW">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="HIGH">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_random_int">
+                <value name="FROM">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="TO">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_random_float"></block>
+        </category>
+        
       <category name="Variables" custom="VARIABLE"></category>
 
       <category name="Colour">
@@ -102,6 +146,7 @@ html.show-blockly .blockly-fill-page {
           <block type="phaser_on_update"></block>
           <block type="phaser_on_outoftime"></block>
           <block type="phaser_repeat_event"></block>
+          <block type="phaser_move"></block>
           <block type="phaser_play_sound"></block>
           <block type="phaser_set_bg"></block>
           <block type="phaser_set_animation"></block>
