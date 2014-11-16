@@ -88,8 +88,8 @@
   Blockly.JavaScript['phaser_repeat_event'] = function(block) {
     var branch = generateJsBranch(block);
 
-    return 'game.time.events.repeat(' + this.getFieldValue('MS') +
-           ', 9999, function() {\n' + branch + '});\n';
+    return 'game.time.events.loop(' + this.getFieldValue('MS') +
+           ', function() {\n' + branch + '});\n';
   };
 
   Blockly.Blocks['phaser_on_update'] = {
