@@ -74,6 +74,24 @@
     }
   };
 
+  Blockly.Blocks['phaser_repeat_event'] = {
+    init: function() {
+      this.appendDummyInput().appendField('every')
+        .appendField(new Blockly.FieldTextInput(
+          '1000',
+          Blockly.FieldTextInput.numberValidator
+        ), 'MS').appendField('ms');
+      this.appendStatementInput('STACK');
+    }
+  };
+
+  Blockly.JavaScript['phaser_repeat_event'] = function(block) {
+    var branch = generateJsBranch(block);
+
+    return 'game.time.events.repeat(' + this.getFieldValue('MS') +
+           ', 9999, function() {\n' + branch + '});\n';
+  };
+
   Blockly.Blocks['phaser_on_update'] = {
     init: function() {
       this.appendDummyInput().appendField('when game updates')
