@@ -65,7 +65,9 @@
       var xml = Blockly.Xml.textToDom(gameData.blocklyXml);
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
     },
-    generateJs: function() {
+    generateJs: function(newGameData) {
+      Blockly.Phaser.setGameData(newGameData);
+
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       xml = Blockly.Xml.domToText(xml);
 

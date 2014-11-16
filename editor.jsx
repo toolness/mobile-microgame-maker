@@ -1,10 +1,7 @@
 var Editor = React.createClass({
   makePhaserState: function(options) {
     var blockly = this.props.blockly;
-
-    blockly.Phaser.setGameData(this.state.gameData);
-
-    var js = blockly.Phaser.generateJs();
+    var js = blockly.Phaser.generateJs(this.state.gameData);
     js = '//# sourceURL=generated-blockly-code.js\n(' + js + ')';
     console.log('js is', js);
 

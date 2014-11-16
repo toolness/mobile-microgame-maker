@@ -52,6 +52,7 @@ PhaserState.createEventEmitter = function(target) {
 
 PhaserState.DEFAULT_PLAY_TIME = 5000;
 PhaserState.DEFAULT_ENDING_TIME = 2000;
+PhaserState.PHASER_VERSION = "2.1.3";
 
 PhaserState.createState = function(options) {
   var gameData = options.gameData;
@@ -59,6 +60,14 @@ PhaserState.createState = function(options) {
   var start = options.start;
   var state = PhaserState.createEventEmitter({
     preload: function() {
+      if (!state.Phaser) {
+        // Our client didn't set this for us, so we'll assume that
+        // Phaser is in the global namespace.
+        state.Phaser = Phaser;
+      }
+      if (state.Phaser.VERSION != PhaserState.PHASER_VERSION)
+        throw new Error("Expected Phaser " + PhaserState.PHASER_VERSION +
+                        " but got " + state.Phaser.VERSION);
       PhaserState.preload(this.game, gameData);
     },
     create: function() {
