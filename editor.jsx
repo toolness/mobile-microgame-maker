@@ -11,8 +11,7 @@ var Editor = React.createClass({
     var js = blockly.Phaser.generateJs();
     console.log('js is', js);
 
-    var state = {
-      eventHandlers: {},
+    var state = PhaserState.createEventEmitter({
       preload: function() {
         PhaserState.preload(this.game, gameData);
       },
@@ -42,17 +41,8 @@ var Editor = React.createClass({
       },
       isEnded: function() {
         return this.microgame.isEnded();
-      },
-      trigger: function(eventName) {
-        var handlers = this.eventHandlers[eventName] || [];
-        handlers.forEach(function(cb) { cb(); });
-      },
-      on: function(eventName, cb) {
-        if (!(eventName in this.eventHandlers))
-          this.eventHandlers[eventName] = [];
-        this.eventHandlers[eventName].push(cb);
       }
-    };
+    });
 
     state.microgame = new PhaserState.Microgame({
       state: state,
