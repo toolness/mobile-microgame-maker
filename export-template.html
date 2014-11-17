@@ -1,34 +1,20 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>My Minigame</title>
+<div id="phaser-holder"></div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/<%= phaserVersion %>/phaser.min.js"></script>
 <script>
-// This is the auto-generated blockly code for the game.
+<%= stateJs %>
 
-<%= blocklyJs %>
+var game = new Phaser.Game(
+  <%= gameData.width %>,
+  <%= gameData.height %>,
+  Phaser.CANVAS,
+  'phaser-holder',
+  state
+);
 
-// This is some scaffolding that allows us to create the mini game.
-// It is kind of janky right now, but we'll make it nicer in the
-// future!
-
-<%= phaserStateJs %>
-
-var game;
-var state;
+<% if (encourageRemix) { %>
 var gameData = <%= JSON.stringify(gameData, null, 2) %>;
-
-onload = function() {
-  state = PhaserState.createState({
-    autoplay: true,
-    gameData: gameData,
-    start: start
-  });
-  game = new Phaser.Game(
-    gameData.width,
-    gameData.height,
-    Phaser.CANVAS,
-    document.body,
-    state
-  );
-};
+<% } %>
 </script>

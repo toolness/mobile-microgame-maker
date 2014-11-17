@@ -61,47 +61,43 @@ PhaserState.Generators.createSprites = function(gameData) {
   )).join('\n');
 };
 
+PhaserState.Generators.createState = function(options) {
+  var gameData = options.gameData;
+
+  return _.template(this._stateTemplate, {
+    preload: this.preload(gameData),
+    createSprites: this.createSprites(gameData),
+    createSounds: this.createSounds(gameData),
+    expectedPhaserVersion: this.PHASER_VERSION,
+    gameData: gameData,
+    playTime: options.playTime || this.DEFAULT_PLAY_TIME,
+    endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
+    extra: options.extra || '',
+    start: options.start
+  });
+};
+
 PhaserState.Generators.makeFunc = function(name, gameData) {
   return eval('(' + this[name](gameData) + ')');
 };
 
-PhaserState.DEFAULT_PLAY_TIME = 5000;
-PhaserState.DEFAULT_ENDING_TIME = 2000;
-PhaserState.PHASER_VERSION = "2.1.3";
+PhaserState.Generators.DEFAULT_PLAY_TIME = 5000;
+PhaserState.Generators.DEFAULT_ENDING_TIME = 2000;
+PhaserState.Generators.PHASER_VERSION = "2.1.3";
 
-PhaserState.createState = function(options) {
-  var gameData = options.gameData;
-  var autoplay = options.autoplay;
-  var start = options.start;
-  var state = SimpleEventEmitter({
-    preload: function() {
-      if (!state.Phaser) {
-        // Our client didn't set this for us, so we'll assume that
-        // Phaser is in the global namespace.
-        state.Phaser = Phaser;
-      }
-      if (state.Phaser.VERSION != PhaserState.PHASER_VERSION)
-        throw new Error("Expected Phaser " + PhaserState.PHASER_VERSION +
-                        " but got " + state.Phaser.VERSION);
-      PhaserState.Generators.makeFunc('preload', gameData)(this.game);
-    },
-    create: function() {
-      PhaserState.Generators.makeFunc('createSprites', gameData)(this);
-      PhaserState.Generators.makeFunc('createSounds', gameData)(this);
-      this.game.stage.backgroundColor = gameData.backgroundColor;
-      this.microgame.create();
-      if (!autoplay)
-        this.game.paused = true;
+PhaserState.Generators.makeStateObject = function(options) {
+  var stateJs = this.createState({
+    gameData: options.gameData,
+    start: options.start,
+    playTime: options.playTime,
+    endingTime: options.endingTime
+  });
+  stateJs = '//# sourceURL=generated-phaser-state-code.js\n' + stateJs;
 
-      start(this);
-    },
-    update: function() {
-      this.microgame.update();
-      this.trigger('update');
-    },
-    render: function() {
-      this.microgame.render();
-    },
+  console.log("stateJs is", stateJs);
+  eval(stateJs);
+
+  _.extend(state, {
     setPaused: function(isPaused) {
       this.game.paused = isPaused;
     },
@@ -110,13 +106,19 @@ PhaserState.createState = function(options) {
     }
   });
 
-  state.microgame = new PhaserMicrogame({
-    state: state,
-    playTime: options.playTime || PhaserState.DEFAULT_PLAY_TIME,
-    endingTime: options.endingTime || PhaserState.DEFAULT_ENDING_TIME
+  state.on('create', function() {
+    if (!options.autoplay)
+      state.game.paused = true;
   });
+
   if (options.onGameEnded)
     state.on('end', options.onGameEnded.bind(null, state));
 
   return state;
 };
+
+AssetLoader.add(
+  $.get('phaser-state-template.js', function(js) {
+    PhaserState.Generators._stateTemplate = js;
+  }, "text")
+);
