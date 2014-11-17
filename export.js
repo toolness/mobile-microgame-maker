@@ -26,6 +26,7 @@ var Export = {
       phaserVersion: PhaserState.Generators.PHASER_VERSION,
       encourageRemix: options.encourageRemix,
       gameData: gameData,
+      creatorURL: window.location.href,
       stateJs: stateJs
     });
   },

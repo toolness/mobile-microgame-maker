@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>My Minigame</title>
-<div id="phaser-holder"></div>
+<div id="phaser-holder"></div><% if (encourageRemix) { %>
+<p><small><a href="javascript:remixGame()">Remix this minigame</a></small></p><% } %>
 <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/<%= phaserVersion %>/phaser.min.js"></script>
 <script>
 <%= stateJs %>
@@ -24,5 +25,19 @@ var game = new Phaser.Game(
 // game into the editor tool; it's not required to play the game.
 
 var gameData = <%= JSON.stringify(gameData) %>;
+
+function remixGame() {
+  var child = window.open(<%= JSON.stringify(creatorURL) %>);
+  window.addEventListener('message', function onMessage(event) {
+    if (event.source !== child) return;
+    if (event.data == "mmm:ready") {
+      window.removeEventListener('message', onMessage, false);
+      child.postMessage(JSON.stringify({
+        type: 'import',
+        gameData: gameData
+      }), '*');
+    }
+  }, false);
+}
 <% } %>
 </script>

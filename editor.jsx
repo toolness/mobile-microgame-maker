@@ -109,11 +109,12 @@ var Editor = React.createClass({
   handleImport: function(e) {
     e.preventDefault();
     this.props.modalManager.show(ImportModal, {
-      onSave: function(gameData) {
-        this.changeGameData({
-          $set: gameData
-        });
-      }.bind(this)
+      onSave: this.importGameData
+    });
+  },
+  importGameData: function(gameData) {
+    this.changeGameData({
+      $set: gameData
     });
   },
   componentDidUpdate: function(prevProps, prevState) {

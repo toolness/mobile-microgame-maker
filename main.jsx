@@ -61,6 +61,20 @@
 
     // For debugging via console only!
     window.editor = editor;
+
+    if (window.opener) {
+      window.addEventListener('message', function onMessage(event) {
+        if (event.source !== window.opener) return;
+        window.removeEventListener('message', onMessage, false);
+        var message = JSON.parse(event.data);
+        if (message.type == 'import' && message.gameData) {
+          if (confirm("Import minigame from " + event.origin + "?")) {
+            editor.importGameData(message.gameData);
+          }
+        }
+      }, false);
+      window.opener.postMessage('mmm:ready', '*');
+    }
   }
 
   function start() {
