@@ -1,6 +1,7 @@
 var Export = {
   files: {},
-  toHtml: function(gameData) {
+  toHtml: function(gameData, options) {
+    options = options || {};
     var stateJs = PhaserState.Generators.createState({
       gameData: gameData,
       start: Blockly.Phaser.generateJs(gameData),
@@ -11,7 +12,7 @@ var Export = {
     });
     return _.template(this._templateString, {
       phaserVersion: PhaserState.Generators.PHASER_VERSION,
-      encourageRemix: false,
+      encourageRemix: options.encourageRemix,
       gameData: gameData,
       stateJs: stateJs
     });
