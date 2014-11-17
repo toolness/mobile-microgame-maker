@@ -1,36 +1,73 @@
 var PhaserState = {};
 
+PhaserState.Generators = {};
+
+PhaserState.Generators.stringifyArgs = function() {
+  return [].slice.call(arguments).map(function(arg) {
+    return JSON.stringify(arg);
+  }).join(', ');
+};
+
+PhaserState.Generators.preload = function(gameData) {
+  return [].concat(
+    gameData.spritesheets.map(function(info) {
+      return 'game.load.spritesheet(' + this.stringifyArgs(
+               info.key, info.url, info.frameWidth, info.frameHeight
+             ) + ');';
+    }, this),
+    gameData.sounds.map(function(info) {
+      return 'game.load.audio(' + this.stringifyArgs(
+               info.key, info.url
+              ) + ');';
+    }, this)
+  ).join('\n');
+};
+
+PhaserState.Generators.createSounds = function(gameData) {
+  return ['var sounds = state.sounds = {};'].concat(
+    gameData.sounds.map(function(info) {
+      return 'sounds.' + info.key + ' = game.add.audio(' +
+        this.stringifyArgs(info.key) + ');';
+    }, this)
+  ).join('\n');
+};
+
+PhaserState.Generators.createSprites = function(gameData) {
+  return _.flatten(['var sprites = state.sprites = {};'].concat(
+    gameData.sprites.map(function(info) {
+      var spriteName = 'sprites.' + info.name;
+      var animations = gameData.animations[info.key];
+
+      return [
+        spriteName + ' = game.add.sprite(' +
+        this.stringifyArgs(info.x, info.y, info.key) + ');'
+      ].concat(animations.map(function(animInfo) {
+        return spriteName + '.animations.add(' + this.stringifyArgs(
+          animInfo.name, animInfo.frames,
+          animInfo.frameRate, animInfo.loop
+        ) + ');';
+      }, this)).concat([
+        spriteName + '.animations.play(' +
+        this.stringifyArgs(info.animation) + ');'
+      ]);
+    }, this)
+  )).join('\n');
+};
+
 PhaserState.preload = function(game, gameData) {
-  gameData.spritesheets.forEach(function(info) {
-    game.load.spritesheet(info.key, info.url, info.frameWidth,
-                          info.frameHeight);
-  });
-  gameData.sounds.forEach(function(info) {
-    game.load.audio(info.key, info.url);
-  });
+  eval(this.Generators.preload(gameData));
 };
 
 PhaserState.createSounds = function(game, gameData) {
-  var sounds = {};
-  gameData.sounds.forEach(function(info) {
-    sounds[info.key] = game.add.audio(info.key);
-  });
-  return sounds;
+  var state = {};
+  eval(this.Generators.createSounds(gameData));
+  return state.sounds;
 };
 
 PhaserState.createSprites = function(game, gameData) {
-  var sprites = {};
-  gameData.sprites.forEach(function(info) {
-    var sprite = game.add.sprite(info.x, info.y, info.key);
-    gameData.animations[info.key].forEach(function(animInfo) {
-      sprite.animations.add(animInfo.name, animInfo.frames,
-                            animInfo.frameRate, animInfo.loop);
-    });
-    sprite.animations.play(info.animation);
-    sprites[info.name] = sprite;
-  });
-
-  return sprites;
+  var state = {};
+  eval(this.Generators.createSprites(gameData));
+  return state.sprites;
 };
 
 PhaserState.createEventEmitter = function(target) {
