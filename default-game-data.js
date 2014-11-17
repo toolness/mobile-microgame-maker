@@ -2,23 +2,23 @@ var defaultGameData = {
   sounds: [
     {
       key: 'blop',
-      url: 'assets/sounds/Blop-Mark_DiAngelo.mp3'
+      url: 'sounds/Blop-Mark_DiAngelo.mp3'
     },
     {
       key: 'woosh',
-      url: 'assets/sounds/Woosh-Mark_DiAngelo.mp3'
+      url: 'sounds/Woosh-Mark_DiAngelo.mp3'
     }
   ],
   spritesheets: [
     {
       key: 'fly',
-      url: 'assets/img/fly-flying.png',
+      url: 'img/fly-flying.png',
       frameWidth: 80,
       frameHeight: 92
     },
     {
       key: 'grumpaloomba',
-      url: 'assets/img/grumpaloomba-06.png',
+      url: 'img/grumpaloomba-06.png',
       frameWidth: 75,
       frameHeight: 73
     }
@@ -66,6 +66,7 @@ var defaultGameData = {
     }
   ],
   blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+  baseURL: 'assets/',
   width: 288,
   height: 216,
   backgroundColor: 0xf0f0f0

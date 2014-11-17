@@ -17,6 +17,7 @@ var CssSprite = React.createClass({
 
     var frameWidth = spritesheet.frameWidth;
     var frameHeight = spritesheet.frameHeight;
+    var url = GameData.resolveURL(gameData, spritesheet.url);
 
     if (this.props.maxDimension) {
       if (frameWidth > frameHeight) {
@@ -33,7 +34,7 @@ var CssSprite = React.createClass({
         width: frameWidth,
         height: frameHeight,
         backgroundSize: 'auto ' + frameHeight + 'px',
-        backgroundImage: 'url(' + spritesheet.url + ')',
+        backgroundImage: 'url(' + url + ')',
         backgroundPosition: -(frame * frameWidth) + 'px 0px'
       }}></div>
     );

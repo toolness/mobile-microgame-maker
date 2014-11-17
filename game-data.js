@@ -1,5 +1,10 @@
 var GameData = {};
 
+GameData.resolveURL = function(gameData, url) {
+  if (/^(https?:)?\/\//.test(url)) return url;
+  return gameData.baseURL + url;
+};
+
 GameData.spriteIndex = function(gameData, id) {
   var index = -1;
   gameData.sprites.some(function(sprite, i) {
