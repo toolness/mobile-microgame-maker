@@ -61,24 +61,8 @@ PhaserState.Generators.createSprites = function(gameData) {
   )).join('\n');
 };
 
-PhaserState.Generators.generateAndEval = function(name, gameData) {
+PhaserState.Generators.makeFunc = function(name, gameData) {
   return eval('(' + this[name](gameData) + ')');
-};
-
-PhaserState.preload = function(game, gameData) {
-  this.Generators.generateAndEval('preload', gameData)(game);
-};
-
-PhaserState.createSounds = function(game, gameData) {
-  var state = {game: game};
-  this.Generators.generateAndEval('createSounds', gameData)(state);
-  return state.sounds;
-};
-
-PhaserState.createSprites = function(game, gameData) {
-  var state = {game: game};
-  this.Generators.generateAndEval('createSprites', gameData)(state);
-  return state.sprites;
 };
 
 PhaserState.DEFAULT_PLAY_TIME = 5000;
@@ -99,11 +83,11 @@ PhaserState.createState = function(options) {
       if (state.Phaser.VERSION != PhaserState.PHASER_VERSION)
         throw new Error("Expected Phaser " + PhaserState.PHASER_VERSION +
                         " but got " + state.Phaser.VERSION);
-      PhaserState.preload(this.game, gameData);
+      PhaserState.Generators.makeFunc('preload', gameData)(this.game);
     },
     create: function() {
-      this.sprites = PhaserState.createSprites(this.game, gameData);
-      this.sounds = PhaserState.createSounds(this.game, gameData);
+      PhaserState.Generators.makeFunc('createSprites', gameData)(this);
+      PhaserState.Generators.makeFunc('createSounds', gameData)(this);
       this.game.stage.backgroundColor = gameData.backgroundColor;
       this.microgame.create();
       if (!autoplay)
