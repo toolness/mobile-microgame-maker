@@ -108,7 +108,13 @@ var Editor = React.createClass({
   },
   handleImport: function(e) {
     e.preventDefault();
-    alert("This functionality has not yet been implemented.");
+    this.props.modalManager.show(ImportModal, {
+      onSave: function(gameData) {
+        this.changeGameData({
+          $set: gameData
+        });
+      }.bind(this)
+    });
   },
   componentDidUpdate: function(prevProps, prevState) {
     if (prevState.gameData !== this.state.gameData)
