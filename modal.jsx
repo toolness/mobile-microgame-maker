@@ -42,9 +42,10 @@ var Modal = React.createClass({
             <div className="modal-body">
               {this.props.children}
             </div>
+            {this.props.hideSaveButton ? null :
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" disabled={!this.props.onSave} onClick={this.handleSave}>Save changes</button>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

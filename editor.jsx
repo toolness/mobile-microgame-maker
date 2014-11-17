@@ -96,6 +96,20 @@ var Editor = React.createClass({
     this.props.onOpenBlockly();
     this.props.blockly.Phaser.setGameData(this.state.gameData);
   },
+  handleReset: function(e) {
+    e.preventDefault();
+    this.props.onReset();
+  },
+  handleExport: function(e) {
+    e.preventDefault();
+    this.props.modalManager.show(ExportModal, {
+      gameData: this.state.gameData
+    });
+  },
+  handleImport: function(e) {
+    e.preventDefault();
+    alert("This functionality has not yet been implemented.");
+  },
   componentDidUpdate: function(prevProps, prevState) {
     if (prevState.gameData !== this.state.gameData)
       this.props.onGameDataChange(this.state.gameData);
@@ -130,10 +144,15 @@ var Editor = React.createClass({
               Redo
             </button>
           </div>
-          <div className="btn-group">
-            <button type="button" className="btn btn-default" onClick={this.props.onReset}>
-              <span className="glyphicon glyphicon-off"></span>
+          <div className="btn-group dropup">
+            <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <strong>&hellip;</strong>
             </button>
+            <ul className="dropdown-menu" role="menu">
+              <li><a href="#" onClick={this.handleReset}><span className="glyphicon glyphicon-off"></span> Reset App</a></li>
+              <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
+              <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
+            </ul>
           </div>
         </div>
       </div>
