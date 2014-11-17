@@ -2,6 +2,13 @@ var PhaserState = {};
 
 PhaserState.Generators = {};
 
+PhaserState.Generators.absoluteURL = function(url) {
+  if (/^(https?:)?\/\//.test(url)) return url;
+  var a = document.createElement('a');
+  a.setAttribute('href', url);
+  return a.href;
+};
+
 PhaserState.Generators.stringifyArgs = function() {
   return [].slice.call(arguments).map(function(arg) {
     return JSON.stringify(arg);
@@ -12,12 +19,13 @@ PhaserState.Generators.preload = function(gameData) {
   return ['function preload(game) {'].concat(
     gameData.spritesheets.map(function(info) {
       return '  game.load.spritesheet(' + this.stringifyArgs(
-               info.key, info.url, info.frameWidth, info.frameHeight
+               info.key, this.absoluteURL(info.url),
+               info.frameWidth, info.frameHeight
              ) + ');';
     }, this),
     gameData.sounds.map(function(info) {
       return '  game.load.audio(' + this.stringifyArgs(
-               info.key, info.url
+               info.key, this.absoluteURL(info.url)
               ) + ');';
     }, this),
     ['}']
