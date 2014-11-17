@@ -4,6 +4,8 @@
 
 <%= createSounds %>
 
+// This function is generated from the minigame's Blockly source.
+
 <%= start %>
 
 <%= extra %>

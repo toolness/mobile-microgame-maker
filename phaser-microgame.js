@@ -1,3 +1,7 @@
+// This encapsulates a "microgame", i.e. a very short game that takes
+// a few seconds to play, has a win/lose outcome, and is given a few
+// seconds to show an ending animation.
+
 var PhaserMicrogame = function(options) {
   this.state = options.state;
   this.endingTime = options.endingTime;

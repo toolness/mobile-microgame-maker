@@ -15,7 +15,12 @@ var game = new Phaser.Game(
 );
 
 <% if (encourageRemix) { %>
-// The following is only defined to allow others to re-import this
+
+// --------------
+// Re-Import Data
+// --------------
+//
+// The following is *only* defined to allow others to re-import this
 // game into the editor tool; it's not required to play the game.
 
 var gameData = <%= JSON.stringify(gameData) %>;

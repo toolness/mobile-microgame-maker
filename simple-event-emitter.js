@@ -1,3 +1,6 @@
+// This is a simple nodeJS EventEmitter-style constructor that just
+// attaches .on() and .trigger() to the given target object.
+
 function SimpleEventEmitter(target) {
   var eventHandlers = {};
 
