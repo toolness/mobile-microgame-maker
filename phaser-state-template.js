@@ -1,10 +1,17 @@
+// This microgame was created with the Mobile Minigame Maker. Learn more
+// at https://toolness.github.io/mobile-microgame-maker/.
+//
+// This code uses Phaser--a fun, free and fast 2D game framework for
+// making HTML5 games for desktop and mobile web browsers. Learn more
+// at http://phaser.io/.
+
 <%= preload %>
 
 <%= createSprites %>
 
 <%= createSounds %>
 
-// This function is generated from the minigame's Blockly source.
+// This function is generated from the microgame's Blockly source.
 
 <%= start %>
 
