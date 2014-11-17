@@ -71,8 +71,7 @@
     spreadsheetToSpritesheet(SPREADSHEET_KEY, render);
   }
 
-  if (document.readyState == 'loading')
-    document.addEventListener('DOMContentLoaded', start, false);
-  else
-    start();
+  $(function() {
+    AssetLoader.whenLoaded(start);
+  });
 })();

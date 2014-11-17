@@ -1,21 +1,19 @@
 var Export = {
-  toHtml: function(gameData, cb) {
-    var templateString;
-    var templateContext = {
+  toHtml: function(gameData) {
+    return _.template(this._templateString, {
       phaserVersion: PhaserState.PHASER_VERSION,
       gameData: gameData,
+      phaserStateJs: this._phaserStateJs,
       blocklyJs: Blockly.Phaser.generateJs(gameData)
-    };
-
-    $.when(
-      $.get('export-template.html', function(html) {
-        templateString = html;
-      }),
-      $.get('phaser-state.js', function(js) {
-        templateContext.phaserStateJs = js;
-      })
-    ).then(function() {
-      cb(null, _.template(templateString, templateContext));
     });
   }
 };
+
+AssetLoader.add($.when(
+  $.get('export-template.html', function(html) {
+    Export._templateString = html;
+  }),
+  $.get('phaser-state.js', function(js) {
+    Export._phaserStateJs = js;
+  })
+));
