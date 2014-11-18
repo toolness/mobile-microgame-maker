@@ -1,6 +1,6 @@
 define(function(require) {
   var Modal = require("jsx!modal");
-  var BlocklyComponent = require("jsx!blockly");
+  var BlocklyComponent = require("jsx!blockly-component");
   var Editor = require("jsx!editor");
   var React = require("react");
   var Blockly = require("phaser-blocks");
