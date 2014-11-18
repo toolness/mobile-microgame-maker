@@ -45,22 +45,24 @@ define(function(require) {
         reset();
     }
 
+    var modalManager, blockly, editor;
+
     try {
-      var modalManager = Modal.createManager(
+      modalManager = Modal.createManager(
         document.getElementById('modal-holder')
       );
 
-      var blockly = React.render(
+      blockly = React.render(
         <BlocklyComponent toolbox={toolbox} onClose={handleCloseBlockly}/>,
         document.getElementById('blockly-holder')
       );
 
-      var editor = React.render(
+      editor = React.render(
         <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
         document.getElementById('editor')
       );
     } catch (e) {
-      setTimeout(function() {
+      window.setTimeout(function() {
         if (window.confirm("A fatal error occured! Reset this app to its factory defaults? Your data will be lost."))
           reset();
       }, 250);
@@ -76,7 +78,7 @@ define(function(require) {
         window.removeEventListener('message', onMessage, false);
         var message = JSON.parse(event.data);
         if (message.type == 'import' && message.gameData) {
-          if (confirm("Import minigame from " + event.origin + "?")) {
+          if (window.confirm("Import minigame from " + event.origin + "?")) {
             editor.importGameData(message.gameData);
           }
         }

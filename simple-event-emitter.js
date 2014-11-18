@@ -16,4 +16,4 @@ function SimpleEventEmitter(target) {
   };
 
   return target;
-};
+}

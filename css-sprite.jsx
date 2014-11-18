@@ -4,13 +4,15 @@ define(function(require) {
 
   var CssSprite = React.createClass({
     render: function() {
+      var sprite, gameData, spritesheet, frame;
+
       try {
-        var sprite = this.props.sprite;
-        var gameData = this.props.gameData;
-        var spritesheet = _.findWhere(gameData.spritesheets, {
+        sprite = this.props.sprite;
+        gameData = this.props.gameData;
+        spritesheet = _.findWhere(gameData.spritesheets, {
           key: sprite.key
         });
-        var frame = _.findWhere(gameData.animations[sprite.key], {
+        frame = _.findWhere(gameData.animations[sprite.key], {
           name: sprite.animation
         }).frames[0];
       } catch (e) {

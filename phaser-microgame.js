@@ -30,7 +30,7 @@ PhaserMicrogame.prototype = {
   update: function() {
     this.timeLeft -= this.state.game.time.elapsed;
     if (this.timeLeft < 0) this.timeLeft = 0;
-    if (this.timeLeft == 0) {
+    if (this.timeLeft === 0) {
       if (this.phase == 'PLAYING') {
         this.state.trigger('outoftime');
         if (this.outcome === undefined)

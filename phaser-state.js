@@ -1,3 +1,4 @@
+/* jshint evil: true */
 define(function(require) {
   var GameData = require('game-data');
 
@@ -94,6 +95,7 @@ define(function(require) {
   PhaserState.Generators.PHASER_VERSION = "2.1.3";
 
   PhaserState.Generators.makeStateObject = function(options) {
+    var state;
     var stateJs = this.createState({
       gameData: options.gameData,
       start: options.start,
@@ -102,6 +104,7 @@ define(function(require) {
     });
     stateJs = '//# sourceURL=generated-phaser-state-code.js\n' + stateJs;
 
+    // Note that stateJs will define "state".
     //console.log("stateJs is", stateJs);
     eval(stateJs);
 

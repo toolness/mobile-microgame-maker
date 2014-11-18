@@ -24,6 +24,14 @@
     "sub": true,
     "undef": true,
     "laxbreak": true,
-    "predef": []
+    "predef": [
+      "define",
+      "window",
+      "document",
+      "console",
+      "Blockly",
+      "_",
+      "$"
+    ]
   }
 }
