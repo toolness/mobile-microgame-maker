@@ -1,0 +1,106 @@
+<xml>
+    <category name="Logic">
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Math">
+          <block type="math_number"></block>
+          <block type="math_arithmetic"></block>
+          <block type="math_single"></block>
+          <block type="math_trig"></block>
+          <block type="math_constant"></block>
+          <block type="math_number_property"></block>
+          <block type="math_change">
+              <value name="DELTA">
+                  <block type="math_number">
+                      <field name="NUM">1</field>
+                  </block>
+              </value>
+          </block>
+          <block type="math_round"></block>
+          <block type="math_on_list"></block>
+          <block type="math_modulo"></block>
+          <block type="math_constrain">
+              <value name="LOW">
+                  <block type="math_number">
+                      <field name="NUM">1</field>
+                  </block>
+              </value>
+              <value name="HIGH">
+                  <block type="math_number">
+                      <field name="NUM">100</field>
+                  </block>
+              </value>
+          </block>
+          <block type="math_random_int">
+              <value name="FROM">
+                  <block type="math_number">
+                      <field name="NUM">1</field>
+                  </block>
+              </value>
+              <value name="TO">
+                  <block type="math_number">
+                      <field name="NUM">100</field>
+                  </block>
+              </value>
+          </block>
+          <block type="math_random_float"></block>
+      </category>
+
+    <category name="Variables" custom="VARIABLE"></category>
+
+    <category name="Colour">
+        <block type="colour_picker"></block>
+        <block type="colour_random"></block>
+        <block type="colour_rgb">
+            <value name="RED">
+                <block type="math_number">
+                    <field name="NUM">100</field>
+                </block>
+            </value>
+            <value name="GREEN">
+                <block type="math_number">
+                    <field name="NUM">50</field>
+                </block>
+            </value>
+            <value name="BLUE">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+        </block>
+        <block type="colour_blend">
+            <value name="COLOUR1">
+                <block type="colour_picker">
+                    <field name="COLOUR">#ff0000</field>
+                </block>
+            </value>
+            <value name="COLOUR2">
+                <block type="colour_picker">
+                    <field name="COLOUR">#3333ff</field>
+                </block>
+            </value>
+            <value name="RATIO">
+                <block type="math_number">
+                    <field name="NUM">0.5</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="Game">
+        <block type="phaser_on_tap"></block>
+        <block type="phaser_on_update"></block>
+        <block type="phaser_on_outoftime"></block>
+        <block type="phaser_repeat_event"></block>
+        <block type="phaser_move"></block>
+        <block type="phaser_play_sound"></block>
+        <block type="phaser_set_bg"></block>
+        <block type="phaser_set_animation"></block>
+        <block type="phaser_win"></block>
+        <block type="phaser_lose"></block>
+    </category>
+</xml>

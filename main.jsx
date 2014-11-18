@@ -5,6 +5,7 @@ define(function(require) {
   var React = require("react");
   var defaultGameData = require("default-game-data");
   var spreadsheetToSpritesheet = require("spreadsheet-to-spritesheet");
+  var toolbox = require('text!blockly-toolbox.xml');
 
   function render(spriteLibrary) {
     var initialGameData = defaultGameData;
@@ -50,7 +51,7 @@ define(function(require) {
       );
 
       var blockly = React.render(
-        <BlocklyComponent toolbox={document.getElementById('toolbox')} onClose={handleCloseBlockly}/>,
+        <BlocklyComponent toolbox={toolbox} onClose={handleCloseBlockly}/>,
         document.getElementById('blockly-holder')
       );
 
