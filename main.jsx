@@ -1,4 +1,9 @@
-(function() {
+define(function(require) {
+  var Modal = require("jsx!modal");
+  var BlocklyComponent = require("jsx!blockly");
+  var Editor = require("jsx!editor");
+  var React = require("react");
+
   function render(spriteLibrary) {
     var initialGameData = defaultGameData;
 
@@ -77,15 +82,11 @@
     }
   }
 
-  function start() {
+  return function start() {
     if (/[&|?]local=1/.test(window.location.search))
       return render();
 
     var SPREADSHEET_KEY = '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs';
     spreadsheetToSpritesheet(SPREADSHEET_KEY, render);
   }
-
-  $(function() {
-    AssetLoader.whenLoaded(start);
-  });
-})();
+});

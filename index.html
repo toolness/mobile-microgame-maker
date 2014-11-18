@@ -40,8 +40,6 @@ html.show-blockly .blockly-fill-page {
   width: 100%;
 }
 </style>
-<script src="vendor/react/build/react-with-addons.js"></script>
-<script src="vendor/react/build/JSXTransformer.js"></script>
 <title>Mobile Minigame Maker</title>
 <div class="container" id="editor-holder">
   <h1>Mobile Minigame Maker</h1>
@@ -166,23 +164,29 @@ html.show-blockly .blockly-fill-page {
 <script src="vendor/blockly/blocks_compressed.js"></script>
 <script src="vendor/blockly/javascript_compressed.js"></script>
 <script src="vendor/blockly/en.js"></script>
-<script src="asset-loader.js"></script>
+<script>
+var require = {
+  paths: {
+    "text": "vendor/require.text",
+    "jsx": "vendor/require.jsx",
+    "JSXTransformer": "vendor/react/build/JSXTransformer",
+    "react": "vendor/react/build/react-with-addons",
+  },
+  jsx: {
+    fileExtension: '.jsx'
+  },
+  shim: {
+  }
+};
+</script>
+<script src="vendor/require.js"></script>
+<script>
+require(["jsx!main"], function(main) {
+  $(function() { main(); });
+});
+</script>
 <script src="phaser-blocks.js"></script>
 <script src="phaser-microgame.js"></script>
 <script src="simple-event-emitter.js"></script>
-<script src="phaser-state.js"></script>
 <script src="spreadsheet-to-spritesheet.js"></script>
-<script src="export.js"></script>
-<script src="game-data.js"></script>
 <script src="default-game-data.js"></script>
-<script type="text/jsx" src="stage.jsx"></script>
-<script type="text/jsx" src="player.jsx"></script>
-<script type="text/jsx" src="sprite.jsx"></script>
-<script type="text/jsx" src="css-sprite.jsx"></script>
-<script type="text/jsx" src="blockly.jsx"></script>
-<script type="text/jsx" src="editor.jsx"></script>
-<script type="text/jsx" src="modal.jsx"></script>
-<script type="text/jsx" src="position-modal.jsx"></script>
-<script type="text/jsx" src="export-modal.jsx"></script>
-<script type="text/jsx" src="import-modal.jsx"></script>
-<script type="text/jsx" src="main.jsx"></script>
