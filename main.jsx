@@ -3,6 +3,7 @@ define(function(require) {
   var BlocklyComponent = require("jsx!blockly");
   var Editor = require("jsx!editor");
   var React = require("react");
+  var defaultGameData = require("default-game-data");
 
   function render(spriteLibrary) {
     var initialGameData = defaultGameData;
