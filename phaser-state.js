@@ -102,7 +102,7 @@ define(function(require) {
     });
     stateJs = '//# sourceURL=generated-phaser-state-code.js\n' + stateJs;
 
-    console.log("stateJs is", stateJs);
+    //console.log("stateJs is", stateJs);
     eval(stateJs);
 
     _.extend(state, {
