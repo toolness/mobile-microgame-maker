@@ -3,7 +3,7 @@ define(function(require) {
 
   var PhaserState = {
     Generators: {
-      _stateTemplate: require('text!phaser-state-template.js')
+      _stateTemplate: require('text!templates/phaser-state-template.js')
     }
   };
 

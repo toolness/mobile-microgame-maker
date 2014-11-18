@@ -3,7 +3,7 @@ define(function(require) {
   var PhaserState = require('phaser-state');
 
   var Export = {
-    _templateString: require('text!export-template.html'),
+    _templateString: require('text!templates/export-template.html'),
     files: {
       'simple-event-emitter.js': require('text!simple-event-emitter.js'),
       'phaser-microgame.js': require('text!phaser-microgame.js')
