@@ -1,4 +1,5 @@
 define(function(require) {
+  var guid = require('guid');
   var React = require('react');
   var PhaserState = require('phaser-state');
   var GameData = require('game-data');
