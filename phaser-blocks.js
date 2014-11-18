@@ -1,4 +1,5 @@
-(function() {
+define(function(require) {
+  var _ = require('underscore');
   var gameData = null;
 
   function soundList() {
@@ -267,4 +268,6 @@
 
     return 'game.stage.backgroundColor = ' + colour + ';\n';
   };
-})();
+
+  return Blockly;
+});

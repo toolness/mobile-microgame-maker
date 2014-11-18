@@ -1,5 +1,6 @@
 /* jshint evil: true */
 define(function(require) {
+  var _ = require('underscore');
   var GameData = require('game-data');
 
   var PhaserState = {

@@ -1,4 +1,5 @@
 define(function(require) {
+  var _ = require('underscore');
   var guid = require('guid');
   var React = require('react');
   var PhaserState = require('phaser-state');

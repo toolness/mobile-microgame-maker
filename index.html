@@ -47,7 +47,6 @@ html.show-blockly .blockly-fill-page {
 </div>
 <div id="blockly-holder" class="blockly-fill-page"></div>
 <div id="modal-holder"></div>
-<script src="vendor/underscore.js"></script>
 <script src="vendor/jquery.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.js"></script>
 <script src="vendor/blockly/blockly_compressed.js"></script>
@@ -55,7 +54,6 @@ html.show-blockly .blockly-fill-page {
 <script src="vendor/blockly/javascript_compressed.js"></script>
 <script src="vendor/blockly/en.js"></script>
 <script src="vendor/require.js"></script>
-<script src="phaser-blocks.js"></script>
 <script src="phaser-microgame.js"></script>
 <script src="simple-event-emitter.js"></script>
 <script>
@@ -65,6 +63,7 @@ require.config({
     "jsx": "vendor/require.jsx",
     "hammer": "vendor/hammer",
     "tabletop": "vendor/tabletop",
+    "underscore": "vendor/underscore",
     "guid": "vendor/guid",
     "JSXTransformer": "vendor/react/build/JSXTransformer",
     "react": "vendor/react/build/react-with-addons",
@@ -75,6 +74,9 @@ require.config({
   shim: {
     "tabletop": {
       exports: "Tabletop"
+    },
+    "underscore": {
+      exports: "_"
     }
   }
 });

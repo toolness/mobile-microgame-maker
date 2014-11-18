@@ -3,6 +3,7 @@ define(function(require) {
   var BlocklyComponent = require("jsx!blockly");
   var Editor = require("jsx!editor");
   var React = require("react");
+  var Blockly = require("phaser-blocks");
   var defaultGameData = require("default-game-data");
   var spreadsheetToSpritesheet = require("spreadsheet-to-spritesheet");
   var toolbox = require('text!blockly-toolbox.xml');

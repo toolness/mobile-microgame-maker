@@ -1,5 +1,7 @@
 define(function(require) {
+  var _ = require('underscore');
   var React = require('react');
+
   var Modal = React.createClass({
     $modal: function() {
       return $(this.refs.modal.getDOMNode());
