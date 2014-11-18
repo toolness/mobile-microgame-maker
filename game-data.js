@@ -1,5 +1,10 @@
 var GameData = {};
 
+GameData.validateSymbol = function(symbol) {
+  return symbol && symbol.length >= 1 &&
+         /^[A-Za-z][A-Za-z0-9_]*$/.test(symbol);
+};
+
 GameData.resolveURL = function(gameData, url) {
   if (/^(https?:)?\/\//.test(url)) return url;
   return gameData.baseURL + url;

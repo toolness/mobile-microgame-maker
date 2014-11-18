@@ -28,6 +28,18 @@ var Sprite = React.createClass({
       }.bind(this)
     });
   },
+  handleChangeName: function() {
+    var name = window.prompt("Enter a new name for this sprite.",
+                             this.props.sprite.name);
+    if (name === null) return;
+    if (!GameData.validateSymbol(name))
+      return window.alert("The name must start with a letter and " +
+                          "contain only alphanumeric characters and " +
+                          "underscores.");
+    this.props.onChange(this.props.sprite.id, {
+      name: {$set: name}
+    });
+  },
   render: function() {
     var sprite = this.props.sprite;
     var animations = this.props.gameData.animations[sprite.key] || [];
@@ -37,7 +49,7 @@ var Sprite = React.createClass({
           <div style={{display: 'inline-block', width: 38, height: 32, verticalAlign: 'bottom'}}>
             <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />
           </div>
-          <code>{sprite.name}</code>
+          <code onClick={this.handleChangeName} style={{cursor: 'pointer'}}>{sprite.name}</code>
           <button className="btn btn-default" style={{float: 'right'}} onClick={this.handleToggleCollapse}>
             <span className={React.addons.classSet({
               'glyphicon': true,
