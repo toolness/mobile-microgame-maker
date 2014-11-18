@@ -1,0 +1,29 @@
+{
+  "name": "mobile-microgame-maker",
+  "version": "0.0.1",
+  "description": "Attempt at building a mobile microgame maker for Minicade.",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jshint": "~2.5.10"    
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/toolness/mobile-microgame-maker.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/toolness/mobile-microgame-maker/issues"
+  },
+  "jshintConfig": {
+    "asi": true,
+    "sub": true,
+    "undef": true,
+    "laxbreak": true,
+    "predef": []
+  }
+}
