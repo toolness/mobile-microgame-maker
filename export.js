@@ -1,5 +1,6 @@
 define(function(require) {
   var _ = require('underscore');
+  var Blockly = require('phaser-blocks');
   var React = require('react');
   var PhaserState = require('phaser-state');
 

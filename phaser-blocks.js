@@ -1,5 +1,6 @@
 define(function(require) {
   var _ = require('underscore');
+  var Blockly = require('blockly');
   var gameData = null;
 
   function soundList() {

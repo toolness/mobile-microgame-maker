@@ -29,7 +29,6 @@
       "window",
       "document",
       "console",
-      "Blockly",
       "$"
     ]
   }

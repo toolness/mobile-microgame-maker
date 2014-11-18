@@ -1,5 +1,6 @@
 define(function(require) {
   var React = require('react');
+  var Blockly = require('blockly');
 
   var BlocklyComponent = React.createClass({
     componentDidMount: function() {
