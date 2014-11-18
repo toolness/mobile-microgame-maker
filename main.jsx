@@ -4,6 +4,7 @@ define(function(require) {
   var Editor = require("jsx!editor");
   var React = require("react");
   var defaultGameData = require("default-game-data");
+  var spreadsheetToSpritesheet = require("spreadsheet-to-spritesheet");
 
   function render(spriteLibrary) {
     var initialGameData = defaultGameData;
