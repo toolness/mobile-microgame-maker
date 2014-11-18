@@ -1,4 +1,5 @@
 define(function(require) {
+  var Hammer = require('hammer');
   var React = require('react');
   var GameData = require('game-data');
   var PhaserState = require('phaser-state');
