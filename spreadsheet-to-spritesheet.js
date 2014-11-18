@@ -1,4 +1,6 @@
 define(function(require) {
+  var Tabletop = require('tabletop');
+
   return function spreadsheetToSpritesheet(key, cb) {
     Tabletop.init({
       key: key,

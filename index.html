@@ -156,7 +156,6 @@ html.show-blockly .blockly-fill-page {
 <div id="modal-holder"></div>
 <script src="vendor/underscore.js"></script>
 <script src="vendor/jquery.js"></script>
-<script src="vendor/tabletop.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.js"></script>
 <script src="vendor/blockly/blockly_compressed.js"></script>
 <script src="vendor/blockly/blocks_compressed.js"></script>
@@ -168,6 +167,7 @@ var require = {
     "text": "vendor/require.text",
     "jsx": "vendor/require.jsx",
     "hammer": "vendor/hammer",
+    "tabletop": "vendor/tabletop",
     "guid": "vendor/guid",
     "JSXTransformer": "vendor/react/build/JSXTransformer",
     "react": "vendor/react/build/react-with-addons",
@@ -176,6 +176,9 @@ var require = {
     fileExtension: '.jsx'
   },
   shim: {
+    "tabletop": {
+      exports: "Tabletop"
+    }
   }
 };
 </script>
