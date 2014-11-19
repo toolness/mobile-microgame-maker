@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Attempt at building a mobile microgame maker for Minicade.",
   "dependencies": {
+    "requirejs": "^2.1.15"
   },
   "devDependencies": {
     "jsxhint": "~0.7.0"
