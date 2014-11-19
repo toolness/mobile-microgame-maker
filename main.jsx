@@ -8,7 +8,11 @@ define(function(require) {
   var spreadsheetToSpritesheet = require("spreadsheet-to-spritesheet");
   var toolbox = require('text!blockly-toolbox.xml');
 
-  function render(spriteLibrary) {
+  function render(options, spriteLibrary) {
+    var root = options.root;
+    var editorHolder = options.editorHolder;
+    var modalHolder = options.modalHolder;
+    var blocklyHolder = options.blocklyHolder;
     var initialGameData = defaultGameData;
 
     try {
@@ -23,12 +27,12 @@ define(function(require) {
     }
 
     function handleOpenBlockly() {
-      document.documentElement.classList.add('show-blockly');
+      root.classList.add('show-blockly');
       Blockly.fireUiEvent(window, 'resize');
     }
 
     function handleCloseBlockly() {
-      document.documentElement.classList.remove('show-blockly');
+      root.classList.remove('show-blockly');
       editor.refreshBlocklyXml();
     }
 
@@ -49,18 +53,16 @@ define(function(require) {
     var modalManager, blockly, editor;
 
     try {
-      modalManager = Modal.createManager(
-        document.getElementById('modal-holder')
-      );
+      modalManager = Modal.createManager(modalHolder);
 
       blockly = React.render(
         <BlocklyComponent toolbox={toolbox} onClose={handleCloseBlockly}/>,
-        document.getElementById('blockly-holder')
+        blocklyHolder
       );
 
       editor = React.render(
         <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
-        document.getElementById('editor')
+        editorHolder
       );
     } catch (e) {
       window.setTimeout(function() {
@@ -88,11 +90,11 @@ define(function(require) {
     }
   }
 
-  return function start() {
+  return function start(options) {
     if (/[&|?]local=1/.test(window.location.search))
-      return render();
+      return render(options);
 
-    var SPREADSHEET_KEY = '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs';
-    spreadsheetToSpritesheet(SPREADSHEET_KEY, render);
+    spreadsheetToSpritesheet(options.spreadsheetKey,
+                             render.bind(null, options));
   }
 });

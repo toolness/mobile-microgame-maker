@@ -4,7 +4,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
 <style>
-html.show-blockly #editor-holder,
+html.show-blockly .editor-wrapper,
 html:not(.show-blockly) #blockly-holder {
   display: none;
 }
@@ -19,7 +19,7 @@ html.show-blockly .blockly-fill-page {
   overflow: hidden;
 }
 
-#editor-holder {
+.editor-wrapper {
   margin-bottom: 3em;
 }
 
@@ -41,16 +41,24 @@ html.show-blockly .blockly-fill-page {
 }
 </style>
 <title>Mobile Minigame Maker</title>
-<div class="container" id="editor-holder">
+<div class="container editor-wrapper">
   <h1>Mobile Minigame Maker</h1>
-  <div id="editor"></div>
+  <div id="editor-holder"></div>
 </div>
 <div id="blockly-holder" class="blockly-fill-page"></div>
 <div id="modal-holder"></div>
 <script src="require-config.js"></script>
 <script src="vendor/require.js"></script>
 <script>
-require(["jsx!main", "jquery"], function(main, $) {
-  $(function() { main(); });
-});
+document.addEventListener("DOMContentLoaded", function() {
+  require(["jsx!main"], function(main) {
+    main({
+      spreadsheetKey: '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs',
+      root: document.documentElement,
+      editorHolder: document.getElementById('editor-holder'),
+      modalHolder: document.getElementById('modal-holder'),
+      blocklyHolder: document.getElementById('blockly-holder')
+    });
+  });
+}, false);
 </script>

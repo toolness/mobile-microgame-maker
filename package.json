@@ -27,7 +27,6 @@
     "predef": [
       "define",
       "window",
-      "document",
       "console"
     ]
   }

@@ -32,6 +32,7 @@ define(function(require) {
 
       var self = this;
       var originalCreate = newState.create;
+      var document = this.refs.phaser.getDOMNode().ownerDocument;
       var iframe = document.createElement('iframe');
 
       newState.create = function() {
