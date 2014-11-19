@@ -41,7 +41,8 @@ define(function(require) {
             y: {$set: this.state.sprite.y + e.deltaY}
           }
         }));
-        this.updateFields();
+        // We could update the fields here, but this slows down
+        // slower systems a lot, so we won't.
       }.bind(this));
       hammer.on('panend', function(e) {
         this.setState({sprite: this.state.movingSprite});
