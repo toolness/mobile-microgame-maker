@@ -47,3 +47,6 @@ var require = {
     }
   }
 };
+
+if (typeof(module) != "undefined")
+  module.exports = require;
