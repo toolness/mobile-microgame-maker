@@ -1,5 +1,6 @@
 define(function(require) {
   var _ = require('underscore');
+  var $ = require('jquery-bootstrap');
   var React = require('react');
 
   var Modal = React.createClass({

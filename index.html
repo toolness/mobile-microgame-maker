@@ -47,8 +47,6 @@ html.show-blockly .blockly-fill-page {
 </div>
 <div id="blockly-holder" class="blockly-fill-page"></div>
 <div id="modal-holder"></div>
-<script src="vendor/jquery.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.js"></script>
 <script src="vendor/require.js"></script>
 <script>
 require.config({
@@ -63,6 +61,8 @@ require.config({
     "blockly/blocks": "vendor/blockly/blocks_compressed",
     "blockly/javascript": "vendor/blockly/javascript_compressed",
     "blockly": "vendor/blockly/en",
+    "jquery": "vendor/jquery",
+    "jquery-bootstrap": "vendor/bootstrap/js/bootstrap",
     "JSXTransformer": "vendor/react/build/JSXTransformer",
     "react": "vendor/react/build/react-with-addons",
   },
@@ -70,6 +70,10 @@ require.config({
     fileExtension: '.jsx'
   },
   shim: {
+    "jquery-bootstrap": {
+      deps: ["jquery"],
+      exports: "jQuery"
+    },
     "tabletop": {
       exports: "Tabletop"
     },

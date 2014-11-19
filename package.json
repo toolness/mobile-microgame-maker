@@ -28,8 +28,7 @@
       "define",
       "window",
       "document",
-      "console",
-      "$"
+      "console"
     ]
   }
 }
