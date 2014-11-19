@@ -2,6 +2,14 @@
 define(function(require) {
   var _ = require('underscore');
   var GameData = require('game-data');
+  var includes = {
+    SimpleEventEmitter: require('includes/simple-event-emitter'),
+    PhaserMicrogame: require('includes/phaser-microgame')
+  };
+  var includeFiles = [
+    require('text!includes/simple-event-emitter.js'),
+    require('text!includes/phaser-microgame.js')
+  ].join('\n');
 
   var PhaserState = {
     Generators: {
@@ -82,7 +90,7 @@ define(function(require) {
       gameData: gameData,
       playTime: options.playTime || this.DEFAULT_PLAY_TIME,
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
-      extra: options.extra || '',
+      extra: options.standalone ? includeFiles : '',
       start: options.start
     });
   };
@@ -96,18 +104,23 @@ define(function(require) {
   PhaserState.Generators.PHASER_VERSION = "2.1.3";
 
   PhaserState.Generators.makeStateObject = function(options) {
-    var state;
     var stateJs = this.createState({
       gameData: options.gameData,
       start: options.start,
       playTime: options.playTime,
       endingTime: options.endingTime
     });
-    stateJs = '//# sourceURL=generated-phaser-state-code.js\n' + stateJs;
+    stateJs = [
+      '//# sourceURL=generated-phaser-state-code.js',
+      '(function(SimpleEventEmitter, PhaserMicrogame) {',
+      stateJs,
+      'return state;',
+      '});'
+    ].join('\n');
 
-    // Note that stateJs will define "state".
     //console.log("stateJs is", stateJs);
-    eval(stateJs);
+    var state = eval(stateJs)(includes.SimpleEventEmitter,
+                              includes.PhaserMicrogame);
 
     _.extend(state, {
       setPaused: function(isPaused) {

@@ -6,10 +6,6 @@ define(function(require) {
 
   var Export = {
     _templateString: require('text!templates/export-template.html'),
-    files: {
-      'simple-event-emitter.js': require('text!simple-event-emitter.js'),
-      'phaser-microgame.js': require('text!phaser-microgame.js')
-    },
     fromHtml: function(html) {
       var match = html.match(/^var gameData = (.+);$/m);
       if (match) {
@@ -27,10 +23,7 @@ define(function(require) {
       var stateJs = PhaserState.Generators.createState({
         gameData: gameData,
         start: Blockly.Phaser.generateJs(gameData),
-        extra: [
-          this.files['simple-event-emitter.js'],
-          this.files['phaser-microgame.js']
-        ].join('\n')
+        standalone: true
       });
       return _.template(this._templateString, {
         phaserVersion: PhaserState.Generators.PHASER_VERSION,
