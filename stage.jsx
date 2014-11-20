@@ -19,7 +19,16 @@ define(function(require) {
             0
           );
         }
-        this.game.destroy();
+        try {
+          this.game.destroy();
+        } catch (e) {
+          // This seems to happen sometimes, perhaps b/c the game
+          // wasn't yet fully initialized by the time we try to
+          // destroy it? Either way, it's probably not a big deal
+          // since the game is in an iframe that will be destroyed,
+          // so just log the error and move on.
+          console.log("error when destroying Phaser game", e);
+        }
         this.game = null;
       }
 
