@@ -1,6 +1,8 @@
 var requirejs = require('requirejs');
 var fs = require('fs');
 
+var getCacheManifest = require('./get-cache-manifest');
+
 // We need to replace JSXTransformer w/ a munged version that doesn't
 // contain any occurrences of "use strict":
 //
@@ -33,6 +35,7 @@ config.modules = [
 console.log("Building...");
 
 requirejs.optimize(config, function(buildResponse) {
+  fs.writeFileSync('build/mmm.appcache', getCacheManifest());
   console.log('Done. Built files are in the "build" directory.');
   fs.unlinkSync('JSXTransformer.useStrictMunged.js');
 }, function(err) {
