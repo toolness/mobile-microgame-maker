@@ -5,14 +5,14 @@ define(function(require) {
   var React = require("react");
   var Blockly = require("phaser-blocks");
   var defaultGameData = require("default-game-data");
-  var spreadsheetToSpritesheet = require("spreadsheet-to-spritesheet");
   var toolbox = require('text!blockly-toolbox.xml');
 
-  function render(options, spriteLibrary) {
+  return function start(options) {
     var root = options.root;
     var editorHolder = options.editorHolder;
     var modalHolder = options.modalHolder;
     var blocklyHolder = options.blocklyHolder;
+    var spriteLibrary = options.spriteLibrary;
     var initialGameData = defaultGameData;
 
     try {
@@ -72,9 +72,6 @@ define(function(require) {
       throw e;
     }
 
-    // For debugging via console only!
-    window.editor = editor;
-
     if (window.opener) {
       window.addEventListener('message', function onMessage(event) {
         if (event.source !== window.opener) return;
@@ -88,13 +85,7 @@ define(function(require) {
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     }
-  }
 
-  return function start(options) {
-    if (/[&|?]local=1/.test(window.location.search))
-      return render(options);
-
-    spreadsheetToSpritesheet(options.spreadsheetKey,
-                             render.bind(null, options));
+    return editor;
   }
 });
