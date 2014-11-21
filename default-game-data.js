@@ -48,24 +48,7 @@ define(function(require) {
         }
       ]
     },
-    sprites: [
-      {
-        id: '3799a7b6-1576-0a79-8cd5-72a0f5e48759',
-        name: 'Object1',
-        x: 0,
-        y: 0,
-        key: 'fly',
-        animation: 'flying'
-      },
-      {
-        id: '3c48f505-4ab3-3724-f578-59d7efe857f4',
-        name: 'Object2',
-        x: 150,
-        y: 0,
-        key: 'grumpaloomba',
-        animation: 'grumpy'
-      }
-    ],
+    sprites: [],
     blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
     baseURL: 'assets/',
     width: 288,
