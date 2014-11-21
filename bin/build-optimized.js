@@ -20,6 +20,7 @@ config.paths['JSXTransformer'] = 'JSXTransformer.useStrictMunged';
 
 config.dir = "./build";
 config.baseUrl = "./";
+config.fileExclusionRegExp = /(^\.)|(^(node_modules|bin)$)/;
 config.stubModules = ['jsx'];
 config.optimize = "none";
 config.modules = [
