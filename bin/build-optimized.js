@@ -26,7 +26,7 @@ config.optimize = "none";
 config.modules = [
   {
     name: "main",
-    exclude: ["react", "JSXTransformer", "text"]
+    exclude: ["JSXTransformer", "text"]
   }
 ];
 
