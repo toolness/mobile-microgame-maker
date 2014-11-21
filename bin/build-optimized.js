@@ -24,7 +24,7 @@ config.stubModules = ['jsx'];
 config.optimize = "none";
 config.modules = [
   {
-    name: "start-main",
+    name: "main",
     exclude: ["react", "JSXTransformer", "text"]
   }
 ];

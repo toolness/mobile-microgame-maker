@@ -1,6 +1,6 @@
-require(["jsx!main", "jquery"], function(main, $) {
+require(["jsx!app", "jquery"], function(app, $) {
   $(function() {
-    main({
+    app({
       spreadsheetKey: '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs',
       root: document.documentElement,
       editorHolder: document.getElementById('editor-holder'),
