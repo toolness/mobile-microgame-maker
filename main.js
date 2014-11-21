@@ -4,6 +4,8 @@ require([
   "jquery"
 ], function(app, spreadsheetToSpritesheet, $) {
   function startApp(spriteLibrary) {
+    $('html').removeClass('loading');
+
     var editor = app({
       root: document.documentElement,
       editorHolder: document.getElementById('editor-holder'),
