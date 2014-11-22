@@ -3,47 +3,61 @@ var fs = require('fs');
 
 var getCacheManifest = require('./get-cache-manifest');
 
-// We need to replace JSXTransformer w/ a munged version that doesn't
-// contain any occurrences of "use strict":
-//
-// https://github.com/seiffert/require-jsx/issues/1#issuecomment-31270188
-//
-// SO. WEIRD.
+function build(cb) {
+  cb = cb || function() {};
 
-var jsxt = fs.readFileSync('vendor/react/build/JSXTransformer.js', 'utf-8');
+  // We need to replace JSXTransformer w/ a munged version that doesn't
+  // contain any occurrences of "use strict":
+  //
+  // https://github.com/seiffert/require-jsx/issues/1#issuecomment-31270188
+  //
+  // SO. WEIRD.
 
-jsxt = jsxt.replace(/'use strict'/g, "'use ' + 'strict'");
+  var jsxt = fs.readFileSync('vendor/react/build/JSXTransformer.js', 'utf-8');
 
-fs.writeFileSync('JSXTransformer.useStrictMunged.js', jsxt);
+  jsxt = jsxt.replace(/'use strict'/g, "'use ' + 'strict'");
 
-var config = require('../require-config');
+  fs.writeFileSync('JSXTransformer.useStrictMunged.js', jsxt);
 
-config.paths['JSXTransformer'] = 'JSXTransformer.useStrictMunged';
+  var config = require('../require-config');
 
-config.dir = "./build";
-config.baseUrl = "./";
-config.fileExclusionRegExp = /(^\.)|(^(node_modules|bin)$)/;
-config.stubModules = ['jsx'];
-config.optimize = "none";
-config.modules = [
-  {
-    name: "main",
-    exclude: ["JSXTransformer", "text"]
-  }
-];
+  config.paths['JSXTransformer'] = 'JSXTransformer.useStrictMunged';
 
-console.log("Building...");
+  config.dir = "./build";
+  config.baseUrl = "./";
+  config.fileExclusionRegExp = /(^\.)|(^(node_modules|bin)$)/;
+  config.stubModules = ['jsx'];
+  config.optimize = "none";
+  config.modules = [
+    {
+      name: "main",
+      exclude: ["JSXTransformer", "text"]
+    }
+  ];
 
-requirejs.optimize(config, function(buildResponse) {
-  // For some reason requirejs swallows any exceptions that arise
-  // here, so we'll do a process.nextTick() so that node logs any
-  // thrown exceptions.
-  process.nextTick(function() {
-    fs.writeFileSync('build/mmm.appcache', getCacheManifest());
-    console.log('Done. Built files are in the "build" directory.');
-    fs.unlinkSync('JSXTransformer.useStrictMunged.js');
+  console.log("Building...");
+
+  requirejs.optimize(config, function(buildResponse) {
+    // For some reason requirejs swallows any exceptions that arise
+    // here, so we'll do a process.nextTick() so that node logs any
+    // thrown exceptions.
+    process.nextTick(function() {
+      fs.writeFileSync('build/mmm.appcache', getCacheManifest());
+      console.log('Done. Built files are in the "build" directory.');
+      fs.unlinkSync('JSXTransformer.useStrictMunged.js');
+      cb(null);
+    });
+  }, function(err) {
+    // Thanks Obama
+    process.nextTick(function() {
+      console.log("Error!");
+      console.log(err);
+      cb(err);
+    });
   });
-}, function(err) {
-  console.log("Error!");
-  console.log(err);
-});
+}
+
+module.exports = build;
+
+if (!module.parent)
+  build();
