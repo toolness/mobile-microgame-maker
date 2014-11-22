@@ -34,7 +34,6 @@ function get() {
     'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff'
   ].concat(listFiles('vendor/blockly/media'))
    .concat(listFiles('assets'))
-   .concat(listFiles('img'))
    .join('\n') + '\n';
 }
 
