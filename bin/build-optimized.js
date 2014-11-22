@@ -35,9 +35,14 @@ config.modules = [
 console.log("Building...");
 
 requirejs.optimize(config, function(buildResponse) {
-  fs.writeFileSync('build/mmm.appcache', getCacheManifest());
-  console.log('Done. Built files are in the "build" directory.');
-  fs.unlinkSync('JSXTransformer.useStrictMunged.js');
+  // For some reason requirejs swallows any exceptions that arise
+  // here, so we'll do a process.nextTick() so that node logs any
+  // thrown exceptions.
+  process.nextTick(function() {
+    fs.writeFileSync('build/mmm.appcache', getCacheManifest());
+    console.log('Done. Built files are in the "build" directory.');
+    fs.unlinkSync('JSXTransformer.useStrictMunged.js');
+  });
 }, function(err) {
   console.log("Error!");
   console.log(err);
