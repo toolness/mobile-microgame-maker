@@ -1,8 +1,28 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+}
+</style>
 <title>My Minigame</title>
-<div id="phaser-holder"></div><% if (encourageRemix) { %>
-<p><small><a href="javascript:remixGame()">Remix this minigame</a></small></p><% } %>
+<div>
+  <div id="phaser-holder"></div><% if (encourageRemix) { %>
+  <p><small><a href="javascript:remixGame()">Remix this minigame</a></small></p><% } %>
+</div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/<%= phaserVersion %>/phaser.min.js"></script>
 <script src="//toolness.github.io/fancy-friday/contrib/tinygame.js"></script>
 <script>

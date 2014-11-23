@@ -39,7 +39,10 @@ PhaserMicrogame.prototype = {
   render: function() {
     var game = this.state.game;
 
-    if (!this.usingTinygame) {
+    if (this.usingTinygame) {
+      document.body.style.backgroundColor =
+        '#' + game.stage.backgroundColor.toString(16);
+    } else {
       if (this.phase == 'PLAYING') {
         game.debug.geom(this.timeBar, '#000000');
       } else {
