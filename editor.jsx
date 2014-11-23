@@ -37,10 +37,10 @@ define(function(require) {
         gameData: changes
       }));    
     },
-    findUnusedSpriteName: function() {
+    findUnusedSpriteName: function(baseName) {
       var names = _.pluck(this.state.gameData.sprites, 'name');
       for (var i = 1; i < 10000; i++) {
-        var candidate = 'Object' + i;
+        var candidate = baseName + i;
         if (names.indexOf(candidate) == -1) return candidate;
       }
       throw new Error('maximum number of sprites reached');
@@ -53,7 +53,7 @@ define(function(require) {
         sprites: {
           $push: [{
             id: guid(),
-            name: this.findUnusedSpriteName(),
+            name: this.findUnusedSpriteName(spritesheet.key),
             x: _.random(this.state.gameData.width - spritesheet.frameWidth),
             y: _.random(this.state.gameData.height - spritesheet.frameHeight),
             key: spritesheet.key,
