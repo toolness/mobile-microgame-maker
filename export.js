@@ -17,12 +17,12 @@ define(function(require) {
     },
     toHtml: function(gameData, options) {
       options = options || {};
-      gameData = React.addons.update(gameData, {
+      var s3GameData = React.addons.update(gameData, {
         baseURL: {$set: '//s3.amazonaws.com/minicade-assets/'}
       });
       var stateJs = PhaserState.Generators.createState({
-        gameData: gameData,
-        start: Blockly.Phaser.generateJs(gameData),
+        gameData: s3GameData,
+        start: Blockly.Phaser.generateJs(s3GameData),
         standalone: true
       });
       return _.template(this._templateString, {
