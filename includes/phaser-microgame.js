@@ -3,28 +3,50 @@
 // seconds to show an ending animation.
 
 var PhaserMicrogame = function(options) {
+  var playTime = options.playTime;
+  var endingTime = options.endingTime;
+
   this.state = options.state;
-  this.endingTime = options.endingTime;
-  this.playTime = this.timeLeft = options.playTime;
   this.phase = 'PLAYING';
   this.outcome = undefined;
+  this.usingTinygame = (typeof(Tinygame) != 'undefined');
+
+  if (this.usingTinygame) {
+    Tinygame.loading();
+    Tinygame.onplay = function() {
+      this.state.game.paused = false;
+    }.bind(this);
+    playTime = Tinygame.playTime * 1000;
+    endingTime = Tinygame.endingTime * 1000;
+  }
+
+  this.endingTime = endingTime;
+  this.playTime = this.timeLeft = playTime;
 };
 
 PhaserMicrogame.prototype = {
   TIME_BAR_HEIGHT: 8,
   create: function() {
     var Phaser = this.state.Phaser;
-    this.timeBar = new Phaser.Rectangle(0, 0, this.state.game.width,
-                                        this.TIME_BAR_HEIGHT);
+    if (this.usingTinygame) {
+      this.state.game.paused = true;
+      Tinygame.loaded();
+    } else {
+      this.timeBar = new Phaser.Rectangle(0, 0, this.state.game.width,
+                                          this.TIME_BAR_HEIGHT);
+    }
   },
   render: function() {
     var game = this.state.game;
-    if (this.phase == 'PLAYING') {
-      game.debug.geom(this.timeBar, '#000000');
-    } else {
-      game.debug.text("Player has " + this.outcome + " the game.",
-                      0, this.TIME_BAR_HEIGHT + 4,
-                      this.outcome == 'WON' ? "lightgreen" : "red");
+
+    if (!this.usingTinygame) {
+      if (this.phase == 'PLAYING') {
+        game.debug.geom(this.timeBar, '#000000');
+      } else {
+        game.debug.text("Player has " + this.outcome + " the game.",
+                        0, this.TIME_BAR_HEIGHT + 4,
+                        this.outcome == 'WON' ? "lightgreen" : "red");
+      }
     }
   },
   update: function() {
@@ -41,23 +63,28 @@ PhaserMicrogame.prototype = {
         this.state.trigger('end');
       }
     }
-    this.timeBar.right = (this.timeLeft / this.playTime) *
-                         this.state.game.width;
+
+    if (!this.usingTinygame) {
+      this.timeBar.right = (this.timeLeft / this.playTime) *
+                           this.state.game.width;
+    }
   },
   setupEndingPhase: function() {
+    if (this.usingTinygame)
+      Tinygame.end(this.outcome == 'WON' ? 1 : 0);
     this.timeLeft = this.endingTime;
     this.phase = 'ENDING';
     this.state.game.input.disabled = true;
   },
   win: function() {
     if (this.phase != 'PLAYING') return;
-    this.setupEndingPhase();
     this.outcome = 'WON';
+    this.setupEndingPhase();
   },
   lose: function() {
     if (this.phase != 'PLAYING') return;
-    this.setupEndingPhase();
     this.outcome = 'LOST';
+    this.setupEndingPhase();
   },
   isEnded: function() {
     return this.phase == 'ENDED';
