@@ -29,7 +29,9 @@ define(function(require) {
         phaserVersion: PhaserState.Generators.PHASER_VERSION,
         encourageRemix: options.encourageRemix,
         gameData: gameData,
-        creatorURL: window.location.href,
+        creatorURL: window.location.protocol + '//' +
+          window.location.host + window.location.pathname +
+          '?importGame=opener',
         stateJs: stateJs
       });
     }

@@ -13,7 +13,7 @@ define(function(require) {
     var modalHolder = options.modalHolder;
     var blocklyHolder = options.blocklyHolder;
     var spriteLibrary = options.spriteLibrary;
-    var initialGameData = defaultGameData;
+    var initialGameData = options.defaultGameData || defaultGameData;
     var storage = options.storage;
     var storageKey = options.storageKey;
 
@@ -72,20 +72,6 @@ define(function(require) {
           reset();
       }, 250);
       throw e;
-    }
-
-    if (window.opener) {
-      window.addEventListener('message', function onMessage(event) {
-        if (event.source !== window.opener) return;
-        window.removeEventListener('message', onMessage, false);
-        var message = JSON.parse(event.data);
-        if (message.type == 'import' && message.gameData) {
-          if (window.confirm("Import minigame from " + event.origin + "?")) {
-            editor.importGameData(message.gameData);
-          }
-        }
-      }, false);
-      window.opener.postMessage('mmm:ready', '*');
     }
 
     return editor;
