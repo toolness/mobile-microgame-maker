@@ -1,44 +1,29 @@
 require([
   "jsx!app",
   "spreadsheet-to-spritesheet",
+  "export",
   "jquery"
-], function(app, spreadsheetToSpritesheet, $) {
+], function(app, spreadsheetToSpritesheet, Export, $) {
   function importGame(game, options) {
     var TIMEOUT = 5000;
     var deferred = $.Deferred();
-    var timeout = null;
 
     function reject(reason) {
-      clearTimeout(timeout);
-      timeout = null;
       window.alert("Failed to import minigame: " + reason);
       deferred.reject();
-      return deferred;
     }
 
     if (!game) {
       deferred.resolve();
     } else if (game == 'opener') {
-      if (!window.opener) return reject("window.opener is null");
-
-      timeout = window.setTimeout(function() {
-        reject("nonexistent or invalid response from opener");
-      }, TIMEOUT);
-      window.addEventListener('message', function onMessage(event) {
-        if (timeout === null) return;
-        if (event.source !== window.opener) return;
-        var message = JSON.parse(event.data);
-        if (message.type == 'import' && message.gameData) {
-          window.removeEventListener('message', onMessage, false);
-          window.history.replaceState({}, '', window.location.pathname);
-          if (window.confirm("Import minigame from " + event.origin + "?")) {
-            options.defaultGameData = message.gameData;
-          }
-          clearTimeout(timeout);
-          deferred.resolve();
+      Export.fromWindowOpener(TIMEOUT, function(err, gameData, origin) {
+        if (err) return reject(err.message);
+        window.history.replaceState({}, '', window.location.pathname);
+        if (window.confirm("Import minigame from " + origin + "?")) {
+          options.defaultGameData = gameData;
         }
-      }, false);
-      window.opener.postMessage('mmm:ready', '*');
+        deferred.resolve();
+      });
     } else {
       reject("unknown importGame value '" + game + "'");
     }
@@ -63,7 +48,7 @@ require([
       }, TIMEOUT);
       spreadsheetToSpritesheet(spreadsheet, function(result) {
         if (timeout === null) return;
-        clearTimeout(timeout);
+        window.clearTimeout(timeout);
         options.spriteLibrary = result;
         deferred.resolve();
       });
