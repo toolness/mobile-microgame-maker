@@ -20,7 +20,7 @@ require([
         if (err) return reject(err.message);
         window.history.replaceState({}, '', window.location.pathname);
         if (window.confirm("Import minigame from " + origin + "?")) {
-          options.defaultGameData = gameData;
+          options.importedGameData = gameData;
         }
         deferred.resolve();
       });

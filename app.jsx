@@ -13,9 +13,12 @@ define(function(require) {
     var modalHolder = options.modalHolder;
     var blocklyHolder = options.blocklyHolder;
     var spriteLibrary = options.spriteLibrary;
-    var initialGameData = options.defaultGameData || defaultGameData;
+    var initialGameData = defaultGameData;
     var storage = options.storage;
     var storageKey = options.storageKey;
+
+    if (options.importedGameData)
+      handleGameDataChange(options.importedGameData);
 
     try {
       initialGameData = JSON.parse(storage[storageKey]);
