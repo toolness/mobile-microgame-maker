@@ -21,6 +21,8 @@ require([
       editorHolder: document.getElementById('editor-holder'),
       modalHolder: document.getElementById('modal-holder'),
       blocklyHolder: document.getElementById('blockly-holder'),
+      storage: window.sessionStorage,
+      storageKey: 'mmm_gamedata',
       spriteLibrary: spriteLibrary
     });
 

@@ -14,9 +14,11 @@ define(function(require) {
     var blocklyHolder = options.blocklyHolder;
     var spriteLibrary = options.spriteLibrary;
     var initialGameData = defaultGameData;
+    var storage = options.storage;
+    var storageKey = options.storageKey;
 
     try {
-      initialGameData = JSON.parse(window.sessionStorage['mmm_gamedata']);
+      initialGameData = JSON.parse(storage[storageKey]);
     } catch (e) {}
 
     if (spriteLibrary) {
@@ -37,11 +39,11 @@ define(function(require) {
     }
 
     function handleGameDataChange(gameData) {
-      window.sessionStorage['mmm_gamedata'] = JSON.stringify(gameData);
+      storage[storageKey] = JSON.stringify(gameData);
     }
 
     function reset() {
-      delete window.sessionStorage['mmm_gamedata'];
+      delete storage[storageKey];
       window.location.reload();
     }
 
