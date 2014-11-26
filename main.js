@@ -3,6 +3,16 @@ require([
   "spreadsheet-to-spritesheet",
   "jquery"
 ], function(app, spreadsheetToSpritesheet, $) {
+  var qs = (function getQueryVariables(query) {
+    var result = {};
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      result[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return result;
+  })(window.location.search.substring(1));
+
   function startApp(spriteLibrary) {
     $('html').removeClass('loading');
 
@@ -19,12 +29,9 @@ require([
   }
 
   $(function() {
-    var spreadsheetMatch = window.location
-      .search.match(/[&|?]spreadsheet=([A-Za-z0-9]+)/);
+    var spreadsheet = qs.spreadsheet;
 
-    if (spreadsheetMatch) {
-      var spreadsheet = spreadsheetMatch[1];
-
+    if (spreadsheet && spreadsheet.match(/^[A-Za-z0-9]+$/)) {
       if (spreadsheet == 'on') {
         spreadsheet = '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs';
       }
