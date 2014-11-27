@@ -2,12 +2,12 @@ define(function(require) {
   var _ = require('underscore');
   var guid = require('guid');
   var React = require('react');
-  var PhaserState = require('phaser-state');
-  var GameData = require('game-data');
-  var Player = require('jsx!player');
-  var Sprite = require('jsx!sprite');
-  var ExportModal = require('jsx!export-modal');
-  var ImportModal = require('jsx!import-modal');
+  var PhaserState = require('./phaser-state');
+  var GameData = require('./game-data');
+  var Player = require('jsx!./player');
+  var Sprite = require('jsx!./sprite');
+  var ExportModal = require('jsx!./export-modal');
+  var ImportModal = require('jsx!./import-modal');
 
   var Editor = React.createClass({
     makePhaserState: function(options) {

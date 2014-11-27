@@ -1,7 +1,7 @@
 /* jshint evil: true */
 define(function(require) {
   var _ = require('underscore');
-  var GameData = require('game-data');
+  var GameData = require('./game-data');
   var includes = {
     SimpleEventEmitter: require('includes/simple-event-emitter'),
     PhaserMicrogame: require('includes/phaser-microgame')

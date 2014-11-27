@@ -1,8 +1,8 @@
 define(function(require) {
   var _ = require('underscore');
-  var Blockly = require('phaser-blocks');
+  var Blockly = require('./phaser-blocks');
   var React = require('react');
-  var PhaserState = require('phaser-state');
+  var PhaserState = require('./phaser-state');
 
   var Export = {
     _templateString: require('text!templates/export-template.html'),

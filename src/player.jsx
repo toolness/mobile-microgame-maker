@@ -1,6 +1,6 @@
 define(function(require) {
   var React = require('react');
-  var Stage = require('jsx!stage');
+  var Stage = require('jsx!./stage');
 
   var Player = React.createClass({
     getInitialState: function() {

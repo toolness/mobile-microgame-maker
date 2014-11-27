@@ -1,7 +1,7 @@
 require([
-  "jsx!app",
-  "spreadsheet-to-spritesheet",
-  "export",
+  "jsx!src/app",
+  "src/spreadsheet-to-spritesheet",
+  "src/export",
   "jquery"
 ], function(app, spreadsheetToSpritesheet, Export, $) {
   function importGame(game, options) {

@@ -1,7 +1,7 @@
 define(function(require) {
   var React = require('react');
-  var Export = require('export');
-  var Modal = require('jsx!modal');
+  var Export = require('./export');
+  var Modal = require('jsx!./modal');
 
   var ExportModal = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
