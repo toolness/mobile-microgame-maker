@@ -3,15 +3,9 @@ define(function(require) {
   var GameData = require('../game-data');
   var CssSprite = require('jsx!./css-sprite');
   var PositionModal = require('jsx!./position-modal');
+  var SpritesheetModal = require('jsx!./spritesheet-modal');
 
   var Sprite = React.createClass({
-    handleChangeKey: function(e) {
-      var key = e.target.value;
-      this.props.onChange(this.props.sprite.id, {
-        key: {$set: key},
-        animation: {$set: this.props.gameData.animations[key][0].name}
-      });
-    },
     handleChangeAnimation: function(e) {
       this.props.onChange(this.props.sprite.id, {
         animation: {$set: e.target.value}
@@ -22,6 +16,17 @@ define(function(require) {
     },
     handleToggleCollapse: function() {
       this.setState({isCollapsed: !this.state.isCollapsed});
+    },
+    handleSpritesheet: function() {
+      this.props.modalManager.show(SpritesheetModal, {
+        gameData: this.props.gameData,
+        onSave: function(spritesheet, animation) {
+          this.props.onChange(this.props.sprite.id, {
+            key: {$set: spritesheet.key},
+            animation: {$set: animation}
+          });
+        }.bind(this)
+      });
     },
     handlePosition: function() {
       this.props.modalManager.show(PositionModal, {
@@ -69,14 +74,6 @@ define(function(require) {
           <div>
             <br/>
             <div className="form-group">
-              <label>Spritesheet</label>
-              <select className="form-control" value={sprite.key} onChange={this.handleChangeKey}>
-                {this.props.gameData.spritesheets.map(function(info) {
-                  return <option key={info.key} value={info.key}>{info.key}</option>
-                })}
-              </select>
-            </div>
-            <div className="form-group">
               <label>Animation</label>
               <select className="form-control" value={sprite.animation} onChange={this.handleChangeAnimation}>
                 {animations.map(function(info) {
@@ -84,6 +81,9 @@ define(function(require) {
                 })}
               </select>
             </div>
+            <button className="btn btn-block btn-default" onClick={this.handleSpritesheet}>
+              Set Spritesheet&hellip;
+            </button>
             <button className="btn btn-block btn-default" onClick={this.handlePosition}>
               Set Starting Position&hellip;
             </button>
