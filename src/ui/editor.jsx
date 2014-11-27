@@ -8,6 +8,7 @@ define(function(require) {
   var Sprite = require('jsx!./sprite');
   var ExportModal = require('jsx!./export-modal');
   var ImportModal = require('jsx!./import-modal');
+  var PublishModal = require('jsx!./publish-modal');
   var SpritesheetModal = require('jsx!./spritesheet-modal');
 
   var Editor = React.createClass({
@@ -128,6 +129,12 @@ define(function(require) {
         onSave: this.importGameData
       });
     },
+    handlePublish: function(e) {
+      e.preventDefault();
+      this.props.modalManager.show(PublishModal, {
+        gameData: this.state.gameData
+      });
+    },
     importGameData: function(gameData) {
       this.changeGameData({
         $set: gameData
@@ -175,6 +182,7 @@ define(function(require) {
                 <li><a href="#" onClick={this.handleReset}><span className="glyphicon glyphicon-off"></span> Reset App</a></li>
                 <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
                 <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
+                <li><a href="#" onClick={this.handlePublish}><span className="glyphicon glyphicon-cloud-upload"></span> Publish to Web</a></li>
               </ul>
             </div>
           </div>
