@@ -6,21 +6,10 @@ define(function(require) {
   var Stage = require('jsx!../stage');
 
   var RectModal = React.createClass({
-    makePhaserState: function(gameData) {
-      return {
-        preload: function() {
-          PhaserState.Generators.makeFunc('preload', gameData)(this.game);
-        },
-        create: function() {
-          PhaserState.Generators.makeFunc('createSprites', gameData)(this);
-          this.game.stage.backgroundColor = gameData.backgroundColor;
-          this.game.paused = true;
-        }
-      };
-    },
     getInitialState: function() {
       return {
-        phaserState: this.makePhaserState(this.props.gameData),
+        phaserState: PhaserState.Generators
+          .makeInertStateObject(this.props.gameData),
         rect: this.props.initialRect,
         rectAnchor: null
       };

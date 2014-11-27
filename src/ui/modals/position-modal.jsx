@@ -8,18 +8,6 @@ define(function(require) {
   var CssSprite = require('jsx!../css-sprite');
 
   var PositionModal = React.createClass({
-    makePhaserState: function(gameData) {
-      return {
-        preload: function() {
-          PhaserState.Generators.makeFunc('preload', gameData)(this.game);
-        },
-        create: function() {
-          PhaserState.Generators.makeFunc('createSprites', gameData)(this);
-          this.game.stage.backgroundColor = gameData.backgroundColor;
-          this.game.paused = true;
-        }
-      };
-    },
     getInitialState: function() {
       var gameData = GameData.withoutSprite(this.props.initialGameData,
                                             this.props.initialSprite);
@@ -28,7 +16,7 @@ define(function(require) {
         sprite: this.props.initialSprite,
         movingSprite: this.props.initialSprite,
         isShown: false,
-        phaserState: this.makePhaserState(gameData)
+        phaserState: PhaserState.Generators.makeInertStateObject(gameData)
       };
     },
     componentDidMount: function() {

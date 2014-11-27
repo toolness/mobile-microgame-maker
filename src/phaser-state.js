@@ -103,6 +103,21 @@ define(function(require) {
   PhaserState.Generators.DEFAULT_ENDING_TIME = 2000;
   PhaserState.Generators.PHASER_VERSION = "2.1.3";
 
+  // Useful when creating a Phaser state that just serves as a
+  // reference point to position things on, etc.
+  PhaserState.Generators.makeInertStateObject = function(gameData) {
+    return {
+      preload: function() {
+        PhaserState.Generators.makeFunc('preload', gameData)(this.game);
+      },
+      create: function() {
+        PhaserState.Generators.makeFunc('createSprites', gameData)(this);
+        this.game.stage.backgroundColor = gameData.backgroundColor;
+        this.game.paused = true;
+      }
+    };
+  };
+
   PhaserState.Generators.makeStateObject = function(options) {
     var stateJs = this.createState({
       gameData: options.gameData,
