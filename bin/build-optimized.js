@@ -43,6 +43,13 @@ function build(cb) {
     // thrown exceptions.
     process.nextTick(function() {
       fs.writeFileSync('build/mmm.appcache', getCacheManifest());
+      fs.writeFileSync(
+        'build/index.html',
+        fs.readFileSync('index.html', 'utf-8').replace(
+          'data-maybe-replace-me-with-a-manifest',
+          'manifest="mmm.appcache"'
+        )
+      );
       console.log('Done. Built files are in the "build" directory.');
       fs.unlinkSync('JSXTransformer.useStrictMunged.js');
       cb(null);
