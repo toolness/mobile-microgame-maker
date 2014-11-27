@@ -1,7 +1,7 @@
 define(function(require) {
   var _ = require('underscore');
   var React = require('react');
-  var GameData = require('./game-data');
+  var GameData = require('../game-data');
 
   var CssSprite = React.createClass({
     render: function() {

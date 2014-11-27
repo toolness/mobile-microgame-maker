@@ -1,8 +1,8 @@
 define(function(require) {
   var Hammer = require('hammer');
   var React = require('react');
-  var GameData = require('./game-data');
-  var PhaserState = require('./phaser-state');
+  var GameData = require('../game-data');
+  var PhaserState = require('../phaser-state');
   var Modal = require('jsx!./modal');
   var Stage = require('jsx!./stage');
   var CssSprite = require('jsx!./css-sprite');

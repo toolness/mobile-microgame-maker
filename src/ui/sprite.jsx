@@ -1,6 +1,6 @@
 define(function(require) {
   var React = require('react');
-  var GameData = require('./game-data');
+  var GameData = require('../game-data');
   var CssSprite = require('jsx!./css-sprite');
   var PositionModal = require('jsx!./position-modal');
 

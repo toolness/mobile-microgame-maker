@@ -1,5 +1,5 @@
 require([
-  "jsx!src/app",
+  "jsx!src/ui/app",
   "src/spreadsheet-to-spritesheet",
   "src/export",
   "jquery"
