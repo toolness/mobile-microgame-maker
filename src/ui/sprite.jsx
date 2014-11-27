@@ -2,8 +2,8 @@ define(function(require) {
   var React = require('react');
   var GameData = require('../game-data');
   var CssSprite = require('jsx!./css-sprite');
-  var PositionModal = require('jsx!./position-modal');
-  var SpritesheetModal = require('jsx!./spritesheet-modal');
+  var PositionModal = require('jsx!./modals/position-modal');
+  var SpritesheetModal = require('jsx!./modals/spritesheet-modal');
 
   var Sprite = React.createClass({
     handleChangeAnimation: function(e) {

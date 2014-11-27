@@ -6,10 +6,10 @@ define(function(require) {
   var GameData = require('../game-data');
   var Player = require('jsx!./player');
   var Sprite = require('jsx!./sprite');
-  var ExportModal = require('jsx!./export-modal');
-  var ImportModal = require('jsx!./import-modal');
-  var PublishModal = require('jsx!./publish-modal');
-  var SpritesheetModal = require('jsx!./spritesheet-modal');
+  var ExportModal = require('jsx!./modals/export-modal');
+  var ImportModal = require('jsx!./modals/import-modal');
+  var PublishModal = require('jsx!./modals/publish-modal');
+  var SpritesheetModal = require('jsx!./modals/spritesheet-modal');
 
   var Editor = React.createClass({
     makePhaserState: function(options) {

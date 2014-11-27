@@ -1,5 +1,5 @@
 define(function(require) {
-  var Modal = require("jsx!./modal");
+  var Modal = require("jsx!./modals/modal");
   var BlocklyComponent = require("jsx!./blockly-component");
   var Editor = require("jsx!./editor");
   var React = require("react");

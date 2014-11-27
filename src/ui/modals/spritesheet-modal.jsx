@@ -1,7 +1,7 @@
 define(function(require) {
   var React = require('react');
   var Modal = require('jsx!./modal');
-  var CssSprite = require('jsx!./css-sprite');
+  var CssSprite = require('jsx!../css-sprite');
 
   return React.createClass({
     handleSave: function() {

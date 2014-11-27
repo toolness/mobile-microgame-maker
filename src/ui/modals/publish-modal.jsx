@@ -1,8 +1,8 @@
 define(function(require) {
   var React = require('react');
   var Modal = require('jsx!./modal');
-  var Export = require('../export');
-  var publish = require('../publish');
+  var Export = require('../../export');
+  var publish = require('../../publish');
 
   // Give the user some time to cancel the modal.
   var PUBLISH_DELAY = 3000;
