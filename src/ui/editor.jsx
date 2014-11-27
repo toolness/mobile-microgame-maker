@@ -8,6 +8,7 @@ define(function(require) {
   var Sprite = require('jsx!./sprite');
   var ExportModal = require('jsx!./export-modal');
   var ImportModal = require('jsx!./import-modal');
+  var SpritesheetModal = require('jsx!./spritesheet-modal');
 
   var Editor = React.createClass({
     makePhaserState: function(options) {
@@ -46,20 +47,24 @@ define(function(require) {
       throw new Error('maximum number of sprites reached');
     },
     handleAddSprite: function() {
-      var spritesheet = this.state.gameData.spritesheets[0];
-      var animation = this.state.gameData.animations[spritesheet.key][0];
+      var gameData = this.state.gameData;
 
-      this.changeGameData({
-        sprites: {
-          $push: [{
-            id: guid(),
-            name: this.findUnusedSpriteName(spritesheet.key),
-            x: _.random(this.state.gameData.width - spritesheet.frameWidth),
-            y: _.random(this.state.gameData.height - spritesheet.frameHeight),
-            key: spritesheet.key,
-            animation: animation.name
-          }]
-        }
+      this.props.modalManager.show(SpritesheetModal, {
+        gameData: gameData,
+        onSave: function(spritesheet, animation) {
+          this.changeGameData({
+            sprites: {
+              $push: [{
+                id: guid(),
+                name: this.findUnusedSpriteName(spritesheet.key),
+                x: _.random(gameData.width - spritesheet.frameWidth),
+                y: _.random(gameData.height - spritesheet.frameHeight),
+                key: spritesheet.key,
+                animation: animation
+              }]
+            }
+          });
+        }.bind(this)
       });
     },
     spriteIndex: function(id) {
