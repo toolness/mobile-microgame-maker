@@ -70,7 +70,7 @@ define(function(require) {
                 ? 'Version ' + this.state.version
                 : 'Development Version'}</p>
             {this.state.appCacheStatus == 'UPDATEREADY'
-             ? <p><button className="btn btn-default" onClick={window.location.reload.bind(window.location)}>
+             ? <p><button className="btn btn-primary" onClick={window.location.reload.bind(window.location)}>
                  Update App
                </button></p>
              : null}
