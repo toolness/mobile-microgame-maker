@@ -73,7 +73,7 @@ define(function(require) {
       var rect = this.state.rect;
 
       return (
-        <Modal title="Draw a rectangle" onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished}>
+        <Modal title={this.props.title || "Draw a rectangle"} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished}>
           <div style={{textAlign: 'center'}}>
             <div style={{
               display: 'inline-block',
@@ -103,7 +103,7 @@ define(function(require) {
                 }}></div>
               </div>
             </div>
-            <p>Just drag a rectangle.</p>
+            <p>{this.props.instructions || "Just drag a rectangle."}</p>
           </div>
           <div className="row">
             <div className="col-xs-6 form-group">

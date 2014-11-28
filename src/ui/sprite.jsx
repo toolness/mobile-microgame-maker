@@ -3,6 +3,7 @@ define(function(require) {
   var GameData = require('../game-data');
   var CssSprite = require('jsx!./css-sprite');
   var PositionModal = require('jsx!./modals/position-modal');
+  var RectModal = require('jsx!./modals/rect-modal');
   var SpritesheetModal = require('jsx!./modals/spritesheet-modal');
 
   var Sprite = React.createClass({
@@ -29,15 +30,30 @@ define(function(require) {
       });
     },
     handlePosition: function() {
-      this.props.modalManager.show(PositionModal, {
-        initialGameData: this.props.gameData,
-        initialSprite: this.props.sprite,
-        onSave: function(sprite) {
-          this.props.onChange(this.props.sprite.id, {
-            $set: sprite
-          });
-        }.bind(this)
-      });
+      if (this.props.sprite.spawnArea) {
+        this.props.modalManager.show(RectModal, {
+          gameData: this.props.gameData,
+          initialRect: this.props.sprite.spawnArea,
+          title: 'Set Starting Area',
+          instructions: 'Draw a rectangle. When your game begins, the ' +
+            'sprite will spawn at a random place within it.',
+          onSave: function(rect) {
+            this.props.onChange(this.props.sprite.id, {
+              spawnArea: {$set: rect}
+            });
+          }.bind(this)
+        });
+      } else {
+        this.props.modalManager.show(PositionModal, {
+          initialGameData: this.props.gameData,
+          initialSprite: this.props.sprite,
+          onSave: function(sprite) {
+            this.props.onChange(this.props.sprite.id, {
+              $set: sprite
+            });
+          }.bind(this)
+        });
+      }
     },
     handleChangeName: function() {
       var name = window.prompt("Enter a new name for this sprite.",
@@ -50,6 +66,22 @@ define(function(require) {
       this.props.onChange(this.props.sprite.id, {
         name: {$set: name}
       });
+    },
+    handleChangePositionType: function(e) {
+      if (e.target.value == "random") {
+        this.props.onChange(this.props.sprite.id, {
+          spawnArea: {$set: {
+            top: 0,
+            left: 0,
+            width: this.props.gameData.width,
+            height: this.props.gameData.height,
+          }}
+        });
+      } else {
+        this.props.onChange(this.props.sprite.id, {
+          spawnArea: {$set: undefined}
+        });
+      }
     },
     render: function() {
       var sprite = this.props.sprite;
@@ -81,11 +113,21 @@ define(function(require) {
                 })}
               </select>
             </div>
+            <div className="form-group">
+              <label>Starting Position</label>
+              <br/>
+              <label className="radio-inline">
+                <input type="radio" value="fixed" checked={!sprite.spawnArea} onChange={this.handleChangePositionType}/> Fixed
+              </label>
+              <label className="radio-inline">
+                <input type="radio" value="random" checked={!!sprite.spawnArea} onChange={this.handleChangePositionType}/> Random
+              </label>
+            </div>
+            <button className="btn btn-block btn-default" onClick={this.handlePosition}>
+              Set Starting {sprite.spawnArea ? 'Area' : 'Position'}&hellip;
+            </button>
             <button className="btn btn-block btn-default" onClick={this.handleSpritesheet}>
               Set Spritesheet&hellip;
-            </button>
-            <button className="btn btn-block btn-default" onClick={this.handlePosition}>
-              Set Starting Position&hellip;
             </button>
             <br/>
             <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
