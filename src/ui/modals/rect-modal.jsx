@@ -65,6 +65,8 @@ define(function(require) {
     updateFields: function() {
       this.refs.top.getDOMNode().value = this.state.rect.top;
       this.refs.left.getDOMNode().value = this.state.rect.left;
+      this.refs.width.getDOMNode().value = this.state.rect.width;
+      this.refs.height.getDOMNode().value = this.state.rect.height;
     },
     render: function() {
       var gameData = this.props.gameData;
@@ -111,6 +113,16 @@ define(function(require) {
             <div className="col-xs-6 form-group">
               <label>Left</label>
               <input ref="left" className="form-control" type="text" defaultValue={rect.left} onChange={this.handleChangeNumber.bind(null, 'left')} onBlur={this.handleBlurNumber.bind(null, 'left')}/>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-6 form-group">
+              <label>Width</label>
+              <input ref="width" className="form-control" type="text" defaultValue={rect.width} onChange={this.handleChangeNumber.bind(null, 'width')} onBlur={this.handleBlurNumber.bind(null, 'width')}/>
+            </div>
+            <div className="col-xs-6 form-group">
+              <label>Height</label>
+              <input ref="height" className="form-control" type="text" defaultValue={rect.height} onChange={this.handleChangeNumber.bind(null, 'height')} onBlur={this.handleBlurNumber.bind(null, 'height')}/>
             </div>
           </div>
         </Modal>
