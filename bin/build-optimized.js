@@ -53,6 +53,7 @@ function build(cb) {
           'data-build-date="' + buildDate.toISOString() + '"'
         )
       );
+      console.log('Built version ' + buildDate.toISOString() + '.');
       console.log('Done. Built files are in the "build" directory.');
       fs.unlinkSync('JSXTransformer.useStrictMunged.js');
       cb(null);
