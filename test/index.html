@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="qunit.css">
+<title>MMM Tests</title>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="qunit.js"></script>
+<script src="define-tests.js"></script>
+<script src="../require-config.js"></script>
+<script>
+require.baseUrl = '../';
+</script>
+<script src="../vendor/require.js"></script>
+<script>
+defineTests.run(["test/all-tests"]);
+</script>
