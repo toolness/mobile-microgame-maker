@@ -1,3 +1,4 @@
 defineTests.combine([
-  "test/test-export"
+  "test/test-export",
+  "test/test-css-sprite"
 ]);
