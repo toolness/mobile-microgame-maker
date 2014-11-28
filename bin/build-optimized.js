@@ -6,6 +6,8 @@ var getCacheManifest = require('./get-cache-manifest');
 function build(cb) {
   cb = cb || function() {};
 
+  var buildDate = new Date();
+
   // We need to replace JSXTransformer w/ a munged version that doesn't
   // contain any occurrences of "use strict":
   //
@@ -42,12 +44,13 @@ function build(cb) {
     // here, so we'll do a process.nextTick() so that node logs any
     // thrown exceptions.
     process.nextTick(function() {
-      fs.writeFileSync('build/mmm.appcache', getCacheManifest());
+      fs.writeFileSync('build/mmm.appcache', getCacheManifest(buildDate));
       fs.writeFileSync(
         'build/index.html',
         fs.readFileSync('index.html', 'utf-8').replace(
           'data-maybe-replace-me-with-a-manifest',
-          'manifest="mmm.appcache"'
+          'manifest="mmm.appcache" ' +
+          'data-build-date="' + buildDate.toISOString() + '"'
         )
       );
       console.log('Done. Built files are in the "build" directory.');

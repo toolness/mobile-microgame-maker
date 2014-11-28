@@ -9,6 +9,7 @@ define(function(require) {
   var ExportModal = require('jsx!./modals/export-modal');
   var ImportModal = require('jsx!./modals/import-modal');
   var PublishModal = require('jsx!./modals/publish-modal');
+  var AboutModal = require('jsx!./modals/about-modal');
   var SpritesheetModal = require('jsx!./modals/spritesheet-modal');
 
   var Editor = React.createClass({
@@ -135,6 +136,10 @@ define(function(require) {
         gameData: this.state.gameData
       });
     },
+    handleAbout: function(e) {
+      e.preventDefault();
+      this.props.modalManager.show(AboutModal);
+    },
     importGameData: function(gameData) {
       this.changeGameData({
         $set: gameData
@@ -180,6 +185,7 @@ define(function(require) {
               </button>
               <ul className="dropdown-menu dropdown-menu-right" role="menu">
                 <li><a href="#" onClick={this.handleReset}><span className="glyphicon glyphicon-off"></span> Reset App</a></li>
+                <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
                 <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
                 <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
                 <li><a href="#" onClick={this.handlePublish}><span className="glyphicon glyphicon-cloud-upload"></span> Publish to Web</a></li>

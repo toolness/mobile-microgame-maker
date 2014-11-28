@@ -15,10 +15,11 @@ function listFiles(dirname) {
   return list;
 }
 
-function get() {
+function get(now) {
+  now = now || new Date();
   return [
     'CACHE MANIFEST',
-    '# ' + (new Date()).toString(),
+    '# ' + now.toString(),
     '',
     'CACHE:',
     'index.html',
