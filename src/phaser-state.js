@@ -55,7 +55,18 @@ define(function(require) {
   };
 
   PhaserState.Generators.createSprites = function(gameData) {
+    var hasRandomSpawns = _.some(_.pluck(gameData.sprites, 'spawnArea'));
     return _.flatten(['function createSprites(state) {'].concat(
+      hasRandomSpawns ? [
+        '  function placeRandomlyInArea(sprite, left, top, width, height) {',
+        '    var rect = new Phaser.Rectangle(left, top, ',
+        '                                    Math.max(width-sprite.width, 0), ',
+        '                                    Math.max(height-sprite.height, 0));',
+        '    sprite.x = rect.randomX;',
+        '    sprite.y = rect.randomY;',
+        '  }',
+        ''
+      ] : [],
       ['  var sprites = state.sprites = {};'],
       ['  var game = state.game;'],
       gameData.sprites.map(function(info) {
@@ -65,7 +76,15 @@ define(function(require) {
         return [
           spriteName + ' = game.add.sprite(' +
           this.stringifyArgs(info.x, info.y, info.key) + ');'
-        ].concat(animations.map(function(animInfo) {
+        ].concat(
+          info.spawnArea
+          ? ['  placeRandomlyInArea(' + spriteName.trim() + ', ' +
+             this.stringifyArgs(info.spawnArea.left,
+                                info.spawnArea.top,
+                                info.spawnArea.width,
+                                info.spawnArea.height) + ');']
+          : []
+        ).concat(animations.map(function(animInfo) {
           return spriteName + '.animations.add(' + this.stringifyArgs(
             animInfo.name, animInfo.frames,
             animInfo.frameRate, animInfo.loop
@@ -91,11 +110,12 @@ define(function(require) {
       playTime: options.playTime || this.DEFAULT_PLAY_TIME,
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
       extra: options.standalone ? includeFiles : '',
+      phaserIsUndefined: !!options.phaserIsUndefined,
       start: options.start
     });
   };
 
-  PhaserState.Generators.makeFunc = function(name, gameData) {
+  PhaserState.Generators.makeFunc = function(name, gameData, Phaser) {
     return eval('(' + this[name](gameData) + ')');
   };
 
@@ -108,10 +128,12 @@ define(function(require) {
   PhaserState.Generators.makeInertStateObject = function(gameData) {
     return {
       preload: function() {
-        PhaserState.Generators.makeFunc('preload', gameData)(this.game);
+        PhaserState.Generators
+          .makeFunc('preload', gameData, this.Phaser)(this.game);
       },
       create: function() {
-        PhaserState.Generators.makeFunc('createSprites', gameData)(this);
+        PhaserState.Generators
+          .makeFunc('createSprites', gameData, this.Phaser)(this);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;
       }
@@ -123,11 +145,13 @@ define(function(require) {
       gameData: options.gameData,
       start: options.start,
       playTime: options.playTime,
-      endingTime: options.endingTime
+      endingTime: options.endingTime,
+      phaserIsUndefined: true
     });
     stateJs = [
       '//# sourceURL=generated-phaser-state-code.js',
       '(function(SimpleEventEmitter, PhaserMicrogame) {',
+      'var Phaser;',
       stateJs,
       'return state;',
       '});'

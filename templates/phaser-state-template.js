@@ -19,7 +19,7 @@
 
 var state = SimpleEventEmitter({
   preload: function() {
-    this.Phaser = this.Phaser || Phaser;
+    <% if (phaserIsUndefined) { %>Phaser = this.Phaser;<% } else { %>this.Phaser = Phaser;<% } %>
     if (this.Phaser.VERSION != "<%= expectedPhaserVersion %>")
       throw new Error("Expected Phaser <%= expectedPhaserVersion %> but got " +
                       this.Phaser.VERSION);
