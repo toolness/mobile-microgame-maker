@@ -40,6 +40,7 @@ define(function(require) {
       }.bind(this));
       hammer.on('panend', function(e) {
         this.setState({rectAnchor: null});
+        this.updateFields();
       }.bind(this));
     },
     componentWillUnmount: function() {
@@ -48,6 +49,22 @@ define(function(require) {
     },
     handleSave: function() {
       this.props.onSave(this.state.rect);
+    },
+    handleBlurNumber: function(prop, e) {
+      e.target.value = this.state.rect[prop];
+    },
+    handleChangeNumber: function(prop, e) {
+      var val = parseFloat(e.target.value);
+      if (isNaN(val)) return;
+      var changes = {};
+      changes[prop] = {$set: val};
+      this.setState(React.addons.update(this.state, {
+        rect: changes
+      }));
+    },
+    updateFields: function() {
+      this.refs.top.getDOMNode().value = this.state.rect.top;
+      this.refs.left.getDOMNode().value = this.state.rect.left;
     },
     render: function() {
       var gameData = this.props.gameData;
@@ -85,6 +102,16 @@ define(function(require) {
               </div>
             </div>
             <p>Just drag a rectangle.</p>
+          </div>
+          <div className="row">
+            <div className="col-xs-6 form-group">
+              <label>Top</label>
+              <input ref="top" className="form-control" type="text" defaultValue={rect.top} onChange={this.handleChangeNumber.bind(null, 'top')} onBlur={this.handleBlurNumber.bind(null, 'top')}/>
+            </div>
+            <div className="col-xs-6 form-group">
+              <label>Left</label>
+              <input ref="left" className="form-control" type="text" defaultValue={rect.left} onChange={this.handleChangeNumber.bind(null, 'left')} onBlur={this.handleBlurNumber.bind(null, 'left')}/>
+            </div>
           </div>
         </Modal>
       );
