@@ -114,10 +114,6 @@ define(function(require) {
       this.props.onOpenBlockly();
       this.props.blockly.Phaser.setGameData(this.state.gameData);
     },
-    handleReset: function(e) {
-      e.preventDefault();
-      this.props.onReset();
-    },
     handleExport: function(e) {
       e.preventDefault();
       this.props.modalManager.show(ExportModal, {
@@ -138,7 +134,9 @@ define(function(require) {
     },
     handleAbout: function(e) {
       e.preventDefault();
-      this.props.modalManager.show(AboutModal);
+      this.props.modalManager.show(AboutModal, {
+        onReset: this.props.onReset
+      });
     },
     importGameData: function(gameData) {
       this.changeGameData({
@@ -184,7 +182,6 @@ define(function(require) {
                 <strong>&hellip;</strong>
               </button>
               <ul className="dropdown-menu dropdown-menu-right" role="menu">
-                <li><a href="#" onClick={this.handleReset}><span className="glyphicon glyphicon-off"></span> Reset App</a></li>
                 <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
                 <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
                 <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>

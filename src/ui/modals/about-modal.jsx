@@ -74,6 +74,7 @@ define(function(require) {
                  Update App
                </button></p>
              : null}
+            <p><button className="btn btn-sm btn-default" onClick={this.props.onReset}>Reset App&hellip;</button></p>
             <p className="text-muted"><small>App cache status: <code>{this.state.appCacheStatus}</code></small></p>
           </div>
         </Modal>
