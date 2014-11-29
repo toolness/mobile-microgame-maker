@@ -1,11 +1,29 @@
 define(function(require) {
   var _ = require('underscore');
+  var $ = require('jquery');
   var Blockly = require('./phaser-blocks');
   var React = require('react');
   var PhaserState = require('./phaser-state');
 
   var Export = {
     _templateString: require('text!templates/export-template.html'),
+    fromUrl: function(url, timeoutMs, cb) {
+      $.ajax({
+        url: url,
+        timeout: timeoutMs,
+        dataType: 'text',
+        error: function(jqXHR, textStatus, errorThrown) {
+          cb(new Error(textStatus));
+        },
+        success: function(data, textStatus, jqXHR) {
+          var gameData = Export.fromHtml(data);
+          if (gameData)
+            cb(null, gameData);
+          else
+            cb(new Error("gameData not found"));
+        }
+      });
+    },
     fromWindowOpener: function(timeoutMs, cb) {
       var timeout = null;
 

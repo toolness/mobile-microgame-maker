@@ -13,16 +13,25 @@ require([
       deferred.reject();
     }
 
+    function accept(gameData, from) {
+      window.history.replaceState({}, '', window.location.pathname);
+      if (window.confirm("Import minigame from " + from + "?")) {
+        options.importedGameData = gameData;
+      }
+      deferred.resolve();
+    }
+
     if (!game) {
       deferred.resolve();
     } else if (game == 'opener') {
       Export.fromWindowOpener(TIMEOUT, function(err, gameData, origin) {
         if (err) return reject(err.message);
-        window.history.replaceState({}, '', window.location.pathname);
-        if (window.confirm("Import minigame from " + origin + "?")) {
-          options.importedGameData = gameData;
-        }
-        deferred.resolve();
+        accept(gameData, origin);
+      });
+    } else if (/^https?:\/\//.test(game)) {
+      Export.fromUrl(game, TIMEOUT, function(err, gameData) {
+        if (err) return reject(err.message);
+        accept(gameData, game);
       });
     } else {
       reject("unknown importGame value '" + game + "'");
