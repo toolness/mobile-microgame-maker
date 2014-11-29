@@ -16,7 +16,7 @@ define(function(require) {
         sprite: this.props.initialSprite,
         movingSprite: this.props.initialSprite,
         isShown: false,
-        phaserState: PhaserState.Generators.makeInertStateObject(gameData)
+        phaserState: null
       };
     },
     componentDidMount: function() {
@@ -38,7 +38,13 @@ define(function(require) {
       }.bind(this));
     },
     handleShown: function() {
-      this.setState({isShown: true});
+      this.setState({
+        isShown: true,
+        // Firefox doesn't like it if we initialize Phaser while its
+        // window isn't visible, so we'll wait until it's shown.
+        phaserState: PhaserState.Generators
+          .makeInertStateObject(this.state.gameData)
+      });
     },
     componentWillUnmount: function() {
       this.hammer.destroy();

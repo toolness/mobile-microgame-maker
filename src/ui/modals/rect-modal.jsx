@@ -8,8 +8,7 @@ define(function(require) {
   var RectModal = React.createClass({
     getInitialState: function() {
       return {
-        phaserState: PhaserState.Generators
-          .makeInertStateObject(this.props.gameData),
+        phaserState: null,
         rect: this.props.initialRect,
         rectAnchor: null
       };
@@ -47,6 +46,14 @@ define(function(require) {
       this.hammer.destroy();
       this.hammer = null;
     },
+    handleShown: function() {
+      this.setState({
+        // Firefox doesn't like it if we initialize Phaser while its
+        // window isn't visible, so we'll wait until it's shown.
+        phaserState: PhaserState.Generators
+          .makeInertStateObject(this.props.gameData)
+      });
+    },
     handleSave: function() {
       this.props.onSave(this.state.rect);
     },
@@ -73,7 +80,7 @@ define(function(require) {
       var rect = this.state.rect;
 
       return (
-        <Modal title={this.props.title || "Draw a rectangle"} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished}>
+        <Modal title={this.props.title || "Draw a rectangle"} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished} onShown={this.handleShown}>
           <div style={{textAlign: 'center'}}>
             <div style={{
               display: 'inline-block',
