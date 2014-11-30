@@ -3,9 +3,11 @@ define(function(require) {
   var Blockly = require('blockly');
   var gameData = null;
 
+  var EMPTY_LIST = [['--', '']];
+
   function soundList() {
     if (!(gameData && gameData.sounds.length))
-      return [['--', '']];
+      return EMPTY_LIST;
     return gameData.sounds.map(function(sound) {
       return [sound.key, sound.key];
     });    
@@ -39,13 +41,21 @@ define(function(require) {
         });
       }
     }
-    return [['--', '']];
+    return EMPTY_LIST;
   }
 
-  function spriteList() {
-    if (!(gameData && gameData.sprites.length))
-      return [['--', '']];
-    return gameData.sprites.map(function(sprite) {
+  function filteredSpriteList(filter) {
+    return function() {
+      if (!gameData) return EMPTY_LIST;
+      return spriteList(gameData.sprites.filter(filter));
+    };
+  }
+
+  function spriteList(list) {
+    if (!gameData) return EMPTY_LIST;
+    list = list || gameData.sprites;
+    if (!list.length) return EMPTY_LIST;
+    return list.map(function(sprite) {
       return [sprite.name, sprite.id];
     });
   }
@@ -225,7 +235,11 @@ define(function(require) {
 
   Blockly.Blocks['phaser_set_animation'] = {
     init: function() {
-      var spriteDropdown = new Blockly.FieldDropdown(spriteList, function(id) {
+      var spritesWithMultipleAnims = filteredSpriteList(function(sprite) {
+        var animations = gameData.animations[sprite.key];
+        return animations.length > 1;
+      });
+      var spriteDropdown = new Blockly.FieldDropdown(spritesWithMultipleAnims, function(id) {
         var animations = animationList(id);
         var currAnimation = _.findWhere(animations, {
           1: animationDropdown.getValue()
