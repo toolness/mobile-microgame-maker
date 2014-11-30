@@ -106,14 +106,16 @@ define(function(require) {
           {this.state.isCollapsed ? null :
           <div>
             <br/>
-            <div className="form-group">
-              <label>Animation</label>
-              <select className="form-control" value={sprite.animation} onChange={this.handleChangeAnimation}>
-                {animations.map(function(info) {
-                  return <option key={info.name} value={info.name}>{info.name}</option>
-                })}
-              </select>
-            </div>
+            {animations.length > 1
+             ? <div className="form-group">
+                 <label>Animation</label>
+                 <select className="form-control" value={sprite.animation} onChange={this.handleChangeAnimation}>
+                   {animations.map(function(info) {
+                     return <option key={info.name} value={info.name}>{info.name}</option>
+                   })}
+                 </select>
+               </div>
+             : null}
             <div className="form-group">
               <label>Starting Position</label>
               <br/>
