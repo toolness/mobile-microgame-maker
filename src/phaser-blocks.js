@@ -1,6 +1,7 @@
 define(function(require) {
   var _ = require('underscore');
   var Blockly = require('blockly');
+  var hackBlocklyForIos = require('./ui/blockly-ios-hacks');
   var gameData = null;
 
   var EMPTY_LIST = [['--', '']];
@@ -283,6 +284,8 @@ define(function(require) {
 
     return 'game.stage.backgroundColor = ' + colour + ';\n';
   };
+
+  hackBlocklyForIos();
 
   return Blockly;
 });
