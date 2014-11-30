@@ -35,6 +35,11 @@ function get(now) {
     'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff'
   ].concat(listFiles('vendor/blockly/media'))
    .concat(listFiles('assets'))
+   .concat([
+    '',
+    'NETWORK:',
+    '*'
+  ])
    .join('\n') + '\n';
 }
 
