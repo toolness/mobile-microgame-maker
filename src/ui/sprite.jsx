@@ -129,12 +129,13 @@ define(function(require) {
             <button className="btn btn-block btn-default" onClick={this.handlePosition}>
               Set Starting {sprite.spawnArea ? 'Area' : 'Position'}&hellip;
             </button>
-            <button className="btn btn-block btn-default" onClick={this.handleSpritesheet}>
-              Set Spritesheet&hellip;
-            </button>
             <br/>
             <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
               <span className="glyphicon glyphicon-trash"></span>
+            </button>
+            &nbsp;
+            <button className="btn btn-xs btn-default" onClick={this.handleSpritesheet}>
+              Change Spritesheet&hellip;
             </button>
           </div>}
         </li>
