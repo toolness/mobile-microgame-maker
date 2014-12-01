@@ -16,7 +16,8 @@ define(function(require) {
 
     Tabletop.init({
       key: key || DEFAULT_KEY,
-      callback: function(data) {
+      callback: function(models) {
+        var data = models.spritesheets.all();
         var spritesheets = [];
         var animations = {};
         var lastSpritesheetKey;
@@ -47,8 +48,7 @@ define(function(require) {
           spritesheets: spritesheets,
           animations: animations
         });
-      },
-      simpleSheet: true
+      }
     });
   }
 });
