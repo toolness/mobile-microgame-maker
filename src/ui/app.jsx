@@ -12,7 +12,7 @@ define(function(require) {
     var editorHolder = options.editorHolder;
     var modalHolder = options.modalHolder;
     var blocklyHolder = options.blocklyHolder;
-    var spriteLibrary = options.spriteLibrary;
+    var assetLibrary = options.assetLibrary;
     var initialGameData = defaultGameData;
     var storage = options.storage;
     var storageKey = options.storageKey;
@@ -24,10 +24,11 @@ define(function(require) {
       initialGameData = JSON.parse(storage[storageKey]);
     } catch (e) {}
 
-    if (spriteLibrary) {
+    if (assetLibrary) {
       initialGameData = React.addons.update(initialGameData, {
-        spritesheets: {$set: spriteLibrary.spritesheets},
-        animations: {$set: spriteLibrary.animations}
+        sounds: {$set: assetLibrary.sounds},
+        spritesheets: {$set: assetLibrary.spritesheets},
+        animations: {$set: assetLibrary.animations}
       });
     }
 

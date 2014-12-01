@@ -1,9 +1,9 @@
 require([
   "jsx!src/ui/app",
-  "src/spreadsheet-to-spritesheet",
+  "src/spreadsheet-to-assets",
   "src/export",
   "jquery"
-], function(app, spreadsheetToSpritesheet, Export, $) {
+], function(app, spreadsheetToAssets, Export, $) {
   function importGame(game, options) {
     var TIMEOUT = 5000;
     var deferred = $.Deferred();
@@ -55,10 +55,10 @@ require([
         window.alert('Failed to retrieve spreadsheet ' + spreadsheet);
         deferred.reject();
       }, TIMEOUT);
-      spreadsheetToSpritesheet(spreadsheet, function(result) {
+      spreadsheetToAssets(spreadsheet, function(result) {
         if (timeout === null) return;
         window.clearTimeout(timeout);
-        options.spriteLibrary = result;
+        options.assetLibrary = result;
         deferred.resolve();
       });
     } else {
