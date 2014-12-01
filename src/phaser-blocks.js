@@ -285,6 +285,25 @@ define(function(require) {
     return 'game.stage.backgroundColor = ' + colour + ';\n';
   };
 
+  Blockly.Blocks['phaser_on_win_or_lose'] = {
+    init: function() {
+      this.appendDummyInput().appendField('when game is')
+        .appendField(new Blockly.FieldDropdown([
+          ['won', 'win'],
+          ['lost', 'lose'],
+          ['won or lost', 'ending']
+        ]), 'EVENT');
+      this.appendStatementInput('STACK');
+    }
+  };
+
+  Blockly.JavaScript['phaser_on_win_or_lose'] = function(block) {
+    var branch = generateJsBranch(block);
+
+    return 'state.on("' + block.getFieldValue('EVENT') +
+           '", function() {\n' + branch + '});\n';
+  };
+
   hackBlocklyForIos();
 
   return Blockly;

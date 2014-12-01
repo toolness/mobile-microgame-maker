@@ -78,6 +78,8 @@ PhaserMicrogame.prototype = {
     this.timeLeft = this.endingTime;
     this.phase = 'ENDING';
     this.state.game.input.disabled = true;
+    this.state.trigger(this.outcome == 'WON' ? 'win' : 'lose');
+    this.state.trigger('ending');
   },
   win: function() {
     if (this.phase != 'PLAYING') return;
