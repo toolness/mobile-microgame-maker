@@ -47,7 +47,7 @@ require([
 
     if (spreadsheet && spreadsheet.match(/^[A-Za-z0-9]+$/)) {
       if (spreadsheet == 'on') {
-        spreadsheet = '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs';
+        spreadsheet = null;
       }
 
       timeout = window.setTimeout(function() {

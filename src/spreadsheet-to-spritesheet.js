@@ -1,9 +1,21 @@
+if (typeof(define) == 'undefined')
+  define = function(fn) {
+    module.exports = fn(require);
+  };
+
 define(function(require) {
   var Tabletop = require('tabletop');
 
+  var DEFAULT_KEY = '15P3ABqc128s1z4vA2Ln1EdrFTXPxZ8YMaiW1w3o1qgs';
+
   return function spreadsheetToSpritesheet(key, cb) {
+    if (typeof(key) == 'function') {
+      cb = key;
+      key = null;
+    }
+
     Tabletop.init({
-      key: key,
+      key: key || DEFAULT_KEY,
       callback: function(data) {
         var spritesheets = [];
         var animations = {};
