@@ -74,19 +74,36 @@ need to first run `npm install` and then run
 build will be placed in the `build` directory, which you can deploy
 to any static web server or Amazon S3.
 
-## Adding Assets
+## Development Assets
 
 During development, microgame assets, such as spritesheets, sounds,
 and so on, are expected to be stored in a Google Spreadsheet, which 
-allows content creators to add their assets without blocking on
+allows content creators to add/change their assets without blocking on
 a developer. The spreadsheet can be loaded by adding
 `?spreadsheet=<key>` to the end of the MMM url, where `<key>` is the
 key for the spreadsheet. Alternatively, `?spreadsheet=on` can be
 supplied, in which case the [default assets spreadsheet][sheet] will
 be loaded.
 
+Assets added to the spreadsheet must be uploaded to a server that
+supports CORS. Images *must* be placed in a `img` directory, and
+sounds *must* be placed in a `sounds` directory.
+
 Note that any errors that occur while loading the sheet will be
 logged to the browser's developer console.
+
+## Production Assets
+
+When ready to deploy the assets to production as part of an
+optimized build, you'll want to run `node bin/fetch-assets.js [key]`.
+If `[key]` is not specified, then the default assets spreadsheet
+will be used.
+
+This script will regenerate `assets.json` based on the contents of
+the spreadsheet, and will copy all assets into the `assets`
+directory. After that, you can run `node bin/build-optimized.js` to
+generate the optimized build, which will include an appcache
+manifest instructing browsers to cache all assets for offline use.
 
 <!-- Links -->
 
