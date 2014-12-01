@@ -1,0 +1,261 @@
+{
+  "spritesheets": [
+    {
+      "key": "fly",
+      "url": "img/fly.png",
+      "frameWidth": 80,
+      "frameHeight": 80
+    },
+    {
+      "key": "badge",
+      "url": "img/badge.png",
+      "frameWidth": 59,
+      "frameHeight": 78
+    },
+    {
+      "key": "dancingbear",
+      "url": "img/bear.png",
+      "frameWidth": 125,
+      "frameHeight": 176
+    },
+    {
+      "key": "blue_creature",
+      "url": "img/blue.png",
+      "frameWidth": 45,
+      "frameHeight": 73
+    },
+    {
+      "key": "red_creature",
+      "url": "img/red.png",
+      "frameWidth": 55,
+      "frameHeight": 73
+    },
+    {
+      "key": "button",
+      "url": "img/button_new-07.png",
+      "frameWidth": 100,
+      "frameHeight": 76
+    },
+    {
+      "key": "mountain",
+      "url": "img/mountain.png",
+      "frameWidth": 100,
+      "frameHeight": 110
+    },
+    {
+      "key": "chopsticks",
+      "url": "img/chopsticks1.png",
+      "frameWidth": 58,
+      "frameHeight": 80
+    },
+    {
+      "key": "sushi",
+      "url": "img/sushi.png",
+      "frameWidth": 35,
+      "frameHeight": 40
+    },
+    {
+      "key": "plate",
+      "url": "img/plate.png",
+      "frameWidth": 77,
+      "frameHeight": 38
+    },
+    {
+      "key": "princess_fight",
+      "url": "img/princess.png",
+      "frameWidth": 100,
+      "frameHeight": 140
+    },
+    {
+      "key": "upsidedown",
+      "url": "img/upsidedown.png",
+      "frameWidth": 162,
+      "frameHeight": 180
+    }
+  ],
+  "animations": {
+    "fly": [
+      {
+        "name": "flying",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "frameRate": 10,
+        "loop": true
+      },
+      {
+        "name": "dead",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frameRate": 4,
+        "loop": false
+      }
+    ],
+    "badge": [
+      {
+        "name": "badge",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "dancingbear": [
+      {
+        "name": "bear",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frameRate": 4,
+        "loop": true
+      },
+      {
+        "name": "bear_fail",
+        "frames": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "frameRate": 4,
+        "loop": false
+      }
+    ],
+    "blue_creature": [
+      {
+        "name": "blue_creature",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "frameRate": 5,
+        "loop": true
+      }
+    ],
+    "red_creature": [
+      {
+        "name": "red_creature",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "frameRate": 5,
+        "loop": true
+      }
+    ],
+    "button": [
+      {
+        "name": "button",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      },
+      {
+        "name": "explode",
+        "frames": [
+          1,
+          2,
+          3
+        ],
+        "frameRate": 3,
+        "loop": false
+      }
+    ],
+    "mountain": [
+      {
+        "name": "mountain",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "chopsticks": [
+      {
+        "name": "chopsticks",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "sushi": [
+      {
+        "name": "sushi",
+        "frames": [
+          0
+        ],
+        "frameRate": 2,
+        "loop": true
+      },
+      {
+        "name": "sushisad",
+        "frames": [
+          1
+        ],
+        "frameRate": null,
+        "loop": false
+      }
+    ],
+    "plate": [
+      {
+        "name": "plate",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "princess_fight": [
+      {
+        "name": "princess_fight",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "upsidedown": [
+      {
+        "name": "upsidedown",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ]
+  }
+}
