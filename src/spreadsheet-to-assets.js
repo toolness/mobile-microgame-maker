@@ -47,11 +47,6 @@ define(function(require) {
   }
 
   return function spreadsheetToAssets(key, cb) {
-    if (typeof(key) == 'function') {
-      cb = key;
-      key = null;
-    }
-
     Tabletop.init({
       key: key || DEFAULT_KEY,
       callback: function(models) {

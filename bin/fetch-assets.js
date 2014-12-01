@@ -2,6 +2,8 @@ var fs = require('fs');
 var request = require('request');
 var spreadsheetToAssets = require('../src/spreadsheet-to-assets.js');
 
+var KEY = process.argv[2];
+
 function download(absoluteURL, relativeURL) {
   request(absoluteURL).on('response', function(res) {
     if (res.statusCode != 200)
@@ -13,7 +15,7 @@ function download(absoluteURL, relativeURL) {
   });
 }
 
-spreadsheetToAssets(function(gameData) {
+spreadsheetToAssets(KEY, function(gameData) {
   gameData.sounds.forEach(function(sound) {
     var absoluteURL = sound.url;
     var relativeURL = 'sounds/' + absoluteURL.match(/\/sounds\/(.+)$/)[1];
