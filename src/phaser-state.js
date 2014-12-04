@@ -103,6 +103,8 @@ define(function(require) {
     var gameData = GameData.withoutUnusedSounds(options.gameData,
                                                 blocklyInfo.soundsUsed);
 
+    gameData= GameData.withoutUnusedSpritesheets(gameData);
+
     return _.template(this._stateTemplate, {
       preload: this.preload(gameData),
       createSprites: this.createSprites(gameData),
