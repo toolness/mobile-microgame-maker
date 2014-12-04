@@ -1,7 +1,7 @@
 defineTests([
   "react",
   "jsx!src/ui/css-sprite",
-  "src/default-game-data"
+  "./sample-game-data"
 ], function(React, CssSprite, defaultGameData) {
   module("CssSprite");
 

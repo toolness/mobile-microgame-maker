@@ -1,6 +1,6 @@
 defineTests([
   "src/export",
-  "src/default-game-data"
+  "./sample-game-data"
 ], function(Export, defaultGameData) {
   module("Export");
 
