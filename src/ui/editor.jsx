@@ -20,7 +20,7 @@ define(function(require) {
       var state = PhaserState.Generators.makeStateObject({
         autoplay: options.autoplay,
         gameData: gameData,
-        start: blockly.Phaser.generateJs(gameData),
+        blocklyInfo: blockly.Phaser.generateJs(gameData),
         onGameEnded: options.onGameEnded
       });
 

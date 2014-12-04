@@ -99,7 +99,9 @@ define(function(require) {
   };
 
   PhaserState.Generators.createState = function(options) {
-    var gameData = options.gameData;
+    var blocklyInfo = options.blocklyInfo;
+    var gameData = GameData.withoutUnusedSounds(options.gameData,
+                                                blocklyInfo.soundsUsed);
 
     return _.template(this._stateTemplate, {
       preload: this.preload(gameData),
@@ -111,7 +113,7 @@ define(function(require) {
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
       extra: options.standalone ? includeFiles : '',
       phaserIsUndefined: !!options.phaserIsUndefined,
-      start: options.start
+      start: blocklyInfo.start
     });
   };
 
@@ -143,7 +145,7 @@ define(function(require) {
   PhaserState.Generators.makeStateObject = function(options) {
     var stateJs = this.createState({
       gameData: options.gameData,
-      start: options.start,
+      blocklyInfo: options.blocklyInfo,
       playTime: options.playTime,
       endingTime: options.endingTime,
       phaserIsUndefined: true

@@ -3,6 +3,7 @@ define(function(require) {
   var Blockly = require('blockly');
   var hackBlocklyForIos = require('./ui/blockly-ios-hacks');
   var gameData = null;
+  var soundsUsed = null;
 
   var EMPTY_LIST = [['--', '']];
 
@@ -80,6 +81,7 @@ define(function(require) {
     },
     generateJs: function(newGameData) {
       Blockly.Phaser.setGameData(newGameData);
+      soundsUsed = [];
 
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       xml = Blockly.Xml.domToText(xml);
@@ -99,7 +101,10 @@ define(function(require) {
       }));
       lines.push('}');
 
-      return lines.join('\n');
+      return {
+        start: lines.join('\n'),
+        soundsUsed: soundsUsed
+      };
     }
   };
 
@@ -207,6 +212,7 @@ define(function(require) {
   };
 
   Blockly.JavaScript['phaser_play_sound'] = function(block) {
+    soundsUsed.push(block.getFieldValue('SOUND'));
     return 'sounds.' + block.getFieldValue('SOUND') + '.play();\n';
   };
 

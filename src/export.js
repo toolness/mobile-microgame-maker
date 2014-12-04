@@ -69,7 +69,7 @@ define(function(require) {
       });
       var stateJs = PhaserState.Generators.createState({
         gameData: s3GameData,
-        start: Blockly.Phaser.generateJs(s3GameData),
+        blocklyInfo: Blockly.Phaser.generateJs(s3GameData),
         standalone: true
       });
       return _.template(this._templateString, {
