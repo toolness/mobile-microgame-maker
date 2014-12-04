@@ -24,6 +24,29 @@ define(function(require) {
     return index;
   };
 
+  GameData.withoutUnusedSpritesheets = function(gameData) {
+    var spriteMap = {};
+
+    gameData.sprites.forEach(function(sprite) {
+      spriteMap[sprite.key] = true;
+    });
+
+    var newSpritesheets = gameData.spritesheets.filter(function(spritesheet) {
+      return spritesheet.key in spriteMap;
+    });
+
+    var newAnimations = {};
+
+    newSpritesheets.forEach(function(spritesheet) {
+      newAnimations[spritesheet.key] = gameData.animations[spritesheet.key];
+    });
+
+    return React.addons.update(gameData, {
+      spritesheets: {$set: newSpritesheets},
+      animations: {$set: newAnimations}
+    });
+  };
+
   GameData.withoutUnusedSounds = function(gameData, soundsUsed) {
     var newSounds = [];
     var soundMap = {};
