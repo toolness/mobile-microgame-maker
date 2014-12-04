@@ -10,6 +10,9 @@
 <script src="../require-config.js"></script>
 <script>
 require.baseUrl = '../';
+
+// Grrr. http://stackoverflow.com/a/8479953
+require.urlArgs = "bust=" + Date.now();
 </script>
 <script src="../vendor/require.js"></script>
 <script>
