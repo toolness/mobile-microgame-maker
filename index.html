@@ -76,7 +76,10 @@ html.show-blockly .blockly-fill-page {
 <div id="modal-holder"></div>
 <script src="require-config.js"></script>
 <script>
-if (!document.documentElement.hasAttribute('manifest')) {
+if (document.documentElement.hasAttribute('manifest')) {
+  // https://github.com/toolness/mobile-microgame-maker/issues/12
+  require.waitSeconds = 0;
+} else {
   // Grrr. http://stackoverflow.com/a/8479953
   require.urlArgs = "bust=" + Date.now();
 }
