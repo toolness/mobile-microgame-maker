@@ -75,6 +75,8 @@ define(function(require) {
         if (window.confirm("A fatal error occured! Reset this app to its factory defaults? Your data will be lost."))
           reset();
       }, 250);
+      console.log(e);
+      console.log(e.stack);
       throw e;
     }
 
