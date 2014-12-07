@@ -28,13 +28,27 @@ PhaserMicrogame.prototype = {
   TIME_BAR_HEIGHT: 8,
   create: function() {
     var Phaser = this.state.Phaser;
+    var game = this.state.game;
     if (this.usingTinygame) {
       this.state.game.paused = true;
       Tinygame.loaded();
     } else {
-      this.timeBar = new Phaser.Rectangle(0, 0, this.state.game.width,
+      this.timeBar = new Phaser.Rectangle(0, 0, game.width,
                                           this.TIME_BAR_HEIGHT);
     }
+    this.mainText = game.add.text(
+      game.world.centerX,
+      game.world.centerY,
+      '',
+      {
+        font: "30px Courier",
+        fill: "#000000",
+        stroke: "#ffffff",
+        strokeThickness: 4,
+        align: "center"
+      }
+    );
+    this.mainText.anchor.setTo(0.5, 0.5);
   },
   render: function() {
     var game = this.state.game;

@@ -168,6 +168,23 @@ define(function(require) {
            sprite + '.events.onInputDown.add(function() {\n' + branch + '});\n';
   };
 
+  Blockly.Blocks['phaser_set_main_text'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('set main text to')
+        .appendField(new Blockly.FieldTextInput(
+          ''
+        ), 'TEXT');
+    }
+  };
+
+  Blockly.JavaScript['phaser_set_main_text'] = function(block) {
+    var text = block.getFieldValue('TEXT');
+
+    return 'microgame.mainText.setText(' + JSON.stringify(text) + ');\n';
+  };
+
   Blockly.Blocks['phaser_move'] = {
     init: function() {
       this.setPreviousStatement(true);
