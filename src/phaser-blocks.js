@@ -108,6 +108,24 @@ define(function(require) {
     }
   };
 
+  Blockly.Blocks['phaser_add_event'] = {
+    init: function() {
+      this.appendDummyInput().appendField('after')
+        .appendField(new Blockly.FieldTextInput(
+          '1000',
+          Blockly.FieldTextInput.numberValidator
+        ), 'MS').appendField('ms');
+      this.appendStatementInput('STACK');
+    }
+  };
+
+  Blockly.JavaScript['phaser_add_event'] = function(block) {
+    var branch = generateJsBranch(block);
+
+    return 'game.time.events.add(' + this.getFieldValue('MS') +
+           ', function() {\n' + branch + '});\n';
+  };
+
   Blockly.Blocks['phaser_repeat_event'] = {
     init: function() {
       this.appendDummyInput().appendField('every')

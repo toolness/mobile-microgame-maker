@@ -95,6 +95,7 @@
         <block type="phaser_on_tap"></block>
         <block type="phaser_on_update"></block>
         <block type="phaser_on_outoftime"></block>
+        <block type="phaser_add_event"></block>
         <block type="phaser_repeat_event"></block>
         <block type="phaser_move"></block>
         <block type="phaser_play_sound"></block>
