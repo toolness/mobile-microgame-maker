@@ -63,12 +63,13 @@ define(function(require) {
   }
 
   function spriteWithId(id) {
-    // TODO: Deal w/ case where id is invalid.
     return _.findWhere(gameData.sprites, {id: id});
   }
 
-  function spriteName(id) {
-    return spriteWithId(id).name;
+  function spriteName(block, fieldName) {
+    fieldName = fieldName || 'SPRITE';
+    var sprite = spriteWithId(block.getFieldValue(fieldName));
+    return sprite && ('sprites.' + sprite.name);
   }
 
   Blockly.Phaser = {
@@ -179,7 +180,8 @@ define(function(require) {
   };
 
   Blockly.JavaScript['phaser_on_tap'] = function(block) {
-    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));
+    var sprite = spriteName(block);
+    if (!sprite) return '';
     var branch = generateJsBranch(block);
 
     return sprite + '.inputEnabled = true;\n' +
@@ -218,7 +220,8 @@ define(function(require) {
   };
 
   Blockly.JavaScript['phaser_move'] = function(block) {
-    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));    
+    var sprite = spriteName(block);
+    if (!sprite) return '';
     var x = Blockly.JavaScript.valueToCode(block, 'X',
       Blockly.JavaScript.ORDER_ATOMIC);
     var y = Blockly.JavaScript.valueToCode(block, 'Y',
@@ -306,7 +309,8 @@ define(function(require) {
   };
 
   Blockly.JavaScript['phaser_set_animation'] = function(block) {
-    var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));
+    var sprite = spriteName(block);
+    if (!sprite) return '';
     var animation = block.getFieldValue('ANIMATION');
 
     return sprite + '.animations.play("' + animation + '");\n';
