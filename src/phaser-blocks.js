@@ -211,11 +211,9 @@ define(function(require) {
         .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE');
       this.appendValueInput('X').setCheck('Number').appendField('to x');
       this.appendValueInput('Y').setCheck('Number').appendField('and y');
-      this.appendDummyInput().appendField('over')
-        .appendField(new Blockly.FieldTextInput(
-          '1000',
-          Blockly.FieldTextInput.numberValidator
-        ), 'MS').appendField('ms');
+      this.appendValueInput('MS').setCheck('Number').appendField('over');
+      this.appendDummyInput().appendField('ms');
+      this.setInputsInline(true);
     }
   };
 
@@ -225,7 +223,8 @@ define(function(require) {
       Blockly.JavaScript.ORDER_ATOMIC);
     var y = Blockly.JavaScript.valueToCode(block, 'Y',
       Blockly.JavaScript.ORDER_ATOMIC);
-    var ms = block.getFieldValue('MS');
+    var ms = Blockly.JavaScript.valueToCode(block, 'MS',
+      Blockly.JavaScript.ORDER_ATOMIC) || '0';
     var values = [];
 
     if (x) values.push({name: 'x', value: x});
