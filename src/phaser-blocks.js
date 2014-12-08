@@ -233,17 +233,11 @@ define(function(require) {
 
     if (!values.length) return '';
 
-    if (ms == '0') {
-      return values.map(function(info) {
-        return sprite + '.' + info.name + ' = ' + info.value;
-      }).join(';\n') + ';\n';
-    } else {
-      return 'game.add.tween(' + sprite + ').to({\n' +
+    return 'game.add.tween(' + sprite + ').to({\n' +
       values.map(function(info) {
         return '  ' + info.name + ': ' + info.value
       }).join(',\n') +
       '\n}, ' + ms + ', null, true);\n';
-    }
   };
 
   Blockly.Blocks['phaser_play_sound'] = {
