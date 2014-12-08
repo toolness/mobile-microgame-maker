@@ -222,18 +222,27 @@ define(function(require) {
   Blockly.JavaScript['phaser_move'] = function(block) {
     var sprite = 'sprites.' + spriteName(block.getFieldValue('SPRITE'));    
     var x = Blockly.JavaScript.valueToCode(block, 'X',
-      Blockly.JavaScript.ORDER_ATOMIC) || '0';
+      Blockly.JavaScript.ORDER_ATOMIC);
     var y = Blockly.JavaScript.valueToCode(block, 'Y',
-      Blockly.JavaScript.ORDER_ATOMIC) || '0';
+      Blockly.JavaScript.ORDER_ATOMIC);
     var ms = block.getFieldValue('MS');
+    var values = [];
+
+    if (x) values.push({name: 'x', value: x});
+    if (y) values.push({name: 'y', value: y});
+
+    if (!values.length) return '';
 
     if (ms == '0') {
-      return sprite + '.x = ' + x + ';\n' + sprite + '.y = ' + y + ';\n';
+      return values.map(function(info) {
+        return sprite + '.' + info.name + ' = ' + info.value;
+      }).join(';\n') + ';\n';
     } else {
       return 'game.add.tween(' + sprite + ').to({\n' +
-             '  x: ' + x + ',\n' +
-             '  y: ' + y + '\n' +
-             '}, ' + ms + ', null, true);\n';
+      values.map(function(info) {
+        return '  ' + info.name + ': ' + info.value
+      }).join(',\n') +
+      '\n}, ' + ms + ', null, true);\n';
     }
   };
 
