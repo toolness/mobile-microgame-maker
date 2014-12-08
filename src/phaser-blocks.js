@@ -190,17 +190,17 @@ define(function(require) {
     init: function() {
       this.setPreviousStatement(true);
       this.setNextStatement(true);
-      this.appendDummyInput().appendField('set main text to')
-        .appendField(new Blockly.FieldTextInput(
-          ''
-        ), 'TEXT');
+      this.interpolateMsg("set main text to %1",
+                          ['TEXT', null, Blockly.ALIGN_RIGHT],
+                          Blockly.ALIGN_RIGHT);
     }
   };
 
   Blockly.JavaScript['phaser_set_main_text'] = function(block) {
-    var text = block.getFieldValue('TEXT');
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT',
+        Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-    return 'microgame.mainText.setText(' + JSON.stringify(text) + ');\n';
+    return 'microgame.mainText.setText(' + text + ');\n';
   };
 
   Blockly.Blocks['phaser_move'] = {
