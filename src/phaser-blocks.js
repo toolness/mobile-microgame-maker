@@ -6,6 +6,13 @@ define(function(require) {
   var soundsUsed = null;
 
   var EMPTY_LIST = [['--', '']];
+  var SPRITE_NUMERIC_PROPS = [
+    ['x', 'x'],
+    ['y', 'y'],
+    ['x scale', 'scale.x'],
+    ['y scale', 'scale.y'],
+    ['angle', 'angle']
+  ];
 
   function soundList() {
     if (!(gameData && gameData.sounds.length))
@@ -278,6 +285,50 @@ define(function(require) {
 
   Blockly.JavaScript['phaser_lose'] = function(block) {
     return 'microgame.lose();\n';
+  };
+
+  Blockly.Blocks['phaser_set_sprite_numeric_prop'] = {
+    init: function() {
+      this.setPreviousStatement(true);
+      this.setNextStatement(true);
+      this.appendDummyInput().appendField('set')
+        .appendField(new Blockly.FieldDropdown(SPRITE_NUMERIC_PROPS),
+                     'PROPERTY');
+      this.appendDummyInput().appendField('of')
+        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE');
+      this.appendValueInput('NUMBER').setCheck('Number').appendField('to');
+      this.setInputsInline(true);
+    }
+  };
+
+  Blockly.JavaScript['phaser_set_sprite_numeric_prop'] = function(block) {
+    var sprite = spriteName(block);
+    if (!sprite) return '';
+    var number = Blockly.JavaScript.valueToCode(block, 'NUMBER',
+      Blockly.JavaScript.ORDER_ATOMIC) || '0';
+
+    return sprite + '.' + block.getFieldValue('PROPERTY') +
+      ' = ' + number + ';\n';
+  };
+
+  Blockly.Blocks['phaser_get_sprite_numeric_prop'] = {
+    init: function() {
+      this.appendDummyInput().appendField('get')
+        .appendField(new Blockly.FieldDropdown(SPRITE_NUMERIC_PROPS),
+                     'PROPERTY');
+      this.appendDummyInput().appendField('of')
+        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE');
+      this.setOutput(true, 'Number');
+      this.setInputsInline(true);
+    }
+  };
+
+  Blockly.JavaScript['phaser_get_sprite_numeric_prop'] = function(block) {
+    var sprite = spriteName(block);
+    if (!sprite) return ['0', Blockly.JavaScript.ORDER_ATOMIC];
+
+    return [sprite + '.' + block.getFieldValue('PROPERTY'),
+            Blockly.JavaScript.ORDER_ATOMIC];
   };
 
   Blockly.Blocks['phaser_set_animation'] = {
