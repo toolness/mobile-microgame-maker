@@ -97,7 +97,7 @@
         <block type="phaser_on_outoftime"></block>
         <block type="phaser_add_event"></block>
         <block type="phaser_repeat_event"></block>
-        <block type="phaser_move">
+        <block type="phaser_tween">
           <value name="MS">
             <block type="math_number">
                 <field name="NUM">1000</field>

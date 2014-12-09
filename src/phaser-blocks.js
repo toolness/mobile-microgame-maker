@@ -213,41 +213,40 @@ define(function(require) {
     return 'microgame.mainText.setText(' + text + ');\n';
   };
 
-  Blockly.Blocks['phaser_move'] = {
+  Blockly.Blocks['phaser_tween'] = {
     init: function() {
       this.setPreviousStatement(true);
       this.setNextStatement(true);
-      this.appendDummyInput().appendField('move')
+      this.appendDummyInput().appendField('tween')
+        .appendField(new Blockly.FieldDropdown(SPRITE_NUMERIC_PROPS),
+               'PROPERTY');
+      this.appendDummyInput().appendField('of')
         .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE');
-      this.appendValueInput('X').setCheck('Number').appendField('to x');
-      this.appendValueInput('Y').setCheck('Number').appendField('and y');
+      this.appendValueInput('NUMBER').setCheck('Number').appendField('to');
       this.appendValueInput('MS').setCheck('Number').appendField('over');
       this.appendDummyInput().appendField('ms');
       this.setInputsInline(true);
     }
   };
 
-  Blockly.JavaScript['phaser_move'] = function(block) {
+  Blockly.JavaScript['phaser_tween'] = function(block) {
     var sprite = spriteName(block);
     if (!sprite) return '';
-    var x = Blockly.JavaScript.valueToCode(block, 'X',
-      Blockly.JavaScript.ORDER_ATOMIC);
-    var y = Blockly.JavaScript.valueToCode(block, 'Y',
-      Blockly.JavaScript.ORDER_ATOMIC);
+    var property = block.getFieldValue('PROPERTY');
+    var number = Blockly.JavaScript.valueToCode(block, 'NUMBER',
+      Blockly.JavaScript.ORDER_ATOMIC) || '0';
     var ms = Blockly.JavaScript.valueToCode(block, 'MS',
       Blockly.JavaScript.ORDER_ATOMIC) || '0';
-    var values = [];
+    var lastDotIndex = property.lastIndexOf('.');
 
-    if (x) values.push({name: 'x', value: x});
-    if (y) values.push({name: 'y', value: y});
+    if (lastDotIndex != -1) {
+      sprite += '.' + property.slice(0, lastDotIndex);
+      property = property.slice(lastDotIndex + 1);
+    }
 
-    if (!values.length) return '';
-
-    return 'game.add.tween(' + sprite + ').to({\n' +
-      values.map(function(info) {
-        return '  ' + info.name + ': ' + info.value
-      }).join(',\n') +
-      '\n}, ' + ms + ', null, true);\n';
+    return 'game.add.tween(' + sprite + ').to({' +
+      property + ': ' + number +
+      '}, ' + ms + ', null, true);\n';
   };
 
   Blockly.Blocks['phaser_play_sound'] = {
