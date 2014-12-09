@@ -11,6 +11,7 @@ define(function(require) {
     ['y', 'y'],
     ['x scale', 'scale.x'],
     ['y scale', 'scale.y'],
+    ['alpha', 'alpha'],
     ['angle', 'angle']
   ];
 
