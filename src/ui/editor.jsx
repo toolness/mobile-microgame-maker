@@ -104,7 +104,6 @@ define(function(require) {
       var xml = blockly.Xml.workspaceToDom(blockly.mainWorkspace);
 
       xml = blockly.Xml.domToText(xml);
-      console.log('refresh blockly xml', xml);
       if (xml == this.state.gameData.blocklyXml) return;
       this.changeGameData({
         blocklyXml: {$set: xml}
