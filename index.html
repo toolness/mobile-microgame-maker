@@ -9,9 +9,13 @@
 html.loading .editor-wrapper, 
 html.loading #blockly-holder,
 html:not(.loading) .loading-throbber,
-html.show-blockly .editor-wrapper,
-html:not(.show-blockly) #blockly-holder {
+html.show-blockly .editor-wrapper {
   display: none;
+}
+
+html:not(.show-blockly) #blockly-holder {
+  visibility: hidden;
+  overflow: hidden;
 }
 
 html.loading, html.loading body, html.loading .loading-throbber,
@@ -42,6 +46,12 @@ html.show-blockly .blockly-fill-page {
 
 .editor-wrapper {
   margin-bottom: 3em;
+}
+
+#blockly-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #blockly-holder .close-box {
