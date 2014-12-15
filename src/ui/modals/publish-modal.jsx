@@ -48,6 +48,15 @@ define(function(require) {
               publishXHR: null,
               publishedURL: publishedURL
             });
+            if (window.opener) {
+              window.opener.postMessage('minicade:url:' + publishedURL, '*');
+              window.opener.postMessage(
+                'minicade:remixurl:' + window.location.protocol + '//' +
+                window.location.host + window.location.pathname +
+                '?importGame=' + encodeURIComponent(publishedURL),
+                '*'
+              );
+            }
           }
         }.bind(this))
       });
