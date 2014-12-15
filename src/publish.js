@@ -1,7 +1,7 @@
 define(function(require) {
   var $ = require('jquery');
 
-  var DEFAULT_TIMEOUT = 5000;
+  var DEFAULT_TIMEOUT = 20000;
   var DEFAULT_HACKPUB = '//hackpub.herokuapp.com/buckets/minicade/';
 
   return function publish(options, cb) {
