@@ -77,6 +77,11 @@ define(function(require) {
           spriteName + ' = game.add.sprite(' +
           this.stringifyArgs(info.x, info.y, info.key) + ');'
         ].concat(
+          info.draggable
+          ? [spriteName + '.inputEnabled = true;',
+             spriteName + '.input.enableDrag(true);']
+          : []
+        ).concat(
           info.spawnArea
           ? ['  placeRandomlyInArea(' + spriteName.trim() + ', ' +
              this.stringifyArgs(info.spawnArea.left,

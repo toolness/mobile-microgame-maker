@@ -84,6 +84,11 @@ define(function(require) {
         });
       }
     },
+    handleChangeDraggable: function(e) {
+      this.props.onChange(this.props.sprite.id, {
+        draggable: {$set: e.target.checked}
+      });
+    },
     render: function() {
       var sprite = this.props.sprite;
       var animations = this.props.gameData.animations[sprite.key] || [];
@@ -129,6 +134,11 @@ define(function(require) {
             <button className="btn btn-block btn-default" onClick={this.handlePosition}>
               Set Starting {sprite.spawnArea ? 'Area' : 'Position'}&hellip;
             </button>
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" checked={!!sprite.draggable} onChange={this.handleChangeDraggable}/> Draggable
+              </label>
+            </div>
             <br/>
             <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
               <span className="glyphicon glyphicon-trash"></span>
