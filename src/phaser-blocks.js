@@ -246,7 +246,7 @@ define(function(require) {
 
     return 'game.add.tween(' + sprite + ').to({' +
       property + ': ' + number +
-      '}, ' + ms + ', null, true);\n';
+      '}, ' + ms + ').start();\n';
   };
 
   Blockly.Blocks['phaser_play_sound'] = {
