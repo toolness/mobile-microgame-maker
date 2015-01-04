@@ -2,8 +2,9 @@ require([
   "jsx!src/ui/app",
   "src/spreadsheet-to-assets",
   "src/export",
+  "src/publish",
   "jquery"
-], function(app, spreadsheetToAssets, Export, $) {
+], function(app, spreadsheetToAssets, Export, publish, $) {
   function importGame(game, options) {
     var TIMEOUT = 5000;
     var deferred = $.Deferred();
@@ -83,6 +84,8 @@ require([
     // For debugging via console only!
     window.editor = editor;
   }
+
+  publish.warmup();
 
   $(function() {
     var options = {};
