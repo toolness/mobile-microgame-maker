@@ -130,7 +130,7 @@ define(function(require) {
 
   PhaserState.Generators.DEFAULT_PLAY_TIME = 5000;
   PhaserState.Generators.DEFAULT_ENDING_TIME = 2000;
-  PhaserState.Generators.PHASER_VERSION = "2.2.2";
+  PhaserState.Generators.PHASER_VERSION = "2.2.1";
 
   // Useful when creating a Phaser state that just serves as a
   // reference point to position things on, etc.
