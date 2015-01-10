@@ -3,27 +3,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
-html, body {
+html, body, #phaser-holder {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  display: -webkit-flex;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
+  overflow: hidden;
 }
 </style>
 <title>My Minigame</title>
-<div>
-  <div id="phaser-holder"></div><% if (encourageRemix) { %>
-  <p><small><a href="javascript:remixGame()">Remix this minigame</a></small></p><% } %>
+<div id="phaser-holder"></div><% if (encourageRemix) { %>
+<span style="position: absolute; bottom: 8px; left: 8px"><small><a href="javascript:remixGame()">Remix this minigame</a></small></span><% } %>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/<%= phaserVersion %>/phaser.min.js"></script>
 <script src="//toolness.github.io/fancy-friday/contrib/tinygame.js"></script>
@@ -37,6 +27,13 @@ var game = new Phaser.Game(
   'phaser-holder',
   state
 );
+
+state.on('preload', function() {
+  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.setMinMax(0, 0, <%= gameData.width %>, <%= gameData.height %>);
+  game.scale.pageAlignVertically = true;
+  game.scale.pageAlignHorizontally = true;
+});
 
 // Safari caches cross-origin resources in a ridiculous way.
 // We'll work around this annoyance by monkeypatching 
