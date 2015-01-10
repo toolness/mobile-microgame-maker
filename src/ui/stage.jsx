@@ -1,6 +1,8 @@
 define(function(require) {
   var React = require('react');
 
+  var TRANSFORM_ORIGIN = '0 0';
+
   var Stage = React.createClass({
     propTypes: {
       width: React.PropTypes.number,
@@ -12,6 +14,13 @@ define(function(require) {
     },
     setPhaserState: function(newState) {
       var hardReset = !newState || (this.iframe && !this.game);
+
+      // An apparent bug on iOS 7 makes it so that transforms aren't
+      // applied if the element isn't visible at the time that
+      // the transform is set. This helps us get around that bug.
+      var transform = this.refs.transform.getDOMNode();
+      transform.style.webkitTransform = this.getTransform();
+      transform.style.webkitTransformOrigin = TRANSFORM_ORIGIN;
 
       if (this.game && this.game.canvas && newState) {
         this.refs.placeholder.getDOMNode().getContext('2d').drawImage(
@@ -81,21 +90,24 @@ define(function(require) {
     componentWillUnmount: function() {
       this.setPhaserState(null);
     },
+    getTransform: function() {
+      return 'scale(' + (this.props.scale) + ')';
+    },
     render: function() {
-      var scale = this.props.scale || 1;
-      var transform = 'scale(' + scale + ')';
+      var scale = this.props.scale;
+      var transform = this.getTransform();
       var transformStyle = {
         transform: transform,
         webkitTransform: transform,
         mozTransform: transform,
-        transformOrigin: '0 0',
-        webkitTransformOrigin: '0 0',
-        mozTransformOrigin: '0 0',
+        transformOrigin: TRANSFORM_ORIGIN,
+        webkitTransformOrigin: TRANSFORM_ORIGIN,
+        mozTransformOrigin: TRANSFORM_ORIGIN,
       };
 
       return (
         <div style={{height: this.props.height * scale, overflow: 'hidden'}}>
-        <div style={transformStyle}>
+        <div ref="transform" style={transformStyle}>
         <div style={{
           position: 'relative',
           width: this.props.width + 'px',
