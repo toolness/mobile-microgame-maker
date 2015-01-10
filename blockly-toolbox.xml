@@ -1,4 +1,32 @@
 <xml>
+    <category name="Game">
+        <block type="phaser_on_tap"></block>
+        <block type="phaser_on_update"></block>
+        <block type="phaser_on_outoftime"></block>
+        <block type="phaser_add_event"></block>
+        <block type="phaser_repeat_event"></block>
+        <block type="phaser_tween">
+          <value name="MS">
+            <block type="math_number">
+                <field name="NUM">1000</field>
+            </block>            
+          </value>
+        </block>
+        <block type="phaser_play_sound"></block>
+        <block type="phaser_set_bg"></block>
+        <block type="phaser_set_main_text">
+          <value name="TEXT">
+            <block type="text"></block>
+          </value>
+        </block>
+        <block type="phaser_set_animation"></block>
+        <block type="phaser_set_sprite_numeric_prop"></block>
+        <block type="phaser_get_sprite_numeric_prop"></block>
+        <block type="phaser_sprites_overlap"></block>
+        <block type="phaser_win"></block>
+        <block type="phaser_lose"></block>
+        <block type="phaser_on_win_or_lose"></block>
+    </category>
     <category name="Text">
         <block type="text"></block>
         <block type="text_join"></block>
@@ -131,33 +159,5 @@
                 </block>
             </value>
         </block>
-    </category>
-    <category name="Game">
-        <block type="phaser_on_tap"></block>
-        <block type="phaser_on_update"></block>
-        <block type="phaser_on_outoftime"></block>
-        <block type="phaser_add_event"></block>
-        <block type="phaser_repeat_event"></block>
-        <block type="phaser_tween">
-          <value name="MS">
-            <block type="math_number">
-                <field name="NUM">1000</field>
-            </block>            
-          </value>
-        </block>
-        <block type="phaser_play_sound"></block>
-        <block type="phaser_set_bg"></block>
-        <block type="phaser_set_main_text">
-          <value name="TEXT">
-            <block type="text"></block>
-          </value>
-        </block>
-        <block type="phaser_set_animation"></block>
-        <block type="phaser_set_sprite_numeric_prop"></block>
-        <block type="phaser_get_sprite_numeric_prop"></block>
-        <block type="phaser_sprites_overlap"></block>
-        <block type="phaser_win"></block>
-        <block type="phaser_lose"></block>
-        <block type="phaser_on_win_or_lose"></block>
     </category>
 </xml>
