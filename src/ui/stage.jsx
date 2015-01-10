@@ -83,9 +83,19 @@ define(function(require) {
     },
     render: function() {
       var scale = this.props.scale || 1;
+      var transform = 'scale(' + scale + ')';
+      var transformStyle = {
+        transform: transform,
+        webkitTransform: transform,
+        mozTransform: transform,
+        transformOrigin: '0 0',
+        webkitTransformOrigin: '0 0',
+        mozTransformOrigin: '0 0',
+      };
+
       return (
         <div style={{height: this.props.height * scale, overflow: 'hidden'}}>
-        <div style={{transform: 'scale(' + scale + ')', transformOrigin: '0 0'}}>
+        <div style={transformStyle}>
         <div style={{
           position: 'relative',
           width: this.props.width + 'px',
