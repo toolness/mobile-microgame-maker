@@ -36,11 +36,13 @@ define(function(require) {
         }
       }
 
+      var scale = this.props.scale || 1;
+
       return (
         <div style={{
-          width: frameWidth,
-          height: frameHeight,
-          backgroundSize: 'auto ' + frameHeight + 'px',
+          width: frameWidth * scale,
+          height: frameHeight * scale,
+          backgroundSize: 'auto ' + (frameHeight * scale) + 'px',
           backgroundImage: 'url(' + url + ')',
           backgroundPosition: -(frame * frameWidth) + 'px 0px'
         }}></div>

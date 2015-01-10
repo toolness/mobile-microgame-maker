@@ -82,7 +82,10 @@ define(function(require) {
       this.setPhaserState(null);
     },
     render: function() {
+      var scale = this.props.scale || 1;
       return (
+        <div style={{height: this.props.height * scale, overflow: 'hidden'}}>
+        <div style={{transform: 'scale(' + scale + ')', transformOrigin: '0 0'}}>
         <div style={{
           position: 'relative',
           width: this.props.width + 'px',
@@ -99,6 +102,8 @@ define(function(require) {
             display: this.state.loading ? 'block' : 'none'
           }}
         /><div ref="phaser"/></div>
+        </div>
+        </div>
       );    
     }
   });

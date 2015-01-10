@@ -9,6 +9,7 @@ define(function(require) {
     getInitialState: function() {
       return {
         phaserState: null,
+        scale: 0.5,
         rect: this.props.initialRect,
         rectAnchor: null
       };
@@ -28,12 +29,13 @@ define(function(require) {
       }.bind(this));
       hammer.on('panmove', function(e) {
         var anchor = this.state.rectAnchor;
+        var iScale = 1 / this.state.scale;
         this.setState({
           rect: {
-            left: e.deltaX < 0 ? anchor.x + e.deltaX : anchor.x,
-            top: e.deltaY < 0 ? anchor.y + e.deltaY : anchor.y,
-            width: Math.abs(e.deltaX),
-            height: Math.abs(e.deltaY)
+            left: (e.deltaX < 0 ? anchor.x + e.deltaX : anchor.x) * iScale,
+            top: (e.deltaY < 0 ? anchor.y + e.deltaY : anchor.y) * iScale,
+            width: Math.abs(e.deltaX) * iScale,
+            height: Math.abs(e.deltaY) * iScale
           }
         });
       }.bind(this));
@@ -78,6 +80,7 @@ define(function(require) {
     render: function() {
       var gameData = this.props.gameData;
       var rect = this.state.rect;
+      var scale = this.state.scale;
 
       return (
         <Modal title={this.props.title || "Draw a rectangle"} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished} onShown={this.handleShown}>
@@ -85,26 +88,24 @@ define(function(require) {
             <div style={{
               display: 'inline-block',
               position: 'relative',
-              width: gameData.width,
-              marginLeft: -20,
-              marginRight: -20
+              width: gameData.width * scale
             }}>
               <div style={{opacity: 0.5, pointerEvents: 'none'}}>
-                <Stage ref="stage" width={gameData.width} height={gameData.height} phaserState={this.state.phaserState}/>
+                <Stage ref="stage" scale={scale} width={gameData.width} height={gameData.height} phaserState={this.state.phaserState}/>
               </div>
               <div ref="surface" style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
-                width: gameData.width,
-                height: gameData.height,
+                width: gameData.width * scale,
+                height: gameData.height * scale,
               }}>
                 <div ref="rect" style={{
                   position: 'absolute',
-                  top: rect.top,
-                  left: rect.left,
-                  width: rect.width,
-                  height: rect.height,
+                  top: rect.top * scale,
+                  left: rect.left * scale,
+                  width: rect.width * scale,
+                  height: rect.height * scale,
                   border: '1px solid red',
                   pointerEvents: 'none'
                 }}></div>

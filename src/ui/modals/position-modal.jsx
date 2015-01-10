@@ -13,6 +13,7 @@ define(function(require) {
                                             this.props.initialSprite);
       return {
         gameData: gameData,
+        scale: 0.5,
         sprite: this.props.initialSprite,
         movingSprite: this.props.initialSprite,
         isShown: false,
@@ -23,10 +24,11 @@ define(function(require) {
       var movable = this.refs.movable.getDOMNode();
       var hammer = this.hammer = new Hammer(movable);
       hammer.on('panmove', function(e) {
+        var iScale = 1 / this.state.scale;
         this.setState(React.addons.update(this.state, {
           movingSprite: {
-            x: {$set: this.state.sprite.x + e.deltaX},
-            y: {$set: this.state.sprite.y + e.deltaY}
+            x: {$set: this.state.sprite.x + e.deltaX * iScale},
+            y: {$set: this.state.sprite.y + e.deltaY * iScale}
           }
         }));
         // We could update the fields here, but this slows down
@@ -74,14 +76,16 @@ define(function(require) {
       var gameData = this.state.gameData;
       var sprite = this.state.sprite;
       var movingSprite = this.state.movingSprite;
+      var scale = this.state.scale;
 
       // An apparent bug on iOS 7 makes it so that transforms aren't
       // applied if the element isn't visible at the time that
       // the transform is set, so we'll wait until the modal is
       // fully shown before setting the transform.
       var movableTransform = this.state.isShown
-                             ? 'translate(' + movingSprite.x + 'px, ' +
-                                              movingSprite.y + 'px)'
+                             ? 'translate(' +
+                                (movingSprite.x * scale) + 'px, ' +
+                                (movingSprite.y * scale) + 'px) '
                              : '';
 
       var movableStyle = {
@@ -104,15 +108,13 @@ define(function(require) {
             <div style={{
               display: 'inline-block',
               position: 'relative',
-              width: gameData.width,
-              marginLeft: -20,
-              marginRight: -20
+              width: gameData.width * scale
             }}>
               <div style={{opacity: 0.5, pointerEvents: 'none'}}>
-                <Stage ref="stage" width={gameData.width} height={gameData.height} phaserState={this.state.phaserState}/>
+                <Stage ref="stage" scale={scale} width={gameData.width} height={gameData.height} phaserState={this.state.phaserState}/>
               </div>
               <div ref="movable" style={movableStyle}>
-                <CssSprite gameData={gameData} sprite={sprite}/>
+                <CssSprite scale={scale} gameData={gameData} sprite={sprite}/>
               </div>
             </div>
             <p>Just drag the object around.</p>
