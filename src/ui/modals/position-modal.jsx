@@ -13,7 +13,7 @@ define(function(require) {
                                             this.props.initialSprite);
       return {
         gameData: gameData,
-        scale: 0.5,
+        scale: 0.4,
         sprite: this.props.initialSprite,
         movingSprite: this.props.initialSprite,
         isShown: false,

@@ -9,7 +9,7 @@ define(function(require) {
     getInitialState: function() {
       return {
         phaserState: null,
-        scale: 0.5,
+        scale: 0.4,
         rect: this.props.initialRect,
         rectAnchor: null
       };

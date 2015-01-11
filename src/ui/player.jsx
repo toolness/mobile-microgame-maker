@@ -6,7 +6,7 @@ define(function(require) {
     getInitialState: function() {
       return {
         isPaused: true,
-        scale: 0.5,
+        scale: 0.4,
         phaserState: this.makePhaserState()
       };
     },
