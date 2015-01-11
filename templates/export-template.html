@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="<%= baseAssetURL %>fonts/FredokaOne.css">
 <style>
 html, body, #phaser-holder {
   width: 100%;
@@ -10,23 +11,38 @@ html, body, #phaser-holder {
   padding: 0;
   overflow: hidden;
 }
+
+.byline {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: 'Fredoka One';
+  font-size: 10px;
+}
 </style>
 <title>My Minigame</title>
-<div id="phaser-holder"></div><% if (encourageRemix) { %>
-<span style="position: absolute; bottom: 8px; left: 8px"><small><a href="javascript:remixGame()">Remix this minigame</a></small></span><% } %>
+<div id="phaser-holder"></div>
+<span class="byline">
+  This game was made with MMM.
+  <% if (encourageRemix) { %><a href="javascript:remixGame()">Remix it.</a><% } %>
+</span>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/<%= phaserVersion %>/phaser.min.js"></script>
 <script src="//toolness.github.io/fancy-friday/contrib/tinygame.js"></script>
 <script>
 <%= stateJs %>
 
-var game = new Phaser.Game(
-  <%= gameData.width %>,
-  <%= gameData.height %>,
-  Phaser.CANVAS,
-  'phaser-holder',
-  state
-);
+var game;
+
+onload = function() {
+  game = new Phaser.Game(
+    <%= gameData.width %>,
+    <%= gameData.height %>,
+    Phaser.CANVAS,
+    'phaser-holder',
+    state
+  );
+};
 
 state.on('preload', function() {
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

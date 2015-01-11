@@ -73,6 +73,7 @@ define(function(require) {
         standalone: true
       });
       return _.template(this._templateString, {
+        baseAssetURL: s3GameData.baseURL,
         phaserVersion: PhaserState.Generators.PHASER_VERSION,
         encourageRemix: options.encourageRemix,
         gameData: gameData,

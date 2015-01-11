@@ -41,7 +41,7 @@ PhaserMicrogame.prototype = {
       game.world.centerY,
       '',
       {
-        font: "30px Courier",
+        font: "30px 'Fredoka One'",
         fill: "#000000",
         stroke: "#ffffff",
         strokeThickness: 4,
