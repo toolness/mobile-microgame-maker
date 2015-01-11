@@ -8,8 +8,8 @@ define(function(require) {
     sprites: [],
     blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
     baseURL: 'assets/',
-    width: 288,
-    height: 216,
+    width: 640,
+    height: 480,
     backgroundColor: 0xf0f0f0
   };
 });

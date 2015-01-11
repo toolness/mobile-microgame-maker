@@ -1,11 +1,15 @@
 define(function(require) {
   var React = require('react');
   var Stage = require('jsx!./stage');
+  var ScaleSizerMixin = require('./scale-sizer-mixin');
 
   var Player = React.createClass({
+    mixins: [ScaleSizerMixin],
     getInitialState: function() {
       return {
         isPaused: true,
+        scale: 0.4,
+        scaleIdealWidth: this.props.gameData.width,
         phaserState: this.makePhaserState()
       };
     },
@@ -43,14 +47,16 @@ define(function(require) {
       this.resetGame(this.props);
     },
     render: function() {
+      var scale = this.state.scale;
+
       return (
         <div style={{textAlign: 'center'}}>
           <div style={{
             display: 'inline-block',
-            width: this.props.gameData.width
+            width: this.props.gameData.width * scale
           }}>
             <div style={{pointerEvents: this.state.isPaused ? 'none' : 'auto'}}>
-              <Stage width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
+              <Stage scale={scale} width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
             </div>
             <div className="btn-group btn-group-justified">
               <div className="btn-group">

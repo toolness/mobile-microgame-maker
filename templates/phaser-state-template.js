@@ -24,6 +24,7 @@ var state = SimpleEventEmitter({
       throw new Error("Expected Phaser <%= expectedPhaserVersion %> but got " +
                       this.Phaser.VERSION);
     preload(this.game);
+    this.trigger('preload');
   },
   create: function() {
     createSprites(this);
