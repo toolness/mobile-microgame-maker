@@ -4,12 +4,15 @@ define(function(require) {
   var PhaserState = require('../../phaser-state');
   var Modal = require('jsx!./modal');
   var Stage = require('jsx!../stage');
+  var ScaleSizerMixin = require('../scale-sizer-mixin');
 
   var RectModal = React.createClass({
+    mixins: [ScaleSizerMixin],
     getInitialState: function() {
       return {
         phaserState: null,
         scale: 0.4,
+        scaleIdealWidth: this.props.gameData.width,
         rect: this.props.initialRect,
         rectAnchor: null
       };
@@ -49,6 +52,7 @@ define(function(require) {
       this.hammer = null;
     },
     handleShown: function() {
+      this.handleScaleResize();
       this.setState({
         // Firefox doesn't like it if we initialize Phaser while its
         // window isn't visible, so we'll wait until it's shown.
@@ -84,7 +88,7 @@ define(function(require) {
 
       return (
         <Modal title={this.props.title || "Draw a rectangle"} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished} onShown={this.handleShown}>
-          <div style={{textAlign: 'center'}}>
+          <div ref="scaleContainer" style={{textAlign: 'center'}}>
             <div style={{
               display: 'inline-block',
               position: 'relative',

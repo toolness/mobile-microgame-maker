@@ -1,12 +1,15 @@
 define(function(require) {
   var React = require('react');
   var Stage = require('jsx!./stage');
+  var ScaleSizerMixin = require('./scale-sizer-mixin');
 
   var Player = React.createClass({
+    mixins: [ScaleSizerMixin],
     getInitialState: function() {
       return {
         isPaused: true,
         scale: 0.4,
+        scaleIdealWidth: this.props.gameData.width,
         phaserState: this.makePhaserState()
       };
     },

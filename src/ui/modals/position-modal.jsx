@@ -6,14 +6,17 @@ define(function(require) {
   var Modal = require('jsx!./modal');
   var Stage = require('jsx!../stage');
   var CssSprite = require('jsx!../css-sprite');
+  var ScaleSizerMixin = require('../scale-sizer-mixin');
 
   var PositionModal = React.createClass({
+    mixins: [ScaleSizerMixin],
     getInitialState: function() {
       var gameData = GameData.withoutSprite(this.props.initialGameData,
                                             this.props.initialSprite);
       return {
         gameData: gameData,
         scale: 0.4,
+        scaleIdealWidth: gameData.width,
         sprite: this.props.initialSprite,
         movingSprite: this.props.initialSprite,
         isShown: false,
@@ -40,6 +43,7 @@ define(function(require) {
       }.bind(this));
     },
     handleShown: function() {
+      this.handleScaleResize();
       this.setState({
         isShown: true,
         // Firefox doesn't like it if we initialize Phaser while its
@@ -104,7 +108,7 @@ define(function(require) {
 
       return (
         <Modal title={"Set position for " + sprite.name} onCancel={this.props.onCancel} onSave={this.handleSave} onFinished={this.props.onFinished} onShown={this.handleShown}>
-          <div style={{textAlign: 'center'}}>
+          <div ref="scaleContainer" style={{textAlign: 'center'}}>
             <div style={{
               display: 'inline-block',
               position: 'relative',
