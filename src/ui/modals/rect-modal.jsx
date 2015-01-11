@@ -35,10 +35,12 @@ define(function(require) {
         var iScale = 1 / this.state.scale;
         this.setState({
           rect: {
-            left: (e.deltaX < 0 ? anchor.x + e.deltaX : anchor.x) * iScale,
-            top: (e.deltaY < 0 ? anchor.y + e.deltaY : anchor.y) * iScale,
-            width: Math.abs(e.deltaX) * iScale,
-            height: Math.abs(e.deltaY) * iScale
+            left: Math.floor((e.deltaX < 0 ? anchor.x + e.deltaX
+                                           : anchor.x) * iScale),
+            top: Math.floor((e.deltaY < 0 ? anchor.y + e.deltaY
+                                          : anchor.y) * iScale),
+            width: Math.floor(Math.abs(e.deltaX) * iScale),
+            height: Math.floor(Math.abs(e.deltaY) * iScale)
           }
         });
       }.bind(this));

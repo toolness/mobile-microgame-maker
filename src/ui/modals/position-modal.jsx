@@ -30,8 +30,8 @@ define(function(require) {
         var iScale = 1 / this.state.scale;
         this.setState(React.addons.update(this.state, {
           movingSprite: {
-            x: {$set: this.state.sprite.x + e.deltaX * iScale},
-            y: {$set: this.state.sprite.y + e.deltaY * iScale}
+            x: {$set: Math.floor(this.state.sprite.x + e.deltaX * iScale)},
+            y: {$set: Math.floor(this.state.sprite.y + e.deltaY * iScale)}
           }
         }));
         // We could update the fields here, but this slows down
