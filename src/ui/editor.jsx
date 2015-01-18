@@ -129,43 +129,49 @@ define(function(require) {
     render: function() {
       return (
         <div>
-          <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState}/>
-          <br/>
-          <ul className="list-group">
-          {this.state.gameData.sprites.map(function(sprite) {
-            return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} modalManager={this.props.modalManager}/>
-          }, this)}
-          </ul>
-          <button type="button" className="btn btn-default btn-block" onClick={this.handleOpenBlockly}>
-            Code&hellip;
-          </button>
-          <br/>
-          <div className="btn-group btn-group-justified">
-            <div className="btn-group">
-              <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
-                <span className="glyphicon glyphicon-plus"></span>
-              </button>
+          <div className="row">
+            <div className="col-sm-8 col-sm-push-4">
+              <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState}/>
+              <div className="visible-xs-block"><br/></div>
             </div>
-            <div className="btn-group">
-              <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
-                Undo
-              </button>
-            </div>
-            <div className="btn-group">
-              <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
-                Redo
-              </button>
-            </div>
-            <div className="btn-group dropup">
-              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <strong>&hellip;</strong>
-              </button>
-              <ul className="dropdown-menu dropdown-menu-right" role="menu">
-                <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
-                <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
-                <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
-                <li><a href="#" onClick={this.handlePublish}><span className="glyphicon glyphicon-cloud-upload"></span> Publish to Web</a></li>
+            <div className="col-sm-4 col-sm-pull-8">
+              <ul className="list-group">
+              {this.state.gameData.sprites.map(function(sprite) {
+                return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} modalManager={this.props.modalManager}/>
+              }, this)}
               </ul>
+              <button type="button" className="btn btn-default btn-block" onClick={this.handleOpenBlockly}>
+                Code&hellip;
+              </button>
+              <br/>
+              <div className="btn-group btn-group-justified">
+                <div className="btn-group">
+                  <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
+                    <span className="glyphicon glyphicon-plus"></span>
+                  </button>
+                </div>
+                <div className="btn-group">
+                  <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
+                    Undo
+                  </button>
+                </div>
+                <div className="btn-group">
+                  <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
+                    Redo
+                  </button>
+                </div>
+                <div className="btn-group dropup">
+                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <strong>&hellip;</strong>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
+                    <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
+                    <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
+                    <li><a href="#" onClick={this.handlePublish}><span className="glyphicon glyphicon-cloud-upload"></span> Publish to Web</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
