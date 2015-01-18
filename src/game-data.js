@@ -28,7 +28,7 @@ define(function(require) {
   GameData.findUnusedSpriteName = function(gameData, baseName) {
     var names = _.pluck(gameData.sprites, 'name');
     for (var i = 1; i < 10000; i++) {
-      var candidate = baseName + i;
+      var candidate = baseName + '_' + i;
       if (names.indexOf(candidate) == -1) return candidate;
     }
     throw new Error('maximum number of sprites reached');
