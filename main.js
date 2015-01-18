@@ -70,6 +70,7 @@ require([
   }
 
   function startApp(options) {
+    window.StartupManager.end();
     $('html').removeClass('loading');
 
     var editor = app($.extend(options, {
