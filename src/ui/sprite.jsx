@@ -12,12 +12,6 @@ define(function(require) {
         animation: {$set: e.target.value}
       });
     },
-    getInitialState: function() {
-      return {isCollapsed: false};
-    },
-    handleToggleCollapse: function() {
-      this.setState({isCollapsed: !this.state.isCollapsed});
-    },
     handleSpritesheet: function() {
       this.props.modalManager.show(SpritesheetModal, {
         gameData: this.props.gameData,
@@ -99,16 +93,7 @@ define(function(require) {
               <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />
             </div>
             <code onClick={this.handleChangeName} style={{cursor: 'pointer'}}>{sprite.name}</code>
-            <button className="btn btn-default" style={{float: 'right'}} onClick={this.handleToggleCollapse}>
-              <span className={React.addons.classSet({
-                'glyphicon': true,
-                'glyphicon-chevron-down': this.state.isCollapsed,
-                'glyphicon-chevron-up': !this.state.isCollapsed
-              })}></span>
-            </button>
-
           </div>
-          {this.state.isCollapsed ? null :
           <div>
             <br/>
             {animations.length > 1
@@ -147,7 +132,7 @@ define(function(require) {
             <button className="btn btn-xs btn-default" onClick={this.handleSpritesheet}>
               Change Spritesheet&hellip;
             </button>
-          </div>}
+          </div>
         </li>
       );
     }
