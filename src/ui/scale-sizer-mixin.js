@@ -1,6 +1,8 @@
 define(function() {
   return {
     handleScaleResize: function() {
+      if (this.props.onBeforeScaleResize)
+        this.props.onBeforeScaleResize();
       var scaleContainer = this.refs.scaleContainer || this;
       var rect = scaleContainer.getDOMNode().getBoundingClientRect();
       var idealWidth = this.state.scaleIdealWidth;

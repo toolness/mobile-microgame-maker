@@ -122,6 +122,19 @@ define(function(require) {
         $set: gameData
       });
     },
+    handleBeforeScaleResize: function() {
+      var style = "";
+      var playerHolderSizer = this.refs.playerHolderSizer.getDOMNode();
+      var playerHolder = this.refs.playerHolder.getDOMNode();
+      var rect;
+
+      if ($(playerHolderSizer).is(':visible')) {
+        rect = playerHolderSizer.getBoundingClientRect();
+        style = "position: fixed; left: " + rect.left + "px; " +
+                "width: " + rect.width + "px";
+      }
+      playerHolder.setAttribute("style", style);
+    },
     componentDidUpdate: function(prevProps, prevState) {
       if (prevState.gameData !== this.state.gameData)
         this.props.onGameDataChange(this.state.gameData);
@@ -131,8 +144,11 @@ define(function(require) {
         <div>
           <div className="row">
             <div className="col-sm-8 col-sm-push-4">
-              <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState}/>
-              <div className="visible-xs-block"><br/></div>
+              <div ref="playerHolderSizer" className="hidden-xs"></div>
+              <div ref="playerHolder">
+                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize}/>
+              </div>
+              <div className="visible-xs"><br/></div>
             </div>
             <div className="col-sm-4 col-sm-pull-8">
               <ul className="list-group">
