@@ -40,6 +40,7 @@ define(function(require) {
     function handleCloseBlockly() {
       root.classList.remove('show-blockly');
       editor.refreshBlocklyXml();
+      Blockly.fireUiEvent(window, 'resize');
     }
 
     function handleGameDataChange(gameData) {
