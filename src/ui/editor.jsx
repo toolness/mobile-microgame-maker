@@ -1,6 +1,4 @@
 define(function(require) {
-  var _ = require('underscore');
-  var guid = require('guid');
   var React = require('react');
   var PhaserState = require('../phaser-state');
   var GameData = require('../game-data');
@@ -46,19 +44,8 @@ define(function(require) {
       this.props.modalManager.show(SpritesheetModal, {
         gameData: gameData,
         onSave: function(spritesheet, animation) {
-          this.changeGameData({
-            sprites: {
-              $push: [{
-                id: guid(),
-                name: GameData.findUnusedSpriteName(gameData,
-                                                    spritesheet.key),
-                x: _.random(gameData.width - spritesheet.frameWidth),
-                y: _.random(gameData.height - spritesheet.frameHeight),
-                key: spritesheet.key,
-                animation: animation
-              }]
-            }
-          });
+          var sprite = GameData.makeSprite(gameData, spritesheet, animation);
+          this.changeGameData({sprites: {$push: [sprite]}});
         }.bind(this)
       });
     },

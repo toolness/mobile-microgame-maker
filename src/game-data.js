@@ -1,5 +1,6 @@
 define(function(require) {
   var _ = require('underscore');
+  var guid = require('guid');
   var React = require('react');
 
   var GameData = {};
@@ -23,6 +24,18 @@ define(function(require) {
       }
     });
     return index;
+  };
+
+  GameData.makeSprite = function(gameData, spritesheet, animation) {
+    return {
+      id: guid(),
+      name: GameData.findUnusedSpriteName(gameData,
+                                          spritesheet.key),
+      x: _.random(gameData.width - spritesheet.frameWidth),
+      y: _.random(gameData.height - spritesheet.frameHeight),
+      key: spritesheet.key,
+      animation: animation
+    };
   };
 
   GameData.findUnusedSpriteName = function(gameData, baseName) {
