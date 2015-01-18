@@ -13,7 +13,7 @@ define(function(require) {
       });
     },
     getInitialState: function() {
-      return {isCollapsed: true};
+      return {isCollapsed: false};
     },
     handleToggleCollapse: function() {
       this.setState({isCollapsed: !this.state.isCollapsed});
