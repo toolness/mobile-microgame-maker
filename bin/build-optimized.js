@@ -1,6 +1,7 @@
 var requirejs = require('requirejs');
 var fs = require('fs');
 
+var buildCss = require('./build-css');
 var getCacheManifest = require('./get-cache-manifest');
 
 function build(cb) {
@@ -70,5 +71,10 @@ function build(cb) {
 
 module.exports = build;
 
-if (!module.parent)
-  build();
+if (!module.parent) {
+  buildCss(function(err) {
+    if (err) throw err;
+    console.log("Built CSS.");
+    build();
+  });
+}

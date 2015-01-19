@@ -54,15 +54,19 @@ allows non-technical users to create a variety of simple minigames.
 
 ## Quick Start
 
-Working on the project just requires a web server that serves
-static files from the root of the repository. If you don't have
-one, try `python -m SimpleHTTPServer`, or if you like node use
-[http-server][].
+```
+git clone https://github.com/toolness/mobile-microgame-maker.git
+cd mobile-microgame-maker
+npm install
+node bin/server.js
+```
+
+Then visit http://localhost:3000/ in your browser.
 
 ## Running Tests
 
-QUnit tests are located in the `test` directory. Just visit it
-in your web browser to run the test suite.
+QUnit tests are located in the `test` directory. Just visit 
+http://localhost:3000/test/ in your browser to run the test suite.
 
 ## Optimized Builds
 

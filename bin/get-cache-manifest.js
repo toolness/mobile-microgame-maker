@@ -1,4 +1,5 @@
 var fs = require('fs');
+var buildCss = require('./build-css');
 
 function listFiles(dirname) {
   var list = [];
@@ -26,6 +27,7 @@ function get(now) {
     'phaser-frame.html',
     'main.js',
     'require-config.js',
+    buildCss.OUTPUT_FILENAME,
     'vendor/require.js',
     'vendor/require.text.js', // Note sure why this needs to be loaded, but
                               // it shows up in the network log on optimized
