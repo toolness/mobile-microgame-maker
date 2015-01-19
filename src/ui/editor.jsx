@@ -129,11 +129,30 @@ define(function(require) {
       var rect;
 
       if ($(playerHolderSizer).is(':visible')) {
+        // We're on something wider than a mobile device, so fix the player
+        // in place.
         rect = playerHolderSizer.getBoundingClientRect();
         style = "position: fixed; left: " + rect.left + "px; " +
                 "width: " + rect.width + "px";
       }
       playerHolder.setAttribute("style", style);
+    },
+    adjustScale: function(newScale) {
+      if (this.refs.playerHolder.getDOMNode().style.position != 'fixed')
+        return newScale;
+
+      // We're on something wider than a mobile device, so the player is
+      // fixed in place and can't be scrolled. Make sure it's fully
+      // visible, and that we have some breathing room below it for some
+      // buttons.
+      var MIN_EXTRA_VERTICAL_PX = 200;
+      var MIN_HEIGHT = 120;
+      var maxHeight = Math.max(window.innerHeight - MIN_EXTRA_VERTICAL_PX,
+                               MIN_HEIGHT);
+      var idealHeight = this.state.gameData.height;
+      if (idealHeight * newScale > maxHeight)
+        newScale = maxHeight / idealHeight;
+      return newScale;
     },
     componentDidUpdate: function(prevProps, prevState) {
       if (prevState.gameData !== this.state.gameData)
@@ -146,7 +165,7 @@ define(function(require) {
             <div className="col-sm-8 col-sm-push-4">
               <div ref="playerHolderSizer" className="hidden-xs"></div>
               <div ref="playerHolder">
-                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize}/>
+                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize} adjustScale={this.adjustScale}/>
               </div>
               <div className="visible-xs"><br/></div>
             </div>

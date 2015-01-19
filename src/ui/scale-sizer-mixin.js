@@ -12,6 +12,8 @@ define(function() {
       } else {
         newScale = rect.width / idealWidth;
       }
+      if (this.props.adjustScale)
+        newScale = this.props.adjustScale(newScale);
       if (this.state.scale != newScale)
         this.setState({scale: newScale});
     },
