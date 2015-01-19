@@ -1,5 +1,82 @@
-/* This file is auto-generated, please do not edit it directly. */
-
-h1 {
-  color: blue;
+@import "../fonts/OpenSans-Light-webfont.css";
+@import "../fonts/OpenSans-ExtraBold-webfont.css";
+body {
+  font-family: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.navbar-mmm {
+  border-radius: 0;
+  background: #3fa9f5;
+  color: white;
+}
+.navbar-mmm .navbar-brand {
+  font-family: 'Open Sans Extrabold';
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.navbar-mmm .navbar-brand-light {
+  font-family: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.navbar-mmm a {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans Extrabold';
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.btn.btn-awsm {
+  font-family: 'Open Sans Extrabold';
+  font-weight: normal;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 0;
+  background-color: #f15a24;
+  border-bottom: 6px solid #cf4d1f;
+}
+.btn.btn-awsm.btn-awsmblue {
+  background-color: #3fa9f5;
+  border-bottom: 6px solid #2f7fb8;
+}
+.btn.btn-awsm:hover {
+  color: black;
+  background-color: #ffff66;
+  border-bottom-color: #ebb161;
+}
+li.list-group-item {
+  border: none;
+  background: #b2ddfb;
+  color: #2f7fb8;
+  border-bottom: 4px solid white;
+}
+li.list-group-item:first-child {
+  border-radius: 0;
+}
+li.list-group-item:last-child {
+  border-radius: 0;
+}
+li.list-group-item select {
+  background: rgba(255, 255, 255, 0.75);
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  box-shadow: none;
+}
+li.list-group-item .btn.btn-awsm {
+  font-family: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: none;
+}
+code {
+  background: transparent;
+  color: inherit;
+}
+div.btn-group-justified > div.btn-group {
+  border-right: 1px solid white;
+}
+div.btn-group-justified > div.btn-group:last-child {
+  border-right: none;
 }
