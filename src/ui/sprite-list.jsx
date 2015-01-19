@@ -1,4 +1,5 @@
 define(function(require) {
+  var $ = require('jquery');
   var React = require('react');
   var Sprite = require('jsx!./sprite');
 
@@ -20,7 +21,11 @@ define(function(require) {
       this.highlightedSpriteTimeout = window.setTimeout(function() {
         this.setState({highlightedSprite: null});
       }.bind(this), HIGHLIGHTED_SPRITE_MS);
-      sprite.getDOMNode().scrollIntoView();
+
+      // http://css-tricks.com/snippets/jquery/smooth-scrolling/
+      $('html, body').animate({
+        scrollTop: $(sprite.getDOMNode()).offset().top
+      }, 500);
     },
     componentWillUnmount: function() {
       window.clearTimeout(this.highlightedSpriteTimeout);
