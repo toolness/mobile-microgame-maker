@@ -1,5 +1,69 @@
-// TODO: Put CSS here.
+@import "../vendor/bootstrap/less/variables.less";
 
-h1 {
-  color: blue;
+@blue: #3FA9F5;
+@lightblue: #B2DDFB;
+@darkblue: #2F7FB8;
+@lightyellow: #FFFF66;
+@darkyellow: #EBB161;
+@lightorange: #F15A24;
+@darkorange: #CF4D1F;
+
+@sectionpadding: 80px;
+
+@lightfont: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+@import "../fonts/OpenSans-Light-webfont.css";
+@import "../fonts/OpenSans-ExtraBold-webfont.css";
+
+// Mixins
+.ultra-bold() {
+  font-family: 'Open Sans Extrabold';
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+// Rules
+body {
+  font-family: @lightfont;
+}
+
+.navbar-mmm {
+  border-radius: 0;
+  background: @blue;
+  color: white;
+}
+
+.navbar-mmm .navbar-brand {
+  .ultra-bold;
+}
+
+.navbar-mmm .navbar-brand-light {
+  font-family: @lightfont;
+}
+
+.navbar-mmm a {
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .ultra-bold;
+}
+
+.btn.btn-awsm {
+  .ultra-bold;
+  color: white;
+  border-radius: 0;
+  background-color: @lightorange;
+  border-bottom: 6px solid @darkorange;
+}
+
+.btn.btn-awsm.btn-awsmblue {
+  background-color: @blue;
+  border-bottom: 6px solid @darkblue;
+}
+
+.btn.btn-awsm:hover {
+  color: black;
+  background-color: @lightyellow;
+  border-bottom-color: @darkyellow;
 }
