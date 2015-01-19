@@ -67,3 +67,36 @@ h1, h2, h3, h4, h5, h6 {
   background-color: @lightyellow;
   border-bottom-color: @darkyellow;
 }
+
+li.list-group-item {
+  border: none;
+  background: @lightblue;
+  color: @darkblue;
+  border-bottom: 4px solid white;
+}
+
+li.list-group-item:first-child {
+  border-radius: 0;
+}
+
+li.list-group-item:last-child {
+  border-radius: 0;
+}
+
+li.list-group-item select {
+  background: rgba(255, 255, 255, 0.75);
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  box-shadow: none;
+}
+
+li.list-group-item .btn.btn-awsm {
+  font-family: @lightfont;
+  text-transform: none;
+}
+
+code {
+  background: transparent;
+  color: inherit;
+}
