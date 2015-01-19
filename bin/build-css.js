@@ -9,12 +9,16 @@ function buildCss(cb) {
   });
 
   parser.parse('@import "base.less";', function(err, tree) {
-    var css;
+    var css = [
+      '/* This file is auto-generated, please do not edit it directly. */',
+      '',
+      ''
+    ].join('\n');
 
     if (err) return cb(err);
 
     try {
-      css = tree.toCSS();
+      css += tree.toCSS();
     } catch (e) {
       return cb(e);
     }
