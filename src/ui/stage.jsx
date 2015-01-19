@@ -93,6 +93,26 @@ define(function(require) {
     getTransform: function() {
       return 'scale(' + (this.props.scale) + ')';
     },
+    handleClick: function(e) {
+      if (!(this.props.onDisplayObjectClick &&
+            this.game && this.game.world)) return;
+
+      var rect = e.target.getBoundingClientRect();
+      var invScale = 1 / this.props.scale;
+      var x = Math.floor((e.clientX - rect.left) * invScale);
+      var y = Math.floor((e.clientY - rect.top) * invScale);
+
+      this.game.world.children.some(function(item) {
+        var point = new this.iframe.contentWindow.Phaser.Point();
+        var hit = this.game.input.hitTest(item, {
+          x: x,
+          y: y
+        }, point);
+        if (hit)
+          this.props.onDisplayObjectClick(item);
+        return hit;
+      }, this);
+    },
     render: function() {
       var scale = this.props.scale;
       var transform = this.getTransform();
@@ -112,7 +132,18 @@ define(function(require) {
           position: 'relative',
           width: this.props.width + 'px',
           height: this.props.height + 'px'
-        }}><canvas
+        }}>
+        {this.props.capturePointerEvents
+         ? <div style={{
+             position: 'absolute',
+             width: this.props.width,
+             height: this.props.height,
+             top: 0,
+             left: 0,
+             zIndex: '2'
+           }} onClick={this.handleClick}></div>
+         : null}
+        <canvas
           ref="placeholder"
           width={this.props.width}
           height={this.props.height}

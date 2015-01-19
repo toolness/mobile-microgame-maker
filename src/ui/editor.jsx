@@ -122,6 +122,11 @@ define(function(require) {
         $set: gameData
       });
     },
+    handleDisplayObjectClick: function(item, phaserState) {
+      var sprite = PhaserState.getSprite(this.state.gameData, item, phaserState);
+      if (!sprite) return;
+      console.log("TODO: in editor, highlight", sprite);
+    },
     handleBeforeScaleResize: function() {
       var style = "";
       var playerHolderSizer = this.refs.playerHolderSizer.getDOMNode();
@@ -165,7 +170,7 @@ define(function(require) {
             <div className="col-sm-8 col-sm-push-4">
               <div ref="playerHolderSizer" className="hidden-xs"></div>
               <div ref="playerHolder">
-                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize} adjustScale={this.adjustScale}/>
+                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize} adjustScale={this.adjustScale} onDisplayObjectClick={this.handleDisplayObjectClick}/>
                 <br/>
                 <div className="btn-group btn-group-justified">
                   <div className="btn-group">

@@ -46,6 +46,9 @@ define(function(require) {
     handleReload: function() {
       this.resetGame(this.props);
     },
+    handleDisplayObjectClick: function(item) {
+      this.props.onDisplayObjectClick(item, this.state.phaserState);
+    },
     render: function() {
       var scale = this.state.scale;
 
@@ -55,8 +58,8 @@ define(function(require) {
             display: 'inline-block',
             width: this.props.gameData.width * scale
           }}>
-            <div style={{pointerEvents: this.state.isPaused ? 'none' : 'auto'}}>
-              <Stage scale={scale} width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState}/>
+            <div>
+              <Stage scale={scale} width={this.props.gameData.width} height={this.props.gameData.height} phaserState={this.state.phaserState} capturePointerEvents={this.state.isPaused} onDisplayObjectClick={this.handleDisplayObjectClick}/>
             </div>
             <div className="btn-group btn-group-justified">
               <div className="btn-group">

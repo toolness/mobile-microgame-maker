@@ -190,5 +190,19 @@ define(function(require) {
     return state;
   };
 
+  PhaserState.getSprite = function(gameData, item, phaserState) {
+    if (!phaserState.sprites) return;
+    var spriteNames = Object.keys(phaserState.sprites);
+    var foundName;
+    spriteNames.some(function(name) {
+      if (phaserState.sprites[name] === item) {
+        foundName = name;
+        return true;
+      }
+    });
+    if (foundName)
+      return GameData.spriteWithName(gameData, foundName);
+  };
+
   return PhaserState;
 });

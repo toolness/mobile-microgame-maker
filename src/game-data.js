@@ -15,6 +15,10 @@ define(function(require) {
     return gameData.baseURL + url;
   };
 
+  GameData.spriteWithName = function(gameData, name) {
+    return _.findWhere(gameData.sprites, {name: name});
+  };
+
   GameData.spriteIndex = function(gameData, id) {
     var index = -1;
     gameData.sprites.some(function(sprite, i) {
