@@ -155,21 +155,68 @@ div.btn-group-justified > div.btn-group:last-child {
   position: absolute;
   top: 0;
   left: 0;
-}
 
-#blockly-holder .close-box {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  z-index: 1;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 4px 10px;
-  font-size: 30px;
-}
+  .blocklyToolboxDiv {
+    background: @lightblue;
+    color: @darkblue;
 
-#blockly-holder .blocklySvg {
-  height: 100%;
-  width: 100%;
+    .blocklyTreeLabel {
+      font-family: @lightfont;
+    }
+
+    .blocklyTreeRow:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .blocklyTreeSelected {
+      // We don't like !important, but the original Blockly rule we're
+      // overriding has it, so we need to use it too.
+      background: @darkblue !important;
+    }
+  }
+
+  .blocklySvg {
+    height: 100%;
+    width: 100%;
+
+    .blocklyFlyoutBackground {
+      fill: @lightblue;
+    }
+
+    .blocklyScrollbarKnob {
+      fill: @lightblue;
+    }
+
+    // Using nth-child here is extremely brittle, but there doesn't
+    // seem to be any other way to style the flyout scrollbar separately
+    // from the other scrollbars.
+    > g:nth-child(3) {
+      .blocklyScrollbarBackground {
+        fill: @lightblue;
+        stroke: @lightblue;
+      }  
+
+      .blocklyScrollbarKnob {
+        fill: @darkblue;
+      }
+    }
+  }
+
+  .close-box {
+    .ultra-bold;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    cursor: pointer;
+    background: @lightorange;
+    color: white;
+    padding: 4px 10px;
+    font-size: 30px;
+  }
+
+  .close-box:hover {
+    color: black;
+    background-color: @lightyellow;
+  }
 }
