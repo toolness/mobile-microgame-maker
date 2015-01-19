@@ -2,6 +2,29 @@
 
 @import "../fonts/OpenSans-Light-webfont.css";
 @import "../fonts/OpenSans-ExtraBold-webfont.css";
+html.loading .editor-wrapper,
+html.loading #blockly-holder,
+html:not(.loading) .loading-throbber,
+html.show-blockly .editor-wrapper {
+  display: none;
+}
+html:not(.show-blockly) #blockly-holder {
+  visibility: hidden;
+  overflow: hidden;
+}
+html.loading,
+html.loading body,
+html.loading .loading-throbber,
+html.show-blockly,
+html.show-blockly body,
+html.show-blockly .blockly-fill-page {
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 body {
   font-family: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -81,4 +104,74 @@ div.btn-group-justified > div.btn-group {
 }
 div.btn-group-justified > div.btn-group:last-child {
   border-right: none;
+}
+.vcenter {
+  /* Internet Explorer 10 */
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+  /* Safari, Chrome, and Opera */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editor-wrapper {
+  margin-bottom: 3em;
+}
+#blockly-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#blockly-holder .blocklyToolboxDiv {
+  background: #b2ddfb;
+  color: #2f7fb8;
+}
+#blockly-holder .blocklyToolboxDiv .blocklyTreeLabel {
+  font-family: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+#blockly-holder .blocklyToolboxDiv .blocklyTreeRow:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+#blockly-holder .blocklyToolboxDiv .blocklyTreeSelected {
+  background: #2f7fb8 !important;
+}
+#blockly-holder .blocklySvg {
+  height: 100%;
+  width: 100%;
+}
+#blockly-holder .blocklySvg .blocklyFlyoutBackground {
+  fill: #b2ddfb;
+}
+#blockly-holder .blocklySvg .blocklyScrollbarKnob {
+  fill: #b2ddfb;
+}
+#blockly-holder .blocklySvg > g:nth-child(3) .blocklyScrollbarBackground {
+  fill: #b2ddfb;
+  stroke: #b2ddfb;
+}
+#blockly-holder .blocklySvg > g:nth-child(3) .blocklyScrollbarKnob {
+  fill: #2f7fb8;
+}
+#blockly-holder .close-box {
+  font-family: 'Open Sans Extrabold';
+  font-weight: normal;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+  cursor: pointer;
+  background: #f15a24;
+  color: white;
+  padding: 4px 10px;
+  font-size: 30px;
+}
+#blockly-holder .close-box:hover {
+  color: black;
+  background-color: #ffff66;
 }
