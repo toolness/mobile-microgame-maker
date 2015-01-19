@@ -93,9 +93,16 @@ h1, h2, h3, h4, h5, h6 {
 
 li.list-group-item {
   border: none;
-  background: @lightblue;
+  background-color: @lightblue;
   color: @darkblue;
   border-bottom: 4px solid white;
+  transition: background-color 0.25s;
+  -webkit-transition: background-color 0.25s;
+  -moz-transition: background-color 0.25s;
+}
+
+li.list-group-item.highlighted {
+  background-color: @lightyellow;
 }
 
 li.list-group-item:first-child {

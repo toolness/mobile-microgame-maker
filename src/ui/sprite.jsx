@@ -86,8 +86,13 @@ define(function(require) {
     render: function() {
       var sprite = this.props.sprite;
       var animations = this.props.gameData.animations[sprite.key] || [];
+      var classes = React.addons.classSet({
+        'list-group-item': true,
+        'highlighted': this.props.highlighted
+      });
+
       return (
-        <li className="list-group-item">
+        <li className={classes}>
           <div>
             <div style={{display: 'inline-block', width: 38, height: 32, verticalAlign: 'bottom'}}>
               <CssSprite sprite={sprite} gameData={this.props.gameData} maxDimension={32} />

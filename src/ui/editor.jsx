@@ -3,7 +3,7 @@ define(function(require) {
   var PhaserState = require('../phaser-state');
   var GameData = require('../game-data');
   var Player = require('jsx!./player');
-  var Sprite = require('jsx!./sprite');
+  var SpriteList = require('jsx!./sprite-list');
   var ExportModal = require('jsx!./modals/export-modal');
   var ImportModal = require('jsx!./modals/import-modal');
   var PublishModal = require('jsx!./modals/publish-modal');
@@ -125,7 +125,7 @@ define(function(require) {
     handleDisplayObjectClick: function(item, phaserState) {
       var sprite = PhaserState.getSprite(this.state.gameData, item, phaserState);
       if (!sprite) return;
-      console.log("TODO: in editor, highlight", sprite);
+      this.refs.spriteList.highlightSprite(sprite.id);
     },
     handleBeforeScaleResize: function() {
       var style = "";
@@ -209,11 +209,11 @@ define(function(require) {
               <div className="visible-xs"><br/></div>
             </div>
             <div className="col-sm-4 col-sm-pull-8">
-              <ul className="list-group">
-              {this.state.gameData.sprites.map(function(sprite) {
-                return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} modalManager={this.props.modalManager}/>
-              }, this)}
-              </ul>
+              <SpriteList ref="spriteList"
+               gameData={this.state.gameData}
+               onRemove={this.handleRemoveSprite}
+               onChange={this.handleChangeSprite}
+               modalManager={this.props.modalManager}/>
             </div>
           </div>
         </div>
