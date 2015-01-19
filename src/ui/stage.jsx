@@ -109,7 +109,7 @@ define(function(require) {
           y: y
         }, point);
         if (hit)
-          this.props.onDisplayObjectClick(item);
+          this.props.onDisplayObjectClick(item, this.props.phaserState);
         return hit;
       }, this);
     },
