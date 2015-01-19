@@ -60,13 +60,13 @@ define(function(require) {
             </div>
             <div className="btn-group btn-group-justified">
               <div className="btn-group">
-                <button type="button" className="btn btn-default" onClick={this.handlePlayPause}>
+                <button type="button" className="btn btn-awsm" onClick={this.handlePlayPause}>
                   <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
                                                                       : 'glyphicon-pause')}></span>
                 </button>
               </div>
               <div className="btn-group">
-                <button type="button" className="btn btn-default" onClick={this.handleReload}>
+                <button type="button" className="btn btn-awsm" onClick={this.handleReload}>
                   <span className="glyphicon glyphicon-refresh"></span>
                 </button>
               </div>

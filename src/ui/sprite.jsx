@@ -116,7 +116,7 @@ define(function(require) {
                 <input type="radio" value="random" checked={!!sprite.spawnArea} onChange={this.handleChangePositionType}/> Random
               </label>
             </div>
-            <button className="btn btn-block btn-default" onClick={this.handlePosition}>
+            <button className="btn btn-block btn-awsm btn-awsmblue" onClick={this.handlePosition}>
               Set Starting {sprite.spawnArea ? 'Area' : 'Position'}&hellip;
             </button>
             <div className="checkbox">
@@ -125,11 +125,11 @@ define(function(require) {
               </label>
             </div>
             <br/>
-            <button className="btn btn-xs btn-default" onClick={this.props.onRemove.bind(null, sprite.id)}>
+            <button className="btn btn-xs btn-awsm btn-awsmblue" onClick={this.props.onRemove.bind(null, sprite.id)}>
               <span className="glyphicon glyphicon-trash"></span>
             </button>
             &nbsp;
-            <button className="btn btn-xs btn-default" onClick={this.handleSpritesheet}>
+            <button className="btn btn-xs btn-awsm btn-awsmblue" onClick={this.handleSpritesheet}>
               Change Spritesheet&hellip;
             </button>
           </div>

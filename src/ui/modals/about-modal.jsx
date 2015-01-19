@@ -70,11 +70,11 @@ define(function(require) {
                 ? 'Version ' + this.state.version
                 : 'Development Version'}</p>
             {this.state.appCacheStatus == 'UPDATEREADY'
-             ? <p><button className="btn btn-primary" onClick={window.location.reload.bind(window.location)}>
+             ? <p><button className="btn btn-awsm" onClick={window.location.reload.bind(window.location)}>
                  Update App
                </button></p>
              : null}
-            <p><button className="btn btn-sm btn-default" onClick={this.props.onReset}>Reset App&hellip;</button></p>
+            <p><button className="btn btn-sm btn-awsm btn-awsmblue" onClick={this.props.onReset}>Reset App&hellip;</button></p>
             <p className="text-muted"><small>App cache status: <code>{this.state.appCacheStatus}</code></small></p>
           </div>
         </Modal>

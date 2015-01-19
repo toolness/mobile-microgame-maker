@@ -49,7 +49,7 @@ define(function(require) {
               </div>
               {this.props.hideSaveButton ? null :
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" disabled={!this.props.onSave} onClick={this.handleSave}>{this.props.saveLabel || "Save changes"}</button>
+                <button type="button" className="btn btn-awsm btn-awsmblue" disabled={!this.props.onSave} onClick={this.handleSave}>{this.props.saveLabel || "Save changes"}</button>
               </div>}
             </div>
           </div>

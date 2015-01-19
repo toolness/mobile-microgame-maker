@@ -156,28 +156,28 @@ define(function(require) {
                 return <Sprite sprite={sprite} key={sprite.id} gameData={this.state.gameData} onRemove={this.handleRemoveSprite} onChange={this.handleChangeSprite} modalManager={this.props.modalManager}/>
               }, this)}
               </ul>
-              <button type="button" className="btn btn-default btn-block" onClick={this.handleOpenBlockly}>
+              <button type="button" className="btn btn-awsm btn-block" onClick={this.handleOpenBlockly}>
                 Code&hellip;
               </button>
               <br/>
               <div className="btn-group btn-group-justified">
                 <div className="btn-group">
-                  <button type="button" className="btn btn-default" onClick={this.handleAddSprite}>
+                  <button type="button" className="btn btn-awsm" onClick={this.handleAddSprite}>
                     <span className="glyphicon glyphicon-plus"></span>
                   </button>
                 </div>
                 <div className="btn-group">
-                  <button type="button" className="btn btn-default" disabled={!this.state.undo.length} onClick={this.handleUndo}>
+                  <button type="button" className="btn btn-awsm" disabled={!this.state.undo.length} onClick={this.handleUndo}>
                     Undo
                   </button>
                 </div>
                 <div className="btn-group">
-                  <button type="button" className="btn btn-default" disabled={!this.state.redo.length} onClick={this.handleRedo}>
+                  <button type="button" className="btn btn-awsm" disabled={!this.state.redo.length} onClick={this.handleRedo}>
                     Redo
                   </button>
                 </div>
                 <div className="btn-group dropup">
-                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <button type="button" className="btn btn-awsm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <strong>&hellip;</strong>
                   </button>
                   <ul className="dropdown-menu dropdown-menu-right" role="menu">
