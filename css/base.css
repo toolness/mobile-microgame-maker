@@ -74,9 +74,15 @@ h6 {
 }
 li.list-group-item {
   border: none;
-  background: #b2ddfb;
+  background-color: #b2ddfb;
   color: #2f7fb8;
   border-bottom: 4px solid white;
+  transition: background-color 0.25s;
+  -webkit-transition: background-color 0.25s;
+  -moz-transition: background-color 0.25s;
+}
+li.list-group-item.highlighted {
+  background-color: #ffff66;
 }
 li.list-group-item:first-child {
   border-radius: 0;
