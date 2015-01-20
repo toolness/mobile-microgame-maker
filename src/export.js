@@ -4,6 +4,7 @@ define(function(require) {
   var Blockly = require('./phaser-blocks');
   var React = require('react');
   var PhaserState = require('./phaser-state');
+  var importFromHtml = require('./import-from-html');
 
   var Export = {
     _templateString: require('text!templates/export-template.html'),
@@ -53,15 +54,7 @@ define(function(require) {
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     },
-    fromHtml: function(html) {
-      var match = html.match(/^var gameData = (.+);$/m);
-      if (match) {
-        try {
-          return JSON.parse(match[1]);
-        } catch (e) {}
-      }
-      return null;
-    },
+    fromHtml: importFromHtml,
     toHtml: function(gameData, options) {
       options = options || {};
       var s3GameData = React.addons.update(gameData, {
