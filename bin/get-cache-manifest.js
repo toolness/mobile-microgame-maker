@@ -25,6 +25,7 @@ function get(now) {
     'CACHE:',
     'index.html',
     'phaser-frame.html',
+    'startup-manager.js.',
     'main.js',
     'require-config.js',
     buildCss.OUTPUT_FILENAME,
