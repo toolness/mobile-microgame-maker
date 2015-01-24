@@ -1,6 +1,7 @@
 define(function(require) {
   var _ = require('underscore');
   var Blockly = require('blockly');
+  var GameData = require('./game-data');
   var hackBlocklyForIos = require('./ui/blockly-ios-hacks');
   var gameData = null;
   var soundsUsed = null;
@@ -21,6 +22,23 @@ define(function(require) {
     return gameData.sounds.map(function(sound) {
       return [sound.key, sound.key];
     });    
+  }
+
+  function playSound(key) {
+    var sound, url;
+
+    if (!(gameData && gameData.sounds.length)) return;
+    sound = _.findWhere(gameData.sounds, {key: key});
+    if (!sound) return;
+    url = GameData.resolveURL(gameData, sound.url);
+
+    // If an exception is raised by playing the sound, we don't
+    // want it to crash the app, so wrap it in a setTimeout().
+    setTimeout(function() {
+      var audio = document.createElement('audio');
+      audio.setAttribute('src', url);
+      audio.play();
+    }, 0);
   }
 
   function generateJsBranch(block) {
@@ -251,10 +269,11 @@ define(function(require) {
 
   Blockly.Blocks['phaser_play_sound'] = {
     init: function() {
+      var field = new Blockly.FieldDropdown(soundList, playSound);
       this.setPreviousStatement(true);
       this.setNextStatement(true);
       this.appendDummyInput().appendField('play')
-        .appendField(new Blockly.FieldDropdown(soundList), 'SOUND');
+        .appendField(field, 'SOUND');
     }
   };
 
