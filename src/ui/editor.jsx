@@ -179,7 +179,7 @@ define(function(require) {
                 <div className="btn-group btn-group-justified">
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm" onClick={this.handleAddSprite}>
-                      Add
+                      <span className="glyphicon glyphicon-plus"></span> Sprite
                     </button>
                   </div>
                   <div className="btn-group">
