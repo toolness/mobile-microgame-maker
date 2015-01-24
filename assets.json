@@ -7,10 +7,10 @@
       "frameHeight": 80
     },
     {
-      "key": "badge",
-      "url": "img/badge.png",
-      "frameWidth": 59,
-      "frameHeight": 78
+      "key": "balloon",
+      "url": "img/balloon.png",
+      "frameWidth": 50,
+      "frameHeight": 148
     },
     {
       "key": "dancingbear",
@@ -19,58 +19,238 @@
       "frameHeight": 176
     },
     {
-      "key": "blue_creature",
-      "url": "img/blue.png",
-      "frameWidth": 45,
-      "frameHeight": 73
+      "key": "sheep",
+      "url": "img/sheep_jumping.png",
+      "frameWidth": 310,
+      "frameHeight": 176
     },
     {
-      "key": "red_creature",
-      "url": "img/red.png",
-      "frameWidth": 55,
-      "frameHeight": 73
+      "key": "poop",
+      "url": "img/poop.png",
+      "frameWidth": 70,
+      "frameHeight": 60
     },
     {
-      "key": "button",
-      "url": "img/button_new-07.png",
-      "frameWidth": 100,
-      "frameHeight": 76
-    },
-    {
-      "key": "mountain",
-      "url": "img/mountain.png",
-      "frameWidth": 100,
+      "key": "button_red",
+      "url": "img/redbutton.png",
+      "frameWidth": 130,
       "frameHeight": 110
     },
     {
-      "key": "chopsticks",
-      "url": "img/chopsticks1.png",
-      "frameWidth": 58,
+      "key": "button_blue",
+      "url": "img/blue_button.png",
+      "frameWidth": 130,
+      "frameHeight": 110
+    },
+    {
+      "key": "button_yellow",
+      "url": "img/yellow_button.png",
+      "frameWidth": 130,
+      "frameHeight": 110
+    },
+    {
+      "key": "eyes",
+      "url": "img/eyes.png",
+      "frameWidth": 155,
       "frameHeight": 80
+    },
+    {
+      "key": "lefthand",
+      "url": "img/hand1.png",
+      "frameWidth": 170,
+      "frameHeight": 140
+    },
+    {
+      "key": "righthand",
+      "url": "img/hand2.png",
+      "frameWidth": 170,
+      "frameHeight": 140
+    },
+    {
+      "key": "marshmallow",
+      "url": "img/marshmallow.png",
+      "frameWidth": 100,
+      "frameHeight": 135
+    },
+    {
+      "key": "fallingstar",
+      "url": "img/fallingstar.png",
+      "frameWidth": 115,
+      "frameHeight": 120
+    },
+    {
+      "key": "bluemonster",
+      "url": "img/blue_creature.png",
+      "frameWidth": 153,
+      "frameHeight": 183
+    },
+    {
+      "key": "redmonster",
+      "url": "img/red_creature.png",
+      "frameWidth": 153,
+      "frameHeight": 183
+    },
+    {
+      "key": "yellowmonster",
+      "url": "img/yellow_creature.png",
+      "frameWidth": 153,
+      "frameHeight": 183
     },
     {
       "key": "sushi",
       "url": "img/sushi.png",
-      "frameWidth": 35,
-      "frameHeight": 40
+      "frameWidth": 70,
+      "frameHeight": 80
     },
     {
-      "key": "plate",
-      "url": "img/plate.png",
-      "frameWidth": 77,
-      "frameHeight": 38
+      "key": "dish",
+      "url": "img/empty_dish.png",
+      "frameWidth": 120,
+      "frameHeight": 66
+    },
+    {
+      "key": "dish_crumbles",
+      "url": "img/dish_crumbles.png",
+      "frameWidth": 120,
+      "frameHeight": 66
     },
     {
       "key": "princess_fight",
-      "url": "img/princess.png",
-      "frameWidth": 100,
-      "frameHeight": 140
+      "url": "img/princess-38.png",
+      "frameWidth": 95,
+      "frameHeight": 150
     },
     {
-      "key": "upsidedown",
-      "url": "img/upsidedown.png",
-      "frameWidth": 162,
+      "key": "crack",
+      "url": "img/ice_broken.png",
+      "frameWidth": 120,
+      "frameHeight": 67
+    },
+    {
+      "key": "largercrack",
+      "url": "img/ice_broken.png",
+      "frameWidth": 120,
+      "frameHeight": 67
+    },
+    {
+      "key": "evenlargercrack",
+      "url": "img/ice_broken.png",
+      "frameWidth": 120,
+      "frameHeight": 67
+    },
+    {
+      "key": "hole",
+      "url": "img/ice_broken.png",
+      "frameWidth": 120,
+      "frameHeight": 67
+    },
+    {
+      "key": "penguin",
+      "url": "img/ice_broken.png",
+      "frameWidth": 120,
+      "frameHeight": 67
+    },
+    {
+      "key": "door",
+      "url": "img/door.png",
+      "frameWidth": 140,
+      "frameHeight": 217
+    },
+    {
+      "key": "fence",
+      "url": "img/fence.png",
+      "frameWidth": 72,
+      "frameHeight": 41
+    },
+    {
+      "key": "hill",
+      "url": "img/mountain1.png",
+      "frameWidth": 170,
       "frameHeight": 180
+    },
+    {
+      "key": "cave",
+      "url": "img/mountain2.png",
+      "frameWidth": 150,
+      "frameHeight": 160
+    },
+    {
+      "key": "mountains",
+      "url": "img/mountain3.png",
+      "frameWidth": 200,
+      "frameHeight": 143
+    },
+    {
+      "key": "pinetree",
+      "url": "img/tree1.png",
+      "frameWidth": 50,
+      "frameHeight": 100
+    },
+    {
+      "key": "cypress",
+      "url": "img/tree2.png",
+      "frameWidth": 50,
+      "frameHeight": 100
+    },
+    {
+      "key": "pinetreetoo",
+      "url": "img/tree3.png",
+      "frameWidth": 50,
+      "frameHeight": 100
+    },
+    {
+      "key": "cypresstoo",
+      "url": "img/tree4.png",
+      "frameWidth": 50,
+      "frameHeight": 100
+    },
+    {
+      "key": "ice_mountain",
+      "url": "img/IceMountains.png",
+      "frameWidth": 122,
+      "frameHeight": 175
+    },
+    {
+      "key": "mountaintops",
+      "url": "img/MountainPale.png",
+      "frameWidth": 126,
+      "frameHeight": 123
+    },
+    {
+      "key": "bushes",
+      "url": "img/bushes.png",
+      "frameWidth": 200,
+      "frameHeight": 200
+    },
+    {
+      "key": "clouds",
+      "url": "img/Clouds.png",
+      "frameWidth": 180,
+      "frameHeight": 87
+    },
+    {
+      "key": "polka_dots",
+      "url": "img/polkadots.png",
+      "frameWidth": 500,
+      "frameHeight": 500
+    },
+    {
+      "key": "moustache",
+      "url": "img/moustache.png",
+      "frameWidth": 118,
+      "frameHeight": 41
+    },
+    {
+      "key": "pizza",
+      "url": "img/pizza.png",
+      "frameWidth": 107,
+      "frameHeight": 114
+    },
+    {
+      "key": "rainbow",
+      "url": "img/rainbow.png",
+      "frameWidth": 110,
+      "frameHeight": 100
     }
   ],
   "animations": {
@@ -104,14 +284,26 @@
         "loop": false
       }
     ],
-    "badge": [
+    "balloon": [
       {
-        "name": "badge",
+        "name": "flying",
         "frames": [
-          0
+          0,
+          1,
+          2,
+          3
         ],
-        "frameRate": 1,
+        "frameRate": 4,
         "loop": true
+      },
+      {
+        "name": "pinched",
+        "frames": [
+          4,
+          5
+        ],
+        "frameRate": 2,
+        "loop": false
       }
     ],
     "dancingbear": [
@@ -138,37 +330,37 @@
         "loop": false
       }
     ],
-    "blue_creature": [
+    "sheep": [
       {
-        "name": "blue_creature",
+        "name": "sheep",
         "frames": [
           0,
           1,
           2,
           3,
-          4
+          4,
+          5,
+          6
         ],
-        "frameRate": 5,
+        "frameRate": 7,
         "loop": true
       }
     ],
-    "red_creature": [
+    "poop": [
       {
-        "name": "red_creature",
+        "name": "ploop",
         "frames": [
           0,
           1,
-          2,
-          3,
-          4
+          2
         ],
-        "frameRate": 5,
+        "frameRate": 3,
         "loop": true
       }
     ],
-    "button": [
+    "button_red": [
       {
-        "name": "button",
+        "name": "off",
         "frames": [
           0
         ],
@@ -176,19 +368,67 @@
         "loop": true
       },
       {
-        "name": "explode",
+        "name": "on",
         "frames": [
-          1,
-          2,
-          3
+          1
         ],
-        "frameRate": 3,
+        "frameRate": 1,
         "loop": false
       }
     ],
-    "mountain": [
+    "button_blue": [
       {
-        "name": "mountain",
+        "name": "off",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      },
+      {
+        "name": "on",
+        "frames": [
+          1
+        ],
+        "frameRate": 1,
+        "loop": false
+      }
+    ],
+    "button_yellow": [
+      {
+        "name": "off",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      },
+      {
+        "name": "on",
+        "frames": [
+          1
+        ],
+        "frameRate": 1,
+        "loop": false
+      }
+    ],
+    "eyes": [
+      {
+        "name": "eyes",
+        "frames": [
+          0,
+          1,
+          2,
+          4,
+          2
+        ],
+        "frameRate": 5,
+        "loop": true
+      }
+    ],
+    "lefthand": [
+      {
+        "name": "lefthand",
         "frames": [
           0
         ],
@@ -196,9 +436,73 @@
         "loop": true
       }
     ],
-    "chopsticks": [
+    "righthand": [
       {
-        "name": "chopsticks",
+        "name": "righthand",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "marshmallow": [
+      {
+        "name": "marshmallow",
+        "frames": [
+          0,
+          1
+        ],
+        "frameRate": 2,
+        "loop": true
+      }
+    ],
+    "fallingstar": [
+      {
+        "name": "star",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "frameRate": 8,
+        "loop": true
+      },
+      {
+        "name": "wish",
+        "frames": [
+          5,
+          6
+        ],
+        "frameRate": 2,
+        "loop": false
+      }
+    ],
+    "bluemonster": [
+      {
+        "name": "bluemonster",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "redmonster": [
+      {
+        "name": "redmonster",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "yellowmonster": [
+      {
+        "name": "yellowmonster",
         "frames": [
           0
         ],
@@ -210,23 +514,29 @@
       {
         "name": "sushi",
         "frames": [
-          0
+          0,
+          1,
+          2,
+          3,
+          4
         ],
-        "frameRate": 2,
+        "frameRate": 5,
         "loop": true
-      },
-      {
-        "name": "sushisad",
-        "frames": [
-          1
-        ],
-        "frameRate": null,
-        "loop": false
       }
     ],
-    "plate": [
+    "dish": [
       {
-        "name": "plate",
+        "name": "dish",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "dish_crumbles": [
+      {
+        "name": "plate_dirty",
         "frames": [
           0
         ],
@@ -236,36 +546,284 @@
     ],
     "princess_fight": [
       {
-        "name": "princess_fight",
+        "name": "idle",
         "frames": [
           0,
           1,
           2,
-          3
+          3,
+          4,
+          5
         ],
-        "frameRate": 1,
+        "frameRate": 6,
         "loop": true
+      },
+      {
+        "name": "fight",
+        "frames": [
+          6,
+          7,
+          8
+        ],
+        "frameRate": 3,
+        "loop": false
       }
     ],
-    "upsidedown": [
+    "crack": [
       {
-        "name": "upsidedown",
+        "name": "break1",
         "frames": [
           0
         ],
         "frameRate": 1,
         "loop": true
       }
+    ],
+    "largercrack": [
+      {
+        "name": "break2",
+        "frames": [
+          1
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "evenlargercrack": [
+      {
+        "name": "break3",
+        "frames": [
+          2
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "hole": [
+      {
+        "name": "break4",
+        "frames": [
+          3
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "penguin": [
+      {
+        "name": "win",
+        "frames": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "frameRate": 6,
+        "loop": true
+      }
+    ],
+    "door": [
+      {
+        "name": "knock",
+        "frames": [
+          0,
+          1
+        ],
+        "frameRate": 2,
+        "loop": true
+      },
+      {
+        "name": "win",
+        "frames": [
+          2,
+          3,
+          4
+        ],
+        "frameRate": 3,
+        "loop": true
+      }
+    ],
+    "fence": [
+      {
+        "name": "fence",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "hill": [
+      {
+        "name": "mountain1",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "cave": [
+      {
+        "name": "mountain2",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "mountains": [
+      {
+        "name": "mountain3",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "pinetree": [
+      {
+        "name": "tree1",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "cypress": [
+      {
+        "name": "tree2",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "pinetreetoo": [
+      {
+        "name": "tree3",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "cypresstoo": [
+      {
+        "name": "tree4",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "ice_mountain": [
+      {
+        "name": "ice_mountain",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "mountaintops": [
+      {
+        "name": "mountaintops",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "bushes": [
+      {
+        "name": "bush",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "clouds": [
+      {
+        "name": "clouds",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "frameRate": 6,
+        "loop": true
+      }
+    ],
+    "polka_dots": [
+      {
+        "name": "polkadots",
+        "frames": [
+          0,
+          1,
+          2
+        ],
+        "frameRate": 3,
+        "loop": true
+      }
+    ],
+    "moustache": [
+      {
+        "name": "moustache",
+        "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "pizza": [
+      {
+        "name": "pizza",
+        "frames": [
+          0
+        ],
+        "frameRate": null,
+        "loop": false
+      }
+    ],
+    "rainbow": [
+      {
+        "name": "rainbow",
+        "frames": [
+          0
+        ],
+        "frameRate": null,
+        "loop": false
+      }
     ]
   },
   "sounds": [
     {
-      "key": "blop",
-      "url": "sounds/Blop-Mark_DiAngelo.mp3"
+      "key": "lasershoot",
+      "url": "sounds/Laser_Shoot.mp3"
     },
     {
-      "key": "woosh",
-      "url": "sounds/Woosh-Mark_DiAngelo.mp3"
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "powerup",
+      "url": "sounds/Powerup.mp3"
     },
     {
       "key": "doorknock",
@@ -276,8 +834,44 @@
       "url": "sounds/squeeze.mp3"
     },
     {
-      "key": "evil",
+      "key": "sheep",
+      "url": "sounds/Sheep.mp3"
+    },
+    {
+      "key": "happy_laughter",
+      "url": "sounds/Happy_Laugh.mp3"
+    },
+    {
+      "key": "evil_laughter",
       "url": "sounds/evil_laugh.mp3"
+    },
+    {
+      "key": "woosh",
+      "url": "sounds/Woosh-Mark_DiAngelo.mp3"
+    },
+    {
+      "key": "coin",
+      "url": "sounds/coin.mp3"
+    },
+    {
+      "key": "blop",
+      "url": "sounds/Blop-Mark_DiAngelo.mp3"
+    },
+    {
+      "key": "eating",
+      "url": "sounds/eat.mp3"
+    },
+    {
+      "key": "meow",
+      "url": "sounds/Meow.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "well",
+      "url": "sounds/well.mp3"
     }
   ]
 }
