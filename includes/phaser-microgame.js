@@ -59,10 +59,6 @@ PhaserMicrogame.prototype = {
     } else {
       if (this.phase == 'PLAYING') {
         game.debug.geom(this.timeBar, '#000000');
-      } else {
-        game.debug.text("Player has " + this.outcome + " the game.",
-                        0, this.TIME_BAR_HEIGHT + 4,
-                        this.outcome == 'WON' ? "lightgreen" : "red");
       }
     }
   },
