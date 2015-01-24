@@ -5,13 +5,19 @@ require([
   "src/publish",
   "jquery"
 ], function(createApp, spreadsheetToAssets, Export, publish, $) {
+  function error(msg) {
+    window.setTimeout(function() {
+      throw new Error(msg);
+    }, 0);
+  }
+
   function importGame(game, options) {
     var TIMEOUT = 5000;
     var deferred = $.Deferred();
 
     function reject(reason) {
-      window.alert("Failed to import minigame: " + reason);
       deferred.reject();
+      error("Failed to import minigame: " + reason);
     }
 
     function accept(gameData, from) {
@@ -53,7 +59,7 @@ require([
 
       timeout = window.setTimeout(function() {
         timeout = null;
-        window.alert('Failed to retrieve spreadsheet ' + spreadsheet);
+        error('Failed to retrieve spreadsheet ' + spreadsheet);
         deferred.reject();
       }, TIMEOUT);
       spreadsheetToAssets(spreadsheet, function(result) {
