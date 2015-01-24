@@ -126,6 +126,7 @@ div.btn-group-justified > div.btn-group:last-child {
   align-items: center;
 }
 .editor-wrapper {
+  padding-top: 70px;
   margin-bottom: 3em;
 }
 #blockly-holder {
