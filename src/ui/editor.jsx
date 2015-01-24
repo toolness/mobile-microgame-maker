@@ -66,6 +66,7 @@ define(function(require) {
       });
     },
     handleUndo: function() {
+      if (!this.state.undo.length) return;
       this.setState(React.addons.update(this.state, {
         undo: {$splice: [[-1, 1]]},
         redo: {$push: [this.state.gameData]},
@@ -73,6 +74,7 @@ define(function(require) {
       }));
     },
     handleRedo: function() {
+      if (!this.state.redo.length) return;
       this.setState(React.addons.update(this.state, {
         undo: {$push: [this.state.gameData]},
         redo: {$splice: [[-1, 1]]},
@@ -175,33 +177,39 @@ define(function(require) {
                 <div className="btn-group btn-group-justified">
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm" onClick={this.handleAddSprite}>
-                      <span className="glyphicon glyphicon-plus"></span>
+                      Add
                     </button>
                   </div>
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm btn-block" onClick={this.handleOpenBlockly}>
-                      Code&hellip;
+                      Code
                     </button>
                   </div>
                   <div className="btn-group">
+                    <button type="button" className="btn btn-awsm" onClick={this.handlePublish}>
+                      Publish
+                    </button>
+                  </div>
+                  <div className="btn-group hidden-xs hidden-sm">
                     <button type="button" className="btn btn-awsm" disabled={!this.state.undo.length} onClick={this.handleUndo}>
                       Undo
                     </button>
                   </div>
-                  <div className="btn-group">
+                  <div className="btn-group hidden-xs hidden-sm">
                     <button type="button" className="btn btn-awsm" disabled={!this.state.redo.length} onClick={this.handleRedo}>
                       Redo
                     </button>
                   </div>
                   <div className="btn-group dropup">
                     <button type="button" className="btn btn-awsm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <strong>&hellip;</strong>
+                      <strong>Moar</strong>
                     </button>
                     <ul className="dropdown-menu dropdown-menu-right" role="menu">
                       <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
                       <li><a href="#" onClick={this.handleExport}><span className="glyphicon glyphicon-export"></span> Export to HTML</a></li>
                       <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
-                      <li><a href="#" onClick={this.handlePublish}><span className="glyphicon glyphicon-cloud-upload"></span> Publish to Web</a></li>
+                      <li className={"hidden-md hidden-lg " + (this.state.undo.length ? "" : "disabled")}><a href="#" onClick={this.handleUndo}>Undo</a></li>
+                      <li className={"hidden-md hidden-lg " + (this.state.redo.length ? "" : "disabled")}><a href="#" onClick={this.handleRedo}>Redo</a></li>
                     </ul>
                   </div>
                 </div>
