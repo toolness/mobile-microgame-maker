@@ -8,6 +8,8 @@ var StartupManager = {
     if (color) span.style.color = color;
   },
   handleError: function(e) {
+    this.poopEl.style.display = "";
+    this.throbberEl.style.display = "none";
     this.log(e.message, "red");
   },
   autobind: function() {
@@ -16,8 +18,10 @@ var StartupManager = {
         this[prop] = this[prop].bind(this);
     }, this);
   },
-  begin: function(msgEl) {
+  begin: function(msgEl, throbberEl, poopEl) {
     this.msgEl = msgEl;
+    this.throbberEl = throbberEl;
+    this.poopEl = poopEl;
     window.addEventListener("error", this.handleError, false);
   },
   end: function() {
