@@ -65,7 +65,8 @@ define(function(require) {
         }
       });
     },
-    handleUndo: function() {
+    handleUndo: function(e) {
+      e.preventDefault();
       if (!this.state.undo.length) return;
       this.setState(React.addons.update(this.state, {
         undo: {$splice: [[-1, 1]]},
@@ -73,7 +74,8 @@ define(function(require) {
         gameData: {$set: this.state.undo[this.state.undo.length - 1]}
       }));
     },
-    handleRedo: function() {
+    handleRedo: function(e) {
+      e.preventDefault();
       if (!this.state.redo.length) return;
       this.setState(React.addons.update(this.state, {
         undo: {$push: [this.state.gameData]},
