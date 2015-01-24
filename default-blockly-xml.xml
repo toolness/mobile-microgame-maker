@@ -1,0 +1,34 @@
+<xml 
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_set_main_text" id="130" inline="false" x="185" y="256">
+    <value name="TEXT">
+      <block type="text" id="131">
+        <field name="TEXT">Click "code..." to change this text!</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_on_win_or_lose" id="54" x="185" y="291">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="34" inline="false">
+        <value name="TEXT">
+          <block type="text" id="35">
+            <field name="TEXT">Woohoo! You Won!</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="73" x="184" y="373">
+    <field name="EVENT">lose</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="110" inline="false">
+        <value name="TEXT">
+          <block type="text" id="111">
+            <field name="TEXT">Uh-Oh! You Lost.</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

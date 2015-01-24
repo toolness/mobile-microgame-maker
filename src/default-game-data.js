@@ -1,12 +1,15 @@
 define(function(require) {
   var assets = JSON.parse(require('text!assets.json'));
+  var blocklyXml = require('text!default-blockly-xml.xml');
+
+  var EMPTY_BLOCKLY_XML = '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>';
 
   return {
     sounds: assets.sounds,
     spritesheets: assets.spritesheets,
     animations: assets.animations,
     sprites: [],
-    blocklyXml: '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>',
+    blocklyXml: blocklyXml,
     baseURL: 'assets/',
     width: 640,
     height: 480,
