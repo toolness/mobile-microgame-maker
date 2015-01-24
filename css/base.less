@@ -10,6 +10,9 @@
 
 @sectionpadding: 80px;
 
+// This must be kept in sync w/ the same variable in sprite-list.jsx.
+@NAVBAR_HEIGHT: 70px;
+
 @lightfont: 'Open Sans Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 @import "../fonts/OpenSans-Light-webfont.css";
@@ -155,6 +158,7 @@ div.btn-group-justified > div.btn-group:last-child {
 }
 
 .editor-wrapper {
+  padding-top: @NAVBAR_HEIGHT;
   margin-bottom: 3em;
 }
 

@@ -5,6 +5,9 @@ define(function(require) {
 
   var HIGHLIGHTED_SPRITE_MS = 1000;
 
+  // This must be kept in-sync w/ the same variable in base.less.
+  var NAVBAR_HEIGHT = 70;
+
   var SpriteList = React.createClass({
     getInitialState: function() {
       return {
@@ -24,7 +27,8 @@ define(function(require) {
 
       // http://css-tricks.com/snippets/jquery/smooth-scrolling/
       $('html, body').animate({
-        scrollTop: $(sprite.getDOMNode()).offset().top
+        scrollTop: $(sprite.getDOMNode()).offset().top -
+                   NAVBAR_HEIGHT
       }, 500);
     },
     componentWillUnmount: function() {
