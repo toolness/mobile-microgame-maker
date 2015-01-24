@@ -40,6 +40,11 @@
       c-0.637,2.293-2.975,3.647-5.223,3.023c-2.249-0.624-3.557-2.988-2.92-5.282c0.636-2.293,2.975-3.646,5.223-3.022l-1.152,4.152"/>
   </g>
   </svg>
+  <div>
+    <button id="reset" style="display: none" class="btn btn-awsm">
+      Reset App To Factory Defaults
+    </button>
+  </div>
   <div><small id="loading-msg"></small></div>
   </div>
 </div>
@@ -65,7 +70,8 @@
 StartupManager.begin(
   document.getElementById('loading-msg'),
   document.getElementById('throbber'),
-  document.getElementById('poop')
+  document.getElementById('poop'),
+  document.getElementById('reset')
 );
 
 if (document.documentElement.hasAttribute('manifest')) {

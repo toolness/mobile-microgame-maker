@@ -7,6 +7,11 @@ var StartupManager = {
     this.msgEl.appendChild(span);
     if (color) span.style.color = color;
   },
+  bindResetButton: function(cb) {
+    if (!this.resetEl) return;
+    this.resetEl.style.display = "";
+    this.resetEl.addEventListener('click', cb, false);
+  },
   handleError: function(e) {
     this.poopEl.style.display = "";
     this.throbberEl.style.display = "none";
@@ -18,10 +23,11 @@ var StartupManager = {
         this[prop] = this[prop].bind(this);
     }, this);
   },
-  begin: function(msgEl, throbberEl, poopEl) {
+  begin: function(msgEl, throbberEl, poopEl, resetEl) {
     this.msgEl = msgEl;
     this.throbberEl = throbberEl;
     this.poopEl = poopEl;
+    this.resetEl = resetEl;
     window.addEventListener("error", this.handleError, false);
   },
   end: function() {

@@ -7,7 +7,7 @@ define(function(require) {
   var defaultGameData = require("../default-game-data");
   var toolbox = require('text!blockly-toolbox.xml');
 
-  return function start(options) {
+  return function createApp(options) {
     var root = options.root;
     var editorHolder = options.editorHolder;
     var modalHolder = options.modalHolder;
@@ -57,9 +57,7 @@ define(function(require) {
         reset();
     }
 
-    var modalManager, blockly, editor;
-
-    try {
+    function start() {
       modalManager = Modal.createManager(modalHolder);
 
       blockly = React.render(
@@ -67,20 +65,18 @@ define(function(require) {
         blocklyHolder
       );
 
-      editor = React.render(
-        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
+      self.editor = React.render(
+        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={self.modalManager}/>,
         editorHolder
       );
-    } catch (e) {
-      window.setTimeout(function() {
-        if (window.confirm("A fatal error occured! Reset this app to its factory defaults? Your data will be lost."))
-          reset();
-      }, 250);
-      console.log(e);
-      console.log(e.stack);
-      throw e;
     }
 
-    return editor;
+    var modalManager, blockly;
+    var self = {
+      reset: reset,
+      start: start
+    };
+
+    return self;
   }
 });

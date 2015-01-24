@@ -4,7 +4,7 @@ require([
   "src/export",
   "src/publish",
   "jquery"
-], function(app, spreadsheetToAssets, Export, publish, $) {
+], function(createApp, spreadsheetToAssets, Export, publish, $) {
   function importGame(game, options) {
     var TIMEOUT = 5000;
     var deferred = $.Deferred();
@@ -70,10 +70,20 @@ require([
   }
 
   function startApp(options) {
-    window.StartupManager.end();
+    var app, errorTimeout;
+
     $('html').removeClass('loading');
 
-    var editor = app($.extend(options, {
+    errorTimeout = window.setTimeout(function() {
+      $('html').addClass('loading');
+      window.StartupManager.handleError({
+        message: "Your computer exploded."
+      });
+      if (app)
+        window.StartupManager.bindResetButton(app.reset);
+    }, 10);
+
+    app = createApp($.extend(options, {
       root: document.documentElement,
       editorHolder: document.getElementById('editor-holder'),
       modalHolder: document.getElementById('modal-holder'),
@@ -82,8 +92,14 @@ require([
       storageKey: 'mmm_gamedata'
     }));
 
+    app.start();
+
     // For debugging via console only!
-    window.editor = editor;
+    window.app = app;
+
+    window.StartupManager.end();
+
+    window.clearTimeout(errorTimeout);
   }
 
   publish.warmup();
