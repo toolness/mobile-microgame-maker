@@ -93,14 +93,14 @@ define(function(require) {
     getTransform: function() {
       return 'scale(' + (this.props.scale) + ')';
     },
-    handleClick: function(e) {
+    handlePointerEvent: function(e, pointer) {
       if (!(this.props.onDisplayObjectClick &&
             this.game && this.game.world)) return;
 
       var rect = e.target.getBoundingClientRect();
       var invScale = 1 / this.props.scale;
-      var x = Math.floor((e.clientX - rect.left) * invScale);
-      var y = Math.floor((e.clientY - rect.top) * invScale);
+      var x = Math.floor((pointer.clientX - rect.left) * invScale);
+      var y = Math.floor((pointer.clientY - rect.top) * invScale);
 
       this.game.world.children.some(function(item) {
         var point = new this.iframe.contentWindow.Phaser.Point();
@@ -112,6 +112,12 @@ define(function(require) {
           this.props.onDisplayObjectClick(item, this.props.phaserState);
         return hit;
       }, this);
+    },
+    handleTouch: function(e) {
+      this.handlePointerEvent(e, e.touches[0]);
+    },
+    handleClick: function(e) {
+      this.handlePointerEvent(e, e);
     },
     render: function() {
       var scale = this.props.scale;
@@ -141,7 +147,7 @@ define(function(require) {
              top: 0,
              left: 0,
              zIndex: '2'
-           }} onClick={this.handleClick}></div>
+           }} onTouchStart={this.handleTouch} onClick={this.handleClick}></div>
          : null}
         <canvas
           ref="placeholder"
