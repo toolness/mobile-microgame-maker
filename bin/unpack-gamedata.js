@@ -34,7 +34,6 @@ function main(basename) {
     var html = Buffer.concat(chunks).toString('utf-8');
     extractGameData(html, function(err, gameData) {
       if (err) throw err;
-      console.log(gameData);
       var blocklyXml = gameData.blocklyXml;
       delete gameData.blocklyXml;
       fs.writeFileSync(basename + '.json',
