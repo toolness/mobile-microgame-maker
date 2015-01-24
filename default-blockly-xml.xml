@@ -3,7 +3,7 @@
   <block type="phaser_set_main_text" id="130" inline="false" x="185" y="256">
     <value name="TEXT">
       <block type="text" id="131">
-        <field name="TEXT">Click "code..." to change this text!</field>
+        <field name="TEXT">Tap "code..." to change this text!</field>
       </block>
     </value>
   </block>
