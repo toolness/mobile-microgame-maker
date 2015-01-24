@@ -179,17 +179,17 @@ define(function(require) {
                 <div className="btn-group btn-group-justified">
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm" onClick={this.handleAddSprite}>
-                      <span className="glyphicon glyphicon-plus"></span> Sprite
+                      <span className="glyphicon glyphicon-plus"></span> <span className="hidden-teensy">Sprite</span>
                     </button>
                   </div>
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm btn-block" onClick={this.handleOpenBlockly}>
-                      <span className="glyphicon glyphicon-wrench"></span> Code
+                      <span className="glyphicon glyphicon-wrench"></span> <span className="hidden-teensy">Code</span>
                     </button>
                   </div>
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm" onClick={this.handlePublish}>
-                      <span className="glyphicon glyphicon-cloud-upload"></span> Publish
+                      <span className="glyphicon glyphicon-cloud-upload"></span> <span className="hidden-teensy">Publish</span>
                     </button>
                   </div>
                   <div className="btn-group hidden-xs hidden-sm">
@@ -204,7 +204,7 @@ define(function(require) {
                   </div>
                   <div className="btn-group dropup">
                     <button type="button" className="btn btn-awsm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <span className="glyphicon glyphicon-flash"></span> Moar
+                      <span className="glyphicon glyphicon-flash"></span> <span className="hidden-teensy">Moar</span>
                     </button>
                     <ul className="dropdown-menu dropdown-menu-right" role="menu">
                       <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
