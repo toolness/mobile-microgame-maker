@@ -204,7 +204,7 @@ define(function(require) {
                   </div>
                   <div className="btn-group dropup">
                     <button type="button" className="btn btn-awsm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <strong><span className="glyphicon glyphicon-flash"></span> Moar</strong>
+                      <span className="glyphicon glyphicon-flash"></span> Moar
                     </button>
                     <ul className="dropdown-menu dropdown-menu-right" role="menu">
                       <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
