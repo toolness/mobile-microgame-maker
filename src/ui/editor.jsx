@@ -184,12 +184,12 @@ define(function(require) {
                   </div>
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm btn-block" onClick={this.handleOpenBlockly}>
-                      Code
+                      <span className="glyphicon glyphicon-wrench"></span> Code
                     </button>
                   </div>
                   <div className="btn-group">
                     <button type="button" className="btn btn-awsm" onClick={this.handlePublish}>
-                      Publish
+                      <span className="glyphicon glyphicon-cloud-upload"></span> Publish
                     </button>
                   </div>
                   <div className="btn-group hidden-xs hidden-sm">
@@ -204,7 +204,7 @@ define(function(require) {
                   </div>
                   <div className="btn-group dropup">
                     <button type="button" className="btn btn-awsm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <strong>Moar</strong>
+                      <strong><span className="glyphicon glyphicon-flash"></span> Moar</strong>
                     </button>
                     <ul className="dropdown-menu dropdown-menu-right" role="menu">
                       <li><a href="#" onClick={this.handleAbout}><span className="glyphicon glyphicon-info-sign"></span> About this App</a></li>
