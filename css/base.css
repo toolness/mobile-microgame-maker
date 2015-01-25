@@ -33,6 +33,9 @@ body {
   background: #3fa9f5;
   color: white;
 }
+.navbar-mmm .navbar-toggle .icon-bar {
+  background: white;
+}
 .navbar-mmm .navbar-brand {
   font-family: 'Open Sans Extrabold';
   font-weight: normal;
@@ -43,6 +46,10 @@ body {
 }
 .navbar-mmm a {
   color: inherit;
+}
+.navbar-mmm .nav a:hover,
+.navbar-mmm .nav a:focus {
+  background: #2f7fb8;
 }
 h1,
 h2,
