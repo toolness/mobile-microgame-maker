@@ -52,17 +52,22 @@ define(function(require) {
         iframe.setAttribute('src', 'phaser-frame.html?bust=' +
                                    window.CACHE_BUSTER);
         iframe.onload = function() {
-          var Phaser = iframe.contentWindow.Phaser;
-          newState.Phaser = Phaser;
-          newState.id = 1;
-          self.game = new Phaser.Game(
-            self.props.width,
-            self.props.height,
-            Phaser.CANVAS,
-            iframe.contentDocument.body,
-            null
-          );
-          self.game.state.add(newState.id.toString(), newState, true);
+          var frameWindow = iframe.contentWindow;
+
+          frameWindow.init(function() {
+            var Phaser = frameWindow.Phaser;
+
+            newState.Phaser = Phaser;
+            newState.id = 1;
+            self.game = new Phaser.Game(
+              self.props.width,
+              self.props.height,
+              Phaser.CANVAS,
+              iframe.contentDocument.body,
+              null
+            );
+            self.game.state.add(newState.id.toString(), newState, true);
+          });
         };
         this.refs.phaser.getDOMNode().appendChild(iframe);
         iframe.style.width = this.props.width + 'px';
