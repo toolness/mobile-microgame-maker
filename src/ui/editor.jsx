@@ -9,6 +9,7 @@ define(function(require) {
   var PublishModal = require('jsx!./modals/publish-modal');
   var AboutModal = require('jsx!./modals/about-modal');
   var SpritesheetModal = require('jsx!./modals/spritesheet-modal');
+  var devServerTools = require('../dev-server-tools');
 
   var Editor = React.createClass({
     makePhaserState: function(options) {
@@ -146,6 +147,20 @@ define(function(require) {
       }
       playerHolder.setAttribute("style", style);
     },
+    handleExportToFilesystem: function(e) {
+      e.preventDefault();
+      devServerTools.exportToFilesystem(this.state.gameData, function(name) {
+        if (name != this.state.gameData.name)
+          this.changeGameData({
+            name: {$set: name}
+          });
+      }.bind(this));
+    },
+    handleImportFromFilesystem: function(e) {
+      e.preventDefault();
+      devServerTools.importFromFilesystem(this.state.gameData.name,
+                                          this.importGameData);
+    },
     adjustScale: function(newScale) {
       if (this.refs.playerHolder.getDOMNode().style.position != 'fixed')
         return newScale;
@@ -168,6 +183,8 @@ define(function(require) {
         this.props.onGameDataChange(this.state.gameData);
     },
     render: function() {
+      var usingDevServer = window.USING_DEV_SERVER;
+
       return (
         <div>
           <div className="row">
@@ -212,6 +229,12 @@ define(function(require) {
                       <li><a href="#" onClick={this.handleImport}><span className="glyphicon glyphicon-import"></span> Import from HTML</a></li>
                       <li className={"hidden-md hidden-lg " + (this.state.undo.length ? "" : "disabled")}><a href="#" onClick={this.handleUndo}>Undo</a></li>
                       <li className={"hidden-md hidden-lg " + (this.state.redo.length ? "" : "disabled")}><a href="#" onClick={this.handleRedo}>Redo</a></li>
+                      {usingDevServer
+                       ? <li><a href="#" onClick={this.handleExportToFilesystem}>Export to filesystem</a></li>
+                       : null}
+                      {usingDevServer
+                       ? <li><a href="#" onClick={this.handleImportFromFilesystem}>Import from filesystem</a></li>
+                       : null}
                     </ul>
                   </div>
                 </div>

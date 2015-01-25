@@ -92,6 +92,8 @@ StartupManager.begin(
     window.CACHE_BUSTER = encodeURIComponent(cacheBuster);
     require.urlArgs = "bust=" + window.CACHE_BUSTER;
   }
+
+  window.USING_DEV_SERVER = html.hasAttribute('data-using-dev-server');
 })();
 </script>
 <script data-main="main" src="vendor/require.js"></script>
