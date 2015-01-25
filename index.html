@@ -77,9 +77,6 @@ StartupManager.begin(
 if (document.documentElement.hasAttribute('manifest')) {
   // https://github.com/toolness/mobile-microgame-maker/issues/12
   require.waitSeconds = 0;
-} else {
-  // Grrr. http://stackoverflow.com/a/8479953
-  require.urlArgs = "bust=" + Date.now();
 }
 </script>
 <script data-main="main" src="vendor/require.js"></script>
