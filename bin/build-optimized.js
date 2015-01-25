@@ -6,6 +6,20 @@ var getCacheManifest = require('./get-cache-manifest');
 
 var ENABLE_APPCACHE = 'ENABLE_APPCACHE' in process.env;
 
+function loadIndexWithHtmlAttrs(attrs) {
+  var attrPairs = [];
+  Object.keys(attrs).forEach(function(name) {
+    var value = attrs[name];
+
+    if (typeof(attrs[name]) == 'undefined') return;
+    attrPairs.push(name + '="' + value + '"');
+  });
+  return fs.readFileSync('index.html', 'utf-8').replace(
+    'data-maybe-replace-me-with-a-manifest',
+    attrPairs.join(' ')
+  );
+}
+
 function build(cb) {
   cb = cb || function() {};
 
@@ -51,11 +65,10 @@ function build(cb) {
                        getCacheManifest(buildDate, !ENABLE_APPCACHE));
       fs.writeFileSync(
         'build/index.html',
-        fs.readFileSync('index.html', 'utf-8').replace(
-          'data-maybe-replace-me-with-a-manifest',
-          (ENABLE_APPCACHE ? 'manifest="mmm.appcache" ' : '') +
-          'data-build-date="' + buildDate.toISOString() + '"'
-        )
+        loadIndexWithHtmlAttrs({
+          'manifest': ENABLE_APPCACHE ? 'mmm.appcache' : undefined,
+          'data-build-date': buildDate.toISOString()
+        })
       );
       console.log('Built version ' + buildDate.toISOString() + '.');
       console.log('Done. Built files are in the "build" directory.');
@@ -73,6 +86,7 @@ function build(cb) {
 }
 
 module.exports = build;
+module.exports.loadIndexWithHtmlAttrs = loadIndexWithHtmlAttrs;
 
 if (!module.parent) {
   console.log(
