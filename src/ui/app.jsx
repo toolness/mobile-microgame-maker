@@ -65,13 +65,13 @@ define(function(require) {
         blocklyHolder
       );
 
-      self.editor = React.render(
+      editor = self.editor = React.render(
         <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
         editorHolder
       );
     }
 
-    var modalManager, blockly;
+    var modalManager, blockly, editor;
     var self = {
       reset: reset,
       start: start
