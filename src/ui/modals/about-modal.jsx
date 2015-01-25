@@ -65,7 +65,7 @@ define(function(require) {
       return (
         <Modal title="&nbsp;" onFinished={this.props.onFinished} hideSaveButton>
           <div style={{textAlign: 'center'}}>
-            <h2>Mobile Minigame Maker</h2>
+            <h2>Make A Minigame</h2>
             <p>{this.state.version
                 ? 'Version ' + this.state.version
                 : 'Development Version'}</p>
