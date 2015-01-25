@@ -49,7 +49,8 @@ define(function(require) {
 
       if (!this.iframe) {
         var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', 'phaser-frame.html');
+        iframe.setAttribute('src', 'phaser-frame.html?bust=' +
+                                   window.CACHE_BUSTER);
         iframe.onload = function() {
           var Phaser = iframe.contentWindow.Phaser;
           newState.Phaser = Phaser;

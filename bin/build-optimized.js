@@ -4,6 +4,8 @@ var fs = require('fs');
 var buildCss = require('./build-css');
 var getCacheManifest = require('./get-cache-manifest');
 
+var ENABLE_APPCACHE = 'ENABLE_APPCACHE' in process.env;
+
 function build(cb) {
   cb = cb || function() {};
 
@@ -45,12 +47,13 @@ function build(cb) {
     // here, so we'll do a process.nextTick() so that node logs any
     // thrown exceptions.
     process.nextTick(function() {
-      fs.writeFileSync('build/mmm.appcache', getCacheManifest(buildDate));
+      fs.writeFileSync('build/mmm.appcache',
+                       getCacheManifest(buildDate, !ENABLE_APPCACHE));
       fs.writeFileSync(
         'build/index.html',
         fs.readFileSync('index.html', 'utf-8').replace(
           'data-maybe-replace-me-with-a-manifest',
-          'manifest="mmm.appcache" ' +
+          (ENABLE_APPCACHE ? 'manifest="mmm.appcache" ' : '') +
           'data-build-date="' + buildDate.toISOString() + '"'
         )
       );
@@ -72,6 +75,11 @@ function build(cb) {
 module.exports = build;
 
 if (!module.parent) {
+  console.log(
+    "Building w/ appcache " +
+    (ENABLE_APPCACHE ? "enabled. Unset " : "disabled. Set ") +
+    "ENABLE_APPCACHE in env to change this."
+  );
   buildCss(function(err) {
     if (err) throw err;
     console.log("Built CSS.");

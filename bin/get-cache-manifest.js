@@ -16,30 +16,37 @@ function listFiles(dirname) {
   return list;
 }
 
-function get(now) {
+function get(now, isEmpty) {
   now = now || new Date();
-  return [
+
+  var lines = [
     'CACHE MANIFEST',
     '# ' + now.toString(),
-    '',
-    'CACHE:',
-    'index.html',
-    'phaser-frame.html',
-    'startup-manager.js',
-    'main.js',
-    'require-config.js',
-    buildCss.OUTPUT_FILENAME,
-    'vendor/require.js',
-    'vendor/require.text.js', // Note sure why this needs to be loaded, but
-                              // it shows up in the network log on optimized
-                              // builds...
-    'vendor/phaser.js',
-    'vendor/bootstrap/css/bootstrap.css',
-    'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff'
-  ].concat(listFiles('vendor/blockly/media'))
-   .concat(listFiles('assets'))
-   .concat(listFiles('fonts'))
-   .concat([
+  ];
+
+  if (!isEmpty) {
+    lines = lines.concat([
+      '',
+      'CACHE:',
+      'index.html',
+      'phaser-frame.html',
+      'startup-manager.js',
+      'main.js',
+      'require-config.js',
+      buildCss.OUTPUT_FILENAME,
+      'vendor/require.js',
+      'vendor/require.text.js', // Note sure why this needs to be loaded, but
+                                // it shows up in the network log on optimized
+                                // builds...
+      'vendor/phaser.js',
+      'vendor/bootstrap/css/bootstrap.css',
+      'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff'
+    ]).concat(listFiles('vendor/blockly/media'))
+      .concat(listFiles('assets'))
+      .concat(listFiles('fonts'));
+  }
+
+  return lines.concat([
     '',
     'NETWORK:',
     '*'

@@ -21,10 +21,18 @@
     //
     // https://github.com/toolness/mobile-microgame-maker/issues/7
     function bypassSafariAppCacheLameness() {
+      var usingManifest = false;
       var LoaderProto = Phaser.Loader.prototype;
       var ua = navigator.userAgent;
       var isSafari = /safari/i.test(ua) && !/chrome/i.test(ua);
-      if (!isSafari || LoaderProto.originalXhrLoad) return;
+
+      try {
+        usingManifest = window.top.document.documentElement
+          .hasAttribute('manifest');
+      } catch (e) {}
+
+      if (!usingManifest || !isSafari || LoaderProto.originalXhrLoad)
+        return;
 
       LoaderProto.originalXhrLoad = LoaderProto.xhrLoad;
       LoaderProto.xhrLoad = function(index, url, type, onload, onerror) {

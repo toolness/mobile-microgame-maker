@@ -74,10 +74,22 @@ StartupManager.begin(
   document.getElementById('reset')
 );
 
-if (document.documentElement.hasAttribute('manifest')) {
-  // https://github.com/toolness/mobile-microgame-maker/issues/12
-  require.waitSeconds = 0;
-}
+(function() {
+  var html = document.documentElement;
+  var cacheBuster = null;
+
+  if (html.hasAttribute('manifest')) {
+    // https://github.com/toolness/mobile-microgame-maker/issues/12
+    require.waitSeconds = 0;
+  } else if (html.hasAttribute('data-build-date')) {
+    cacheBuster = html.getAttribute('data-build-date');
+  }
+
+  if (cacheBuster) {
+    window.CACHE_BUSTER = encodeURIComponent(cacheBuster);
+    require.urlArgs = "bust=" + window.CACHE_BUSTER;
+  }
+})();
 </script>
 <script data-main="main" src="vendor/require.js"></script>
 </body>
