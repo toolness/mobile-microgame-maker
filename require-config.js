@@ -2,6 +2,7 @@ var require = {
   paths: {
     "text": "vendor/require.text",
     "jsx": "vendor/require.jsx",
+    "URLUtils": "vendor/URLUtils",
     "hammer": "vendor/hammer",
     "tabletop": "vendor/tabletop",
     "underscore": "vendor/underscore",
@@ -19,6 +20,9 @@ var require = {
     fileExtension: '.jsx'
   },
   shim: {
+    "URLUtils": {
+      exports: "URLUtils"
+    },
     "jquery-bootstrap": {
       deps: ["jquery"],
       exports: "jQuery"
