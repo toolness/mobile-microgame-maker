@@ -16,6 +16,7 @@ var require = {
     "JSXTransformer": "vendor/react/build/JSXTransformer",
     "react": "vendor/react/build/react-with-addons",
   },
+  waitSeconds: 20,
   jsx: {
     fileExtension: '.jsx'
   },
