@@ -7,7 +7,7 @@ define(function(require) {
   var importFromHtml = require('./import-from-html');
 
   var Export = {
-    _templateString: require('text!templates/export-template.html'),
+    _templateString: require('text!codegen-templates/export-template.html'),
     fromUrl: function(url, timeoutMs, cb) {
       $.ajax({
         url: url,

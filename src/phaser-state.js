@@ -11,9 +11,10 @@ define(function(require) {
     require('text!includes/phaser-microgame.js')
   ].join('\n');
 
+  var template = require('text!codegen-templates/phaser-state-template.js');
   var PhaserState = {
     Generators: {
-      _stateTemplate: require('text!templates/phaser-state-template.js')
+      _stateTemplate: template
     }
   };
 
