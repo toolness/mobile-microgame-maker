@@ -56,6 +56,17 @@ define(function(require) {
     return GameData.withoutUnusedSpritesheets(gameData);
   };
 
+  GameData.maximize = function(gameData, assetLibrary) {
+    // TODO: Preserve any assets in gameData that aren't
+    // present in assetLibrary.
+
+    return React.addons.update(gameData, {
+      sounds: {$set: assetLibrary.sounds},
+      spritesheets: {$set: assetLibrary.spritesheets},
+      animations: {$set: assetLibrary.animations}
+    });
+  };
+
   GameData.withoutUnusedSpritesheets = function(gameData) {
     var spriteMap = {};
 

@@ -4,6 +4,7 @@ define(function(require) {
   var Editor = require("jsx!./editor");
   var React = require("react");
   var Blockly = require("../phaser-blocks");
+  var GameData = require("../game-data");
   var defaultGameData = require("../default-game-data");
   var toolbox = require('text!blockly-toolbox.xml');
 
@@ -25,11 +26,7 @@ define(function(require) {
     } catch (e) {}
 
     if (assetLibrary) {
-      initialGameData = React.addons.update(initialGameData, {
-        sounds: {$set: assetLibrary.sounds},
-        spritesheets: {$set: assetLibrary.spritesheets},
-        animations: {$set: assetLibrary.animations}
-      });
+      initialGameData = GameData.maximize(initialGameData, assetLibrary);
     }
 
     function handleOpenBlockly() {

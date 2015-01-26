@@ -5,6 +5,7 @@ define(function(require) {
   var PhaserState = require('./phaser-state');
   var GameData = require('./game-data');
   var Blockly = require('./phaser-blocks');
+  var defaultGameData = require('./default-game-data');
 
   return {
     importFromFilesystem: function(name, cb) {
@@ -17,9 +18,9 @@ define(function(require) {
         error: function(jqXHR, textStatus, errorThrown) {
           alert(new Error(textStatus + " " +  jqXHR.status));
         },
-        success: function(data, textStatus, jqXHR) {
+        success: function(gameData, textStatus, jqXHR) {
           alert("Successfully imported " + name + "!");
-          cb(data);
+          cb(GameData.maximize(gameData, defaultGameData));
         }
       });
     },

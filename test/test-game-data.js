@@ -5,6 +5,13 @@ defineTests([
 ], function(React, GameData, defaultGameData) {
   module("GameData");
 
+  test("maximize() adds assets", function() {
+    var gameData = GameData.maximize({foo: 1}, defaultGameData);
+    deepEqual(gameData.sounds, defaultGameData.sounds);
+    deepEqual(gameData.spritesheets, defaultGameData.spritesheets);
+    deepEqual(gameData.animations, defaultGameData.animations);
+  });
+
   test("withoutUnusedSounds() clears sounds when none used", function() {
     var gameData = GameData.withoutUnusedSounds(defaultGameData, []);
     deepEqual(gameData.sounds, []);
