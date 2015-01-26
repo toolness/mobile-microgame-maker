@@ -4,7 +4,6 @@ define(function(require) {
   var Blockly = require('./phaser-blocks');
   var React = require('react');
   var PhaserState = require('./phaser-state');
-  var importFromHtml = require('./import-from-html');
 
   var Export = {
     _templateString: require('text!codegen-templates/export-template.html'),
@@ -54,7 +53,15 @@ define(function(require) {
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     },
-    fromHtml: importFromHtml,
+    fromHtml: function(html) {
+      var match = html.match(/^var gameData = (.+);$/m);
+      if (match) {
+        try {
+          return JSON.parse(match[1]);
+        } catch (e) {}
+      }
+      return null;
+    },
     toHtml: function(gameData, options) {
       options = _.defaults(options || {}, {
         baseAssetURL: '//s3.amazonaws.com/minicade-assets/',
