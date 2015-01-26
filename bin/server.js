@@ -1,8 +1,9 @@
 var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
+var prettyData = require('pretty-data').pd;
+var stableStringify = require('json-stable-stringify');
 
-var writeGameData = require('./unpack-gamedata').writeGameData;
 var buildOptimized = require('./build-optimized');
 var buildCss = require('./build-css');
 
@@ -56,10 +57,20 @@ app.get('/examples/:name', function(req, res, next) {
 });
 
 app.post('/examples/:name', function(req, res, next) {
-  var name = EXAMPLES_DIR + '/' + req.name
+  var basename = EXAMPLES_DIR + '/' + req.name;
+  var gameData = JSON.parse(req.body.gameData);
 
-  fs.writeFileSync(name + '.html', req.body.html);
-  writeGameData(name, JSON.parse(req.body.gameData));
+  fs.writeFileSync(basename + '.html', req.body.html);
+  var blocklyXml = gameData.blocklyXml;
+
+  delete gameData.blocklyXml;
+  fs.writeFileSync(basename + '.json',
+                   stableStringify(gameData, {space: 2}));
+  console.log('wrote', basename + '.json.');
+  fs.writeFileSync(basename + '.xml',
+                   prettyData.xml(blocklyXml));
+  console.log('wrote', basename + '.xml.');
+
   res.send({status: "OK"});
 });
 
