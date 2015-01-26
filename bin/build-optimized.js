@@ -34,9 +34,9 @@ function build(cb) {
 
   var jsxt = fs.readFileSync('vendor/react/build/JSXTransformer.js', 'utf-8');
 
-  jsxt = jsxt.replace(/'use strict'/g, "'use ' + 'strict'");
+  var jsxtMunged = jsxt.replace(/'use strict'/g, "'use ' + 'strict'");
 
-  fs.writeFileSync('JSXTransformer.useStrictMunged.js', jsxt);
+  fs.writeFileSync('JSXTransformer.useStrictMunged.js', jsxtMunged);
 
   var config = require('../require-config');
 
@@ -71,6 +71,10 @@ function build(cb) {
         })
       );
       console.log('Built version ' + buildDate.toISOString() + '.');
+      fs.writeFileSync(
+        'build/vendor/react/build/JSXTransformer.js',
+        jsxt
+      );
       console.log('Done. Built files are in the "build" directory.');
       fs.unlinkSync('JSXTransformer.useStrictMunged.js');
       cb(null);
