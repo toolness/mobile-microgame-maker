@@ -25,17 +25,21 @@ function extractGameData(html, cb) {
   });
 }
 
+function writeGameData(basename, gameData) {
+  var blocklyXml = gameData.blocklyXml;
+  delete gameData.blocklyXml;
+  fs.writeFileSync(basename + '.json',
+                   stableStringify(gameData, {space: 2}));
+  console.log('wrote', basename + '.json.');
+  fs.writeFileSync(basename + '.xml',
+                   prettyData.xml(blocklyXml));
+  console.log('wrote', basename + '.xml.');
+}
+
 function extractAndWriteGameData(basename, html, cb) {
   extractGameData(html, function(err, gameData) {
     if (err) return cb(err);
-    var blocklyXml = gameData.blocklyXml;
-    delete gameData.blocklyXml;
-    fs.writeFileSync(basename + '.json',
-                     stableStringify(gameData, {space: 2}));
-    console.log('wrote', basename + '.json.');
-    fs.writeFileSync(basename + '.xml',
-                     prettyData.xml(blocklyXml));
-    console.log('wrote', basename + '.xml.');
+    writeGameData(basename, gameData);
     cb(null);
   });
 }
@@ -55,6 +59,7 @@ function main(basename) {
 }
 
 module.exports = extractAndWriteGameData;
+module.exports.writeGameData = writeGameData;
 
 if (!module.parent) {
   if (!BASENAME) {

@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var unpackGameData = require('./unpack-gamedata');
+var writeGameData = require('./unpack-gamedata').writeGameData;
 var buildOptimized = require('./build-optimized');
 var buildCss = require('./build-css');
 
@@ -59,10 +59,8 @@ app.post('/examples/:name', function(req, res, next) {
   var name = EXAMPLES_DIR + '/' + req.name
 
   fs.writeFileSync(name + '.html', req.body.html);
-  unpackGameData(name, req.body.html, function(err) {
-    if (err) return next(err);
-    res.send({status: "OK"});
-  });
+  writeGameData(name, JSON.parse(req.body.gameData));
+  res.send({status: "OK"});
 });
 
 app.use(express.static(__dirname + '/..'));

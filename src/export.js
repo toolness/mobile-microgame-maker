@@ -3,7 +3,6 @@ define(function(require) {
   var $ = require('jquery');
   var Blockly = require('./phaser-blocks');
   var React = require('react');
-  var GameData = require('./game-data');
   var PhaserState = require('./phaser-state');
   var importFromHtml = require('./import-from-html');
 
@@ -67,9 +66,6 @@ define(function(require) {
         blocklyInfo: blocklyInfo,
         standalone: true
       });
-      if (options.exportMinimizedGameData) {
-        gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
-      }
       return _.template(this._templateString, {
         baseAssetURL: s3GameData.baseURL,
         phaserVersion: PhaserState.Generators.PHASER_VERSION,

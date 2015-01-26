@@ -2,6 +2,8 @@ define(function(require) {
   var $ = require('jquery');
   var React = require('react');
   var Export = require('./export');
+  var GameData = require('./game-data');
+  var Blockly = require('./phaser-blocks');
 
   return {
     importFromFilesystem: function(name, cb) {
@@ -26,20 +28,20 @@ define(function(require) {
       name = window.prompt("Enter name of example to export.", name);
       if (!name) return;
 
+      var html = Export.toHtml(gameData, {encourageRemix: false});
+      var blocklyInfo = Blockly.Phaser.generateJs(gameData);
+
       gameData = React.addons.update(gameData, {
         name: {$set: name}
       });
-
-      var html = Export.toHtml(gameData, {
-        encourageRemix: true,
-        exportMinimizedGameData: true
-      });
+      gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
 
       $.ajax({
         method: 'POST',
         url: '/examples/' + name,
         data: {
-          'html': html
+          'html': html,
+          'gameData': JSON.stringify(gameData)
         },
         dataType: 'json',
         error: function(jqXHR, textStatus, errorThrown) {
