@@ -51,6 +51,11 @@ define(function(require) {
     throw new Error('maximum number of sprites reached');
   };
 
+  GameData.minimize = function(gameData, soundsUsed) {
+    gameData = GameData.withoutUnusedSounds(gameData, soundsUsed);
+    return GameData.withoutUnusedSpritesheets(gameData);
+  };
+
   GameData.withoutUnusedSpritesheets = function(gameData) {
     var spriteMap = {};
 

@@ -30,7 +30,10 @@ define(function(require) {
         name: {$set: name}
       });
 
-      var html = Export.toHtml(gameData, {encourageRemix: true});
+      var html = Export.toHtml(gameData, {
+        encourageRemix: true,
+        exportMinimizedGameData: true
+      });
 
       $.ajax({
         method: 'POST',

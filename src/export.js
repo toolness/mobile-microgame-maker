@@ -3,6 +3,7 @@ define(function(require) {
   var $ = require('jquery');
   var Blockly = require('./phaser-blocks');
   var React = require('react');
+  var GameData = require('./game-data');
   var PhaserState = require('./phaser-state');
   var importFromHtml = require('./import-from-html');
 
@@ -60,11 +61,15 @@ define(function(require) {
       var s3GameData = React.addons.update(gameData, {
         baseURL: {$set: '//s3.amazonaws.com/minicade-assets/'}
       });
+      var blocklyInfo = Blockly.Phaser.generateJs(s3GameData);
       var stateJs = PhaserState.Generators.createState({
         gameData: s3GameData,
-        blocklyInfo: Blockly.Phaser.generateJs(s3GameData),
+        blocklyInfo: blocklyInfo,
         standalone: true
       });
+      if (options.exportMinimizedGameData) {
+        gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
+      }
       return _.template(this._templateString, {
         baseAssetURL: s3GameData.baseURL,
         phaserVersion: PhaserState.Generators.PHASER_VERSION,

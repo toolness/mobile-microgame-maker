@@ -105,10 +105,8 @@ define(function(require) {
 
   PhaserState.Generators.createState = function(options) {
     var blocklyInfo = options.blocklyInfo;
-    var gameData = GameData.withoutUnusedSounds(options.gameData,
-                                                blocklyInfo.soundsUsed);
-
-    gameData= GameData.withoutUnusedSpritesheets(gameData);
+    var gameData = GameData.minimize(options.gameData,
+                                     blocklyInfo.soundsUsed);
 
     return _.template(this._stateTemplate, {
       preload: this.preload(gameData),
