@@ -32,7 +32,7 @@
     ]
   },
   "backgroundColor": 15790320,
-  "baseURL": "../assets/",
+  "baseURL": "assets/",
   "blocklyXml": "simple.xml",
   "height": 480,
   "name": "simple",
