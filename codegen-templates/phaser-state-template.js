@@ -17,7 +17,7 @@
 
 <%= extra %>
 
-var state = SimpleEventEmitter({
+var state = PhaserMicrogame.SimpleEventEmitter({
   preload: function() {
     <% if (phaserIsUndefined) { %>Phaser = this.Phaser;<% } else { %>this.Phaser = Phaser;<% } %>
     if (this.Phaser.VERSION != "<%= expectedPhaserVersion %>")

@@ -39,11 +39,8 @@ var require = {
       deps: ["blockly/javascript"],
       exports: "Blockly"
     },
-    "includes/phaser-microgame": {
+    "assets/js/phaser-microgame-0.1": {
       exports: "PhaserMicrogame"
-    },
-    "includes/simple-event-emitter": {
-      exports: "SimpleEventEmitter"
     }
   }
 };

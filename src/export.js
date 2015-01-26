@@ -61,8 +61,7 @@ define(function(require) {
         scripts: [
           '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
           PhaserState.Generators.PHASER_VERSION +
-          '/phaser.min.js',
-          '//toolness.github.io/fancy-friday/contrib/tinygame.js'
+          '/phaser.min.js'
         ]
       });
 
@@ -90,8 +89,7 @@ define(function(require) {
 
     return PhaserState.Generators.createState({
       gameData: s3GameData,
-      blocklyInfo: blocklyInfo,
-      standalone: true
+      blocklyInfo: blocklyInfo
     });
   }
 

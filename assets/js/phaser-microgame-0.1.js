@@ -1,6 +1,17 @@
-// This encapsulates a "microgame", i.e. a very short game that takes
-// a few seconds to play, has a win/lose outcome, and is given a few
-// seconds to show an ending animation.
+// PhaserMicrogame v0.1.0
+// 
+// This micro-library can be used to make a "microgame", i.e. a very
+// short game that takes a few seconds to play, has a win/lose
+// outcome, and is given a few seconds to show an ending animation.
+//
+// Its dependencies are:
+//
+//   * Phaser - http://phaser.io/
+//   * Tinygame - https://github.com/toolness/fancy-friday
+
+// ## PhaserMicrogame constructor
+//
+// This encapsulates a microgame.
 
 var PhaserMicrogame = function(options) {
   var playTime = options.playTime;
@@ -105,4 +116,55 @@ PhaserMicrogame.prototype = {
   isEnded: function() {
     return this.phase == 'ENDED';
   }
+};
+
+// ## PhaserMicrogame.SimpleEventEmitter constructor
+//
+// This is a simple nodeJS EventEmitter-style constructor that just
+// attaches .on() and .trigger() to the given target object.
+
+PhaserMicrogame.SimpleEventEmitter = function SimpleEventEmitter(target) {
+  var eventHandlers = {};
+
+  target.trigger = function(eventName) {
+    var handlers = eventHandlers[eventName] || [];
+    handlers.forEach(function(cb) { cb(); });
+  };
+
+  target.on = function(eventName, cb) {
+    if (!(eventName in eventHandlers))
+      eventHandlers[eventName] = [];
+    eventHandlers[eventName].push(cb);
+  };
+
+  return target;
+};
+
+// ## PhaserMicrogame.installStupidHacks()
+//
+// Install any annoying hacks we need to have Phaser run properly
+// on the widest variety of platforms.
+
+PhaserMicrogame.installStupidHacks = function() {
+
+  // Safari caches cross-origin resources in a ridiculous way.
+  // We'll work around this annoyance by monkeypatching 
+  // Phaser to ensure that we never ask for cached data.
+
+  function bypassSafariCORSLameness() {
+    var LoaderProto = Phaser.Loader.prototype;
+    var ua = navigator.userAgent;
+    var isSafari = /safari/i.test(ua) && !/chrome/i.test(ua);
+    if (!isSafari || LoaderProto.originalXhrLoad) return;
+
+    console.log("Monkeypatching Phaser.Loader to bust cache because " +
+                "https://github.com/photonstorm/phaser/issues/1355.");
+    LoaderProto.originalXhrLoad = LoaderProto.xhrLoad;
+    LoaderProto.xhrLoad = function(index, url, type, onload, onerror) {
+      url = url + '?cacheBust=' + Date.now();
+      return this.originalXhrLoad(index, url, type, onload, onerror);
+    };
+  }
+
+  bypassSafariCORSLameness();
 };

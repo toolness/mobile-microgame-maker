@@ -2,14 +2,7 @@
 define(function(require) {
   var _ = require('underscore');
   var GameData = require('./game-data');
-  var includes = {
-    SimpleEventEmitter: require('includes/simple-event-emitter'),
-    PhaserMicrogame: require('includes/phaser-microgame')
-  };
-  var includeFiles = [
-    require('text!includes/simple-event-emitter.js'),
-    require('text!includes/phaser-microgame.js')
-  ].join('\n');
+  var PhaserMicrogame = require('assets/js/phaser-microgame-0.1');
 
   var template = require('text!codegen-templates/phaser-state-template.js');
   var PhaserState = {
@@ -117,7 +110,7 @@ define(function(require) {
       gameData: gameData,
       playTime: options.playTime || this.DEFAULT_PLAY_TIME,
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
-      extra: options.standalone ? includeFiles : '',
+      extra: '',
       phaserIsUndefined: !!options.phaserIsUndefined,
       start: blocklyInfo.start
     });
@@ -158,7 +151,7 @@ define(function(require) {
     });
     stateJs = [
       '//# sourceURL=generated-phaser-state-code.js',
-      '(function(SimpleEventEmitter, PhaserMicrogame) {',
+      '(function(PhaserMicrogame) {',
       'var Phaser;',
       stateJs,
       'return state;',
@@ -166,8 +159,7 @@ define(function(require) {
     ].join('\n');
 
     //console.log("stateJs is", stateJs);
-    var state = eval(stateJs)(includes.SimpleEventEmitter,
-                              includes.PhaserMicrogame);
+    var state = eval(stateJs)(PhaserMicrogame);
 
     _.extend(state, {
       setPaused: function(isPaused) {
