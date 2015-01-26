@@ -1,0 +1,33 @@
+<xml 
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_set_main_text" id="129" inline="false" x="378" y="220">
+    <value name="TEXT">
+      <block type="text" id="130">
+        <field name="TEXT">Tap the fly!</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_on_tap" id="131" x="378" y="260">
+    <field name="SPRITE">e65cedca-81b9-5dd2-5613-6ce46552008c</field>
+    <statement name="STACK">
+      <block type="phaser_play_sound" id="132">
+        <field name="SOUND">woohoo</field>
+        <next>
+          <block type="phaser_win" id="154"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="133" x="377" y="373">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_set_bg" id="134" inline="false">
+        <value name="COLOUR">
+          <block type="colour_picker" id="135">
+            <field name="COLOUR">#33ff33</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

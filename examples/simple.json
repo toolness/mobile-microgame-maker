@@ -1,0 +1,70 @@
+{
+  "animations": {
+    "fly": [
+      {
+        "frameRate": 10,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "loop": true,
+        "name": "flying"
+      },
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": false,
+        "name": "dead"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "../assets/",
+  "blocklyXml": "simple.xml",
+  "height": 480,
+  "name": "simple",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "flying",
+      "id": "e65cedca-81b9-5dd2-5613-6ce46552008c",
+      "key": "fly",
+      "name": "fly_1",
+      "spawnArea": {
+        "height": 480,
+        "left": 0,
+        "top": 0,
+        "width": 640
+      },
+      "x": 355,
+      "y": 195
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 80,
+      "frameWidth": 80,
+      "key": "fly",
+      "url": "img/fly.png"
+    }
+  ],
+  "width": 640
+}
