@@ -56,37 +56,41 @@ define(function(require) {
     },
     fromHtml: importFromHtml,
     toHtml: function(gameData, options) {
-      options = options || {};
-      var s3GameData = React.addons.update(gameData, {
-        baseURL: {$set: options.baseAssetURL ||
-                        '//s3.amazonaws.com/minicade-assets/'}
+      options = _.defaults(options || {}, {
+        baseAssetURL: '//s3.amazonaws.com/minicade-assets/',
+        phaserURL: '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
+                   PhaserState.Generators.PHASER_VERSION +
+                   '/phaser.min.js',
+        tinygameURL: '//toolness.github.io/fancy-friday/contrib/tinygame.js'
       });
-      var blocklyInfo = Blockly.Phaser.generateJs(s3GameData);
-      var stateJs = PhaserState.Generators.createState({
-        gameData: s3GameData,
-        blocklyInfo: blocklyInfo,
-        standalone: true
-      });
-      var phaserURL = options.phaserURL ||
-                      ('//cdnjs.cloudflare.com/ajax/libs/phaser/' +
-                       PhaserState.Generators.PHASER_VERSION +
-                       '/phaser.min.js');
-      var tinygameURL = options.tinygameURL ||
-                        '//toolness.github.io/fancy-friday/contrib/' +
-                        'tinygame.js';
+
       return _.template(this._templateString, {
-        baseAssetURL: s3GameData.baseURL,
-        phaserURL: phaserURL,
-        tinygameURL: tinygameURL,
+        baseAssetURL: options.baseAssetURL,
+        phaserURL: options.phaserURL,
+        tinygameURL: options.tinygameURL,
         encourageRemix: options.encourageRemix,
         gameData: gameData,
         creatorURL: window.location.protocol + '//' +
           window.location.host + window.location.pathname +
           '?importGame=opener',
-        stateJs: stateJs
+        stateJs: options.stateJs || buildStateJs(gameData, options)
       });
     }
   };
+
+  function buildStateJs(gameData, options) {
+    options = options || {};
+    var s3GameData = React.addons.update(gameData, {
+      baseURL: {$set: options.baseAssetURL}
+    });
+    var blocklyInfo = Blockly.Phaser.generateJs(s3GameData);
+
+    return PhaserState.Generators.createState({
+      gameData: s3GameData,
+      blocklyInfo: blocklyInfo,
+      standalone: true
+    });
+  }
 
   return Export;
 });

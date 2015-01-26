@@ -2,6 +2,7 @@ define(function(require) {
   var $ = require('jquery');
   var React = require('react');
   var Export = require('./export');
+  var PhaserState = require('./phaser-state');
   var GameData = require('./game-data');
   var Blockly = require('./phaser-blocks');
 
@@ -28,18 +29,28 @@ define(function(require) {
       name = window.prompt("Enter name of example to export.", name);
       if (!name) return;
 
+      gameData = React.addons.update(gameData, {
+        name: {$set: name},
+        baseURL: {$set: '../assets/'}
+      });
+
+      var blocklyInfo = Blockly.Phaser.generateJs(gameData);
+
+      gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
+
+      var stateJs = PhaserState.Generators.createState({
+        gameData: gameData,
+        blocklyInfo: blocklyInfo,
+        standalone: true
+      });
       var html = Export.toHtml(gameData, {
+        stateJs: stateJs,
         encourageRemix: false,
-        baseAssetURL: '../assets/',
+        baseAssetURL: gameData.baseURL,
         phaserURL: '../vendor/phaser.js',
         tinygameURL: '../vendor/tinygame.js'
       });
-      var blocklyInfo = Blockly.Phaser.generateJs(gameData);
 
-      gameData = React.addons.update(gameData, {
-        name: {$set: name}
-      });
-      gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
 
       $.ajax({
         method: 'POST',
