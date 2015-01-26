@@ -47,7 +47,8 @@ define(function(require) {
           var type = jqXHR.getResponseHeader('content-type');
           if (/^text\/html/.test(type))
             return Export.fromHtml(url, data, cb);
-          if (/^application\/json/.test(type)) {
+          if (/^application\/json/.test(type) ||
+              /^binary\/octet-stream/.test(type)) {
             try {
               data = JSON.parse(data);
             } catch (e) {
