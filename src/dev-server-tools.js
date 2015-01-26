@@ -26,6 +26,7 @@ define(function(require) {
     },
     exportToFilesystem: function(gameData, cb) {
       var name = gameData.name;
+      var originalBaseURL = gameData.baseURL;
 
       name = window.prompt("Enter name of example to export.", name);
       if (!name) return;
@@ -50,6 +51,10 @@ define(function(require) {
         baseAssetURL: gameData.baseURL,
         baseCreatorURL: '../',
         scripts: ['../vendor/phaser.js']
+      });
+
+      gameData = React.addons.update(gameData, {
+        baseURL: {$set: originalBaseURL}
       });
 
       $.ajax({
