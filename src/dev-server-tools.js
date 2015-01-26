@@ -28,7 +28,12 @@ define(function(require) {
       name = window.prompt("Enter name of example to export.", name);
       if (!name) return;
 
-      var html = Export.toHtml(gameData, {encourageRemix: false});
+      var html = Export.toHtml(gameData, {
+        encourageRemix: false,
+        baseAssetURL: '../assets/',
+        phaserURL: '../vendor/phaser.js',
+        tinygameURL: '../vendor/tinygame.js'
+      });
       var blocklyInfo = Blockly.Phaser.generateJs(gameData);
 
       gameData = React.addons.update(gameData, {
