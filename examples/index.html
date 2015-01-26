@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../css/base.css">
+<title>Example Minigames</title>
+<div class="container">
+  <h1>Example Minigames</h1>
+  <div id="examples"></div>
+</div>
+<script src="../vendor/react/build/JSXTransformer.js"></script>
+<script src="../vendor/react/build/react-with-addons.js"></script>
+<script src="examples.js"></script>
+<script type="text/jsx">
+var GameEntry = React.createClass({
+  render: function() {
+    var basename = this.props.basename;
+    var a = document.createElement('a');
+
+    a.setAttribute('href', basename + '.html');
+
+    return (
+      <div className="row">
+        <div className="col-sm-8">
+          <h4>{basename}</h4>
+        </div>
+        <div className="col-sm-4">
+          <a href={basename + '.html'}
+            className="btn btn-awsm btn-xs">Play</a>
+          &nbsp;
+          <a href={'../?importGame=' + a.href}
+             className="btn btn-awsm btn-awsmblue btn-xs">Remix</a>
+        </div>
+      </div>
+    );
+  }
+});
+
+var App = React.createClass({
+  render: function() {
+    return (
+      <ul className="list-unstyled">
+        {this.props.games.map(function(basename, i) {
+          return (
+            <li key={i}>
+              <GameEntry basename={basename}/>
+            </li>
+          );
+         })}
+      </ul>
+    );
+  }
+});
+
+React.render(
+  <App games={EXAMPLES}/>,
+  document.getElementById('examples')
+);
+</script>
