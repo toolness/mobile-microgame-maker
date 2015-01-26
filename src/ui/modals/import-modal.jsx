@@ -9,14 +9,19 @@ define(function(require) {
     },
     handleChange: function(e) {
       var value = e.target.value;
-      this.setState({latestValue: value, gameData: null});
-      Export.fromHtml(value, function(err, gameData) {
+      var onGameData = function(err, gameData) {
         if (err)
           return console.log(err);
         if (!this.isMounted() || this.state.latestValue != value)
           return;
         this.setState({gameData: gameData});
-      }.bind(this));
+      }.bind(this);
+      this.setState({latestValue: value, gameData: null});
+      if (/^https?:\/\//.test(value)) {
+        Export.fromUrl(value, onGameData);
+      } else {
+        Export.fromHtml(value, onGameData);
+      }
     },
     handleSave: function() {
       this.props.onSave(this.state.gameData);

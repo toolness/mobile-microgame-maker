@@ -33,6 +33,7 @@ require([
     } else if (game == 'opener') {
       Export.fromWindowOpener(TIMEOUT, function(err, gameData, origin) {
         if (err) return reject(err.message);
+        if (!gameData) return reject("gameData not found");
         accept(gameData, origin);
       });
     } else if (/^https?:\/\//.test(game)) {

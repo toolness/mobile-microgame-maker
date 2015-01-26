@@ -5,9 +5,15 @@ define(function(require) {
   var React = require('react');
   var PhaserState = require('./phaser-state');
 
+  var DEFAULT_NETWORK_TIMEOUT = 10000;
+
   var Export = {
     _templateString: require('text!codegen-templates/export-template.html'),
     fromUrl: function(url, timeoutMs, cb) {
+      if (typeof(cb) == 'undefined') {
+        cb = timeoutMs;
+        timeoutMs = DEFAULT_NETWORK_TIMEOUT;
+      }
       $.ajax({
         url: url,
         timeout: timeoutMs,
@@ -16,13 +22,7 @@ define(function(require) {
           cb(new Error(textStatus));
         },
         success: function(data, textStatus, jqXHR) {
-          Export.fromHtml(data, function(err, gameData) {
-            if (err) return cb(err);
-            if (gameData)
-              cb(null, gameData);
-            else
-              cb(new Error("gameData not found"));
-          });
+          Export.fromHtml(data, cb);
         }
       });
     },
