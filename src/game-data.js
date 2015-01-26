@@ -57,13 +57,23 @@ define(function(require) {
   };
 
   GameData.maximize = function(gameData, assetLibrary) {
-    // TODO: Preserve any assets in gameData that aren't
-    // present in assetLibrary.
+    var uniqueLibSounds = assetLibrary.sounds.filter(function(sound) {
+      return !_.findWhere(gameData.sounds, {key: sound.key});
+    });
+    var newSounds = gameData.sounds.concat(uniqueLibSounds);
+    var uniqueLibSheets = assetLibrary.spritesheets.filter(function(ss) {
+      return !_.findWhere(gameData.spritesheets, {key: ss.key});
+    });
+    var newSheets = gameData.spritesheets.concat(uniqueLibSheets);
+    var newAnims = _.extend({}, assetLibrary.animations);
+    _.keys(gameData.animations).forEach(function(name) {
+      newAnims[name] = gameData.animations[name];
+    });
 
     return React.addons.update(gameData, {
-      sounds: {$set: assetLibrary.sounds},
-      spritesheets: {$set: assetLibrary.spritesheets},
-      animations: {$set: assetLibrary.animations}
+      sounds: {$set: newSounds},
+      spritesheets: {$set: newSheets},
+      animations: {$set: newAnims}
     });
   };
 
