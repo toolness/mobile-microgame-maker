@@ -45,8 +45,10 @@ define(function(require) {
       });
       var html = Export.toHtml(gameData, {
         stateJs: stateJs,
-        encourageRemix: false,
+        encourageRemix: true,
+        gameDataForRemix: name + '.json',
         baseAssetURL: gameData.baseURL,
+        baseCreatorURL: '../',
         scripts: ['../vendor/phaser.js']
       });
 

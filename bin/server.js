@@ -63,7 +63,7 @@ app.post('/examples/:name', function(req, res, next) {
   fs.writeFileSync(basename + '.html', req.body.html);
   var blocklyXml = gameData.blocklyXml;
 
-  delete gameData.blocklyXml;
+  gameData.blocklyXml = req.name + '.xml';
   fs.writeFileSync(basename + '.json',
                    stableStringify(gameData, {space: 2}));
   console.log('wrote', basename + '.json.');

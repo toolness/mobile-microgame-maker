@@ -1,6 +1,7 @@
 define(function(require) {
   var _ = require('underscore');
   var $ = require('jquery');
+  var URLUtils = require('URLUtils');
   var Blockly = require('./phaser-blocks');
   var React = require('react');
   var PhaserState = require('./phaser-state');
@@ -9,6 +10,27 @@ define(function(require) {
 
   var Export = {
     _templateString: require('text!codegen-templates/export-template.html'),
+    fromJson: function(baseURL, gameData, cb) {
+      if (typeof(gameData) == 'string')
+        // Looks like gameData is a URL pointing to a JSON blob.
+        return Export.fromUrl(resolveURL(gameData, baseURL), cb);
+      if (gameData && gameData.blocklyXml && gameData.blocklyXml[0] != '<') {
+        // Looks like blocklyXml is a URL.
+        return $.ajax({
+          url: resolveURL(gameData.blocklyXml, baseURL),
+          timeout: DEFAULT_NETWORK_TIMEOUT,
+          dataType: 'text',
+          error: function(jqXHR, textStatus, errorThrown) {
+            cb(new Error(textStatus));
+          },
+          success: function(data, textStatus, jqXHR) {
+            gameData.blocklyXml = data;
+            cb(null, gameData);
+          }
+        });
+      }
+      window.setTimeout(function() { cb(null, gameData); }, 0);
+    },
     fromUrl: function(url, timeoutMs, cb) {
       if (typeof(cb) == 'undefined') {
         cb = timeoutMs;
@@ -22,7 +44,18 @@ define(function(require) {
           cb(new Error(textStatus));
         },
         success: function(data, textStatus, jqXHR) {
-          Export.fromHtml(data, cb);
+          var type = jqXHR.getResponseHeader('content-type');
+          if (/^text\/html/.test(type))
+            return Export.fromHtml(url, data, cb);
+          if (/^application\/json/.test(type)) {
+            try {
+              data = JSON.parse(data);
+            } catch (e) {
+              return cb(e);
+            }
+            return Export.fromJson(url, data, cb);
+          }
+          return cb(new Error('unknown content type: ' + type));
         }
       });
     },
@@ -50,12 +83,21 @@ define(function(require) {
         if (message.type == 'import' && message.gameData) {
           window.removeEventListener('message', onMessage, false);
           window.clearTimeout(timeout);
-          cb(null, message.gameData, event.origin);
+          var baseURL = resolveURL(message.pathname || '/', event.origin);
+          Export.fromJson(baseURL, message.gameData, function(err, gameData) {
+            if (err) return cb(err);
+            cb(null, gameData, event.origin);
+          });
         }
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     },
-    fromHtml: function(html, cb) {
+    fromHtml: function(baseURL, html, cb) {
+      if (typeof(cb) == 'undefined') {
+        cb = html;
+        html = baseURL;
+        baseURL = null;
+      }
       var match = html.match(/^var gameData = (.+);$/m);
       var result = null;
       if (match) {
@@ -63,11 +105,14 @@ define(function(require) {
           result = JSON.parse(match[1]);
         } catch (e) {}
       }
-      setTimeout(function() { cb(null, result); }, 0);
+      return Export.fromJson(baseURL, result, cb);
     },
     toHtml: function(gameData, options) {
       options = _.defaults(options || {}, {
         baseAssetURL: '//s3.amazonaws.com/minicade-assets/',
+        baseCreatorURL: window.location.protocol + '//' +
+                        window.location.host + window.location.pathname,
+        gameDataForRemix: gameData,
         scripts: [
           '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
           PhaserState.Generators.PHASER_VERSION +
@@ -81,14 +126,17 @@ define(function(require) {
           return '<script src="' + src + '"></script>';
         }),
         encourageRemix: options.encourageRemix,
+        gameDataForRemix: options.gameDataForRemix,
         gameData: gameData,
-        creatorURL: window.location.protocol + '//' +
-          window.location.host + window.location.pathname +
-          '?importGame=opener',
+        creatorURL: options.baseCreatorURL + '?importGame=opener',
         stateJs: options.stateJs || buildStateJs(gameData, options)
       });
     }
   };
+
+  function resolveURL(url, base) {
+    return new URLUtils(url, base || undefined).href;
+  }
 
   function buildStateJs(gameData, options) {
     options = options || {};

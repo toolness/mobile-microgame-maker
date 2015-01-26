@@ -63,7 +63,7 @@ PhaserMicrogame.installStupidHacks();
 // The following is *only* defined to allow others to re-import this
 // game into the editor tool; it's not required to play the game.
 
-var gameData = <%= JSON.stringify(gameData) %>;
+var gameData = <%= JSON.stringify(gameDataForRemix) %>;
 
 function remixGame() {
   var child = window.open(<%= JSON.stringify(creatorURL) %>);
@@ -73,7 +73,8 @@ function remixGame() {
       window.removeEventListener('message', onMessage, false);
       child.postMessage(JSON.stringify({
         type: 'import',
-        gameData: gameData
+        gameData: gameData,
+        pathname: window.location.pathname
       }), '*');
     }
   }, false);
