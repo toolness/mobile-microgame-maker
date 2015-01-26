@@ -36,6 +36,7 @@ define(function(require) {
         cb = timeoutMs;
         timeoutMs = DEFAULT_NETWORK_TIMEOUT;
       }
+      url = resolveURL(url, window.location.href);
       $.ajax({
         url: url,
         timeout: timeoutMs,
@@ -93,12 +94,7 @@ define(function(require) {
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     },
-    fromHtml: function(baseURL, html, cb) {
-      if (typeof(cb) == 'undefined') {
-        cb = html;
-        html = baseURL;
-        baseURL = null;
-      }
+    _fromHtml: function(html) {
       var match = html.match(/^var gameData = (.+);$/m);
       var result = null;
       if (match) {
@@ -106,7 +102,15 @@ define(function(require) {
           result = JSON.parse(match[1]);
         } catch (e) {}
       }
-      return Export.fromJson(baseURL, result, cb);
+      return result;
+    },
+    fromHtml: function(baseURL, html, cb) {
+      if (typeof(cb) == 'undefined') {
+        cb = html;
+        html = baseURL;
+        baseURL = null;
+      }
+      return Export.fromJson(baseURL, Export._fromHtml(html), cb);
     },
     toHtml: function(gameData, options) {
       options = _.defaults(options || {}, {
