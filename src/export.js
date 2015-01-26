@@ -58,16 +58,19 @@ define(function(require) {
     toHtml: function(gameData, options) {
       options = _.defaults(options || {}, {
         baseAssetURL: '//s3.amazonaws.com/minicade-assets/',
-        phaserURL: '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
-                   PhaserState.Generators.PHASER_VERSION +
-                   '/phaser.min.js',
-        tinygameURL: '//toolness.github.io/fancy-friday/contrib/tinygame.js'
+        scripts: [
+          '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
+          PhaserState.Generators.PHASER_VERSION +
+          '/phaser.min.js',
+          '//toolness.github.io/fancy-friday/contrib/tinygame.js'
+        ]
       });
 
       return _.template(this._templateString, {
         baseAssetURL: options.baseAssetURL,
-        phaserURL: options.phaserURL,
-        tinygameURL: options.tinygameURL,
+        scriptTags: options.scripts.map(function(src) {
+          return '<script src="' + src + '"></script>';
+        }),
         encourageRemix: options.encourageRemix,
         gameData: gameData,
         creatorURL: window.location.protocol + '//' +

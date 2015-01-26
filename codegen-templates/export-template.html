@@ -27,8 +27,7 @@ html, body, #phaser-holder {
   <% if (encourageRemix) { %><a href="javascript:remixGame()">Remix it.</a><% } %>
 </span>
 </div>
-<script src="<%= phaserURL %>"></script>
-<script src="<%= tinygameURL %>"></script>
+<%= scriptTags.join('\n') %>
 <script>
 <%= stateJs %>
 

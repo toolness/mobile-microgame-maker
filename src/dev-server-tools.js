@@ -42,16 +42,19 @@ define(function(require) {
       var stateJs = PhaserState.Generators.createState({
         gameData: gameData,
         blocklyInfo: blocklyInfo,
-        standalone: true
+        standalone: false
       });
       var html = Export.toHtml(gameData, {
         stateJs: stateJs,
         encourageRemix: false,
         baseAssetURL: gameData.baseURL,
-        phaserURL: '../vendor/phaser.js',
-        tinygameURL: '../vendor/tinygame.js'
+        scripts: [
+          '../vendor/phaser.js',
+          '../vendor/tinygame.js',
+          '../includes/phaser-microgame.js',
+          '../includes/simple-event-emitter.js',
+        ]
       });
-
 
       $.ajax({
         method: 'POST',
