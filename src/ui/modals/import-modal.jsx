@@ -5,12 +5,18 @@ define(function(require) {
 
   var ImportModal = React.createClass({
     getInitialState: function() {
-      return {gameData: null};
+      return {latestValue: null, gameData: null};
     },
     handleChange: function(e) {
-      this.setState({
-        gameData: Export.fromHtml(e.target.value)
-      });
+      var value = e.target.value;
+      this.setState({latestValue: value, gameData: null});
+      Export.fromHtml(value, function(err, gameData) {
+        if (err)
+          return console.log(err);
+        if (!this.isMounted() || this.state.latestValue != value)
+          return;
+        this.setState({gameData: gameData});
+      }.bind(this));
     },
     handleSave: function() {
       this.props.onSave(this.state.gameData);

@@ -16,11 +16,13 @@ define(function(require) {
           cb(new Error(textStatus));
         },
         success: function(data, textStatus, jqXHR) {
-          var gameData = Export.fromHtml(data);
-          if (gameData)
-            cb(null, gameData);
-          else
-            cb(new Error("gameData not found"));
+          Export.fromHtml(data, function(err, gameData) {
+            if (err) return cb(err);
+            if (gameData)
+              cb(null, gameData);
+            else
+              cb(new Error("gameData not found"));
+          });
         }
       });
     },
@@ -53,14 +55,15 @@ define(function(require) {
       }, false);
       window.opener.postMessage('mmm:ready', '*');
     },
-    fromHtml: function(html) {
+    fromHtml: function(html, cb) {
       var match = html.match(/^var gameData = (.+);$/m);
+      var result = null;
       if (match) {
         try {
-          return JSON.parse(match[1]);
+          result = JSON.parse(match[1]);
         } catch (e) {}
       }
-      return null;
+      setTimeout(function() { cb(null, result); }, 0);
     },
     toHtml: function(gameData, options) {
       options = _.defaults(options || {}, {
