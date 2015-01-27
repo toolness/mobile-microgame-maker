@@ -1,0 +1,168 @@
+<xml 
+  
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_set_main_text" id="149" inline="false" x="-134" y="-172">
+    <value name="TEXT">
+      <block type="text" id="150">
+        <field name="TEXT">Use more than one finger ;)</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="151" inline="true">
+        <field name="VAR">push</field>
+        <value name="VALUE">
+          <block type="math_number" id="152">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+  <block type="phaser_add_event" id="153" x="63" y="-119">
+    <field name="MS">500</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="154" inline="false">
+        <value name="TEXT">
+          <block type="text" id="155">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_tap" id="156" x="-147" y="-51">
+    <field name="SPRITE">43e9ad32-eeeb-cc6a-4e6a-a3c5f9f12c07</field>
+    <statement name="STACK">
+      <block type="math_change" id="157" inline="true">
+        <field name="VAR">push</field>
+        <value name="DELTA">
+          <block type="math_number" id="158">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_set_animation" id="159">
+            <field name="SPRITE">43e9ad32-eeeb-cc6a-4e6a-a3c5f9f12c07</field>
+            <field name="ANIMATION">on</field>
+            <next>
+              <block type="phaser_play_sound" id="160">
+                <field name="SOUND">powerup</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_add_event" id="161" x="216" y="-36">
+    <field name="MS">1500</field>
+    <statement name="STACK">
+      <block type="controls_if" id="162" inline="false">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="163" inline="true">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="variables_get" id="164">
+                <field name="VAR">push</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="165">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="phaser_win" id="166"></block>
+        </statement>
+        <statement name="ELSE">
+          <block type="phaser_lose" id="167"></block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_tap" id="168" x="-189" y="119">
+    <field name="SPRITE">8831c924-b43c-b595-af8a-fe1332c12749</field>
+    <statement name="STACK">
+      <block type="math_change" id="169" inline="true">
+        <field name="VAR">push</field>
+        <value name="DELTA">
+          <block type="math_number" id="170">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_set_animation" id="171">
+            <field name="SPRITE">8831c924-b43c-b595-af8a-fe1332c12749</field>
+            <field name="ANIMATION">on</field>
+            <next>
+              <block type="phaser_play_sound" id="172">
+                <field name="SOUND">powerup</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_tap" id="173" x="159" y="167">
+    <field name="SPRITE">caa8d5dc-a816-8d48-5bcf-4d12ae61a7f9</field>
+    <statement name="STACK">
+      <block type="math_change" id="174" inline="true">
+        <field name="VAR">push</field>
+        <value name="DELTA">
+          <block type="math_number" id="175">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_set_animation" id="176">
+            <field name="SPRITE">caa8d5dc-a816-8d48-5bcf-4d12ae61a7f9</field>
+            <field name="ANIMATION">on</field>
+            <next>
+              <block type="phaser_play_sound" id="177">
+                <field name="SOUND">powerup</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="178" x="-156" y="345">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="179" inline="false">
+        <value name="TEXT">
+          <block type="text" id="180">
+            <field name="TEXT">Woohoo! That was fast :)</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="181">
+            <field name="SOUND">woohoo</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="182" x="-156" y="453">
+    <field name="EVENT">lose</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="183" inline="false">
+        <value name="TEXT">
+          <block type="text" id="184">
+            <field name="TEXT">Uh-Oh! That wasn't fast enough...</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="185">
+            <field name="SOUND">game_over</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

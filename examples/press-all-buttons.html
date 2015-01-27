@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../assets/fonts/FredokaOne.css">
+<style>
+html, body, #phaser-holder {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.byline {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: 'Fredoka One';
+  font-size: 10px;
+}
+</style>
+<title>My Minigame</title>
+<div id="phaser-holder"></div>
+<span class="byline">
+  This game was made with MMM.
+  <a href="javascript:remixGame()">Remix it.</a>
+</span>
+</div>
+<script src="../vendor/phaser.js"></script>
+<script src="../assets/js/tinygame-0.2.js"></script>
+<script src="../assets/js/phaser-microgame-0.1.js"></script>
+<script>
+// This microgame was created with the Mobile Minigame Maker. Learn more
+// at https://toolness.github.io/mobile-microgame-maker/.
+//
+// This code uses Phaser--a fun, free and fast 2D game framework for
+// making HTML5 games for desktop and mobile web browsers. Learn more
+// at http://phaser.io/.
+
+function preload(game) {
+  game.load.spritesheet("button_red", "../assets/img/redbutton.png", 130, 110);
+  game.load.spritesheet("button_blue", "../assets/img/blue_button.png", 130, 110);
+  game.load.spritesheet("button_yellow", "../assets/img/yellow_button.png", 130, 110);
+  game.load.audio("woohoo", "../assets/sounds/woohoo.mp3");
+  game.load.audio("powerup", "../assets/sounds/Powerup.mp3");
+  game.load.audio("game_over", "../assets/sounds/game_over.mp3");
+}
+
+function createSprites(state) {
+  var sprites = state.sprites = {};
+  var game = state.game;
+  sprites.button_red_1 = game.add.sprite(80, 300, "button_red");
+  sprites.button_red_1.animations.add("off", [0], 1, true);
+  sprites.button_red_1.animations.add("on", [1], 1, false);
+  sprites.button_red_1.animations.play("off");
+  sprites.button_blue_1 = game.add.sprite(258, 300, "button_blue");
+  sprites.button_blue_1.animations.add("off", [0], 1, true);
+  sprites.button_blue_1.animations.add("on", [1], 1, false);
+  sprites.button_blue_1.animations.play("off");
+  sprites.button_yellow_1 = game.add.sprite(428, 300, "button_yellow");
+  sprites.button_yellow_1.animations.add("off", [0], 1, true);
+  sprites.button_yellow_1.animations.add("on", [1], 1, false);
+  sprites.button_yellow_1.animations.play("off");
+}
+
+function createSounds(state) {
+  var sounds = state.sounds = {};
+  var game = state.game;
+  sounds.woohoo = game.add.audio("woohoo");
+  sounds.powerup = game.add.audio("powerup");
+  sounds.game_over = game.add.audio("game_over");
+}
+
+// This function is generated from the microgame's Blockly source.
+
+function start(state) {
+  var game = state.game;
+  var microgame = state.microgame;
+  var sprites = state.sprites;
+  var sounds = state.sounds;
+  
+  var push;
+  
+  
+  microgame.mainText.setText('Use more than one finger ;)');
+  push = 0;
+  
+  game.time.events.add(500, function() {
+    microgame.mainText.setText('');
+  });
+  
+  sprites.button_red_1.inputEnabled = true;
+  sprites.button_red_1.events.onInputDown.add(function() {
+    push = (typeof push == 'number' ? push : 0) + 1;
+    sprites.button_red_1.animations.play("on");
+    sounds.powerup.play();
+  });
+  
+  game.time.events.add(1500, function() {
+    if (push >= 3) {
+      microgame.win();
+    } else {
+      microgame.lose();
+    }
+  });
+  
+  sprites.button_blue_1.inputEnabled = true;
+  sprites.button_blue_1.events.onInputDown.add(function() {
+    push = (typeof push == 'number' ? push : 0) + 1;
+    sprites.button_blue_1.animations.play("on");
+    sounds.powerup.play();
+  });
+  
+  sprites.button_yellow_1.inputEnabled = true;
+  sprites.button_yellow_1.events.onInputDown.add(function() {
+    push = (typeof push == 'number' ? push : 0) + 1;
+    sprites.button_yellow_1.animations.play("on");
+    sounds.powerup.play();
+  });
+  
+  state.on("win", function() {
+    microgame.mainText.setText('Woohoo! That was fast :)');
+    sounds.woohoo.play();
+  });
+  
+  state.on("lose", function() {
+    microgame.mainText.setText('Uh-Oh! That wasn\'t fast enough...');
+    sounds.game_over.play();
+  });
+  
+}
+
+
+
+var state = PhaserMicrogame.SimpleEventEmitter({
+  preload: function() {
+    this.Phaser = Phaser;
+    if (this.Phaser.VERSION != "2.2.1")
+      throw new Error("Expected Phaser 2.2.1 but got " +
+                      this.Phaser.VERSION);
+    preload(this.game);
+    this.trigger('preload');
+  },
+  create: function() {
+    createSprites(this);
+    createSounds(this);
+    this.game.transparent = false;
+    this.game.stage.backgroundColor = 0xf0f0f0;
+
+    this.microgame.mainText = this.game.add.text(
+      this.game.world.centerX,
+      this.game.world.centerY,
+      '',
+      {
+        font: "30px 'Fredoka One'",
+        fill: "#000000",
+        stroke: "#ffffff",
+        strokeThickness: 4,
+        align: "center"
+      }
+    );
+    this.microgame.mainText.anchor.setTo(0.5, 0.5);
+    this.microgame.create();
+    start(this);
+    this.trigger('create');
+  },
+  update: function() {
+    this.microgame.update();
+    this.trigger('update');
+  },
+  render: function() {
+    this.microgame.render();
+  }
+});
+
+state.microgame = new PhaserMicrogame({
+  state: state,
+  playTime: 5000,
+  endingTime: 2000
+});
+
+
+var game;
+
+onload = function() {
+  game = new Phaser.Game(
+    640,
+    480,
+    Phaser.CANVAS,
+    'phaser-holder',
+    state,
+    true
+  );
+};
+
+state.on('preload', function() {
+  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.setMinMax(0, 0, 640, 480);
+  game.scale.pageAlignVertically = true;
+  game.scale.pageAlignHorizontally = true;
+});
+
+PhaserMicrogame.installStupidHacks();
+
+
+
+// --------------
+// Re-Import Data
+// --------------
+//
+// The following is *only* defined to allow others to re-import this
+// game into the editor tool; it's not required to play the game.
+
+var gameData = "press-all-buttons.json";
+
+function remixGame() {
+  var child = window.open("../?importGame=opener");
+  window.addEventListener('message', function onMessage(event) {
+    if (event.source !== child) return;
+    if (event.data == "mmm:ready") {
+      window.removeEventListener('message', onMessage, false);
+      child.postMessage(JSON.stringify({
+        type: 'import',
+        gameData: gameData,
+        pathname: window.location.pathname
+      }), '*');
+    }
+  }, false);
+}
+
+</script>

@@ -1,0 +1,124 @@
+{
+  "animations": {
+    "button_blue": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "off"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          1
+        ],
+        "loop": false,
+        "name": "on"
+      }
+    ],
+    "button_red": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "off"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          1
+        ],
+        "loop": false,
+        "name": "on"
+      }
+    ],
+    "button_yellow": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "off"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          1
+        ],
+        "loop": false,
+        "name": "on"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "press-all-buttons.xml",
+  "height": 480,
+  "name": "press-all-buttons",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "powerup",
+      "url": "sounds/Powerup.mp3"
+    },
+    {
+      "key": "game_over",
+      "url": "sounds/game_over.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "off",
+      "id": "43e9ad32-eeeb-cc6a-4e6a-a3c5f9f12c07",
+      "key": "button_red",
+      "name": "button_red_1",
+      "x": 80,
+      "y": 300
+    },
+    {
+      "animation": "off",
+      "id": "8831c924-b43c-b595-af8a-fe1332c12749",
+      "key": "button_blue",
+      "name": "button_blue_1",
+      "x": 258,
+      "y": 300
+    },
+    {
+      "animation": "off",
+      "id": "caa8d5dc-a816-8d48-5bcf-4d12ae61a7f9",
+      "key": "button_yellow",
+      "name": "button_yellow_1",
+      "x": 428,
+      "y": 300
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 110,
+      "frameWidth": 130,
+      "key": "button_red",
+      "url": "img/redbutton.png"
+    },
+    {
+      "frameHeight": 110,
+      "frameWidth": 130,
+      "key": "button_blue",
+      "url": "img/blue_button.png"
+    },
+    {
+      "frameHeight": 110,
+      "frameWidth": 130,
+      "key": "button_yellow",
+      "url": "img/yellow_button.png"
+    }
+  ],
+  "width": 640
+}
