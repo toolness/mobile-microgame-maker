@@ -40,22 +40,6 @@ app.get('/css/base.css', function(req, res, next) {
   });
 });
 
-app.get('/examples/:name', function(req, res, next) {
-  var name = req.name;
-  if (!fs.existsSync(EXAMPLES_DIR + '/' + name + '.html'))
-    return res.status(404).send("Example " + name + " does not exist!");
-
-  var gameData = fs.readFileSync(EXAMPLES_DIR + '/' + name + '.json',
-                                 'utf-8');
-  var blocklyXml = fs.readFileSync(EXAMPLES_DIR + '/' + name + '.xml',
-                                   'utf-8');
-
-  gameData = JSON.parse(gameData);
-  gameData.blocklyXml = blocklyXml;
-
-  return res.send(gameData);
-});
-
 app.post('/examples/:name', function(req, res, next) {
   var basename = EXAMPLES_DIR + '/' + req.name;
   var gameData = JSON.parse(req.body.gameData);
