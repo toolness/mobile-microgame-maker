@@ -27,6 +27,21 @@ app.get('/', function(req, res, next) {
   }));
 });
 
+app.get('/examples/examples.js', function(req, res, next) {
+  var JSON_RE = /^(.+)\.json$/;
+  var examples = fs.readdirSync(EXAMPLES_DIR).filter(function(filename) {
+    return JSON_RE.test(filename);
+  }).map(function(filename) {
+    return filename.match(JSON_RE)[1];
+  });
+  var exJs = fs.readFileSync(EXAMPLES_DIR + '/examples.js', 'utf-8');
+  exJs = exJs.replace(
+    /var EXAMPLES\s*=\s*\[/,
+    "var EXAMPLES = " + JSON.stringify(examples) + " || ["
+  );
+  return res.type('application/javascript').send(exJs);
+});
+
 app.get('/css/base.css', function(req, res, next) {
   buildCss(function(err) {
     if (err) {
