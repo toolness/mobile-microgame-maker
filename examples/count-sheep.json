@@ -1,0 +1,187 @@
+{
+  "animations": {
+    "bushes": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "bush"
+      }
+    ],
+    "cypresstoo": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "tree4"
+      }
+    ],
+    "fence": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "fence"
+      }
+    ],
+    "pinetreetoo": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "tree3"
+      }
+    ],
+    "sheep": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "sheep"
+      },
+      {
+        "frameRate": 15,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          0
+        ],
+        "loop": false,
+        "name": "sheepjump"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "count-sheep.xml",
+  "height": 480,
+  "name": "count-sheep",
+  "sounds": [
+    {
+      "key": "sheep",
+      "url": "sounds/Sheep.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    },
+    {
+      "key": "crickets",
+      "url": "sounds/Crickets.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "bush",
+      "id": "111a90c8-ea61-272f-cd23-7b0620b19e98",
+      "key": "bushes",
+      "name": "grass",
+      "x": 36,
+      "y": 57
+    },
+    {
+      "animation": "bush",
+      "id": "cb4abe4b-41dc-6625-b195-2bf7e8a90440",
+      "key": "bushes",
+      "name": "grass2",
+      "x": 297,
+      "y": 349
+    },
+    {
+      "animation": "bush",
+      "id": "f8dfa53c-0e3d-4561-29e8-9c0825627cb6",
+      "key": "bushes",
+      "name": "grass3",
+      "x": 341,
+      "y": 65
+    },
+    {
+      "animation": "tree3",
+      "id": "6ae3fe8b-fdd5-c079-7631-9a3883311232",
+      "key": "pinetreetoo",
+      "name": "pinetreetoo_1",
+      "x": 71,
+      "y": 279
+    },
+    {
+      "animation": "tree4",
+      "id": "e0366dec-55db-ae4e-bc07-a76462bacafb",
+      "key": "cypresstoo",
+      "name": "cypresstoo_1",
+      "x": 523,
+      "y": 278
+    },
+    {
+      "animation": "tree3",
+      "id": "d5950cf7-12ae-7abf-6e9b-31c698776a14",
+      "key": "pinetreetoo",
+      "name": "cave_1",
+      "x": 262,
+      "y": 53
+    },
+    {
+      "animation": "fence",
+      "id": "b05d181d-6453-52bd-9e1d-cfb2234b3497",
+      "key": "fence",
+      "name": "fence_1",
+      "x": 288,
+      "y": 291
+    },
+    {
+      "animation": "sheep",
+      "id": "a524623e-f06f-d8e3-72e8-c256ef47692e",
+      "key": "sheep",
+      "name": "sheep_1",
+      "x": 195,
+      "y": 170
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 176,
+      "frameWidth": 310,
+      "key": "sheep",
+      "url": "img/sheep_jumping.png"
+    },
+    {
+      "frameHeight": 41,
+      "frameWidth": 72,
+      "key": "fence",
+      "url": "img/fence.png"
+    },
+    {
+      "frameHeight": 100,
+      "frameWidth": 50,
+      "key": "pinetreetoo",
+      "url": "img/tree3.png"
+    },
+    {
+      "frameHeight": 100,
+      "frameWidth": 50,
+      "key": "cypresstoo",
+      "url": "img/tree4.png"
+    },
+    {
+      "frameHeight": 200,
+      "frameWidth": 200,
+      "key": "bushes",
+      "url": "img/bushes.png"
+    }
+  ],
+  "width": 640
+}
