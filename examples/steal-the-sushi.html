@@ -39,14 +39,14 @@ html, body, #phaser-holder {
 // at http://phaser.io/.
 
 function preload(game) {
-  game.load.spritesheet("sushi", "https://s3.amazonaws.com/minicade-assets/img/sushi_new.png", 70, 80);
-  game.load.spritesheet("sushimonster", "https://s3.amazonaws.com/minicade-assets/img/sushimonster.png", 144, 100);
-  game.load.spritesheet("dish", "https://s3.amazonaws.com/minicade-assets/img/empty_dish.png", 120, 66);
-  game.load.spritesheet("dish_crumbles", "https://s3.amazonaws.com/minicade-assets/img/dish_crumbles.png", 120, 66);
-  game.load.spritesheet("bluedish", "https://s3.amazonaws.com/minicade-assets/img/bluedish.png", 120, 66);
-  game.load.audio("woohoo", "https://s3.amazonaws.com/minicade-assets/sounds/woohoo.mp3");
-  game.load.audio("eating", "https://s3.amazonaws.com/minicade-assets/sounds/eat.mp3");
-  game.load.audio("sad_trombone", "https://s3.amazonaws.com/minicade-assets/sounds/sad_trombone.mp3");
+  game.load.spritesheet("sushi", "../assets/img/sushi_new.png", 70, 80);
+  game.load.spritesheet("sushimonster", "../assets/img/sushimonster.png", 144, 100);
+  game.load.spritesheet("dish", "../assets/img/empty_dish.png", 120, 66);
+  game.load.spritesheet("dish_crumbles", "../assets/img/dish_crumbles.png", 120, 66);
+  game.load.spritesheet("bluedish", "../assets/img/bluedish.png", 120, 66);
+  game.load.audio("woohoo", "../assets/sounds/woohoo.mp3");
+  game.load.audio("eating", "../assets/sounds/eat.mp3");
+  game.load.audio("sad_trombone", "../assets/sounds/sad_trombone.mp3");
 }
 
 function createSprites(state) {

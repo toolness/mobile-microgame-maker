@@ -39,11 +39,11 @@ html, body, #phaser-holder {
 // at http://phaser.io/.
 
 function preload(game) {
-  game.load.spritesheet("dancingbear", "https://s3.amazonaws.com/minicade-assets/img/bear.png", 125, 176);
-  game.load.spritesheet("polka_dots", "https://s3.amazonaws.com/minicade-assets/img/polkadots.png", 500, 500);
-  game.load.audio("woohoo", "https://s3.amazonaws.com/minicade-assets/sounds/woohoo.mp3");
-  game.load.audio("squeeze", "https://s3.amazonaws.com/minicade-assets/sounds/squeeze.mp3");
-  game.load.audio("sad_trombone", "https://s3.amazonaws.com/minicade-assets/sounds/sad_trombone.mp3");
+  game.load.spritesheet("dancingbear", "../assets/img/bear.png", 125, 176);
+  game.load.spritesheet("polka_dots", "../assets/img/polkadots.png", 500, 500);
+  game.load.audio("woohoo", "../assets/sounds/woohoo.mp3");
+  game.load.audio("squeeze", "../assets/sounds/squeeze.mp3");
+  game.load.audio("sad_trombone", "../assets/sounds/sad_trombone.mp3");
 }
 
 function createSprites(state) {
