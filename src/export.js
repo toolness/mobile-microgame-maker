@@ -4,6 +4,7 @@ define(function(require) {
   var URLUtils = require('URLUtils');
   var Blockly = require('./phaser-blocks');
   var React = require('react');
+  var GameData = require('./game-data');
   var PhaserState = require('./phaser-state');
 
   var DEFAULT_NETWORK_TIMEOUT = 10000;
@@ -113,11 +114,15 @@ define(function(require) {
       return Export.fromJson(baseURL, Export._fromHtml(html), cb);
     },
     toHtml: function(gameData, options) {
+      var originalBaseURL = gameData.baseURL;
+      var blocklyInfo;
+      var stateJs;
+      var gameDataForRemix;
+
       options = _.defaults(options || {}, {
         baseAssetURL: '//s3.amazonaws.com/minicade-assets/',
         baseCreatorURL: window.location.protocol + '//' +
                         window.location.host + window.location.pathname,
-        gameDataForRemix: gameData,
         scripts: [
           '//cdnjs.cloudflare.com/ajax/libs/phaser/' +
           PhaserState.Generators.PHASER_VERSION +
@@ -125,35 +130,43 @@ define(function(require) {
         ]
       });
 
+      stateJs = options.stateJs;
+      gameDataForRemix = options.gameDataForRemix;
+
+      if (!stateJs) {
+        gameData = React.addons.update(gameData, {
+          baseURL: {$set: options.baseAssetURL}
+        });
+        blocklyInfo = Blockly.Phaser.generateJs(gameData);
+        gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
+        stateJs = PhaserState.Generators.createState({
+          minimizeGameData: false,
+          gameData: gameData,
+          blocklyInfo: blocklyInfo
+        });
+      }
+
+      if (!gameDataForRemix)
+        gameDataForRemix = React.addons.update(gameData, {
+          baseURL: {$set: originalBaseURL}
+        });
+
       return _.template(this._templateString, {
         baseAssetURL: options.baseAssetURL,
         scriptTags: options.scripts.map(function(src) {
           return '<script src="' + src + '"></script>';
         }),
         encourageRemix: options.encourageRemix,
-        gameDataForRemix: options.gameDataForRemix,
+        gameDataForRemix: gameDataForRemix,
         gameData: gameData,
         creatorURL: options.baseCreatorURL + '?importGame=opener',
-        stateJs: options.stateJs || buildStateJs(gameData, options)
+        stateJs: stateJs
       });
     }
   };
 
   function resolveURL(url, base) {
     return new URLUtils(url, base || undefined).href;
-  }
-
-  function buildStateJs(gameData, options) {
-    options = options || {};
-    var s3GameData = React.addons.update(gameData, {
-      baseURL: {$set: options.baseAssetURL}
-    });
-    var blocklyInfo = Blockly.Phaser.generateJs(s3GameData);
-
-    return PhaserState.Generators.createState({
-      gameData: s3GameData,
-      blocklyInfo: blocklyInfo
-    });
   }
 
   return Export;
