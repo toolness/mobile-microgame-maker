@@ -73,10 +73,10 @@
       "frameHeight": 135
     },
     {
-      "key": "fallingstar",
-      "url": "img/fallingstar.png",
-      "frameWidth": 115,
-      "frameHeight": 120
+      "key": "star",
+      "url": "img/star.png",
+      "frameWidth": 64,
+      "frameHeight": 62
     },
     {
       "key": "bluemonster",
@@ -98,9 +98,15 @@
     },
     {
       "key": "sushi",
-      "url": "img/sushi.png",
+      "url": "img/sushi_new.png",
       "frameWidth": 70,
       "frameHeight": 80
+    },
+    {
+      "key": "sushimonster",
+      "url": "img/sushimonster.png",
+      "frameWidth": 144,
+      "frameHeight": 100
     },
     {
       "key": "dish",
@@ -115,6 +121,12 @@
       "frameHeight": 66
     },
     {
+      "key": "bluedish",
+      "url": "img/bluedish.png",
+      "frameWidth": 120,
+      "frameHeight": 66
+    },
+    {
       "key": "princess_fight",
       "url": "img/princess-38.png",
       "frameWidth": 95,
@@ -122,30 +134,6 @@
     },
     {
       "key": "crack",
-      "url": "img/ice_broken.png",
-      "frameWidth": 120,
-      "frameHeight": 67
-    },
-    {
-      "key": "largercrack",
-      "url": "img/ice_broken.png",
-      "frameWidth": 120,
-      "frameHeight": 67
-    },
-    {
-      "key": "evenlargercrack",
-      "url": "img/ice_broken.png",
-      "frameWidth": 120,
-      "frameHeight": 67
-    },
-    {
-      "key": "hole",
-      "url": "img/ice_broken.png",
-      "frameWidth": 120,
-      "frameHeight": 67
-    },
-    {
-      "key": "penguin",
       "url": "img/ice_broken.png",
       "frameWidth": 120,
       "frameHeight": 67
@@ -251,6 +239,12 @@
       "url": "img/rainbow.png",
       "frameWidth": 110,
       "frameHeight": 100
+    },
+    {
+      "key": "ew",
+      "url": "img/ew.png",
+      "frameWidth": 80,
+      "frameHeight": 135
     }
   ],
   "animations": {
@@ -334,16 +328,25 @@
       {
         "name": "sheep",
         "frames": [
+          0
+        ],
+        "frameRate": 1,
+        "loop": true
+      },
+      {
+        "name": "sheepjump",
+        "frames": [
           0,
           1,
           2,
           3,
           4,
           5,
-          6
+          6,
+          0
         ],
-        "frameRate": 7,
-        "loop": true
+        "frameRate": 15,
+        "loop": false
       }
     ],
     "poop": [
@@ -457,24 +460,21 @@
         "loop": true
       }
     ],
-    "fallingstar": [
+    "star": [
       {
         "name": "star",
         "frames": [
           0,
-          1,
-          2,
-          3,
-          4
+          1
         ],
-        "frameRate": 8,
+        "frameRate": 2,
         "loop": true
       },
       {
         "name": "wish",
         "frames": [
-          5,
-          6
+          2,
+          3
         ],
         "frameRate": 2,
         "loop": false
@@ -522,15 +522,45 @@
         ],
         "frameRate": 5,
         "loop": true
+      },
+      {
+        "name": "sadsushi",
+        "frames": [
+          4,
+          5,
+          6
+        ],
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "sushimonster": [
+      {
+        "name": "sushimonster",
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          3,
+          2,
+          1
+        ],
+        "frameRate": 8,
+        "loop": true
       }
     ],
     "dish": [
       {
         "name": "dish",
         "frames": [
-          0
+          0,
+          1,
+          2,
+          3
         ],
-        "frameRate": 1,
+        "frameRate": 4,
         "loop": true
       }
     ],
@@ -538,9 +568,25 @@
       {
         "name": "plate_dirty",
         "frames": [
-          0
+          0,
+          1,
+          2,
+          3
         ],
-        "frameRate": 1,
+        "frameRate": 4,
+        "loop": true
+      }
+    ],
+    "bluedish": [
+      {
+        "name": "bluedish",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frameRate": 4,
         "loop": true
       }
     ],
@@ -573,43 +619,27 @@
       {
         "name": "break1",
         "frames": [
-          0
-        ],
-        "frameRate": 1,
-        "loop": true
-      }
-    ],
-    "largercrack": [
-      {
-        "name": "break2",
-        "frames": [
           1
         ],
         "frameRate": 1,
         "loop": true
-      }
-    ],
-    "evenlargercrack": [
+      },
       {
-        "name": "break3",
+        "name": "break2",
         "frames": [
           2
         ],
         "frameRate": 1,
         "loop": true
-      }
-    ],
-    "hole": [
+      },
       {
-        "name": "break4",
+        "name": "break3",
         "frames": [
           3
         ],
         "frameRate": 1,
         "loop": true
-      }
-    ],
-    "penguin": [
+      },
       {
         "name": "win",
         "frames": [
@@ -619,8 +649,8 @@
           7,
           8
         ],
-        "frameRate": 6,
-        "loop": true
+        "frameRate": 5,
+        "loop": false
       }
     ],
     "door": [
@@ -641,7 +671,7 @@
           4
         ],
         "frameRate": 3,
-        "loop": true
+        "loop": false
       }
     ],
     "fence": [
@@ -763,7 +793,11 @@
           2,
           3,
           4,
-          5
+          5,
+          4,
+          3,
+          2,
+          1
         ],
         "frameRate": 6,
         "loop": true
@@ -797,8 +831,8 @@
         "frames": [
           0
         ],
-        "frameRate": null,
-        "loop": false
+        "frameRate": 1,
+        "loop": true
       }
     ],
     "rainbow": [
@@ -807,8 +841,20 @@
         "frames": [
           0
         ],
-        "frameRate": null,
-        "loop": false
+        "frameRate": 1,
+        "loop": true
+      }
+    ],
+    "ew": [
+      {
+        "name": "ew",
+        "frames": [
+          0,
+          1,
+          2
+        ],
+        "frameRate": 3,
+        "loop": true
       }
     ]
   },
@@ -872,6 +918,26 @@
     {
       "key": "well",
       "url": "sounds/well.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    },
+    {
+      "key": "shh",
+      "url": "sounds/shh.mp3"
+    },
+    {
+      "key": "crickets",
+      "url": "sounds/Crickets.mp3"
+    },
+    {
+      "key": "ew",
+      "url": "sounds/Ee.mp3"
+    },
+    {
+      "key": "game_over",
+      "url": "sounds/game_over.mp3"
     }
   ]
 }
