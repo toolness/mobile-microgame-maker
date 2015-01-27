@@ -1,4 +1,4 @@
-// PhaserMicrogame v0.1.1
+// PhaserMicrogame v0.1.2
 // 
 // This micro-library can be used to make a "microgame", i.e. a very
 // short game that takes a few seconds to play, has a win/lose
@@ -47,19 +47,28 @@ PhaserMicrogame.prototype = {
       this.timeBar = new Phaser.Rectangle(0, 0, game.width,
                                           this.TIME_BAR_HEIGHT);
     }
-    this.mainText = game.add.text(
-      game.world.centerX,
-      game.world.centerY,
-      '',
-      {
-        font: "30px 'Fredoka One'",
-        fill: "#000000",
-        stroke: "#ffffff",
-        strokeThickness: 4,
-        align: "center"
-      }
-    );
-    this.mainText.anchor.setTo(0.5, 0.5);
+
+    if (!this.mainText) {
+      // TODO: Deprecate this; we want PhaserMicrogame to
+      // encapsulate the bare minimum required for a microgame so that
+      // anyone can use it to develop their own microgame with Phaser,
+      // but mainText is quite specific to MMM.
+      console.log("Creating mainText, but this feature will be dropped " +
+                  "in phaser-microgame v0.2.");
+      this.mainText = game.add.text(
+        game.world.centerX,
+        game.world.centerY,
+        '',
+        {
+          font: "30px 'Fredoka One'",
+          fill: "#000000",
+          stroke: "#ffffff",
+          strokeThickness: 4,
+          align: "center"
+        }
+      );
+      this.mainText.anchor.setTo(0.5, 0.5);
+    }
   },
   render: function() {
     var game = this.state.game;
