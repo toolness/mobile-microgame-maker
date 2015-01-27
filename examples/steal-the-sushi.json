@@ -1,0 +1,207 @@
+{
+  "animations": {
+    "bluedish": [
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": true,
+        "name": "bluedish"
+      }
+    ],
+    "dish": [
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": true,
+        "name": "dish"
+      }
+    ],
+    "dish_crumbles": [
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": true,
+        "name": "plate_dirty"
+      }
+    ],
+    "sushi": [
+      {
+        "frameRate": 5,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "loop": true,
+        "name": "sushi"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          4,
+          5,
+          6
+        ],
+        "loop": true,
+        "name": "sadsushi"
+      }
+    ],
+    "sushimonster": [
+      {
+        "frameRate": 8,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          3,
+          2,
+          1
+        ],
+        "loop": true,
+        "name": "sushimonster"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "steal-the-sushi.xml",
+  "height": 480,
+  "name": "steal-the-sushi",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "eating",
+      "url": "sounds/eat.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "bluedish",
+      "id": "a744600b-2e48-9477-3acc-02681c2f44c1",
+      "key": "bluedish",
+      "name": "bluedish_1",
+      "x": 252,
+      "y": 44
+    },
+    {
+      "animation": "dish",
+      "id": "cf381edf-6c08-762e-7deb-89080310cb09",
+      "key": "dish",
+      "name": "dish_1",
+      "x": 248,
+      "y": 370
+    },
+    {
+      "animation": "plate_dirty",
+      "id": "563fe786-53e3-ca16-941f-9e596b93031b",
+      "key": "dish_crumbles",
+      "name": "plate",
+      "x": 391,
+      "y": 259
+    },
+    {
+      "animation": "plate_dirty",
+      "id": "cf6bf1cc-f52a-8f9e-58af-4429fe4cdd78",
+      "key": "dish_crumbles",
+      "name": "plate2",
+      "x": 68,
+      "y": 201
+    },
+    {
+      "animation": "sushimonster",
+      "id": "7b7244a8-ec1e-145e-7f3b-2c40f6b26bef",
+      "key": "sushimonster",
+      "name": "sushimonster_1",
+      "spawnArea": {
+        "height": 150,
+        "left": 320,
+        "top": 130,
+        "width": 320
+      },
+      "x": 470,
+      "y": 292
+    },
+    {
+      "animation": "sushimonster",
+      "id": "59e5a120-e01b-adcd-2e86-919b3f5c995f",
+      "key": "sushimonster",
+      "name": "sushimonster_2",
+      "spawnArea": {
+        "height": 170,
+        "left": 0,
+        "top": 140,
+        "width": 320
+      },
+      "x": 346,
+      "y": 26
+    },
+    {
+      "animation": "sushi",
+      "draggable": true,
+      "id": "38587506-0305-19d7-ac97-d3d518e2a8b2",
+      "key": "sushi",
+      "name": "sushi_1",
+      "x": 273,
+      "y": 341
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 80,
+      "frameWidth": 70,
+      "key": "sushi",
+      "url": "img/sushi_new.png"
+    },
+    {
+      "frameHeight": 100,
+      "frameWidth": 144,
+      "key": "sushimonster",
+      "url": "img/sushimonster.png"
+    },
+    {
+      "frameHeight": 66,
+      "frameWidth": 120,
+      "key": "dish",
+      "url": "img/empty_dish.png"
+    },
+    {
+      "frameHeight": 66,
+      "frameWidth": 120,
+      "key": "dish_crumbles",
+      "url": "img/dish_crumbles.png"
+    },
+    {
+      "frameHeight": 66,
+      "frameWidth": 120,
+      "key": "bluedish",
+      "url": "img/bluedish.png"
+    }
+  ],
+  "width": 640
+}
