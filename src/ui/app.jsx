@@ -26,7 +26,11 @@ define(function(require) {
     } catch (e) {}
 
     if (assetLibrary) {
-      initialGameData = GameData.maximize(initialGameData, assetLibrary);
+      // Merge the external asset library w/ our built-in one,
+      // giving priority to the external one.
+      assetLibrary = GameData.maximize(assetLibrary, defaultGameData);
+    } else {
+      assetLibrary = defaultGameData;
     }
 
     function handleOpenBlockly() {
@@ -63,7 +67,7 @@ define(function(require) {
       );
 
       editor = self.editor = React.render(
-        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager}/>,
+        <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager} assetLibrary={assetLibrary}/>,
         editorHolder
       );
     }

@@ -29,7 +29,8 @@ define(function(require) {
       return {
         undo: [],
         redo: [],
-        gameData: this.props.initialGameData
+        gameData: GameData.maximize(this.props.initialGameData,
+                                    this.props.assetLibrary)
       };
     },
     changeGameData: function(changes) {
@@ -124,7 +125,7 @@ define(function(require) {
     },
     importGameData: function(gameData) {
       this.changeGameData({
-        $set: gameData
+        $set: GameData.maximize(gameData, this.props.assetLibrary)
       });
     },
     handleDisplayObjectClick: function(item, phaserState) {
