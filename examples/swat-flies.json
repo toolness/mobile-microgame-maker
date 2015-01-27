@@ -1,0 +1,110 @@
+{
+  "animations": {
+    "fly": [
+      {
+        "frameRate": 10,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "loop": true,
+        "name": "flying"
+      },
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": false,
+        "name": "dead"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "swat-flies.xml",
+  "height": 480,
+  "name": "swat-flies",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "woosh",
+      "url": "sounds/Woosh-Mark_DiAngelo.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "flying",
+      "id": "1303d4ec-49f4-0d5f-c0ce-1c1e5d42ac72",
+      "key": "fly",
+      "name": "fly_1",
+      "spawnArea": {
+        "height": 386,
+        "left": 138,
+        "top": 9,
+        "width": 342
+      },
+      "x": 71,
+      "y": 325
+    },
+    {
+      "animation": "flying",
+      "id": "2a9911ac-d086-1983-fbbb-1305f65fc27c",
+      "key": "fly",
+      "name": "fly_2",
+      "spawnArea": {
+        "height": 291,
+        "left": 28,
+        "top": 41,
+        "width": 334
+      },
+      "x": 553,
+      "y": 327
+    },
+    {
+      "animation": "flying",
+      "id": "bf3153cc-6c74-08de-f5b3-371855fcd01e",
+      "key": "fly",
+      "name": "fly_3",
+      "spawnArea": {
+        "height": 276,
+        "left": 235,
+        "top": 195,
+        "width": 397
+      },
+      "x": 433,
+      "y": 79
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 80,
+      "frameWidth": 80,
+      "key": "fly",
+      "url": "img/fly.png"
+    }
+  ],
+  "width": 640
+}

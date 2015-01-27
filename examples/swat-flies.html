@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../assets/fonts/FredokaOne.css">
+<style>
+html, body, #phaser-holder {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.byline {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: 'Fredoka One';
+  font-size: 10px;
+}
+</style>
+<title>My Minigame</title>
+<div id="phaser-holder"></div>
+<span class="byline">
+  This game was made with MMM.
+  <a href="javascript:remixGame()">Remix it.</a>
+</span>
+</div>
+<script src="../vendor/phaser.js"></script>
+<script src="../assets/js/tinygame-0.2.js"></script>
+<script src="../assets/js/phaser-microgame-0.1.js"></script>
+<script>
+// This microgame was created with the Mobile Minigame Maker. Learn more
+// at https://toolness.github.io/mobile-microgame-maker/.
+//
+// This code uses Phaser--a fun, free and fast 2D game framework for
+// making HTML5 games for desktop and mobile web browsers. Learn more
+// at http://phaser.io/.
+
+function preload(game) {
+  game.load.spritesheet("fly", "https://s3.amazonaws.com/minicade-assets/img/fly.png", 80, 80);
+  game.load.audio("woohoo", "https://s3.amazonaws.com/minicade-assets/sounds/woohoo.mp3");
+  game.load.audio("woosh", "https://s3.amazonaws.com/minicade-assets/sounds/Woosh-Mark_DiAngelo.mp3");
+  game.load.audio("musicbox", "https://s3.amazonaws.com/minicade-assets/sounds/Music_Box.mp3");
+  game.load.audio("sad_trombone", "https://s3.amazonaws.com/minicade-assets/sounds/sad_trombone.mp3");
+}
+
+function createSprites(state) {
+  function placeRandomlyInArea(sprite, left, top, width, height) {
+    var rect = new Phaser.Rectangle(left, top, 
+                                    Math.max(width-sprite.width, 0), 
+                                    Math.max(height-sprite.height, 0));
+    sprite.x = rect.randomX;
+    sprite.y = rect.randomY;
+  }
+
+  var sprites = state.sprites = {};
+  var game = state.game;
+  sprites.fly_1 = game.add.sprite(71, 325, "fly");
+  placeRandomlyInArea(sprites.fly_1, 138, 9, 342, 386);
+  sprites.fly_1.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
+  sprites.fly_1.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_1.animations.play("flying");
+  sprites.fly_2 = game.add.sprite(553, 327, "fly");
+  placeRandomlyInArea(sprites.fly_2, 28, 41, 334, 291);
+  sprites.fly_2.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
+  sprites.fly_2.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_2.animations.play("flying");
+  sprites.fly_3 = game.add.sprite(433, 79, "fly");
+  placeRandomlyInArea(sprites.fly_3, 235, 195, 397, 276);
+  sprites.fly_3.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
+  sprites.fly_3.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_3.animations.play("flying");
+}
+
+function createSounds(state) {
+  var sounds = state.sounds = {};
+  var game = state.game;
+  sounds.woohoo = game.add.audio("woohoo");
+  sounds.woosh = game.add.audio("woosh");
+  sounds.musicbox = game.add.audio("musicbox");
+  sounds.sad_trombone = game.add.audio("sad_trombone");
+}
+
+// This function is generated from the microgame's Blockly source.
+
+function start(state) {
+  var game = state.game;
+  var microgame = state.microgame;
+  var sprites = state.sprites;
+  var sounds = state.sounds;
+  
+  var dead_fly;
+  
+  function math_random_int(a, b) {
+    if (a > b) {
+      // Swap a and b to ensure a is smaller.
+      var c = a;
+      a = b;
+      b = c;
+    }
+    return Math.floor(Math.random() * (b - a + 1) + a);
+  }
+  
+  
+  game.stage.backgroundColor = '#ffffff';
+  
+  sprites.fly_1.inputEnabled = true;
+  sprites.fly_1.events.onInputDown.add(function() {
+    sounds.woosh.play();
+    sprites.fly_1.alpha = 0;
+    dead_fly = (typeof dead_fly == 'number' ? dead_fly : 0) + 1;
+  });
+  
+  game.time.events.loop(1000, function() {
+    sprites.fly_1.x = math_random_int(1, 300);
+    sprites.fly_1.y = math_random_int(1, 300);
+    sprites.fly_2.x = math_random_int(1, 300);
+    sprites.fly_2.y = math_random_int(1, 300);
+    sprites.fly_3.x = math_random_int(1, 300);
+    sprites.fly_3.y = math_random_int(1, 300);
+  });
+  
+  sprites.fly_2.inputEnabled = true;
+  sprites.fly_2.events.onInputDown.add(function() {
+    sounds.woosh.play();
+    sprites.fly_2.alpha = 0;
+    dead_fly = (typeof dead_fly == 'number' ? dead_fly : 0) + 1;
+  });
+  
+  sprites.fly_3.inputEnabled = true;
+  sprites.fly_3.events.onInputDown.add(function() {
+    sounds.woosh.play();
+    sprites.fly_3.alpha = 0;
+    dead_fly = (typeof dead_fly == 'number' ? dead_fly : 0) + 1;
+  });
+  
+  state.on("update", function() {
+    if (dead_fly == 3) {
+      microgame.win();
+    }
+  });
+  
+  state.on("lose", function() {
+    microgame.mainText.setText('Defeated by flies. How sad...');
+    sounds.sad_trombone.play();
+  });
+  
+  state.on("win", function() {
+    microgame.mainText.setText('Nice job, lord of the flies ;)');
+    sounds.woohoo.play();
+    sounds.musicbox.play();
+  });
+  
+}
+
+
+
+var state = PhaserMicrogame.SimpleEventEmitter({
+  preload: function() {
+    this.Phaser = Phaser;
+    if (this.Phaser.VERSION != "2.2.1")
+      throw new Error("Expected Phaser 2.2.1 but got " +
+                      this.Phaser.VERSION);
+    preload(this.game);
+    this.trigger('preload');
+  },
+  create: function() {
+    createSprites(this);
+    createSounds(this);
+    this.game.transparent = false;
+    this.game.stage.backgroundColor = 0xf0f0f0;
+
+    this.microgame.mainText = this.game.add.text(
+      this.game.world.centerX,
+      this.game.world.centerY,
+      '',
+      {
+        font: "30px 'Fredoka One'",
+        fill: "#000000",
+        stroke: "#ffffff",
+        strokeThickness: 4,
+        align: "center"
+      }
+    );
+    this.microgame.mainText.anchor.setTo(0.5, 0.5);
+    this.microgame.create();
+    start(this);
+    this.trigger('create');
+  },
+  update: function() {
+    this.microgame.update();
+    this.trigger('update');
+  },
+  render: function() {
+    this.microgame.render();
+  }
+});
+
+state.microgame = new PhaserMicrogame({
+  state: state,
+  playTime: 5000,
+  endingTime: 2000
+});
+
+
+var game;
+
+onload = function() {
+  game = new Phaser.Game(
+    640,
+    480,
+    Phaser.CANVAS,
+    'phaser-holder',
+    state,
+    true
+  );
+};
+
+state.on('preload', function() {
+  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.setMinMax(0, 0, 640, 480);
+  game.scale.pageAlignVertically = true;
+  game.scale.pageAlignHorizontally = true;
+});
+
+PhaserMicrogame.installStupidHacks();
+
+
+
+// --------------
+// Re-Import Data
+// --------------
+//
+// The following is *only* defined to allow others to re-import this
+// game into the editor tool; it's not required to play the game.
+
+var gameData = "swat-flies.json";
+
+function remixGame() {
+  var child = window.open("../?importGame=opener");
+  window.addEventListener('message', function onMessage(event) {
+    if (event.source !== child) return;
+    if (event.data == "mmm:ready") {
+      window.removeEventListener('message', onMessage, false);
+      child.postMessage(JSON.stringify({
+        type: 'import',
+        gameData: gameData,
+        pathname: window.location.pathname
+      }), '*');
+    }
+  }, false);
+}
+
+</script>
