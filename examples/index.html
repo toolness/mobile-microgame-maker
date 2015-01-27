@@ -4,6 +4,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="vendor/fancy-friday.css">
 <title>Example Minigames</title>
 <div class="container">
   <h1>Example Minigames</h1>
@@ -11,9 +12,47 @@
 </div>
 <script src="../vendor/react/build/JSXTransformer.js"></script>
 <script src="../vendor/react/build/react-with-addons.js"></script>
+<script src="vendor/fancy-friday.js"></script>
 <script src="examples.js"></script>
 <script type="text/jsx">
+var MicrogameFrame = React.createClass({
+  handleMicrogameEnded: function() {
+    console.log("Microgame ended with score " + this.microgame.score + ".");
+    this.props.onEnd();
+  },
+  componentDidMount: function() {
+    this.microgame = FancyFriday.Microgame(this.props.url, {
+      autoplay: true,
+      difficulty: this.props.difficulty,
+      playTime: this.props.playTime
+    });
+    this.microgame.addEventListener("microgameended",
+                                    this.handleMicrogameEnded);
+    this.getDOMNode().appendChild(this.microgame);
+  },
+  componentWillUnmount: function() {
+    this.microgame.removeEventListener("microgameended",
+                                       this.handleMicrogameEnded);
+    this.microgame.parentNode.removeChild(this.microgame);
+  },
+  render: function() {
+    return <div></div>;
+  }
+});
+
 var GameEntry = React.createClass({
+  getInitialState: function() {
+    return {
+      isPlaying: false
+    };
+  },
+  handleEnd: function() {
+    this.setState({isPlaying: false});
+  },
+  handlePlay: function(e) {
+    e.target.blur();
+    this.setState({isPlaying: true});
+  },
   render: function() {
     var basename = this.props.basename;
     var a = document.createElement('a');
@@ -27,11 +66,18 @@ var GameEntry = React.createClass({
         </div>
         <div className="col-sm-4">
           <a href={basename + '.html'}
-            className="btn btn-awsm btn-xs">Play</a>
+            className="btn btn-awsm btn-xs">View</a>
+          &nbsp;
+          <button className="btn btn-awsm btn-xs" onClick={this.handlePlay}>
+            Play
+          </button>
           &nbsp;
           <a href={'../?importGame=' + a.href}
              className="btn btn-awsm btn-awsmblue btn-xs">Remix</a>
         </div>
+        {this.state.isPlaying
+         ? <MicrogameFrame url={a.href} onEnd={this.handleEnd}/>
+         : null}
       </div>
     );
   }
