@@ -1,4 +1,4 @@
-// PhaserMicrogame v0.1.2
+// PhaserMicrogame v0.1.3
 // 
 // This micro-library can be used to make a "microgame", i.e. a very
 // short game that takes a few seconds to play, has a win/lose
@@ -74,8 +74,10 @@ PhaserMicrogame.prototype = {
     var game = this.state.game;
 
     if (this.usingTinygame) {
-      document.body.style.backgroundColor =
-        '#' + game.stage.backgroundColor.toString(16);
+      document.body.style.backgroundColor = Phaser.Color.getWebRGB(
+        game.stage.backgroundColor
+      );
+
       if (this._tinygameLoadedCountdown) {
         // We want to give the game a few frames to properly
         // render itself so it isn't accidentally shown in a
