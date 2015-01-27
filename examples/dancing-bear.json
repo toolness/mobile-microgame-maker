@@ -1,0 +1,92 @@
+{
+  "animations": {
+    "dancingbear": [
+      {
+        "frameRate": 4,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "loop": true,
+        "name": "bear"
+      },
+      {
+        "frameRate": 4,
+        "frames": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "loop": false,
+        "name": "bear_fail"
+      }
+    ],
+    "polka_dots": [
+      {
+        "frameRate": 3,
+        "frames": [
+          0,
+          1,
+          2
+        ],
+        "loop": true,
+        "name": "polkadots"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "dancing-bear.xml",
+  "height": 480,
+  "name": "dancing-bear",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "squeeze",
+      "url": "sounds/squeeze.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "polkadots",
+      "id": "8de37af8-d05d-2046-a7f4-193dfce67842",
+      "key": "polka_dots",
+      "name": "polka_dots_1",
+      "x": 52,
+      "y": -5
+    },
+    {
+      "animation": "bear",
+      "id": "c48a291c-4ad5-5cd1-0517-915cc75dbc02",
+      "key": "dancingbear",
+      "name": "dancingbear_1",
+      "x": 250,
+      "y": 228
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 176,
+      "frameWidth": 125,
+      "key": "dancingbear",
+      "url": "img/bear.png"
+    },
+    {
+      "frameHeight": 500,
+      "frameWidth": 500,
+      "key": "polka_dots",
+      "url": "img/polkadots.png"
+    }
+  ],
+  "width": 640
+}

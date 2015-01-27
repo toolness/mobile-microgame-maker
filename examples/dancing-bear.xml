@@ -1,0 +1,215 @@
+<xml 
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_set_bg" id="283" inline="false" x="-88" y="358">
+    <value name="COLOUR">
+      <block type="colour_blend" id="284" inline="false">
+        <value name="COLOUR1">
+          <block type="colour_picker" id="285">
+            <field name="COLOUR">#3333ff</field>
+          </block>
+        </value>
+        <value name="COLOUR2">
+          <block type="colour_picker" id="286">
+            <field name="COLOUR">#ffffff</field>
+          </block>
+        </value>
+        <value name="RATIO">
+          <block type="math_number" id="287">
+            <field name="NUM">0.9</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="phaser_set_sprite_numeric_prop" id="288" inline="true">
+        <field name="PROPERTY">alpha</field>
+        <field name="SPRITE">8de37af8-d05d-2046-a7f4-193dfce67842</field>
+        <value name="NUMBER">
+          <block type="math_number" id="289">
+            <field name="NUM">0.1</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+  <block type="phaser_set_main_text" id="290" inline="false" x="245" y="361">
+    <value name="TEXT">
+      <block type="text" id="291">
+        <field name="TEXT">Don't stop tapping!</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_add_event" id="292" x="258" y="394">
+    <field name="MS">500</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="293" inline="false">
+        <value name="TEXT">
+          <block type="text" id="294">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="variables_set" id="295" inline="true" x="658" y="496">
+    <field name="VAR">TAPS</field>
+    <value name="VALUE">
+      <block type="math_number" id="296">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_repeat_event" id="297" x="-127" y="563">
+    <field name="MS">1000</field>
+    <statement name="STACK">
+      <block type="phaser_tween" id="298" inline="true">
+        <field name="PROPERTY">x</field>
+        <field name="SPRITE">c48a291c-4ad5-5cd1-0517-915cc75dbc02</field>
+        <value name="NUMBER">
+          <block type="math_random_int" id="299" inline="true">
+            <value name="FROM">
+              <block type="math_number" id="300">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number" id="301">
+                <field name="NUM">400</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="MS">
+          <block type="math_number" id="302">
+            <field name="NUM">200</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_tween" id="303" inline="true">
+            <field name="PROPERTY">y</field>
+            <field name="SPRITE">c48a291c-4ad5-5cd1-0517-915cc75dbc02</field>
+            <value name="NUMBER">
+              <block type="math_random_int" id="304" inline="true">
+                <value name="FROM">
+                  <block type="math_number" id="305">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="306">
+                    <field name="NUM">400</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="MS">
+              <block type="math_number" id="307">
+                <field name="NUM">200</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="308" inline="false">
+                <value name="IF0">
+                  <block type="logic_compare" id="309" inline="true">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <block type="variables_get" id="310">
+                        <field name="VAR">TAPS</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="311">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="phaser_lose" id="312"></block>
+                </statement>
+                <next>
+                  <block type="variables_set" id="313" inline="true">
+                    <field name="VAR">TAPS</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="314">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_outoftime" id="315" x="664" y="687">
+    <statement name="STACK">
+      <block type="phaser_win" id="316"></block>
+    </statement>
+  </block>
+  <block type="phaser_on_tap" id="317" x="206" y="748">
+    <field name="SPRITE">c48a291c-4ad5-5cd1-0517-915cc75dbc02</field>
+    <statement name="STACK">
+      <block type="phaser_play_sound" id="318">
+        <field name="SOUND">squeeze</field>
+        <next>
+          <block type="math_change" id="319" inline="true">
+            <field name="VAR">TAPS</field>
+            <value name="DELTA">
+              <block type="math_number" id="320">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="321" x="-65" y="931">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="322" inline="false">
+        <value name="TEXT">
+          <block type="text" id="323">
+            <field name="TEXT">Woohoo! Such dancing skillz.</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="324">
+            <field name="SOUND">woohoo</field>
+            <next>
+              <block type="phaser_play_sound" id="325">
+                <field name="SOUND">squeeze</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="326" x="-59" y="1073">
+    <field name="EVENT">lose</field>
+    <statement name="STACK">
+      <block type="phaser_play_sound" id="327">
+        <field name="SOUND">sad_trombone</field>
+        <next>
+          <block type="phaser_set_main_text" id="328" inline="false">
+            <value name="TEXT">
+              <block type="text" id="329">
+                <field name="TEXT">Nooo! You made the dancing bear sad :(</field>
+              </block>
+            </value>
+            <next>
+              <block type="phaser_set_animation" id="330">
+                <field name="SPRITE">c48a291c-4ad5-5cd1-0517-915cc75dbc02</field>
+                <field name="ANIMATION">bear_fail</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
