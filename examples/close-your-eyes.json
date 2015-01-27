@@ -1,0 +1,118 @@
+{
+  "animations": {
+    "eyes": [
+      {
+        "frameRate": 5,
+        "frames": [
+          0,
+          1,
+          2,
+          4,
+          2
+        ],
+        "loop": true,
+        "name": "eyes"
+      }
+    ],
+    "lefthand": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "lefthand"
+      }
+    ],
+    "righthand": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "righthand"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "close-your-eyes.xml",
+  "height": 480,
+  "name": "close-your-eyes",
+  "sounds": [
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "shh",
+      "url": "sounds/shh.mp3"
+    },
+    {
+      "key": "game_over",
+      "url": "sounds/game_over.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "eyes",
+      "id": "41e89ffb-3f76-7487-15ad-1a2c7e12f2f1",
+      "key": "eyes",
+      "name": "eyes_1",
+      "x": 215,
+      "y": 183
+    },
+    {
+      "animation": "lefthand",
+      "draggable": true,
+      "id": "42586480-dc73-d04a-2528-cf5909ce3f25",
+      "key": "lefthand",
+      "name": "lefthand_1",
+      "spawnArea": {
+        "height": 480,
+        "left": 0,
+        "top": 0,
+        "width": 200
+      },
+      "x": 186,
+      "y": 198
+    },
+    {
+      "animation": "righthand",
+      "draggable": true,
+      "id": "ade26cfa-e642-8b25-4dbb-35f1be8c480b",
+      "key": "righthand",
+      "name": "righthand_1",
+      "spawnArea": {
+        "height": 480,
+        "left": 440,
+        "top": 0,
+        "width": 200
+      },
+      "x": 447,
+      "y": 211
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 80,
+      "frameWidth": 155,
+      "key": "eyes",
+      "url": "img/eyes.png"
+    },
+    {
+      "frameHeight": 140,
+      "frameWidth": 170,
+      "key": "lefthand",
+      "url": "img/hand1.png"
+    },
+    {
+      "frameHeight": 140,
+      "frameWidth": 170,
+      "key": "righthand",
+      "url": "img/hand2.png"
+    }
+  ],
+  "width": 640
+}

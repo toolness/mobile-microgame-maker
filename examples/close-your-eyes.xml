@@ -1,0 +1,118 @@
+<xml 
+  
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_set_bg" id="172" inline="false" x="180" y="214">
+    <value name="COLOUR">
+      <block type="colour_picker" id="173">
+        <field name="COLOUR">#ffcc00</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_on_update" id="174" x="138" y="364">
+    <statement name="STACK">
+      <block type="controls_if" id="175" inline="false">
+        <value name="IF0">
+          <block type="logic_operation" id="176" inline="true">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="phaser_sprites_overlap" id="177">
+                <field name="SPRITE1">42586480-dc73-d04a-2528-cf5909ce3f25</field>
+                <field name="SPRITE2">41e89ffb-3f76-7487-15ad-1a2c7e12f2f1</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="phaser_sprites_overlap" id="178">
+                <field name="SPRITE1">ade26cfa-e642-8b25-4dbb-35f1be8c480b</field>
+                <field name="SPRITE2">41e89ffb-3f76-7487-15ad-1a2c7e12f2f1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="phaser_win" id="179"></block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="180" x="164" y="535">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_play_sound" id="181">
+        <field name="SOUND">shh</field>
+        <next>
+          <block type="phaser_play_sound" id="182">
+            <field name="SOUND">musicbox</field>
+            <next>
+              <block type="phaser_set_bg" id="183" inline="false">
+                <value name="COLOUR">
+                  <block type="colour_picker" id="184">
+                    <field name="COLOUR">#000000</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="phaser_set_main_text" id="185" inline="false">
+                    <value name="TEXT">
+                      <block type="text" id="186">
+                        <field name="TEXT">Shh...you won ;)</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="phaser_set_sprite_numeric_prop" id="187" inline="true">
+                        <field name="PROPERTY">alpha</field>
+                        <field name="SPRITE">42586480-dc73-d04a-2528-cf5909ce3f25</field>
+                        <value name="NUMBER">
+                          <block type="math_number" id="188">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="phaser_set_sprite_numeric_prop" id="189" inline="true">
+                            <field name="PROPERTY">alpha</field>
+                            <field name="SPRITE">ade26cfa-e642-8b25-4dbb-35f1be8c480b</field>
+                            <value name="NUMBER">
+                              <block type="math_number" id="190">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="phaser_set_sprite_numeric_prop" id="191" inline="true">
+                                <field name="PROPERTY">alpha</field>
+                                <field name="SPRITE">41e89ffb-3f76-7487-15ad-1a2c7e12f2f1</field>
+                                <value name="NUMBER">
+                                  <block type="math_number" id="192">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="193" x="532" y="534">
+    <field name="EVENT">lose</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="194" inline="false">
+        <value name="TEXT">
+          <block type="text" id="195">
+            <field name="TEXT">This can be hard for some people...</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="196">
+            <field name="SOUND">game_over</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
