@@ -103,6 +103,7 @@ var state = PhaserMicrogame.SimpleEventEmitter({
   create: function() {
     createSprites(this);
     createSounds(this);
+    this.game.transparent = false;
     this.game.stage.backgroundColor = 0xf0f0f0;
     this.microgame.create();
     start(this);
@@ -132,7 +133,8 @@ onload = function() {
     480,
     Phaser.CANVAS,
     'phaser-holder',
-    state
+    state,
+    true
   );
 };
 
