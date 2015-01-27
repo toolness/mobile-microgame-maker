@@ -1,0 +1,189 @@
+{
+  "animations": {
+    "cypress": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "tree2"
+      }
+    ],
+    "ew": [
+      {
+        "frameRate": 3,
+        "frames": [
+          0,
+          1,
+          2
+        ],
+        "loop": true,
+        "name": "ew"
+      }
+    ],
+    "pinetree": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "tree1"
+      }
+    ],
+    "poop": [
+      {
+        "frameRate": 3,
+        "frames": [
+          0,
+          1,
+          2
+        ],
+        "loop": true,
+        "name": "ploop"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "poop.xml",
+  "height": 480,
+  "name": "poop",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    },
+    {
+      "key": "ew",
+      "url": "sounds/Ee.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "ploop",
+      "id": "bf3153cc-6c74-08de-f5b3-371855fcd01e",
+      "key": "poop",
+      "name": "poop",
+      "spawnArea": {
+        "height": 200,
+        "left": 350,
+        "top": 0,
+        "width": 300
+      },
+      "x": 28,
+      "y": 346
+    },
+    {
+      "animation": "ploop",
+      "id": "9f38d091-3b67-65bf-e2de-b3fd9742e113",
+      "key": "poop",
+      "name": "poop_1",
+      "spawnArea": {
+        "height": 150,
+        "left": 200,
+        "top": 330,
+        "width": 300
+      },
+      "x": 128,
+      "y": 328
+    },
+    {
+      "animation": "ploop",
+      "id": "48643834-b149-53a4-12ad-256a67a35c96",
+      "key": "poop",
+      "name": "poop_2",
+      "spawnArea": {
+        "height": 140,
+        "left": 0,
+        "top": 0,
+        "width": 300
+      },
+      "x": 7,
+      "y": 127
+    },
+    {
+      "animation": "ploop",
+      "id": "daa8d820-38c9-f2f3-4bdc-bd2363dcb340",
+      "key": "poop",
+      "name": "poop_3",
+      "spawnArea": {
+        "height": 158,
+        "left": 0,
+        "top": 317,
+        "width": 300
+      },
+      "x": 256,
+      "y": 275
+    },
+    {
+      "animation": "ew",
+      "draggable": true,
+      "id": "aa912536-bff2-fb47-0d6a-e92245b23bd1",
+      "key": "ew",
+      "name": "ew",
+      "x": -2,
+      "y": 158
+    },
+    {
+      "animation": "tree1",
+      "id": "63d83a98-2394-0ed2-bf32-c3c3d765a2b8",
+      "key": "pinetree",
+      "name": "tree",
+      "x": 512,
+      "y": 358
+    },
+    {
+      "animation": "tree2",
+      "id": "d95e16c5-4c10-6011-47e9-7e15ac860816",
+      "key": "cypress",
+      "name": "cypress_1",
+      "x": 558,
+      "y": 315
+    },
+    {
+      "animation": "tree2",
+      "id": "0439575c-6992-3e9f-1345-156e0840f8ca",
+      "key": "cypress",
+      "name": "pinetree_1",
+      "x": 472,
+      "y": 297
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 60,
+      "frameWidth": 70,
+      "key": "poop",
+      "url": "img/poop.png"
+    },
+    {
+      "frameHeight": 100,
+      "frameWidth": 50,
+      "key": "pinetree",
+      "url": "img/tree1.png"
+    },
+    {
+      "frameHeight": 100,
+      "frameWidth": 50,
+      "key": "cypress",
+      "url": "img/tree2.png"
+    },
+    {
+      "frameHeight": 135,
+      "frameWidth": 80,
+      "key": "ew",
+      "url": "img/ew.png"
+    }
+  ],
+  "width": 640
+}
