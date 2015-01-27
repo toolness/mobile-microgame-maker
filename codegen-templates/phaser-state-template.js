@@ -29,6 +29,7 @@ var state = PhaserMicrogame.SimpleEventEmitter({
   create: function() {
     createSprites(this);
     createSounds(this);
+    this.game.transparent = false;
     this.game.stage.backgroundColor = 0x<%= gameData.backgroundColor.toString(16) %>;
     this.microgame.create();
     start(this);
