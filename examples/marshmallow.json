@@ -1,0 +1,53 @@
+{
+  "animations": {
+    "marshmallow": [
+      {
+        "frameRate": 2,
+        "frames": [
+          0,
+          1
+        ],
+        "loop": true,
+        "name": "marshmallow"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "marshmallow.xml",
+  "height": 480,
+  "name": "marshmallow",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "marshmallow",
+      "id": "bf3153cc-6c74-08de-f5b3-371855fcd01e",
+      "key": "marshmallow",
+      "name": "marshmallow",
+      "x": 259,
+      "y": 173
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 135,
+      "frameWidth": 100,
+      "key": "marshmallow",
+      "url": "img/marshmallow.png"
+    }
+  ],
+  "width": 640
+}

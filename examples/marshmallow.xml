@@ -1,0 +1,91 @@
+<xml 
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_on_tap" id="20" x="-246" y="-83">
+    <field name="SPRITE">bf3153cc-6c74-08de-f5b3-371855fcd01e</field>
+    <statement name="STACK">
+      <block type="phaser_play_sound" id="21">
+        <field name="SOUND">sad_trombone</field>
+        <next>
+          <block type="phaser_set_sprite_numeric_prop" id="22" inline="true">
+            <field name="PROPERTY">alpha</field>
+            <field name="SPRITE">bf3153cc-6c74-08de-f5b3-371855fcd01e</field>
+            <value name="NUMBER">
+              <block type="math_number" id="23">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="phaser_lose" id="24">
+                <next>
+                  <block type="phaser_set_main_text" id="25" inline="false">
+                    <value name="TEXT">
+                      <block type="text" id="26">
+                        <field name="TEXT">Well.. we said "don't eat it "!</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_outoftime" id="27" x="140" y="72">
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="28" inline="false">
+        <value name="TEXT">
+          <block type="text" id="29">
+            <field name="TEXT">Woohoo! Such will power!</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_set_sprite_numeric_prop" id="30" inline="true">
+            <field name="PROPERTY">alpha</field>
+            <field name="SPRITE">bf3153cc-6c74-08de-f5b3-371855fcd01e</field>
+            <value name="NUMBER">
+              <block type="math_number" id="31">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="phaser_play_sound" id="32">
+                <field name="SOUND">woohoo</field>
+                <next>
+                  <block type="phaser_play_sound" id="39">
+                    <field name="SOUND">musicbox</field>
+                    <next>
+                      <block type="phaser_win" id="33"></block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_set_bg" id="34" inline="false" x="-236" y="182">
+    <value name="COLOUR">
+      <block type="colour_blend" id="35" inline="false">
+        <value name="COLOUR1">
+          <block type="colour_picker" id="36">
+            <field name="COLOUR">#ffccff</field>
+          </block>
+        </value>
+        <value name="COLOUR2">
+          <block type="colour_picker" id="37">
+            <field name="COLOUR">#ffffff</field>
+          </block>
+        </value>
+        <value name="RATIO">
+          <block type="math_number" id="38">
+            <field name="NUM">0.9</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>
