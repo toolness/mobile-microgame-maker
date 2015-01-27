@@ -105,6 +105,20 @@ var state = PhaserMicrogame.SimpleEventEmitter({
     createSounds(this);
     this.game.transparent = false;
     this.game.stage.backgroundColor = 0xf0f0f0;
+
+    this.microgame.mainText = this.game.add.text(
+      this.game.world.centerX,
+      this.game.world.centerY,
+      '',
+      {
+        font: "30px 'Fredoka One'",
+        fill: "#000000",
+        stroke: "#ffffff",
+        strokeThickness: 4,
+        align: "center"
+      }
+    );
+    this.microgame.mainText.anchor.setTo(0.5, 0.5);
     this.microgame.create();
     start(this);
     this.trigger('create');
