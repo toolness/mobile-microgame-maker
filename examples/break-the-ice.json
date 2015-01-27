@@ -1,0 +1,209 @@
+{
+  "animations": {
+    "clouds": [
+      {
+        "frameRate": 6,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "loop": true,
+        "name": "clouds"
+      }
+    ],
+    "crack": [
+      {
+        "frameRate": 1,
+        "frames": [
+          1
+        ],
+        "loop": true,
+        "name": "break1"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          2
+        ],
+        "loop": true,
+        "name": "break2"
+      },
+      {
+        "frameRate": 1,
+        "frames": [
+          3
+        ],
+        "loop": true,
+        "name": "break3"
+      },
+      {
+        "frameRate": 5,
+        "frames": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "loop": false,
+        "name": "win"
+      }
+    ],
+    "ice_mountain": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "ice_mountain"
+      }
+    ],
+    "mountaintops": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "mountaintops"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "break-the-ice.xml",
+  "height": 480,
+  "name": "break-the-ice",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "eating",
+      "url": "sounds/eat.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    },
+    {
+      "key": "well",
+      "url": "sounds/well.mp3"
+    },
+    {
+      "key": "game_over",
+      "url": "sounds/game_over.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "break1",
+      "id": "37b30432-88cf-6419-fe61-ef37199d3146",
+      "key": "crack",
+      "name": "crack_1",
+      "x": 244,
+      "y": 290
+    },
+    {
+      "animation": "mountaintops",
+      "id": "dc9a67f4-e618-fb44-4776-c7d0386ef6a0",
+      "key": "mountaintops",
+      "name": "mountaintops_1",
+      "x": 500,
+      "y": 93
+    },
+    {
+      "animation": "mountaintops",
+      "id": "1d435b55-4b9c-841c-9433-8896a9216678",
+      "key": "mountaintops",
+      "name": "mountaintops_2",
+      "x": 418,
+      "y": 93
+    },
+    {
+      "animation": "mountaintops",
+      "id": "fff615c2-c994-8ef9-b396-a40820ffbfae",
+      "key": "mountaintops",
+      "name": "mountaintops_4",
+      "x": 250,
+      "y": 93
+    },
+    {
+      "animation": "mountaintops",
+      "id": "8c10213b-67e3-63c8-a10f-aa5a668dbccf",
+      "key": "mountaintops",
+      "name": "mountaintops_5",
+      "x": 372,
+      "y": 93
+    },
+    {
+      "animation": "clouds",
+      "id": "2356aea0-af58-415e-bd86-81effbc42f96",
+      "key": "clouds",
+      "name": "clouds_2",
+      "x": 393,
+      "y": 69
+    },
+    {
+      "animation": "ice_mountain",
+      "id": "a08497ab-b728-c2be-56ad-3bd21cf0d5ac",
+      "key": "ice_mountain",
+      "name": "ice_mountain_1",
+      "x": 161,
+      "y": 41
+    },
+    {
+      "animation": "ice_mountain",
+      "id": "c72d3ecb-8b65-df6e-2521-1e38d60992a8",
+      "key": "ice_mountain",
+      "name": "ice_mountain_2",
+      "x": 75,
+      "y": 41
+    },
+    {
+      "animation": "clouds",
+      "id": "98fc1753-4597-1d65-0f23-70839f6f2b51",
+      "key": "clouds",
+      "name": "clouds_1",
+      "x": 1,
+      "y": 70
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 67,
+      "frameWidth": 120,
+      "key": "crack",
+      "url": "img/ice_broken.png"
+    },
+    {
+      "frameHeight": 175,
+      "frameWidth": 122,
+      "key": "ice_mountain",
+      "url": "img/IceMountains.png"
+    },
+    {
+      "frameHeight": 123,
+      "frameWidth": 126,
+      "key": "mountaintops",
+      "url": "img/MountainPale.png"
+    },
+    {
+      "frameHeight": 87,
+      "frameWidth": 180,
+      "key": "clouds",
+      "url": "img/Clouds.png"
+    }
+  ],
+  "width": 640
+}

@@ -1,0 +1,135 @@
+<xml 
+  
+  xmlns="http://www.w3.org/1999/xhtml">
+  <block type="phaser_on_win_or_lose" id="260" x="-49" y="228">
+    <field name="EVENT">win</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="261" inline="false">
+        <value name="TEXT">
+          <block type="text" id="262">
+            <field name="TEXT">Woohoo! Penguins ;)</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="263">
+            <field name="SOUND">woohoo</field>
+            <next>
+              <block type="phaser_play_sound" id="264">
+                <field name="SOUND">musicbox</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="phaser_on_win_or_lose" id="265" x="-262" y="327">
+    <field name="EVENT">lose</field>
+    <statement name="STACK">
+      <block type="phaser_set_main_text" id="266" inline="false">
+        <value name="TEXT">
+          <block type="text" id="267">
+            <field name="TEXT">Well, you lost. That was a surprise.</field>
+          </block>
+        </value>
+        <next>
+          <block type="phaser_play_sound" id="268">
+            <field name="SOUND">game_over</field>
+            <next>
+              <block type="phaser_play_sound" id="269">
+                <field name="SOUND">well</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="variables_set" id="270" inline="true" x="-222" y="451">
+    <field name="VAR">cracks</field>
+    <value name="VALUE">
+      <block type="math_number" id="271">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  <block type="phaser_on_tap" id="272" x="-204" y="498">
+    <field name="SPRITE">37b30432-88cf-6419-fe61-ef37199d3146</field>
+    <statement name="STACK">
+      <block type="math_change" id="273" inline="true">
+        <field name="VAR">cracks</field>
+        <value name="DELTA">
+          <block type="math_number" id="274">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="275" inline="false">
+            <mutation elseif="1" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="276" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="277">
+                    <field name="VAR">cracks</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="278">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="phaser_set_animation" id="279">
+                <field name="SPRITE">37b30432-88cf-6419-fe61-ef37199d3146</field>
+                <field name="ANIMATION">break2</field>
+                <next>
+                  <block type="phaser_play_sound" id="280">
+                    <field name="SOUND">eating</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id="281" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="282">
+                    <field name="VAR">cracks</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="283">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="phaser_set_animation" id="284">
+                <field name="SPRITE">37b30432-88cf-6419-fe61-ef37199d3146</field>
+                <field name="ANIMATION">break3</field>
+                <next>
+                  <block type="phaser_play_sound" id="285">
+                    <field name="SOUND">eating</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="phaser_set_animation" id="286">
+                <field name="SPRITE">37b30432-88cf-6419-fe61-ef37199d3146</field>
+                <field name="ANIMATION">win</field>
+                <next>
+                  <block type="phaser_win" id="287"></block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

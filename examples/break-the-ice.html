@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../assets/fonts/FredokaOne.css">
+<style>
+html, body, #phaser-holder {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.byline {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: 'Fredoka One';
+  font-size: 10px;
+}
+</style>
+<title>My Minigame</title>
+<div id="phaser-holder"></div>
+<span class="byline">
+  This game was made with MMM.
+  <a href="javascript:remixGame()">Remix it.</a>
+</span>
+</div>
+<script src="../vendor/phaser.js"></script>
+<script src="../assets/js/tinygame-0.2.js"></script>
+<script src="../assets/js/phaser-microgame-0.1.js"></script>
+<script>
+// This microgame was created with the Mobile Minigame Maker. Learn more
+// at https://toolness.github.io/mobile-microgame-maker/.
+//
+// This code uses Phaser--a fun, free and fast 2D game framework for
+// making HTML5 games for desktop and mobile web browsers. Learn more
+// at http://phaser.io/.
+
+function preload(game) {
+  game.load.spritesheet("crack", "../assets/img/ice_broken.png", 120, 67);
+  game.load.spritesheet("ice_mountain", "../assets/img/IceMountains.png", 122, 175);
+  game.load.spritesheet("mountaintops", "../assets/img/MountainPale.png", 126, 123);
+  game.load.spritesheet("clouds", "../assets/img/Clouds.png", 180, 87);
+  game.load.audio("woohoo", "../assets/sounds/woohoo.mp3");
+  game.load.audio("eating", "../assets/sounds/eat.mp3");
+  game.load.audio("musicbox", "../assets/sounds/Music_Box.mp3");
+  game.load.audio("well", "../assets/sounds/well.mp3");
+  game.load.audio("game_over", "../assets/sounds/game_over.mp3");
+}
+
+function createSprites(state) {
+  var sprites = state.sprites = {};
+  var game = state.game;
+  sprites.crack_1 = game.add.sprite(244, 290, "crack");
+  sprites.crack_1.animations.add("break1", [1], 1, true);
+  sprites.crack_1.animations.add("break2", [2], 1, true);
+  sprites.crack_1.animations.add("break3", [3], 1, true);
+  sprites.crack_1.animations.add("win", [4,5,6,7,8], 5, false);
+  sprites.crack_1.animations.play("break1");
+  sprites.mountaintops_1 = game.add.sprite(500, 93, "mountaintops");
+  sprites.mountaintops_1.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_1.animations.play("mountaintops");
+  sprites.mountaintops_2 = game.add.sprite(418, 93, "mountaintops");
+  sprites.mountaintops_2.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_2.animations.play("mountaintops");
+  sprites.mountaintops_4 = game.add.sprite(250, 93, "mountaintops");
+  sprites.mountaintops_4.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_4.animations.play("mountaintops");
+  sprites.mountaintops_5 = game.add.sprite(372, 93, "mountaintops");
+  sprites.mountaintops_5.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_5.animations.play("mountaintops");
+  sprites.clouds_2 = game.add.sprite(393, 69, "clouds");
+  sprites.clouds_2.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], 6, true);
+  sprites.clouds_2.animations.play("clouds");
+  sprites.ice_mountain_1 = game.add.sprite(161, 41, "ice_mountain");
+  sprites.ice_mountain_1.animations.add("ice_mountain", [0], 1, true);
+  sprites.ice_mountain_1.animations.play("ice_mountain");
+  sprites.ice_mountain_2 = game.add.sprite(75, 41, "ice_mountain");
+  sprites.ice_mountain_2.animations.add("ice_mountain", [0], 1, true);
+  sprites.ice_mountain_2.animations.play("ice_mountain");
+  sprites.clouds_1 = game.add.sprite(1, 70, "clouds");
+  sprites.clouds_1.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], 6, true);
+  sprites.clouds_1.animations.play("clouds");
+}
+
+function createSounds(state) {
+  var sounds = state.sounds = {};
+  var game = state.game;
+  sounds.woohoo = game.add.audio("woohoo");
+  sounds.eating = game.add.audio("eating");
+  sounds.musicbox = game.add.audio("musicbox");
+  sounds.well = game.add.audio("well");
+  sounds.game_over = game.add.audio("game_over");
+}
+
+// This function is generated from the microgame's Blockly source.
+
+function start(state) {
+  var game = state.game;
+  var microgame = state.microgame;
+  var sprites = state.sprites;
+  var sounds = state.sounds;
+  
+  var cracks;
+  
+  
+  state.on("win", function() {
+    microgame.mainText.setText('Woohoo! Penguins ;)');
+    sounds.woohoo.play();
+    sounds.musicbox.play();
+  });
+  
+  state.on("lose", function() {
+    microgame.mainText.setText('Well, you lost. That was a surprise.');
+    sounds.game_over.play();
+    sounds.well.play();
+  });
+  
+  cracks = 0;
+  
+  sprites.crack_1.inputEnabled = true;
+  sprites.crack_1.events.onInputDown.add(function() {
+    cracks = (typeof cracks == 'number' ? cracks : 0) + 1;
+    if (cracks == 1) {
+      sprites.crack_1.animations.play("break2");
+      sounds.eating.play();
+    } else if (cracks == 2) {
+      sprites.crack_1.animations.play("break3");
+      sounds.eating.play();
+    } else {
+      sprites.crack_1.animations.play("win");
+      microgame.win();
+    }
+  });
+  
+}
+
+
+
+var state = PhaserMicrogame.SimpleEventEmitter({
+  preload: function() {
+    this.Phaser = Phaser;
+    if (this.Phaser.VERSION != "2.2.1")
+      throw new Error("Expected Phaser 2.2.1 but got " +
+                      this.Phaser.VERSION);
+    preload(this.game);
+    this.trigger('preload');
+  },
+  create: function() {
+    createSprites(this);
+    createSounds(this);
+    this.game.transparent = false;
+    this.game.stage.backgroundColor = 0xf0f0f0;
+
+    this.microgame.mainText = this.game.add.text(
+      this.game.world.centerX,
+      this.game.world.centerY,
+      '',
+      {
+        font: "30px 'Fredoka One'",
+        fill: "#000000",
+        stroke: "#ffffff",
+        strokeThickness: 4,
+        align: "center"
+      }
+    );
+    this.microgame.mainText.anchor.setTo(0.5, 0.5);
+    this.microgame.create();
+    start(this);
+    this.trigger('create');
+  },
+  update: function() {
+    this.microgame.update();
+    this.trigger('update');
+  },
+  render: function() {
+    this.microgame.render();
+  }
+});
+
+state.microgame = new PhaserMicrogame({
+  state: state,
+  playTime: 5000,
+  endingTime: 2000
+});
+
+
+var game;
+
+onload = function() {
+  game = new Phaser.Game(
+    640,
+    480,
+    Phaser.CANVAS,
+    'phaser-holder',
+    state,
+    true
+  );
+};
+
+state.on('preload', function() {
+  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.setMinMax(0, 0, 640, 480);
+  game.scale.pageAlignVertically = true;
+  game.scale.pageAlignHorizontally = true;
+});
+
+PhaserMicrogame.installStupidHacks();
+
+
+
+// --------------
+// Re-Import Data
+// --------------
+//
+// The following is *only* defined to allow others to re-import this
+// game into the editor tool; it's not required to play the game.
+
+var gameData = "break-the-ice.json";
+
+function remixGame() {
+  var child = window.open("../?importGame=opener");
+  window.addEventListener('message', function onMessage(event) {
+    if (event.source !== child) return;
+    if (event.data == "mmm:ready") {
+      window.removeEventListener('message', onMessage, false);
+      child.postMessage(JSON.stringify({
+        type: 'import',
+        gameData: gameData,
+        pathname: window.location.pathname
+      }), '*');
+    }
+  }, false);
+}
+
+</script>
