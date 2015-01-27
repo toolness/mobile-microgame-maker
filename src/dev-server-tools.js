@@ -37,6 +37,7 @@ define(function(require) {
       gameData = GameData.minimize(gameData, blocklyInfo.soundsUsed);
 
       var stateJs = PhaserState.Generators.createState({
+        minimizeGameData: false,
         gameData: gameData,
         blocklyInfo: blocklyInfo
       });
