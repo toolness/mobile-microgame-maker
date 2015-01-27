@@ -1,4 +1,4 @@
-// PhaserMicrogame v0.1.0
+// PhaserMicrogame v0.1.1
 // 
 // This micro-library can be used to make a "microgame", i.e. a very
 // short game that takes a few seconds to play, has a win/lose
@@ -29,6 +29,7 @@ var PhaserMicrogame = function(options) {
     }.bind(this);
     playTime = Tinygame.playTime * 1000;
     endingTime = Tinygame.endingTime * 1000;
+    this._tinygameLoadedCountdown = 2;
   }
 
   this.endingTime = endingTime;
@@ -42,7 +43,6 @@ PhaserMicrogame.prototype = {
     var game = this.state.game;
     if (this.usingTinygame) {
       this.state.game.paused = true;
-      Tinygame.loaded();
     } else {
       this.timeBar = new Phaser.Rectangle(0, 0, game.width,
                                           this.TIME_BAR_HEIGHT);
@@ -67,6 +67,14 @@ PhaserMicrogame.prototype = {
     if (this.usingTinygame) {
       document.body.style.backgroundColor =
         '#' + game.stage.backgroundColor.toString(16);
+      if (this._tinygameLoadedCountdown) {
+        // We want to give the game a few frames to properly
+        // render itself so it isn't accidentally shown in a
+        // half-formed state.
+        this._tinygameLoadedCountdown--;
+        if (this._tinygameLoadedCountdown == 0)
+          Tinygame.loaded();
+      }
     } else {
       if (this.phase == 'PLAYING') {
         game.debug.geom(this.timeBar, '#000000');
