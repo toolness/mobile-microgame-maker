@@ -1,0 +1,92 @@
+{
+  "animations": {
+    "star": [
+      {
+        "frameRate": 2,
+        "frames": [
+          0,
+          1
+        ],
+        "loop": true,
+        "name": "star"
+      },
+      {
+        "frameRate": 2,
+        "frames": [
+          2,
+          3
+        ],
+        "loop": false,
+        "name": "wish"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "falling-star.xml",
+  "height": 480,
+  "name": "falling-star",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "musicbox",
+      "url": "sounds/Music_Box.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "star",
+      "id": "1303d4ec-49f4-0d5f-c0ce-1c1e5d42ac72",
+      "key": "star",
+      "name": "star_1",
+      "spawnArea": {
+        "height": 480,
+        "left": 0,
+        "top": 0,
+        "width": 200
+      },
+      "x": 71,
+      "y": 325
+    },
+    {
+      "animation": "star",
+      "id": "5c1e1e78-a639-1221-7502-6faee1a85fb1",
+      "key": "star",
+      "name": "star_2",
+      "spawnArea": {
+        "height": 480,
+        "left": 200,
+        "top": 0,
+        "width": 200
+      },
+      "x": 251,
+      "y": 122
+    },
+    {
+      "animation": "star",
+      "id": "0042a092-5acc-d409-fee0-6a5b5f871552",
+      "key": "star",
+      "name": "star_3",
+      "spawnArea": {
+        "height": 480,
+        "left": 400,
+        "top": 0,
+        "width": 230
+      },
+      "x": 218,
+      "y": 390
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 62,
+      "frameWidth": 64,
+      "key": "star",
+      "url": "img/star.png"
+    }
+  ],
+  "width": 640
+}

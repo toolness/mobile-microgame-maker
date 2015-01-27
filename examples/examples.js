@@ -1,6 +1,7 @@
 (function(global) {
   var EXAMPLES = [
-    'simple'
+    'simple',
+    'falling-star'
   ];
 
   if (typeof(global.define) == 'function') {
