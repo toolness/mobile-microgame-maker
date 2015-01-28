@@ -11,21 +11,41 @@ html, body, #phaser-holder {
   padding: 0;
   overflow: hidden;
 }
+<% if (encourageRemix) { %>
+html { font-size: 10px; }
+@media (min-width: 480px) { html { font-size: 12px; } }
+@media (min-width: 768px) { html { font-size: 15px; } }
+@media (min-width: 992px) { html { font-size: 20px; } }
+@media (min-width: 1200px) { html { font-size: 25px; } }
 
 .byline {
+  display: block;
   position: absolute;
-  bottom: 8px;
-  left: 8px;
+  bottom: 2rem;
+  left: -2.66rem;
   font-family: 'Fredoka One';
-  font-size: 10px;
+  transform: rotate(45deg);
+  background: #F15A24;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
+
+.byline a {
+  display: block;
+  padding: 0.26rem 3.33rem;
+  color: white;
+  text-decoration: none;
+}
+
+.byline a:hover {
+  text-decoration: underline;
+}<% } %>
 </style>
 <title>My Minigame</title>
 <div id="phaser-holder"></div>
-<span class="byline">
-  This game was made with MMM.
-  <% if (encourageRemix) { %><a href="javascript:remixGame()">Remix it.</a><% } %>
-</span>
+<% if (encourageRemix) { %><span class="byline">
+  <a href="javascript:remixGame()">Remix Me</a>
+</span><% } else { %><span style="font-family: 'Fredoka One'; font-size: 10px; position: absolute; bottom: 4px; left: 4px; opacity: 0.5">This game was made with <a href="http://mmm.minica.de" style="color: inherit">Minicade's Minigame Maker.</a></span><% } %>
 </div>
 <%= scriptTags.join('\n') %>
 <script src="<%= baseAssetURL %>js/tinygame-0.2.js"></script>
