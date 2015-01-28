@@ -62,12 +62,16 @@ app.post('/examples/:name', function(req, res, next) {
   fs.writeFileSync(basename + '.html', req.body.html);
   var blocklyXml = gameData.blocklyXml;
 
+  blocklyXml = prettyData.xml(blocklyXml).split('\n').filter(function(line) {
+    return line.trim().length > 0;
+  }).join('\n');
+
   gameData.blocklyXml = req.name + '.xml';
   fs.writeFileSync(basename + '.json',
                    stableStringify(gameData, {space: 2}));
   console.log('wrote', basename + '.json.');
   fs.writeFileSync(basename + '.xml',
-                   prettyData.xml(blocklyXml));
+                   blocklyXml);
   console.log('wrote', basename + '.xml.');
 
   res.send({status: "OK"});
