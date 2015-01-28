@@ -148,6 +148,10 @@ define(function(require) {
       }
       playerHolder.setAttribute("style", style);
     },
+    handleRegenerateAllExamples: function(e) {
+      e.preventDefault();
+      devServerTools.regenerateAllExamples();
+    },
     handleExportToFilesystem: function(e) {
       e.preventDefault();
       devServerTools.exportToFilesystem(this.state.gameData, function(name) {
@@ -235,6 +239,9 @@ define(function(require) {
                        : null}
                       {usingDevServer
                        ? <li><a href="#" onClick={this.handleImportFromFilesystem}>Import from filesystem</a></li>
+                       : null}
+                      {usingDevServer
+                       ? <li><a href="#" onClick={this.handleRegenerateAllExamples}>Regenerate all examples</a></li>
                        : null}
                     </ul>
                   </div>
