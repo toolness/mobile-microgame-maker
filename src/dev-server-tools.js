@@ -68,7 +68,8 @@ define(function(require) {
         gameDataForRemix: name + '.json',
         baseAssetURL: gameData.baseURL,
         baseCreatorURL: '../',
-        scripts: ['../vendor/phaser.js']
+        scripts: ['../vendor/phaser-' +
+                  PhaserState.Generators.PHASER_VERSION + '.js']
       });
 
       gameData = React.addons.update(gameData, {
