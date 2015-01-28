@@ -1,6 +1,4 @@
 <xml 
-  
-  
   xmlns="http://www.w3.org/1999/xhtml">
   <block type="phaser_on_win_or_lose" id="260" x="-49" y="228">
     <field name="EVENT">win</field>
