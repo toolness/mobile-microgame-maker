@@ -81,10 +81,7 @@ StartupManager.begin(
   var html = document.documentElement;
   var cacheBuster = null;
 
-  if (html.hasAttribute('manifest')) {
-    // https://github.com/toolness/mobile-microgame-maker/issues/12
-    require.waitSeconds = 0;
-  } else if (html.hasAttribute('data-build-date')) {
+  if (html.hasAttribute('data-build-date')) {
     cacheBuster = html.getAttribute('data-build-date');
   }
 
@@ -94,6 +91,11 @@ StartupManager.begin(
   }
 
   window.USING_DEV_SERVER = html.hasAttribute('data-using-dev-server');
+
+  if (window.USING_DEV_SERVER) {
+    // We're in development mode, so assume modules load quickly.
+    require.waitSeconds = 10;
+  }
 })();
 </script>
 <script data-main="main" src="vendor/require.js"></script>
