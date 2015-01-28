@@ -13,8 +13,8 @@
     'break-the-ice'
   ];
 
-  if (typeof(global.define) == 'function') {
-    global.define(function() { return EXAMPLES; });
+  if (typeof(define) == 'function') {
+    define(function() { return EXAMPLES; });
   } else {
     global.EXAMPLES = EXAMPLES;
   }
