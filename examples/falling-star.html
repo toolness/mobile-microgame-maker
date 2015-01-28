@@ -58,17 +58,17 @@ function createSprites(state) {
   sprites.star_1 = game.add.sprite(71, 325, "star");
   placeRandomlyInArea(sprites.star_1, 0, 0, 200, 480);
   sprites.star_1.animations.add("star", [0,1], 2, true);
-  sprites.star_1.animations.add("wish", [2], 1, false);
+  sprites.star_1.animations.add("wish", [2,3], 2, false);
   sprites.star_1.animations.play("star");
   sprites.star_2 = game.add.sprite(251, 122, "star");
   placeRandomlyInArea(sprites.star_2, 200, 0, 200, 480);
   sprites.star_2.animations.add("star", [0,1], 2, true);
-  sprites.star_2.animations.add("wish", [2], 1, false);
+  sprites.star_2.animations.add("wish", [2,3], 2, false);
   sprites.star_2.animations.play("star");
   sprites.star_3 = game.add.sprite(218, 390, "star");
   placeRandomlyInArea(sprites.star_3, 400, 0, 230, 480);
   sprites.star_3.animations.add("star", [0,1], 2, true);
-  sprites.star_3.animations.add("wish", [2], 1, false);
+  sprites.star_3.animations.add("wish", [2,3], 2, false);
   sprites.star_3.animations.play("star");
 }
 
