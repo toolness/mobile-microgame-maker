@@ -1,5 +1,6 @@
 var fs = require('fs');
 var express = require('express');
+var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var prettyData = require('pretty-data').pd;
 var stableStringify = require('json-stable-stringify');
@@ -18,6 +19,8 @@ app.param('name', function(req, res, next, name) {
   req.name = name;
   next();
 });
+
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 

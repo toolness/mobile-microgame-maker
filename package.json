@@ -10,7 +10,8 @@
     "express": "4.11.0",
     "request": "^2.49.0",
     "pretty-data": "^0.40.0",
-    "body-parser": "^1.10.2"
+    "body-parser": "^1.10.2",
+    "morgan": "^1.5.1"
   },
   "devDependencies": {
     "jsxhint": "~0.7.0"
