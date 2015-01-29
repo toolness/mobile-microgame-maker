@@ -1,0 +1,84 @@
+{
+  "animations": {
+    "bluemonster": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "bluemonster"
+      }
+    ],
+    "yellowmonster": [
+      {
+        "frameRate": 1,
+        "frames": [
+          0
+        ],
+        "loop": true,
+        "name": "yellowmonster"
+      }
+    ]
+  },
+  "backgroundColor": 15790320,
+  "baseURL": "assets/",
+  "blocklyXml": "catch-the-monster.xml",
+  "height": 480,
+  "name": "catch-the-monster",
+  "sounds": [
+    {
+      "key": "woohoo",
+      "url": "sounds/woohoo.mp3"
+    },
+    {
+      "key": "woosh",
+      "url": "sounds/Woosh-Mark_DiAngelo.mp3"
+    },
+    {
+      "key": "sad_trombone",
+      "url": "sounds/sad_trombone.mp3"
+    }
+  ],
+  "sprites": [
+    {
+      "animation": "bluemonster",
+      "id": "f053be46-fae1-d366-ae2e-8a6fe0fb7993",
+      "key": "bluemonster",
+      "name": "bluemonster_1",
+      "x": 0,
+      "y": -155
+    },
+    {
+      "animation": "yellowmonster",
+      "id": "24647db2-9e82-0e4a-c101-6c020ee09f39",
+      "key": "yellowmonster",
+      "name": "yellowmonster_1",
+      "x": 240,
+      "y": -155
+    },
+    {
+      "animation": "bluemonster",
+      "id": "cb27df42-13b5-a6d4-88b2-577ccf91bd1b",
+      "key": "bluemonster",
+      "name": "bluemonster_2",
+      "x": 485,
+      "y": -155
+    }
+  ],
+  "spritesheets": [
+    {
+      "frameHeight": 183,
+      "frameWidth": 153,
+      "key": "bluemonster",
+      "url": "img/blue_creature.png"
+    },
+    {
+      "frameHeight": 183,
+      "frameWidth": 153,
+      "key": "yellowmonster",
+      "url": "img/yellow_creature.png"
+    }
+  ],
+  "width": 640
+}

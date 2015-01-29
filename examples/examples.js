@@ -1,5 +1,6 @@
 (function(global) {
   var EXAMPLES = [
+    'catch-the-monster',
     'simple',
     'falling-star',
     'steal-the-sushi',
