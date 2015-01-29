@@ -20,7 +20,7 @@ define(function(require) {
       });
       return (
         <Modal title="Export to HTML" hideSaveButton onFinished={this.props.onFinished}>
-          <p>Here is the HTML for your Minigame.</p>
+          <p>Here is the HTML for your Minigame. Paste it into a site like <a href="http://jsbin.com/" target="_blank">JS Bin</a> to level up and learn HTML5 game development with <a target="_blank" href="http://phaser.io/">Phaser</a>!</p>
           <textarea className="form-control" rows="15" style={{fontFamily: 'monospace'}} spellCheck="false" onChange={this.handleChange} value={exportedHtml}></textarea>
           <div className="checkbox">
             <label>
