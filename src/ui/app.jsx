@@ -34,11 +34,13 @@ define(function(require) {
     }
 
     function handleOpenBlockly() {
+      Blockly.mainWorkspace.rendered = true;
       root.classList.add('show-blockly');
       Blockly.fireUiEvent(window, 'resize');
     }
 
     function handleCloseBlockly() {
+      Blockly.mainWorkspace.rendered = false;
       root.classList.remove('show-blockly');
       editor.refreshBlocklyXml();
       Blockly.fireUiEvent(window, 'resize');
@@ -65,6 +67,7 @@ define(function(require) {
         <BlocklyComponent toolbox={toolbox} onClose={handleCloseBlockly}/>,
         blocklyHolder
       );
+      Blockly.mainWorkspace.rendered = false;
 
       editor = self.editor = React.render(
         <Editor initialGameData={initialGameData} onOpenBlockly={handleOpenBlockly} onGameDataChange={handleGameDataChange} blockly={Blockly} onReset={handleReset} modalManager={modalManager} assetLibrary={assetLibrary}/>,
