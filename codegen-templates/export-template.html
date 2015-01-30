@@ -48,7 +48,6 @@ html { font-size: 10px; }
 <% if (encourageRemix) { %><span class="byline">
   <a href="javascript:remixGame()">Remix Me</a>
 </span><% } else { %><span style="font-family: 'Fredoka One'; font-size: 10px; position: absolute; bottom: 4px; left: 4px; opacity: 0.5">This game was made with <a href="http://mmm.minica.de" style="color: inherit">Minicade's Minigame Maker.</a></span><% } %>
-</div>
 <%= scriptTags.join('\n') %>
 <script src="<%= baseAssetURL %>js/tinygame-0.2.js"></script>
 <script src="<%= baseAssetURL %>js/phaser-microgame-0.1.js"></script>
