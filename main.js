@@ -22,9 +22,7 @@ require([
 
     function accept(gameData, from) {
       window.history.replaceState({}, '', window.location.pathname);
-      if (window.confirm("Import minigame from " + from + "?")) {
-        options.importedGameData = gameData;
-      }
+      options.importedGameData = gameData;
       deferred.resolve();
     }
 
