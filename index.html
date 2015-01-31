@@ -90,6 +90,7 @@ StartupManager.begin(
     require.urlArgs = "bust=" + window.CACHE_BUSTER;
   }
 
+  window.GIT_COMMIT = html.getAttribute('data-git-commit');
   window.USING_DEV_SERVER = html.hasAttribute('data-using-dev-server');
 
   if (window.USING_DEV_SERVER) {

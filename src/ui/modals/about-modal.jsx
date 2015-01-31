@@ -49,7 +49,8 @@ define(function(require) {
       var doc = this.getDOMNode().ownerDocument;
       this.setState({
         appCacheStatus: this.appCacheStatusAsString(),
-        version: doc.documentElement.getAttribute('data-build-date')
+        version: doc.documentElement.getAttribute('data-build-date'),
+        gitCommit: window.GIT_COMMIT
       });
       this.cacheEvents.forEach(function(type) {
         appCache.addEventListener(type, this.handleCacheEvent, false);
@@ -68,7 +69,12 @@ define(function(require) {
             <h2>Make A Minigame</h2>
             <p>{this.state.version
                 ? 'Version ' + this.state.version
-                : 'Development Version'}</p>
+                : 'Development Version'}
+                {this.state.gitCommit
+                 ? <span> / <a target="_blank" href={"https://github.com/toolness/mobile-microgame-maker/commit/" + this.state.gitCommit}>
+                     {this.state.gitCommit.slice(0, 10)}</a></span>
+                 : null}
+            </p>
             {this.state.appCacheStatus == 'UPDATEREADY'
              ? <p><button className="btn btn-awsm" onClick={window.location.reload.bind(window.location)}>
                  Update App
