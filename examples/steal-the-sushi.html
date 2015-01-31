@@ -82,30 +82,30 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.bluedish_1 = game.add.sprite(252, 44, "bluedish");
-  sprites.bluedish_1.animations.add("bluedish", [0,1,2,3], 4, true);
+  sprites.bluedish_1.animations.add("bluedish", [0,1,2,3], time.fps(4), true);
   sprites.bluedish_1.animations.play("bluedish");
   sprites.dish_1 = game.add.sprite(248, 370, "dish");
-  sprites.dish_1.animations.add("dish", [0,1,2,3], 4, true);
+  sprites.dish_1.animations.add("dish", [0,1,2,3], time.fps(4), true);
   sprites.dish_1.animations.play("dish");
   sprites.plate = game.add.sprite(391, 259, "dish_crumbles");
-  sprites.plate.animations.add("plate_dirty", [0,1,2,3], 4, true);
+  sprites.plate.animations.add("plate_dirty", [0,1,2,3], time.fps(4), true);
   sprites.plate.animations.play("plate_dirty");
   sprites.plate2 = game.add.sprite(68, 201, "dish_crumbles");
-  sprites.plate2.animations.add("plate_dirty", [0,1,2,3], 4, true);
+  sprites.plate2.animations.add("plate_dirty", [0,1,2,3], time.fps(4), true);
   sprites.plate2.animations.play("plate_dirty");
   sprites.sushimonster_1 = game.add.sprite(470, 292, "sushimonster");
   placeRandomlyInArea(sprites.sushimonster_1, 320, 130, 320, 150);
-  sprites.sushimonster_1.animations.add("sushimonster", [0,1,2,3,4,3,2,1], 8, true);
+  sprites.sushimonster_1.animations.add("sushimonster", [0,1,2,3,4,3,2,1], time.fps(8), true);
   sprites.sushimonster_1.animations.play("sushimonster");
   sprites.sushimonster_2 = game.add.sprite(346, 26, "sushimonster");
   placeRandomlyInArea(sprites.sushimonster_2, 0, 140, 320, 170);
-  sprites.sushimonster_2.animations.add("sushimonster", [0,1,2,3,4,3,2,1], 8, true);
+  sprites.sushimonster_2.animations.add("sushimonster", [0,1,2,3,4,3,2,1], time.fps(8), true);
   sprites.sushimonster_2.animations.play("sushimonster");
   sprites.sushi_1 = game.add.sprite(273, 341, "sushi");
   sprites.sushi_1.inputEnabled = true;
   sprites.sushi_1.input.enableDrag(true);
-  sprites.sushi_1.animations.add("sushi", [0,1,2,3,4], 5, true);
-  sprites.sushi_1.animations.add("sadsushi", [4,5,6], 1, true);
+  sprites.sushi_1.animations.add("sushi", [0,1,2,3,4], time.fps(5), true);
+  sprites.sushi_1.animations.add("sadsushi", [4,5,6], time.fps(1), true);
   sprites.sushi_1.animations.play("sushi");
 }
 
@@ -137,7 +137,7 @@ function start(state) {
   
   microgame.mainText.setText('Drag the sushi to the blue plate!');
   
-  game.time.events.add(1000, function() {
+  game.time.events.add(time.ms(1000), function() {
     microgame.mainText.setText('Avoid the chopstick monsters!');
   });
   
@@ -146,13 +146,13 @@ function start(state) {
     sounds.eating.play();
   });
   
-  game.time.events.add(2000, function() {
+  game.time.events.add(time.ms(2000), function() {
     microgame.mainText.setText('');
   });
   
   state.on("update", function() {
-    game.add.tween(sprites.sushimonster_1).to({x: Math.random()}, 1000).start();
-    game.add.tween(sprites.sushimonster_2).to({y: Math.random()}, 1000).start();
+    game.add.tween(sprites.sushimonster_1).to({x: Math.random()}, time.ms(1000)).start();
+    game.add.tween(sprites.sushimonster_2).to({y: Math.random()}, time.ms(1000)).start();
     if (Phaser.Rectangle.intersects(sprites.sushi_1.getBounds(), sprites.sushimonster_1.getBounds())) {
       microgame.mainText.setText('Ooops! No sushi for you!');
       microgame.lose();
@@ -234,10 +234,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

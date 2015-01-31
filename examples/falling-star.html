@@ -78,18 +78,18 @@ function createSprites(state) {
   var game = state.game;
   sprites.star_1 = game.add.sprite(71, 325, "star");
   placeRandomlyInArea(sprites.star_1, 0, 0, 200, 480);
-  sprites.star_1.animations.add("star", [0,1], 2, true);
-  sprites.star_1.animations.add("wish", [2,3], 2, false);
+  sprites.star_1.animations.add("star", [0,1], time.fps(2), true);
+  sprites.star_1.animations.add("wish", [2,3], time.fps(2), false);
   sprites.star_1.animations.play("star");
   sprites.star_2 = game.add.sprite(251, 122, "star");
   placeRandomlyInArea(sprites.star_2, 200, 0, 200, 480);
-  sprites.star_2.animations.add("star", [0,1], 2, true);
-  sprites.star_2.animations.add("wish", [2,3], 2, false);
+  sprites.star_2.animations.add("star", [0,1], time.fps(2), true);
+  sprites.star_2.animations.add("wish", [2,3], time.fps(2), false);
   sprites.star_2.animations.play("star");
   sprites.star_3 = game.add.sprite(218, 390, "star");
   placeRandomlyInArea(sprites.star_3, 400, 0, 230, 480);
-  sprites.star_3.animations.add("star", [0,1], 2, true);
-  sprites.star_3.animations.add("wish", [2,3], 2, false);
+  sprites.star_3.animations.add("star", [0,1], time.fps(2), true);
+  sprites.star_3.animations.add("wish", [2,3], time.fps(2), false);
   sprites.star_3.animations.play("star");
 }
 
@@ -138,16 +138,16 @@ function start(state) {
   
   game.stage.backgroundColor = colour_blend('#000099', '#000000', 0.5);
   
-  game.time.events.loop(200, function() {
+  game.time.events.loop(time.ms(200), function() {
     sprites.star_1.alpha = Math.random();
     sprites.star_2.alpha = Math.random();
     sprites.star_3.alpha = Math.random();
-    game.add.tween(sprites.star_1).to({x: math_random_int(1, 600)}, 1000).start();
-    game.add.tween(sprites.star_1).to({y: math_random_int(1, 600)}, 1000).start();
-    game.add.tween(sprites.star_2).to({x: math_random_int(1, 600)}, 1000).start();
-    game.add.tween(sprites.star_2).to({y: math_random_int(1, 600)}, 1000).start();
-    game.add.tween(sprites.star_3).to({x: math_random_int(1, 600)}, 1000).start();
-    game.add.tween(sprites.star_3).to({y: math_random_int(1, 600)}, 1000).start();
+    game.add.tween(sprites.star_1).to({x: math_random_int(1, 600)}, time.ms(1000)).start();
+    game.add.tween(sprites.star_1).to({y: math_random_int(1, 600)}, time.ms(1000)).start();
+    game.add.tween(sprites.star_2).to({x: math_random_int(1, 600)}, time.ms(1000)).start();
+    game.add.tween(sprites.star_2).to({y: math_random_int(1, 600)}, time.ms(1000)).start();
+    game.add.tween(sprites.star_3).to({x: math_random_int(1, 600)}, time.ms(1000)).start();
+    game.add.tween(sprites.star_3).to({y: math_random_int(1, 600)}, time.ms(1000)).start();
   });
   
   sprites.star_2.inputEnabled = true;
@@ -228,10 +228,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

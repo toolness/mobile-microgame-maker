@@ -71,13 +71,13 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.bluemonster_1 = game.add.sprite(0, -155, "bluemonster");
-  sprites.bluemonster_1.animations.add("bluemonster", [0], 1, true);
+  sprites.bluemonster_1.animations.add("bluemonster", [0], time.fps(1), true);
   sprites.bluemonster_1.animations.play("bluemonster");
   sprites.yellowmonster_1 = game.add.sprite(240, -155, "yellowmonster");
-  sprites.yellowmonster_1.animations.add("yellowmonster", [0], 1, true);
+  sprites.yellowmonster_1.animations.add("yellowmonster", [0], time.fps(1), true);
   sprites.yellowmonster_1.animations.play("yellowmonster");
   sprites.bluemonster_2 = game.add.sprite(485, -155, "bluemonster");
-  sprites.bluemonster_2.animations.add("bluemonster", [0], 1, true);
+  sprites.bluemonster_2.animations.add("bluemonster", [0], time.fps(1), true);
   sprites.bluemonster_2.animations.play("bluemonster");
 }
 
@@ -118,7 +118,7 @@ function start(state) {
   isGoingDown = true;
   speed = 250;
   
-  game.time.events.loop(750, function() {
+  game.time.events.loop(time.ms(750), function() {
     sounds.woosh.play();
     rand = math_random_int(1, 3);
     if (isGoingDown) {
@@ -131,13 +131,13 @@ function start(state) {
         sprites.bluemonster_2.x = sprites.yellowmonster_1.x;
         sprites.yellowmonster_1.x = temporary;
       }
-      game.add.tween(sprites.bluemonster_1).to({y: 0}, speed).start();
-      game.add.tween(sprites.bluemonster_2).to({y: 0}, speed).start();
-      game.add.tween(sprites.yellowmonster_1).to({y: 0}, speed).start();
+      game.add.tween(sprites.bluemonster_1).to({y: 0}, time.ms(speed)).start();
+      game.add.tween(sprites.bluemonster_2).to({y: 0}, time.ms(speed)).start();
+      game.add.tween(sprites.yellowmonster_1).to({y: 0}, time.ms(speed)).start();
     } else {
-      game.add.tween(sprites.bluemonster_1).to({y: -200}, speed).start();
-      game.add.tween(sprites.bluemonster_2).to({y: -200}, speed).start();
-      game.add.tween(sprites.yellowmonster_1).to({y: -200}, speed).start();
+      game.add.tween(sprites.bluemonster_1).to({y: -200}, time.ms(speed)).start();
+      game.add.tween(sprites.bluemonster_2).to({y: -200}, time.ms(speed)).start();
+      game.add.tween(sprites.yellowmonster_1).to({y: -200}, time.ms(speed)).start();
     }
     isGoingDown = !isGoingDown;
   });
@@ -213,10 +213,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;
