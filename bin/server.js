@@ -20,7 +20,8 @@ app.param('name', function(req, res, next, name) {
   next();
 });
 
-app.use(morgan('dev'));
+if (!module.parent)
+  app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -72,10 +73,12 @@ app.post('/examples/:name', function(req, res, next) {
   gameData.blocklyXml = req.name + '.xml';
   fs.writeFileSync(basename + '.json',
                    stableStringify(gameData, {space: 2}));
-  console.log('wrote', basename + '.json.');
+  if (!module.parent)
+    console.log('wrote', basename + '.json.');
   fs.writeFileSync(basename + '.xml',
                    blocklyXml);
-  console.log('wrote', basename + '.xml.');
+  if (!module.parent)
+    console.log('wrote', basename + '.xml.');
 
   res.send({status: "OK"});
 });
