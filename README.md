@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/toolness/mobile-microgame-maker.svg?branch=gh-pages)](https://travis-ci.org/toolness/mobile-microgame-maker)
+
 This is a very early attempt at a Mobile Microgame Maker (MMM) for
 [Minicade][]. 
 
