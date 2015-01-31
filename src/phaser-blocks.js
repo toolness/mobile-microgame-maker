@@ -2,7 +2,6 @@ define(function(require) {
   var _ = require('underscore');
   var Blockly = require('blockly');
   var GameData = require('./game-data');
-  var hackBlocklyForIos = require('./ui/blockly-ios-hacks');
   var gameData = null;
   var soundsUsed = null;
 
@@ -442,8 +441,6 @@ define(function(require) {
     return 'state.on("' + block.getFieldValue('EVENT') +
            '", function() {\n' + branch + '});\n';
   };
-
-  hackBlocklyForIos();
 
   return Blockly;
 });
