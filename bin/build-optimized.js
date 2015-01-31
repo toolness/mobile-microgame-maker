@@ -1,4 +1,5 @@
 var requirejs = require('requirejs');
+var execFile = require('child_process').execFile;
 var fs = require('fs');
 
 var buildCss = require('./build-css');
@@ -20,7 +21,7 @@ function loadIndexWithHtmlAttrs(attrs) {
   );
 }
 
-function build(cb) {
+function buildWithGitCommit(gitCommit, cb) {
   cb = cb || function() {};
 
   var buildDate = new Date();
@@ -67,10 +68,13 @@ function build(cb) {
         'build/index.html',
         loadIndexWithHtmlAttrs({
           'manifest': ENABLE_APPCACHE ? 'mmm.appcache' : undefined,
+          'data-git-commit': gitCommit,
           'data-build-date': buildDate.toISOString()
         })
       );
-      console.log('Built version ' + buildDate.toISOString() + '.');
+      console.log('Built version ' + buildDate.toISOString() +
+                  ', based on commit ' +
+                  (gitCommit || '?').slice(0, 10) + '.');
       fs.writeFileSync(
         'build/vendor/react/build/JSXTransformer.js',
         jsxt
@@ -86,6 +90,18 @@ function build(cb) {
       console.log(err);
       cb(err);
     });
+  });
+}
+
+function build(cb) {
+  execFile('git', ['rev-parse', 'HEAD'], function(err, hash) {
+    if (err || !/^[a-f0-9]+$/.test(hash.trim())) {
+      console.log("warning: 'git rev-parse HEAD' failed.");
+      hash = undefined;
+    } else {
+      hash = hash.trim();
+    }
+    buildWithGitCommit(hash, cb);
   });
 }
 
