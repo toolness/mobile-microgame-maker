@@ -148,8 +148,8 @@ define(function(require) {
   Blockly.JavaScript['phaser_add_event'] = function(block) {
     var branch = generateJsBranch(block);
 
-    return 'game.time.events.add(' + this.getFieldValue('MS') +
-           ', function() {\n' + branch + '});\n';
+    return 'game.time.events.add(time.ms(' + this.getFieldValue('MS') +
+           '), function() {\n' + branch + '});\n';
   };
 
   Blockly.Blocks['phaser_repeat_event'] = {
@@ -166,8 +166,8 @@ define(function(require) {
   Blockly.JavaScript['phaser_repeat_event'] = function(block) {
     var branch = generateJsBranch(block);
 
-    return 'game.time.events.loop(' + this.getFieldValue('MS') +
-           ', function() {\n' + branch + '});\n';
+    return 'game.time.events.loop(time.ms(' + this.getFieldValue('MS') +
+           '), function() {\n' + branch + '});\n';
   };
 
   Blockly.Blocks['phaser_on_update'] = {
@@ -263,7 +263,7 @@ define(function(require) {
 
     return 'game.add.tween(' + sprite + ').to({' +
       property + ': ' + number +
-      '}, ' + ms + ').start();\n';
+      '}, time.ms(' + ms + ')).start();\n';
   };
 
   Blockly.Blocks['phaser_play_sound'] = {

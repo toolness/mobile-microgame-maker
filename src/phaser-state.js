@@ -13,6 +13,8 @@ define(function(require) {
 
   PhaserState.Generators.stringifyArgs = function() {
     return [].slice.call(arguments).map(function(arg) {
+      if (arg && arg.stringify === false && typeof(arg.value) == 'string')
+        return arg.value;
       return JSON.stringify(arg);
     }).join(', ');
   };
@@ -86,7 +88,9 @@ define(function(require) {
         ).concat(animations.map(function(animInfo) {
           return spriteName + '.animations.add(' + this.stringifyArgs(
             animInfo.name, animInfo.frames,
-            animInfo.frameRate, animInfo.loop
+            {stringify: false,
+             value: 'time.fps(' + animInfo.frameRate + ')'},
+            animInfo.loop
           ) + ');';
         }, this)).concat([
           spriteName + '.animations.play(' +

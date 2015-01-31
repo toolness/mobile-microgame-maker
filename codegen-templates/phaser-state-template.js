@@ -63,3 +63,5 @@ state.microgame = new PhaserMicrogame({
   playTime: <%= playTime %>,
   endingTime: <%= endingTime %>
 });
+
+var time = state.microgame.time;
