@@ -104,6 +104,7 @@ define(function(require) {
   PhaserState.Generators.createState = function(options) {
     options = _.defaults(options, {
       minimizeGameData: true,
+      standalone: false,
       difficulty: 'easy'
     });
 
@@ -119,6 +120,7 @@ define(function(require) {
       createSounds: this.createSounds(gameData),
       expectedPhaserVersion: this.PHASER_VERSION,
       gameData: gameData,
+      standalone: options.standalone,
       difficulty: difficulty,
       playTime: options.playTime || this.DEFAULT_PLAY_TIMES[difficulty],
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
