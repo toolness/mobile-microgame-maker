@@ -80,18 +80,18 @@ function createSprites(state) {
   var game = state.game;
   sprites.fly_1 = game.add.sprite(71, 325, "fly");
   placeRandomlyInArea(sprites.fly_1, 138, 9, 342, 386);
-  sprites.fly_1.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
-  sprites.fly_1.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_1.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], time.fps(10), true);
+  sprites.fly_1.animations.add("dead", [0,1,2,3], time.fps(4), false);
   sprites.fly_1.animations.play("flying");
   sprites.fly_2 = game.add.sprite(553, 327, "fly");
   placeRandomlyInArea(sprites.fly_2, 28, 41, 334, 291);
-  sprites.fly_2.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
-  sprites.fly_2.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_2.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], time.fps(10), true);
+  sprites.fly_2.animations.add("dead", [0,1,2,3], time.fps(4), false);
   sprites.fly_2.animations.play("flying");
   sprites.fly_3 = game.add.sprite(433, 79, "fly");
   placeRandomlyInArea(sprites.fly_3, 235, 195, 397, 276);
-  sprites.fly_3.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], 10, true);
-  sprites.fly_3.animations.add("dead", [0,1,2,3], 4, false);
+  sprites.fly_3.animations.add("flying", [0,1,2,3,4,5,6,7,8,9], time.fps(10), true);
+  sprites.fly_3.animations.add("dead", [0,1,2,3], time.fps(4), false);
   sprites.fly_3.animations.play("flying");
 }
 
@@ -134,7 +134,7 @@ function start(state) {
     dead_fly = (typeof dead_fly == 'number' ? dead_fly : 0) + 1;
   });
   
-  game.time.events.loop(1000, function() {
+  game.time.events.loop(time.ms(1000), function() {
     sprites.fly_1.x = math_random_int(1, 300);
     sprites.fly_1.y = math_random_int(1, 300);
     sprites.fly_2.x = math_random_int(1, 300);
@@ -220,10 +220,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

@@ -70,7 +70,7 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.marshmallow = game.add.sprite(259, 173, "marshmallow");
-  sprites.marshmallow.animations.add("marshmallow", [0,1], 2, true);
+  sprites.marshmallow.animations.add("marshmallow", [0,1], time.fps(2), true);
   sprites.marshmallow.animations.play("marshmallow");
 }
 
@@ -172,10 +172,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

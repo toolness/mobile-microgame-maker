@@ -1,4 +1,4 @@
-// PhaserMicrogame v0.1.3
+// PhaserMicrogame v0.1.4
 // 
 // This micro-library can be used to make a "microgame", i.e. a very
 // short game that takes a few seconds to play, has a win/lose
@@ -16,6 +16,7 @@
 var PhaserMicrogame = function(options) {
   var playTime = options.playTime;
   var endingTime = options.endingTime;
+  var difficulty = options.difficulty || 'easy';
 
   this.state = options.state;
   this.phase = 'PLAYING';
@@ -29,11 +30,14 @@ var PhaserMicrogame = function(options) {
     }.bind(this);
     playTime = Tinygame.playTime * 1000;
     endingTime = Tinygame.endingTime * 1000;
+    difficulty = Tinygame.difficulty;
     this._tinygameLoadedCountdown = 2;
   }
 
   this.endingTime = endingTime;
   this.playTime = this.timeLeft = playTime;
+  this.difficulty = difficulty;
+  this.time = new PhaserMicrogame.Time(this);
 };
 
 PhaserMicrogame.prototype = {
@@ -157,6 +161,25 @@ PhaserMicrogame.SimpleEventEmitter = function SimpleEventEmitter(target) {
   };
 
   return target;
+};
+
+PhaserMicrogame.Time = function Time(microgame) {
+  this.microgame = microgame;
+  this.dilationFactor = this.DILATION_FACTORS[microgame.difficulty];
+};
+
+PhaserMicrogame.Time.prototype = {
+  DILATION_FACTORS: {
+    easy: 1,
+    medium: 0.8,
+    hard: 0.6
+  },
+  fps: function(fps) {
+    return fps * (1 / this.dilationFactor);
+  },
+  ms: function(ms) {
+    return ms * this.dilationFactor;
+  }
 };
 
 // ## PhaserMicrogame.installStupidHacks()

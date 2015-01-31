@@ -63,6 +63,7 @@ define(function(require) {
 
       var stateJs = PhaserState.Generators.createState({
         minimizeGameData: false,
+        standalone: true,
         gameData: gameData,
         blocklyInfo: blocklyInfo
       });

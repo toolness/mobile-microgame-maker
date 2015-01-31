@@ -83,33 +83,33 @@ function createSprites(state) {
   var game = state.game;
   sprites.poop = game.add.sprite(28, 346, "poop");
   placeRandomlyInArea(sprites.poop, 350, 0, 300, 200);
-  sprites.poop.animations.add("ploop", [0,1,2], 3, true);
+  sprites.poop.animations.add("ploop", [0,1,2], time.fps(3), true);
   sprites.poop.animations.play("ploop");
   sprites.poop_1 = game.add.sprite(128, 328, "poop");
   placeRandomlyInArea(sprites.poop_1, 200, 330, 300, 150);
-  sprites.poop_1.animations.add("ploop", [0,1,2], 3, true);
+  sprites.poop_1.animations.add("ploop", [0,1,2], time.fps(3), true);
   sprites.poop_1.animations.play("ploop");
   sprites.poop_2 = game.add.sprite(7, 127, "poop");
   placeRandomlyInArea(sprites.poop_2, 0, 0, 300, 140);
-  sprites.poop_2.animations.add("ploop", [0,1,2], 3, true);
+  sprites.poop_2.animations.add("ploop", [0,1,2], time.fps(3), true);
   sprites.poop_2.animations.play("ploop");
   sprites.poop_3 = game.add.sprite(256, 275, "poop");
   placeRandomlyInArea(sprites.poop_3, 0, 317, 300, 158);
-  sprites.poop_3.animations.add("ploop", [0,1,2], 3, true);
+  sprites.poop_3.animations.add("ploop", [0,1,2], time.fps(3), true);
   sprites.poop_3.animations.play("ploop");
   sprites.ew = game.add.sprite(-2, 158, "ew");
   sprites.ew.inputEnabled = true;
   sprites.ew.input.enableDrag(true);
-  sprites.ew.animations.add("ew", [0,1,2], 3, true);
+  sprites.ew.animations.add("ew", [0,1,2], time.fps(3), true);
   sprites.ew.animations.play("ew");
   sprites.tree = game.add.sprite(512, 358, "pinetree");
-  sprites.tree.animations.add("tree1", [0], 1, true);
+  sprites.tree.animations.add("tree1", [0], time.fps(1), true);
   sprites.tree.animations.play("tree1");
   sprites.cypress_1 = game.add.sprite(558, 315, "cypress");
-  sprites.cypress_1.animations.add("tree2", [0], 1, true);
+  sprites.cypress_1.animations.add("tree2", [0], time.fps(1), true);
   sprites.cypress_1.animations.play("tree2");
   sprites.pinetree_1 = game.add.sprite(472, 297, "cypress");
-  sprites.pinetree_1.animations.add("tree2", [0], 1, true);
+  sprites.pinetree_1.animations.add("tree2", [0], time.fps(1), true);
   sprites.pinetree_1.animations.play("tree2");
 }
 
@@ -167,19 +167,19 @@ function start(state) {
     microgame.mainText.setText('EWW!! YOU LOST...');
   });
   
-  game.time.events.add(1000, function() {
+  game.time.events.add(time.ms(1000), function() {
     microgame.mainText.setText('But don\'t step on poop!');
   });
   
-  game.time.events.add(2000, function() {
+  game.time.events.add(time.ms(2000), function() {
     microgame.mainText.setText('');
   });
   
-  game.time.events.loop(1000, function() {
-    game.add.tween(sprites.poop).to({x: math_random_int(10, 400)}, 500).start();
-    game.add.tween(sprites.poop_1).to({y: math_random_int(10, 400)}, 500).start();
-    game.add.tween(sprites.poop_2).to({y: math_random_int(10, 400)}, 500).start();
-    game.add.tween(sprites.poop_3).to({x: math_random_int(10, 400)}, 500).start();
+  game.time.events.loop(time.ms(1000), function() {
+    game.add.tween(sprites.poop).to({x: math_random_int(10, 400)}, time.ms(500)).start();
+    game.add.tween(sprites.poop_1).to({y: math_random_int(10, 400)}, time.ms(500)).start();
+    game.add.tween(sprites.poop_2).to({y: math_random_int(10, 400)}, time.ms(500)).start();
+    game.add.tween(sprites.poop_3).to({x: math_random_int(10, 400)}, time.ms(500)).start();
   });
   
   state.on("update", function() {
@@ -252,10 +252,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

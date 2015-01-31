@@ -72,16 +72,16 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.button_red_1 = game.add.sprite(80, 300, "button_red");
-  sprites.button_red_1.animations.add("off", [0], 1, true);
-  sprites.button_red_1.animations.add("on", [1], 1, false);
+  sprites.button_red_1.animations.add("off", [0], time.fps(1), true);
+  sprites.button_red_1.animations.add("on", [1], time.fps(1), false);
   sprites.button_red_1.animations.play("off");
   sprites.button_blue_1 = game.add.sprite(258, 300, "button_blue");
-  sprites.button_blue_1.animations.add("off", [0], 1, true);
-  sprites.button_blue_1.animations.add("on", [1], 1, false);
+  sprites.button_blue_1.animations.add("off", [0], time.fps(1), true);
+  sprites.button_blue_1.animations.add("on", [1], time.fps(1), false);
   sprites.button_blue_1.animations.play("off");
   sprites.button_yellow_1 = game.add.sprite(428, 300, "button_yellow");
-  sprites.button_yellow_1.animations.add("off", [0], 1, true);
-  sprites.button_yellow_1.animations.add("on", [1], 1, false);
+  sprites.button_yellow_1.animations.add("off", [0], time.fps(1), true);
+  sprites.button_yellow_1.animations.add("on", [1], time.fps(1), false);
   sprites.button_yellow_1.animations.play("off");
 }
 
@@ -107,7 +107,7 @@ function start(state) {
   microgame.mainText.setText('Use more than one finger ;)');
   push = 0;
   
-  game.time.events.add(500, function() {
+  game.time.events.add(time.ms(500), function() {
     microgame.mainText.setText('');
   });
   
@@ -118,7 +118,7 @@ function start(state) {
     sounds.powerup.play();
   });
   
-  game.time.events.add(1500, function() {
+  game.time.events.add(time.ms(1500), function() {
     if (push >= 3) {
       microgame.win();
     } else {
@@ -196,10 +196,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

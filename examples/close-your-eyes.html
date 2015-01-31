@@ -80,19 +80,19 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.eyes_1 = game.add.sprite(215, 183, "eyes");
-  sprites.eyes_1.animations.add("eyes", [0,1,2,4,2], 5, true);
+  sprites.eyes_1.animations.add("eyes", [0,1,2,4,2], time.fps(5), true);
   sprites.eyes_1.animations.play("eyes");
   sprites.lefthand_1 = game.add.sprite(186, 198, "lefthand");
   sprites.lefthand_1.inputEnabled = true;
   sprites.lefthand_1.input.enableDrag(true);
   placeRandomlyInArea(sprites.lefthand_1, 0, 0, 200, 480);
-  sprites.lefthand_1.animations.add("lefthand", [0], 1, true);
+  sprites.lefthand_1.animations.add("lefthand", [0], time.fps(1), true);
   sprites.lefthand_1.animations.play("lefthand");
   sprites.righthand_1 = game.add.sprite(447, 211, "righthand");
   sprites.righthand_1.inputEnabled = true;
   sprites.righthand_1.input.enableDrag(true);
   placeRandomlyInArea(sprites.righthand_1, 440, 0, 200, 480);
-  sprites.righthand_1.animations.add("righthand", [0], 1, true);
+  sprites.righthand_1.animations.add("righthand", [0], time.fps(1), true);
   sprites.righthand_1.animations.play("righthand");
 }
 
@@ -181,10 +181,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

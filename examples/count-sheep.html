@@ -74,29 +74,29 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.grass = game.add.sprite(36, 57, "bushes");
-  sprites.grass.animations.add("bush", [0], 1, true);
+  sprites.grass.animations.add("bush", [0], time.fps(1), true);
   sprites.grass.animations.play("bush");
   sprites.grass2 = game.add.sprite(297, 349, "bushes");
-  sprites.grass2.animations.add("bush", [0], 1, true);
+  sprites.grass2.animations.add("bush", [0], time.fps(1), true);
   sprites.grass2.animations.play("bush");
   sprites.grass3 = game.add.sprite(341, 65, "bushes");
-  sprites.grass3.animations.add("bush", [0], 1, true);
+  sprites.grass3.animations.add("bush", [0], time.fps(1), true);
   sprites.grass3.animations.play("bush");
   sprites.pinetreetoo_1 = game.add.sprite(71, 279, "pinetreetoo");
-  sprites.pinetreetoo_1.animations.add("tree3", [0], 1, true);
+  sprites.pinetreetoo_1.animations.add("tree3", [0], time.fps(1), true);
   sprites.pinetreetoo_1.animations.play("tree3");
   sprites.cypresstoo_1 = game.add.sprite(523, 278, "cypresstoo");
-  sprites.cypresstoo_1.animations.add("tree4", [0], 1, true);
+  sprites.cypresstoo_1.animations.add("tree4", [0], time.fps(1), true);
   sprites.cypresstoo_1.animations.play("tree4");
   sprites.cave_1 = game.add.sprite(262, 53, "pinetreetoo");
-  sprites.cave_1.animations.add("tree3", [0], 1, true);
+  sprites.cave_1.animations.add("tree3", [0], time.fps(1), true);
   sprites.cave_1.animations.play("tree3");
   sprites.fence_1 = game.add.sprite(288, 291, "fence");
-  sprites.fence_1.animations.add("fence", [0], 1, true);
+  sprites.fence_1.animations.add("fence", [0], time.fps(1), true);
   sprites.fence_1.animations.play("fence");
   sprites.sheep_1 = game.add.sprite(195, 170, "sheep");
-  sprites.sheep_1.animations.add("sheep", [0], 1, true);
-  sprites.sheep_1.animations.add("sheepjump", [0,1,2,3,4,5,6,0], 15, false);
+  sprites.sheep_1.animations.add("sheep", [0], time.fps(1), true);
+  sprites.sheep_1.animations.add("sheepjump", [0,1,2,3,4,5,6,0], time.fps(15), false);
   sprites.sheep_1.animations.play("sheep");
 }
 
@@ -215,10 +215,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

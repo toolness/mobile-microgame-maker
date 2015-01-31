@@ -71,11 +71,11 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.polka_dots_1 = game.add.sprite(52, -5, "polka_dots");
-  sprites.polka_dots_1.animations.add("polkadots", [0,1,2], 3, true);
+  sprites.polka_dots_1.animations.add("polkadots", [0,1,2], time.fps(3), true);
   sprites.polka_dots_1.animations.play("polkadots");
   sprites.dancingbear_1 = game.add.sprite(250, 228, "dancingbear");
-  sprites.dancingbear_1.animations.add("bear", [0,1,2,3], 4, true);
-  sprites.dancingbear_1.animations.add("bear_fail", [3,4,5,6], 4, false);
+  sprites.dancingbear_1.animations.add("bear", [0,1,2,3], time.fps(4), true);
+  sprites.dancingbear_1.animations.add("bear_fail", [3,4,5,6], time.fps(4), false);
   sprites.dancingbear_1.animations.play("bear");
 }
 
@@ -130,15 +130,15 @@ function start(state) {
   
   microgame.mainText.setText('Don\'t stop tapping!');
   
-  game.time.events.add(500, function() {
+  game.time.events.add(time.ms(500), function() {
     microgame.mainText.setText('');
   });
   
   TAPS = 0;
   
-  game.time.events.loop(1000, function() {
-    game.add.tween(sprites.dancingbear_1).to({x: math_random_int(1, 400)}, 200).start();
-    game.add.tween(sprites.dancingbear_1).to({y: math_random_int(1, 400)}, 200).start();
+  game.time.events.loop(time.ms(1000), function() {
+    game.add.tween(sprites.dancingbear_1).to({x: math_random_int(1, 400)}, time.ms(200)).start();
+    game.add.tween(sprites.dancingbear_1).to({y: math_random_int(1, 400)}, time.ms(200)).start();
     if (TAPS < 1) {
       microgame.lose();
     }
@@ -213,10 +213,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;

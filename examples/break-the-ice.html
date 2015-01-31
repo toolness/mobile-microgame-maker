@@ -75,34 +75,34 @@ function createSprites(state) {
   var sprites = state.sprites = {};
   var game = state.game;
   sprites.crack_1 = game.add.sprite(244, 290, "crack");
-  sprites.crack_1.animations.add("break1", [1], 1, true);
-  sprites.crack_1.animations.add("break2", [2], 1, true);
-  sprites.crack_1.animations.add("break3", [3], 1, true);
-  sprites.crack_1.animations.add("win", [4,5,6,7,8], 5, false);
+  sprites.crack_1.animations.add("break1", [1], time.fps(1), true);
+  sprites.crack_1.animations.add("break2", [2], time.fps(1), true);
+  sprites.crack_1.animations.add("break3", [3], time.fps(1), true);
+  sprites.crack_1.animations.add("win", [4,5,6,7,8], time.fps(5), false);
   sprites.crack_1.animations.play("break1");
   sprites.mountaintops_1 = game.add.sprite(500, 93, "mountaintops");
-  sprites.mountaintops_1.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_1.animations.add("mountaintops", [0], time.fps(1), true);
   sprites.mountaintops_1.animations.play("mountaintops");
   sprites.mountaintops_2 = game.add.sprite(418, 93, "mountaintops");
-  sprites.mountaintops_2.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_2.animations.add("mountaintops", [0], time.fps(1), true);
   sprites.mountaintops_2.animations.play("mountaintops");
   sprites.mountaintops_4 = game.add.sprite(250, 93, "mountaintops");
-  sprites.mountaintops_4.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_4.animations.add("mountaintops", [0], time.fps(1), true);
   sprites.mountaintops_4.animations.play("mountaintops");
   sprites.mountaintops_5 = game.add.sprite(372, 93, "mountaintops");
-  sprites.mountaintops_5.animations.add("mountaintops", [0], 1, true);
+  sprites.mountaintops_5.animations.add("mountaintops", [0], time.fps(1), true);
   sprites.mountaintops_5.animations.play("mountaintops");
   sprites.clouds_2 = game.add.sprite(393, 69, "clouds");
-  sprites.clouds_2.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], 6, true);
+  sprites.clouds_2.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], time.fps(6), true);
   sprites.clouds_2.animations.play("clouds");
   sprites.ice_mountain_1 = game.add.sprite(161, 41, "ice_mountain");
-  sprites.ice_mountain_1.animations.add("ice_mountain", [0], 1, true);
+  sprites.ice_mountain_1.animations.add("ice_mountain", [0], time.fps(1), true);
   sprites.ice_mountain_1.animations.play("ice_mountain");
   sprites.ice_mountain_2 = game.add.sprite(75, 41, "ice_mountain");
-  sprites.ice_mountain_2.animations.add("ice_mountain", [0], 1, true);
+  sprites.ice_mountain_2.animations.add("ice_mountain", [0], time.fps(1), true);
   sprites.ice_mountain_2.animations.play("ice_mountain");
   sprites.clouds_1 = game.add.sprite(1, 70, "clouds");
-  sprites.clouds_1.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], 6, true);
+  sprites.clouds_1.animations.add("clouds", [0,1,2,3,4,5,4,3,2,1], time.fps(6), true);
   sprites.clouds_1.animations.play("clouds");
 }
 
@@ -202,10 +202,10 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 });
 
 state.microgame = new PhaserMicrogame({
-  state: state,
-  playTime: 5000,
-  endingTime: 2000
+  state: state
 });
+
+var time = state.microgame.time;
 
 
 var game;
