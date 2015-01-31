@@ -82,6 +82,9 @@ app.post('/examples/:name', function(req, res, next) {
 
 app.use(express.static(__dirname + '/..'));
 
-app.listen(PORT, function() {
-  console.log("Listening on port", PORT);
-});
+module.exports = app;
+
+if (!module.parent)
+  app.listen(PORT, function() {
+    console.log("Listening on port", PORT);
+  });
