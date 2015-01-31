@@ -19,6 +19,7 @@ define(function(require) {
       var state = PhaserState.Generators.makeStateObject({
         autoplay: options.autoplay,
         gameData: gameData,
+        difficulty: this.state.difficulty,
         blocklyInfo: blockly.Phaser.generateJs(gameData),
         onGameEnded: options.onGameEnded
       });
@@ -29,6 +30,7 @@ define(function(require) {
       return {
         undo: [],
         redo: [],
+        difficulty: 'Easy',
         gameData: GameData.maximize(this.props.initialGameData,
                                     this.props.assetLibrary)
       };
@@ -166,6 +168,9 @@ define(function(require) {
       devServerTools.importFromFilesystem(this.state.gameData.name,
                                           this.importGameData);
     },
+    handleChangeDifficulty: function(difficulty) {
+      this.setState({difficulty: difficulty});
+    },
     adjustScale: function(newScale) {
       if (this.refs.playerHolder.getDOMNode().style.position != 'fixed')
         return newScale;
@@ -196,7 +201,7 @@ define(function(require) {
             <div className="col-sm-8 col-sm-push-4">
               <div ref="playerHolderSizer" className="hidden-xs"></div>
               <div ref="playerHolder">
-                <Player gameData={this.state.gameData} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize} adjustScale={this.adjustScale} onDisplayObjectClick={this.handleDisplayObjectClick}/>
+                <Player gameData={this.state.gameData} difficulty={this.state.difficulty} makePhaserState={this.makePhaserState} onBeforeScaleResize={this.handleBeforeScaleResize} adjustScale={this.adjustScale} onDisplayObjectClick={this.handleDisplayObjectClick} onChangeDifficulty={this.handleChangeDifficulty}/>
                 <br/>
                 <div className="btn-group btn-group-justified">
                   <div className="btn-group">

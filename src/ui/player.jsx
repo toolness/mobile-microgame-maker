@@ -14,7 +14,8 @@ define(function(require) {
       };
     },
     componentWillReceiveProps: function(nextProps) {
-      if (nextProps.gameData !== this.props.gameData)
+      if (nextProps.gameData !== this.props.gameData ||
+          nextProps.difficulty !== this.props.difficulty)
         this.resetGame(nextProps);
     },
     resetGame: function(props, autoplay) {
@@ -46,6 +47,10 @@ define(function(require) {
     handleReload: function() {
       this.resetGame(this.props);
     },
+    handleChangeDifficulty: function(e) {
+      e.preventDefault();
+      this.props.onChangeDifficulty(e.target.textContent);
+    },
     render: function() {
       var scale = this.state.scale;
 
@@ -64,6 +69,16 @@ define(function(require) {
                   <span className={'glyphicon '+ (this.state.isPaused ? 'glyphicon-play'
                                                                       : 'glyphicon-pause')}></span>
                 </button>
+              </div>
+              <div className="btn-group dropup">
+                <button type="button" className="btn btn-awsm btn-awsmblue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  {this.props.difficulty} <span className="caret"></span>
+                </button>
+                <ul className="dropdown-menu" role="menu" style={{textAlign: 'left'}}>
+                  <li><a href="#" onClick={this.handleChangeDifficulty}>Easy</a></li>
+                  <li><a href="#" onClick={this.handleChangeDifficulty}>Medium</a></li>
+                  <li><a href="#" onClick={this.handleChangeDifficulty}>Hard</a></li>
+                </ul>
               </div>
               <div className="btn-group">
                 <button type="button" className="btn btn-awsm btn-awsmblue" onClick={this.handleReload}>

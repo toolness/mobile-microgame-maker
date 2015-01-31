@@ -102,12 +102,16 @@ define(function(require) {
   };
 
   PhaserState.Generators.createState = function(options) {
-    options = _.defaults(options, {minimizeGameData: true});
+    options = _.defaults(options, {
+      minimizeGameData: true,
+      difficulty: 'easy'
+    });
 
     var blocklyInfo = options.blocklyInfo;
     var gameData = options.minimizeGameData
       ? GameData.minimize(options.gameData, blocklyInfo.soundsUsed)
       : options.gameData;
+    var difficulty = options.difficulty.toLowerCase();
 
     return _.template(this._stateTemplate, {
       preload: this.preload(gameData),
@@ -115,7 +119,8 @@ define(function(require) {
       createSounds: this.createSounds(gameData),
       expectedPhaserVersion: this.PHASER_VERSION,
       gameData: gameData,
-      playTime: options.playTime || this.DEFAULT_PLAY_TIME,
+      difficulty: difficulty,
+      playTime: options.playTime || this.DEFAULT_PLAY_TIMES[difficulty],
       endingTime: options.endingTime || this.DEFAULT_ENDING_TIME,
       extra: '',
       phaserIsUndefined: !!options.phaserIsUndefined,
@@ -127,7 +132,11 @@ define(function(require) {
     return eval('(' + this[name](gameData) + ')');
   };
 
-  PhaserState.Generators.DEFAULT_PLAY_TIME = 5000;
+  PhaserState.Generators.DEFAULT_PLAY_TIMES = {
+    easy: 5000,
+    medium: 4000,
+    hard: 3000
+  };
   PhaserState.Generators.DEFAULT_ENDING_TIME = 2000;
   PhaserState.Generators.PHASER_VERSION = "2.2.1";
 
@@ -152,6 +161,7 @@ define(function(require) {
     var stateJs = this.createState({
       gameData: options.gameData,
       blocklyInfo: options.blocklyInfo,
+      difficulty: options.difficulty,
       playTime: options.playTime,
       endingTime: options.endingTime,
       phaserIsUndefined: true

@@ -60,6 +60,7 @@ var state = PhaserMicrogame.SimpleEventEmitter({
 
 state.microgame = new PhaserMicrogame({
   state: state,
+  difficulty: '<%= difficulty %>',
   playTime: <%= playTime %>,
   endingTime: <%= endingTime %>
 });
