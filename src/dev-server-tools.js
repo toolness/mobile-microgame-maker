@@ -9,41 +9,45 @@ define(function(require) {
   var EXAMPLES = require('examples/examples');
 
   return {
+    regenerateExample: function(example, cb) {
+      this._importFromFilesystem(example, function(err, gameData) {
+        if (err) return cb(err);
+        this._exportToFilesystem(example, gameData, cb);
+      }.bind(this));
+    },
     regenerateAllExamples: function() {
-      var self = this;
       var examplesLeft = EXAMPLES.slice();
       var importNextGame = function() {
         var example = examplesLeft.pop();
 
-        console.log("importing examples/" + example);
-        self._importFromFilesystem(example, function(gameData) {
-          console.log("exporting examples/" + example);
-          self._exportToFilesystem(example, gameData, function() {
-            if (examplesLeft.length == 0)
-              alert("All examples regenerated!");
-            else
-              importNextGame();
-          });
+        console.log("regenerating examples/" + example);
+        this.regenerateExample(example, function(err) {
+          if (err) return alert("Error! " + err.message);
+          if (examplesLeft.length == 0)
+            alert("All examples regenerated!");
+          else
+            importNextGame();
         });
-      };
+      }.bind(this);
 
       importNextGame();
     },
     _importFromFilesystem: function(name, cb) {
-      Export.fromUrl('examples/' + name + '.html', function(err, gameData) {
-        if (err) {
-          console.log(err);
-          return alert("Error! Check the browser console.");
-        }
+      var url = require.toUrl('examples/' + name + '.html');
+      Export.fromUrl(url, function(err, gameData) {
+        if (err) return cb(err);
         if (gameData == null)
-          return alert("No game data found!");
-        cb(gameData);
+          return cb(new Error("No game data found!"));
+        cb(null, gameData);
       });
     },
     importFromFilesystem: function(name, cb) {
       name = window.prompt("Enter name of example to import.", name);
       if (!name) return;
-      this._importFromFilesystem(name, cb);
+      this._importFromFilesystem(name, function(err, gameData) {
+        if (err) return alert("Error! " + err.message);
+        cb(gameData);
+      });
     },
     _exportToFilesystem: function(name, gameData, cb) {
       var originalBaseURL = gameData.baseURL;
@@ -85,15 +89,12 @@ define(function(require) {
         },
         dataType: 'json',
         error: function(jqXHR, textStatus, errorThrown) {
-          alert(new Error(textStatus + " " +  jqXHR.status));
+          return cb(new Error(textStatus + " " +  jqXHR.status));
         },
         success: function(data, textStatus, jqXHR) {
-          if (data.status != "OK") {
-            console.log(data);
-            alert("Expected status OK but got something different!");
-            return;
-          }
-          cb(name);
+          if (data.status != "OK")
+            return cb(new Error("POST failed: " + JSON.stringify(data)));
+          cb(null, name);
         }
       });
     },
@@ -102,7 +103,8 @@ define(function(require) {
 
       name = window.prompt("Enter name of example to export.", name);
       if (!name) return;
-      this._exportToFilesystem(name, gameData, function(name) {
+      this._exportToFilesystem(name, gameData, function(err, name) {
+        if (err) return alert("Error! " + err.message);
         alert("Successfully wrote " + name + "!");
         cb(name);
       });

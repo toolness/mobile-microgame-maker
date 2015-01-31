@@ -18,7 +18,7 @@
     "jsxhint": "~0.7.0"
   },
   "scripts": {
-    "test": "node bin/test.js"
+    "test": "node bin/test.js && node bin/regenerate-examples.js"
   },
   "repository": {
     "type": "git",

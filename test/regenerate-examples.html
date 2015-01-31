@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="vendor/qunit.css">
+<title>Rebuild Examples</title>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="phantomjs-hacks.js"></script>
+<script src="vendor/qunit.js"></script>
+<script src="../require-config.js"></script>
+<script>
+require.baseUrl = '../';
+
+// Grrr. http://stackoverflow.com/a/8479953
+require.urlArgs = "bust=" + Date.now();
+
+QUnit.config.autostart = false;
+</script>
+<script src="../vendor/require.js"></script>
+<script>
+require([
+  "examples/examples",
+  "src/phaser-blocks",
+  "src/dev-server-tools"
+], function(EXAMPLES, Blockly, devServerTools) {
+  module("Example Code Regeneration");
+
+  Blockly.mainWorkspace = new Blockly.Workspace();
+
+  EXAMPLES.forEach(function(example) {
+    asyncTest("regenerating '" + example + "' works", function() {
+      devServerTools.regenerateExample(example, function(err) {
+        strictEqual(err, null, "no errors are raised");
+        start();
+      });
+    });
+  });
+
+  QUnit.start();
+});
+</script>
