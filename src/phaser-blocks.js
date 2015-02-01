@@ -107,12 +107,17 @@ define(function(require) {
     },
     generateJs: function(newGameData) {
       Blockly.Phaser.setGameData(newGameData);
-      soundsUsed = [];
+      var currentSoundsUsed = soundsUsed = [];
 
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       xml = Blockly.Xml.domToText(xml);
 
-      var blocklyLines = Blockly.JavaScript.workspaceToCode().split('\n');
+      try {
+        var blocklyLines = Blockly.JavaScript.workspaceToCode().split('\n');
+      } finally {
+        soundsUsed = null;
+      }
+
       var lines = [
         'function start(state) {',
         '  var game = state.game;',
@@ -129,7 +134,7 @@ define(function(require) {
 
       return {
         start: lines.join('\n'),
-        soundsUsed: soundsUsed
+        soundsUsed: currentSoundsUsed
       };
     }
   };
@@ -277,7 +282,8 @@ define(function(require) {
   };
 
   Blockly.JavaScript['phaser_play_sound'] = function(block) {
-    soundsUsed.push(block.getFieldValue('SOUND'));
+    if (soundsUsed)
+      soundsUsed.push(block.getFieldValue('SOUND'));
     return 'sounds.' + block.getFieldValue('SOUND') + '.play();\n';
   };
 
