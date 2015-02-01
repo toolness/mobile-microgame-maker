@@ -230,6 +230,49 @@ div.btn-group-justified > div.btn-group:last-child {
     color: black;
     background-color: @lightyellow;
   }
+
+  .blockly-js-toggle {
+    .ultra-bold;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+    cursor: pointer;
+    background: @darkblue;
+    color: white;
+    padding: 10px;
+  }
+
+  .blockly-panel {
+    height: 100%;
+  }
+
+  .blockly-js-panel {
+    display: none;
+    overflow: auto;
+    padding: 10px;
+  }
+
+  .blockly-fill-page:not(.blockly-js-expanded) >
+  .blockly-js-toggle .caret {
+    border-top: 0;
+    border-bottom: 4px solid;
+  }
+
+  .blockly-fill-page.blockly-js-expanded {
+    > .blockly-panel {
+      height: 75%;
+    }
+
+    > .blockly-js-panel {
+      display: block;
+      height: 25%;
+    }
+
+    > .blockly-js-toggle {
+      bottom: 25%;
+    }
+  }
 }
 
 @media (max-width: 480px) {
