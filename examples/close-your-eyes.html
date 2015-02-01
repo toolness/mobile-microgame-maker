@@ -12,6 +12,15 @@ html, body, #phaser-holder {
   overflow: hidden;
 }
 
+/* This fixes a strange iPhone bug:
+ * https://github.com/toolness/mobile-microgame-maker/issues/41 */
+@media (max-width: 320px) {
+  #phaser-holder {
+    max-width: 320px;
+  }
+}
+
+
 html { font-size: 10px; }
 @media (min-width: 480px) { html { font-size: 12px; } }
 @media (min-width: 768px) { html { font-size: 15px; } }
