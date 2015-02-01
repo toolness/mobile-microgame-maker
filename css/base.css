@@ -200,7 +200,8 @@ div.btn-group-justified > div.btn-group:last-child {
 }
 #blockly-holder .blockly-js-panel {
   display: none;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   padding: 10px;
 }
 #blockly-holder .blockly-fill-page:not(.blockly-js-expanded) > .blockly-js-toggle .caret {
