@@ -209,14 +209,14 @@ div.btn-group-justified > div.btn-group:last-child {
   border-bottom: 4px solid;
 }
 #blockly-holder .blockly-fill-page.blockly-js-expanded > .blockly-panel {
-  height: 75%;
+  height: 66%;
 }
 #blockly-holder .blockly-fill-page.blockly-js-expanded > .blockly-js-panel {
   display: block;
-  height: 25%;
+  height: 34%;
 }
 #blockly-holder .blockly-fill-page.blockly-js-expanded > .blockly-js-toggle {
-  bottom: 25%;
+  bottom: 34%;
 }
 @media (max-width: 480px) {
   .hidden-teensy {
