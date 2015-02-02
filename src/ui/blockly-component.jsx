@@ -1,6 +1,7 @@
 define(function(require) {
   var React = require('react');
   var Blockly = require('blockly');
+  var Prism = require('prism');
 
   var BlocklyComponent = React.createClass({
     getInitialState: function() {
@@ -31,7 +32,7 @@ define(function(require) {
       if (!this.state.showJsPanel) return;
       var js = Blockly.JavaScript.workspaceToCode();
       this.setState({
-        js: js
+        js: Prism.highlight(js, Prism.languages.javascript, 'javascript')
       });
     },
     handleToggleJsPanel: function() {
@@ -48,7 +49,7 @@ define(function(require) {
           <div className="blockly-panel" ref="blockly"></div>
           <div className="blockly-js-panel">
             <p>Below is the <a href="http://phaser.io/" target="_blank">Phaser</a>-based JavaScript translation for your Blockly code.</p>
-            <pre>{this.state.js}</pre>
+            <pre dangerouslySetInnerHTML={{__html: this.state.js}}></pre>
             <p>
               <small><strong>Note: </strong>
               This isn't all the code for your minigame. To see the full code, export your minigame to HTML via the <span className="glyphicon glyphicon-flash"></span> <strong>MOAR</strong> button in the main editor.

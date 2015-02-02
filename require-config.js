@@ -2,6 +2,7 @@ var require = {
   paths: {
     "text": "vendor/require.text",
     "jsx": "vendor/require.jsx",
+    "prism": "vendor/prism",
     "URLUtils": "vendor/URLUtils",
     "hammer": "vendor/hammer",
     "tabletop": "vendor/tabletop",
@@ -21,6 +22,9 @@ var require = {
     fileExtension: '.jsx'
   },
   shim: {
+    "prism": {
+      exports: "Prism"
+    },
     "URLUtils": {
       exports: "URLUtils"
     },
