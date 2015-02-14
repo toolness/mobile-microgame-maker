@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+CACHE:
+phaser-frame.html
+vendor/phaser-2.2.1.js
+vendor/FontLoader.js
+assets/fonts/FredokaOne.css
+assets/fonts/FredokaOne-Regular.ttf
+
+NETWORK:
+*
