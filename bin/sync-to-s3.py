@@ -61,7 +61,7 @@ call("rm -rf build")
 call("node bin/build-optimized.js")
 
 # The '/' after 'build' is REALLY important here.
-call_s3cmd("sync build/ s3://%(BUCKET)s")
+call_s3cmd("sync --delete-removed build/ s3://%(BUCKET)s")
 
 call("gzip -c -9 build/main.js > build/main.js.gz")
 call_s3cmd("put -m application/javascript "
