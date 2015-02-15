@@ -49,8 +49,11 @@ define(function(require) {
 
       if (!this.iframe) {
         var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', 'phaser-frame.html?bust=' +
-                                   window.CACHE_BUSTER);
+        var url = 'phaser-frame.html' +
+                  (window.CACHE_BUSTER
+                   ? '?bust=' + window.CACHE_BUSTER
+                   : '');
+        iframe.setAttribute('src', url);
         iframe.onload = function() {
           var frameWindow = iframe.contentWindow;
 
