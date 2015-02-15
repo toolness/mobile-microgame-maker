@@ -26,7 +26,13 @@ if (!module.parent)
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', function(req, res, next) {
-  res.send(buildOptimized.loadIndexWithHtmlAttrs({
+  res.send(buildOptimized.loadFileWithHtmlAttrs('index.html', {
+    'data-using-dev-server': true
+  }));
+});
+
+app.get('/phaser-frame.html', function(req, res, next) {
+  res.send(buildOptimized.loadFileWithHtmlAttrs('phaser-frame.html', {
     'data-using-dev-server': true
   }));
 });

@@ -82,7 +82,8 @@ StartupManager.begin(
   var html = document.documentElement;
   var cacheBuster = null;
 
-  if (html.hasAttribute('data-build-date')) {
+  if (html.hasAttribute('data-build-date') &&
+      !html.hasAttribute('manifest')) {
     cacheBuster = html.getAttribute('data-build-date');
   }
 
