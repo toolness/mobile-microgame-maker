@@ -63,6 +63,11 @@ call("node bin/build-optimized.js")
 # The '/' after 'build' is REALLY important here.
 call_s3cmd("sync --delete-removed build/ s3://%(BUCKET)s")
 
+if args.offline:
+    call_s3cmd("put -m text/cache-manifest "
+               "--add-header 'Cache-Control:must-revalidate' "
+               "build/mmm.appcache s3://%(BUCKET)s/mmm.appcache")
+
 call("gzip -c -9 build/main.js > build/main.js.gz")
 call_s3cmd("put -m application/javascript "
            "--add-header 'Content-Encoding:gzip' build/main.js.gz "
