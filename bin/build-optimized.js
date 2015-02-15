@@ -7,7 +7,7 @@ var getCacheManifest = require('./get-cache-manifest');
 
 var ENABLE_APPCACHE = 'ENABLE_APPCACHE' in process.env;
 
-function loadIndexWithHtmlAttrs(attrs) {
+function loadFileWithHtmlAttrs(filename, attrs) {
   var attrPairs = [];
   Object.keys(attrs).forEach(function(name) {
     var value = attrs[name];
@@ -15,7 +15,7 @@ function loadIndexWithHtmlAttrs(attrs) {
     if (typeof(attrs[name]) == 'undefined') return;
     attrPairs.push(name + '="' + value + '"');
   });
-  return fs.readFileSync('index.html', 'utf-8').replace(
+  return fs.readFileSync(filename, 'utf-8').replace(
     'data-maybe-replace-me-with-a-manifest',
     attrPairs.join(' ')
   );
@@ -64,14 +64,16 @@ function buildWithGitCommit(gitCommit, cb) {
     process.nextTick(function() {
       fs.writeFileSync('build/mmm.appcache',
                        getCacheManifest(buildDate, !ENABLE_APPCACHE));
-      fs.writeFileSync(
-        'build/index.html',
-        loadIndexWithHtmlAttrs({
-          'manifest': ENABLE_APPCACHE ? 'mmm.appcache' : undefined,
-          'data-git-commit': gitCommit,
-          'data-build-date': buildDate.toISOString()
-        })
-      );
+      ['index.html', 'phaser-frame.html'].forEach(function(filename) {
+        fs.writeFileSync(
+          'build/' + filename,
+          loadFileWithHtmlAttrs(filename, {
+            'manifest': ENABLE_APPCACHE ? 'mmm.appcache' : undefined,
+            'data-git-commit': gitCommit,
+            'data-build-date': buildDate.toISOString()
+          })
+        );
+      });
       console.log('Built version ' + buildDate.toISOString() +
                   ', based on commit ' +
                   (gitCommit || '?').slice(0, 10) + '.');
@@ -106,7 +108,7 @@ function build(cb) {
 }
 
 module.exports = build;
-module.exports.loadIndexWithHtmlAttrs = loadIndexWithHtmlAttrs;
+module.exports.loadFileWithHtmlAttrs = loadFileWithHtmlAttrs;
 
 if (!module.parent) {
   console.log(

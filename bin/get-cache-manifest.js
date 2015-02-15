@@ -33,12 +33,14 @@ function get(now, isEmpty) {
       'startup-manager.js',
       'main.js',
       'require-config.js',
+      'vendor/phaser-2.2.1.js',
+      'vendor/FontLoader.js',
       buildCss.OUTPUT_FILENAME,
       'vendor/require.js',
       'vendor/require.text.js', // Note sure why this needs to be loaded, but
                                 // it shows up in the network log on optimized
                                 // builds...
-      'vendor/phaser.js',
+      'vendor/prism.css',
       'vendor/bootstrap/css/bootstrap.css',
       'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff'
     ]).concat(listFiles('vendor/blockly/media'))
