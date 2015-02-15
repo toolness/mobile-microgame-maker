@@ -24,6 +24,10 @@ if (!module.parent)
   app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(function(req, res, next) {
+  res.set('Cache-Control', 'must-revalidate');
+  next();
+});
 
 app.get('/', function(req, res, next) {
   res.send(buildOptimized.loadFileWithHtmlAttrs('index.html', {
