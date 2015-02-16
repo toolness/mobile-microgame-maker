@@ -52,7 +52,7 @@ define(function(require) {
   };
 
   GameData.minimize = function(gameData, soundsUsed) {
-    gameData = GameData.withoutUnusedSounds(gameData, soundsUsed);
+    gameData = GameData.withoutUnusedSounds(gameData, soundsUsed || []);
     return GameData.withoutUnusedSpritesheets(gameData);
   };
 

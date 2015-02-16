@@ -26,8 +26,10 @@ define(function(require) {
     handlePosition: function() {
       if (this.props.sprite.spawnArea) {
         this.props.modalManager.show(RectModal, {
-          gameData: GameData.withoutSprite(this.props.gameData,
-                                           this.props.sprite),
+          gameData: GameData.minimize(
+            GameData.withoutSprite(this.props.gameData,
+                                   this.props.sprite)
+          ),
           initialRect: this.props.sprite.spawnArea,
           title: 'Set Starting Area',
           instructions: 'Draw a rectangle. When your game begins, the ' +
