@@ -50,8 +50,9 @@ def call(cmdline):
     else:
         subprocess.check_call(cmdline, shell=True, env=env, cwd=ROOT)
 
-def call_s3cmd(cmdline):
-    flags = ['--acl-public']
+def call_s3cmd(cmdline, caching='max-age=600'):
+    flags = ['--acl-public',
+             "--add-header 'Cache-Control:%s'" % caching]
     if args.dry_run:
         flags.append("--dry-run")
     cmdline = "s3cmd " + ' '.join(flags) + " " + cmdline
@@ -65,8 +66,8 @@ call_s3cmd("sync --delete-removed build/ s3://%(BUCKET)s")
 
 if args.offline:
     call_s3cmd("put -m text/cache-manifest "
-               "--add-header 'Cache-Control:must-revalidate' "
-               "build/mmm.appcache s3://%(BUCKET)s/mmm.appcache")
+               "build/mmm.appcache s3://%(BUCKET)s/mmm.appcache",
+               caching="must-revalidate")
 
 call("gzip -c -9 build/main.js > build/main.js.gz")
 call_s3cmd("put -m application/javascript "
@@ -78,8 +79,9 @@ call("gzip -c -9 build/vendor/phaser-%(PHASER_VERSION)s.js > "
 
 call_s3cmd("put -m application/javascript "
            "--add-header 'Content-Encoding:gzip' "
-           "--add-header 'Cache-Control:max-age=86400' "
            "build/vendor/phaser-%(PHASER_VERSION)s.js.gz "
-           "s3://%(BUCKET)s/vendor/phaser-%(PHASER_VERSION)s.js")
+           "s3://%(BUCKET)s/vendor/phaser-%(PHASER_VERSION)s.js",
+           caching="max-age=86400")
 
-call_s3cmd("sync assets/js/ s3://minicade-assets/js/")
+call_s3cmd("sync assets/js/ s3://minicade-assets/js/",
+           caching="max-age=86400")
