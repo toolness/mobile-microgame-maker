@@ -130,7 +130,7 @@ define(function(require) {
     });
   };
 
-  PhaserState.Generators.makeFunc = function(name, gameData, Phaser) {
+  PhaserState.Generators.makeFunc = function(name, gameData, Phaser, time) {
     return eval('(' + this[name](gameData) + ')');
   };
 
@@ -145,6 +145,8 @@ define(function(require) {
   // Useful when creating a Phaser state that just serves as a
   // reference point to position things on, etc.
   PhaserState.Generators.makeInertStateObject = function(gameData) {
+    var time = new PhaserMicrogame.Time({difficulty: 'easy'});
+
     return {
       preload: function() {
         PhaserState.Generators
@@ -152,7 +154,7 @@ define(function(require) {
       },
       create: function() {
         PhaserState.Generators
-          .makeFunc('createSprites', gameData, this.Phaser)(this);
+          .makeFunc('createSprites', gameData, this.Phaser, time)(this);
         this.game.stage.backgroundColor = gameData.backgroundColor;
         this.game.paused = true;
       }
