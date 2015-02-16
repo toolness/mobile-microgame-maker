@@ -23,6 +23,7 @@
         <block type="phaser_set_sprite_numeric_prop"></block>
         <block type="phaser_get_sprite_numeric_prop"></block>
         <block type="phaser_sprites_overlap"></block>
+        <block type="phaser_sprites_overlap_with_tolerance"></block>
         <block type="phaser_win"></block>
         <block type="phaser_lose"></block>
         <block type="phaser_on_win_or_lose"></block>

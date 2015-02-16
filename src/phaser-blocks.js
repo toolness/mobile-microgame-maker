@@ -377,6 +377,45 @@ define(function(require) {
             Blockly.JavaScript.ORDER_ATOMIC];
   };
 
+  Blockly.Blocks['phaser_sprites_overlap_with_tolerance'] = {
+    init: function() {
+      this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE1');
+      this.appendDummyInput().appendField('overlaps')
+        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE2');
+      this.appendDummyInput().appendField('with tolerance')
+        .appendField(new Blockly.FieldTextInput(
+          '0',
+          Blockly.FieldTextInput.numberValidator
+        ), 'TOLERANCE');
+      this.setOutput(true, 'Boolean');
+      this.setInputsInline(true);
+    }
+  };
+
+  Blockly.JavaScript['phaser_sprites_overlap_with_tolerance'] = function(block) {
+    var sprite1 = spriteName(block, 'SPRITE1');
+    var sprite2 = spriteName(block, 'SPRITE2');
+    var tolerance = this.getFieldValue('TOLERANCE');
+    var functionName = Blockly.JavaScript.provideFunction_(
+      'spritesOverlap',
+      ['function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ +
+       '(a, b, tolerance) {',
+       '  var bBounds = b.getBounds();',
+       '  return a.getBounds().intersectsRaw(',
+       '    bBounds.left, bBounds.right, bBounds.top, bBounds.bottom,',
+       '    tolerance',
+       '  );',
+       '}']
+    );
+    if (!sprite1 || !sprite2)
+      return ['false', Blockly.JavaScript.ORDER_ATOMIC];
+
+    return ['spritesOverlap(' + sprite1 + ', ' + sprite2 + ', ' +
+                            tolerance + ')',
+            Blockly.JavaScript.ORDER_ATOMIC];
+  };
+
   Blockly.Blocks['phaser_set_animation'] = {
     init: function() {
       var spritesWithMultipleAnims = filteredSpriteList(function(sprite) {
