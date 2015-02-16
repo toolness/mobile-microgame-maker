@@ -67,7 +67,7 @@ call_s3cmd("sync --delete-removed build/ s3://%(BUCKET)s")
 if args.offline:
     call_s3cmd("put -m text/cache-manifest "
                "build/mmm.appcache s3://%(BUCKET)s/mmm.appcache",
-               caching="must-revalidate")
+               caching="max-age=0, must-revalidate")
 
 call("gzip -c -9 build/main.js > build/main.js.gz")
 call_s3cmd("put -m application/javascript "
