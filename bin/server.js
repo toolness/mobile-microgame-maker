@@ -25,7 +25,7 @@ if (!module.parent)
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(function(req, res, next) {
-  res.set('Cache-Control', 'must-revalidate');
+  res.set('Cache-Control', 'no-cache');
   next();
 });
 
