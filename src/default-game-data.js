@@ -5,6 +5,7 @@ define(function(require) {
   var EMPTY_BLOCKLY_XML = '<xml xmlns="http://www.w3.org/1999/xhtml"></xml>';
 
   return {
+    version: 1,
     sounds: assets.sounds,
     spritesheets: assets.spritesheets,
     animations: assets.animations,
