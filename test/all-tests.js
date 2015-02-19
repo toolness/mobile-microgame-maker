@@ -3,5 +3,6 @@ defineTests.combine([
   "test/test-examples",
   "test/test-export",
   "test/test-game-data",
+  "test/test-migrations",
   "test/test-css-sprite"
 ]);
