@@ -3,9 +3,6 @@ define(function(require) {
   var $ = require('jquery');
 
   function migrate(xml) {
-    xml = xml.split('\n').map(function(line) {
-      return line.trim();
-    }).join('');
     var dom = Blockly.Xml.textToDom(xml);
     $('block[type=phaser_sprites_overlap]', dom).each(function() {
       $(this).attr('type', 'phaser_sprites_overlap_with_tolerance');
@@ -13,7 +10,7 @@ define(function(require) {
       $(field).attr('name', 'TOLERANCE').text('0');
       $(this).append(field);
     });
-    return Blockly.Xml.domToPrettyText(dom);
+    return Blockly.Xml.domToText(dom);
   }
 
   return function migrateOverlapBlock(gameData) {

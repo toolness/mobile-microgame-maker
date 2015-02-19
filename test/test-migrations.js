@@ -13,7 +13,10 @@ defineTests([
         '  </block>',
         '</xml>'
       ].join('\n')
-    }, {maxVersion: 1}), {
+    }, {
+      maxVersion: 1,
+      prettifyXml: true
+    }), {
       version: 1,
       blocklyXml: [
         '<xml xmlns="http://www.w3.org/1999/xhtml">',
