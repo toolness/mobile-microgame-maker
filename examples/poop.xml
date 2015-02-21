@@ -183,9 +183,10 @@
     <statement name="STACK">
       <block type="controls_if" id="455" inline="false">
         <value name="IF0">
-          <block type="phaser_sprites_overlap" id="456">
+          <block type="phaser_sprites_overlap_with_tolerance" id="456">
             <field name="SPRITE1">aa912536-bff2-fb47-0d6a-e92245b23bd1</field>
             <field name="SPRITE2">bf3153cc-6c74-08de-f5b3-371855fcd01e</field>
+            <field name="TOLERANCE">0</field>
           </block>
         </value>
         <statement name="DO0">
@@ -194,9 +195,10 @@
         <next>
           <block type="controls_if" id="458" inline="false">
             <value name="IF0">
-              <block type="phaser_sprites_overlap" id="459">
+              <block type="phaser_sprites_overlap_with_tolerance" id="459">
                 <field name="SPRITE1">aa912536-bff2-fb47-0d6a-e92245b23bd1</field>
                 <field name="SPRITE2">9f38d091-3b67-65bf-e2de-b3fd9742e113</field>
+                <field name="TOLERANCE">0</field>
               </block>
             </value>
             <statement name="DO0">
@@ -205,9 +207,10 @@
             <next>
               <block type="controls_if" id="461" inline="false">
                 <value name="IF0">
-                  <block type="phaser_sprites_overlap" id="462">
+                  <block type="phaser_sprites_overlap_with_tolerance" id="462">
                     <field name="SPRITE1">aa912536-bff2-fb47-0d6a-e92245b23bd1</field>
                     <field name="SPRITE2">48643834-b149-53a4-12ad-256a67a35c96</field>
+                    <field name="TOLERANCE">0</field>
                   </block>
                 </value>
                 <statement name="DO0">
@@ -216,9 +219,10 @@
                 <next>
                   <block type="controls_if" id="464" inline="false">
                     <value name="IF0">
-                      <block type="phaser_sprites_overlap" id="465">
+                      <block type="phaser_sprites_overlap_with_tolerance" id="465">
                         <field name="SPRITE1">aa912536-bff2-fb47-0d6a-e92245b23bd1</field>
                         <field name="SPRITE2">daa8d820-38c9-f2f3-4bdc-bd2363dcb340</field>
+                        <field name="TOLERANCE">0</field>
                       </block>
                     </value>
                     <statement name="DO0">
@@ -227,9 +231,10 @@
                     <next>
                       <block type="controls_if" id="467" inline="false">
                         <value name="IF0">
-                          <block type="phaser_sprites_overlap" id="468">
+                          <block type="phaser_sprites_overlap_with_tolerance" id="468">
                             <field name="SPRITE1">aa912536-bff2-fb47-0d6a-e92245b23bd1</field>
                             <field name="SPRITE2">d95e16c5-4c10-6011-47e9-7e15ac860816</field>
+                            <field name="TOLERANCE">0</field>
                           </block>
                         </value>
                         <statement name="DO0">

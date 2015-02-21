@@ -166,6 +166,14 @@ function start(state) {
     return Math.floor(Math.random() * (b - a + 1) + a);
   }
   
+  function spritesOverlap(a, b, tolerance) {
+    var bBounds = b.getBounds();
+    return a.getBounds().intersectsRaw(
+      bBounds.left, bBounds.right, bBounds.top, bBounds.bottom,
+      tolerance
+    );
+  }
+  
   
   microgame.mainText.setText('Help Peter get to the park...');
   game.stage.backgroundColor = colour_blend('#ffffcc', '#ffffff', 0.5);
@@ -192,19 +200,19 @@ function start(state) {
   });
   
   state.on("update", function() {
-    if (Phaser.Rectangle.intersects(sprites.ew.getBounds(), sprites.poop.getBounds())) {
+    if (spritesOverlap(sprites.ew, sprites.poop, 0)) {
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.ew.getBounds(), sprites.poop_1.getBounds())) {
+    if (spritesOverlap(sprites.ew, sprites.poop_1, 0)) {
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.ew.getBounds(), sprites.poop_2.getBounds())) {
+    if (spritesOverlap(sprites.ew, sprites.poop_2, 0)) {
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.ew.getBounds(), sprites.poop_3.getBounds())) {
+    if (spritesOverlap(sprites.ew, sprites.poop_3, 0)) {
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.ew.getBounds(), sprites.cypress_1.getBounds())) {
+    if (spritesOverlap(sprites.ew, sprites.cypress_1, 0)) {
       microgame.win();
     }
   });

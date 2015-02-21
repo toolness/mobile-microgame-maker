@@ -98,9 +98,11 @@
             <next>
               <block type="controls_if" id="84" inline="false">
                 <value name="IF0">
-                  <block type="phaser_sprites_overlap" id="85">
+                  <block type="phaser_sprites_overlap_with_tolerance" id="85">
                     <field name="SPRITE1">38587506-0305-19d7-ac97-d3d518e2a8b2</field>
                     <field name="SPRITE2">7b7244a8-ec1e-145e-7f3b-2c40f6b26bef</field>
+                    <field name="TOLERANCE">0</field>
+                    <field name="TOLERANCE">0</field>
                   </block>
                 </value>
                 <statement name="DO0">
@@ -118,9 +120,11 @@
                 <next>
                   <block type="controls_if" id="89" inline="false">
                     <value name="IF0">
-                      <block type="phaser_sprites_overlap" id="90">
+                      <block type="phaser_sprites_overlap_with_tolerance" id="90">
                         <field name="SPRITE1">38587506-0305-19d7-ac97-d3d518e2a8b2</field>
                         <field name="SPRITE2">59e5a120-e01b-adcd-2e86-919b3f5c995f</field>
+                        <field name="TOLERANCE">0</field>
+                        <field name="TOLERANCE">0</field>
                       </block>
                     </value>
                     <statement name="DO0">
@@ -138,9 +142,11 @@
                     <next>
                       <block type="controls_if" id="94" inline="false">
                         <value name="IF0">
-                          <block type="phaser_sprites_overlap" id="95">
+                          <block type="phaser_sprites_overlap_with_tolerance" id="95">
                             <field name="SPRITE1">38587506-0305-19d7-ac97-d3d518e2a8b2</field>
                             <field name="SPRITE2">a744600b-2e48-9477-3acc-02681c2f44c1</field>
+                            <field name="TOLERANCE">0</field>
+                            <field name="TOLERANCE">0</field>
                           </block>
                         </value>
                         <statement name="DO0">

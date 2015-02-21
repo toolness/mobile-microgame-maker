@@ -134,6 +134,15 @@ function start(state) {
   var sprites = state.sprites;
   var sounds = state.sounds;
   
+  function spritesOverlap(a, b, tolerance) {
+    var bBounds = b.getBounds();
+    return a.getBounds().intersectsRaw(
+      bBounds.left, bBounds.right, bBounds.top, bBounds.bottom,
+      tolerance
+    );
+  }
+  
+  
   game.stage.backgroundColor = '#ffffff';
   
   state.on("win", function() {
@@ -162,15 +171,15 @@ function start(state) {
   state.on("update", function() {
     game.add.tween(sprites.sushimonster_1).to({x: Math.random()}, time.ms(1000)).start();
     game.add.tween(sprites.sushimonster_2).to({y: Math.random()}, time.ms(1000)).start();
-    if (Phaser.Rectangle.intersects(sprites.sushi_1.getBounds(), sprites.sushimonster_1.getBounds())) {
+    if (spritesOverlap(sprites.sushi_1, sprites.sushimonster_1, 0)) {
       microgame.mainText.setText('Ooops! No sushi for you!');
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.sushi_1.getBounds(), sprites.sushimonster_2.getBounds())) {
+    if (spritesOverlap(sprites.sushi_1, sprites.sushimonster_2, 0)) {
       microgame.mainText.setText('Ooops! No sushi for you!');
       microgame.lose();
     }
-    if (Phaser.Rectangle.intersects(sprites.sushi_1.getBounds(), sprites.bluedish_1.getBounds())) {
+    if (spritesOverlap(sprites.sushi_1, sprites.bluedish_1, 0)) {
       microgame.win();
       microgame.mainText.setText('Woohoo! Sushi :)');
     }
