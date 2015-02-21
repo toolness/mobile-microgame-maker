@@ -355,28 +355,6 @@ define(function(require) {
             Blockly.JavaScript.ORDER_ATOMIC];
   };
 
-  Blockly.Blocks['phaser_sprites_overlap'] = {
-    init: function() {
-      this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE1');
-      this.appendDummyInput().appendField('overlaps')
-        .appendField(new Blockly.FieldDropdown(spriteList), 'SPRITE2');
-      this.setOutput(true, 'Boolean');
-      this.setInputsInline(true);
-    }
-  };
-
-  Blockly.JavaScript['phaser_sprites_overlap'] = function(block) {
-    var sprite1 = spriteName(block, 'SPRITE1');
-    var sprite2 = spriteName(block, 'SPRITE2');
-    if (!sprite1 || !sprite2)
-      return ['false', Blockly.JavaScript.ORDER_ATOMIC];
-
-    return ['Phaser.Rectangle.intersects(' +
-            sprite1 + '.getBounds(), ' + sprite2 + '.getBounds())',
-            Blockly.JavaScript.ORDER_ATOMIC];
-  };
-
   Blockly.Blocks['phaser_sprites_overlap_with_tolerance'] = {
     init: function() {
       this.appendDummyInput()

@@ -6,12 +6,20 @@ define(function(require) {
   var React = require('react');
   var GameData = require('./game-data');
   var PhaserState = require('./phaser-state');
+  var migrations = require('./migrations');
 
   var DEFAULT_NETWORK_TIMEOUT = 10000;
 
   var Export = {
     _templateString: require('text!codegen-templates/export-template.html'),
+    _migrateWrapper: function(cb) {
+      return function(err, gameData) {
+        if (err) return cb(err);
+        return cb(null, migrations.migrate(gameData));
+      };
+    },
     fromJson: function(baseURL, gameData, cb) {
+      cb = Export._migrateWrapper(cb);
       if (typeof(gameData) == 'string')
         // Looks like gameData is a URL pointing to a JSON blob.
         return Export.fromUrl(resolveURL(gameData, baseURL), cb);

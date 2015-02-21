@@ -21,6 +21,11 @@ var require = {
   jsx: {
     fileExtension: '.jsx'
   },
+  packages: [
+    {
+      name: "src/migrations"
+    }
+  ],
   shim: {
     "prism": {
       exports: "Prism"
